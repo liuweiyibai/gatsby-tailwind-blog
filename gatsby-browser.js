@@ -1,7 +1,30 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import Nprogress from 'nprogress';
+import { WrapWithLayout, WrapWithProvider } from './wrap-with';
+import './src/styles/public.scss';
+import './label.css'
 
-// You can delete this file if you're not using it
+Nprogress.configure({
+  showSpinner: false,
+});
+
+export const wrapRootElement = WrapWithProvider;
+export const wrapPageElement = WrapWithLayout;
+
+export const disableCorePrefetching = () => {
+  return true;
+};
+
+export const onClientEntry = () => {
+  Nprogress.start();
+};
+export const onPreRouteUpdate = () => {
+  Nprogress.start();
+};
+export const onRouteUpdateDelayed = () => {
+  Nprogress.start();
+};
+export const onRouteUpdate = () => {
+  setTimeout(() => {
+    Nprogress.done();
+  }, 300);
+};

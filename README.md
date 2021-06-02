@@ -1,94 +1,148 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+  <a href="https://www.gatsbyjs.com">
+    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  gatsby-starter-typescript-plus
+  blog use Gatsby's build
 </h1>
 
-> A starter kit for TypeScript-based Gatsby projects with sensible defaults.
+## 生成关于我页面
 
-This is a starter kit for [Gatsby.js](https://www.gatsbyjs.org/) websites written in TypeScript. It includes the bare essentials for you to get started (styling, Markdown parsing, minimal toolset).
+[地址](https://rahuldkjain.github.io/gh-profile-readme-generator/)
 
-## 🗒️ Features
+## 用到的插件
 
-- TypeScript
-- ESLint (with custom ESLint rules)
-- Markdown rendering with Remark
-- Basic component structure
-- Styling with [emotion](https://emotion.sh/)
+[载入 codepen 等](gatsby-remark-embedder)
 
-## 🚀 Quick start
+[生成标题 hash 标签](gatsby-remark-autolink-headers)
 
-> A nodejs >= 6.0.0 setup with [yarn](https://yarnpkg.com/) is recommended.
+- [✅] 归档添加切换动画
+- [✅] 归档页添加懒加载过渡元素
+- [✅] 拆分 layout 组件到免卸载单位
+- [✅] 增加 pageloading 效果
+- [❌] 使用 tailwind 和 @emotion 重写 css <https://tjaddison.com/blog/2019/06/create-react-app-emotion-and-tailwind-css-starter-app/>
+- [❌] 抽离 layout 组件中的 graphql 查询
+- [❌] 记录滚动位置
+- [✅] react-lazyload 懒加载
+- [❌] [压缩向页面传递的 json 大小](https://gersom.nl/post/reducing-gatsbys-page-preloading-bandwidth/)
 
-1.  **Create a Gatsby site.**
+## 使用 lighthouse
 
-    Install `gatsby-cli` package globally on your machine.
+  测试网站性能
 
-    ```bash
-    # using NPM
-    npm install -g gatsby-cli
+## 博客文章
 
-    # using YARN
-    yarn global add gatsby-cli
-    ```
+- [❌] css-doodle 文档
+- [❌] 手写 bind 实现
+- [❌] 手写 apply 实现
+- [❌] 手写 promise 实现
+- [❌] js 贪心算法
+- [❌] 前端 10 算法
+- [❌] [用惰性加载优化 React 程序](http://blog.yidengxuetang.com/post/201905/18/)
+  [来，实现一个“滚动加载”](http://limoer.cc/2019/06/27/scrollload/s)
 
-    Use the `gatsby-cli` to create a new site and install its dependencies.
+- [❌] [git 克隆仓库内的一个文件夹](https://blog.csdn.net/qq_36560161/article/details/78260532)
 
-    ```bash
-    gatsby new project-name https://github.com/resir014/gatsby-starter-typescript-plus
-    ```
+- [❌] [如何优雅的为 PWA 注册 Service Worker](https://zhuanlan.zhihu.com/p/28161855)
+- [❌] [有必要上 ssr 吗](https://www.zhihu.com/question/308792091)
 
-2.  **Start developing.**
+## 评论解决方案
 
-    Move to project's directory.
+GITALK ✅
 
-    ```bash
-    cd project-name/
-    ```
+## 草稿
 
-    Start your site.
+- [Yum/RPM 安装的 Nginx 如何添加第三方模块(LuaJIT)](https://blog.csdn.net/weixin_34245749/article/details/92921021)
 
-    ```bash
-    # using npm
-    npm start
+- nginx 如何使用 lua 脚本
+  <https://www.cnblogs.com/winss/p/13605087.html>
 
-    # using yarn
-    yarn start
-    ```
+- nginx 使用 lua 脚本读取 redis，<https://my.oschina.net/u/1175305/blog/1799941>
 
-    Open source code using your favorite IDE/Text editor and navigate to `src/` directory, this is where your application live.
+- nginx 使用 lua 脚本向 kfuka 写入数据
 
-3.  **Build your application for production.**
+- 如何封装一个前端组件，<https://juejin.cn/post/6844903847874265101>
 
-    Once you're finished, you can make production build of your app using:
+## prismjs
 
-    ```bash
-    # using npm
-    npm run build
+- 代码缩进
+- 添加文件类型显示 ✅
+- 添加文件名显示 ✅
 
-    # using yarn
-    yarn build
-    ```
+## 在线编辑器
 
-4.  **Deploy your app to Github pages!**
+[摩纳哥](https://microsoft.github.io/monaco-editor/playground.html)
 
-    After building your application in step 3, you're ready to publish your app and go online!
+[codemirror](https://codemirror.net/6/docs/)
 
-    ```bash
-    # using npm
-    npm run deploy
+[参考地址](https://sq.163yun.com/blog/article/184733100361850880)
 
-    # using yarn
-    yarn deploy
-    ```
+## 生成开发文档的工具
 
-## ❤️ Credits
+- [storybook](https://storybook.js.org/)
+- [docz](https://www.docz.site/docs/getting-started)
 
-Built with [Gatsby](https://www.gatsbyjs.org/) - the blazing-fast static site generator for [React](https://facebook.github.io/react/).
+## 收集的插件
 
-## 💫 Deploy
+- <https://www.gatsbyjs.com/plugins/gatsby-remark-code-repls/?=gatsby-remark-code>
+-
+- <https://www.gatsbyjs.com/plugins/gatsby-plugin-paginated-collection/>
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/resir014/gatsby-starter-typescript-plus)
+- [使用 gatsby 写文档](https://github.com/brainhubeu/gatsby-docs-kit)
+
+### jenkins 构建脚本
+
+```bash
+rm -rf ./node_modules
+node -v
+npm -v
+npm config set registry https://registry.npm.taobao.org
+npm config set sha  rp_binary_host "https://npm.taobao.org/mirrors/sharp"
+npm config set sharp_libvips_binary_host "https://npm.taobao.org/mirrors/sharp-libvips"
+npm install
+npm run build
+```
+
+- 或者使用 yarn
+
+```bash
+rm -rf ./node_modules
+node -v
+yarn -v
+yarn config set registry https://registry.npm.taobao.org
+yarn config set sharp_binary_host "https://npm.taobao.org/mirrors/sharp"
+yarn config set sharp_libvips_binary_host "https://npm.taobao.org/mirrors/sharp-libvips"
+yarn install --pure-lockfile  # 这个参数是在服务器install不生成yarn.lock，防止服务器和本地代码冲突
+yarn run build
+```
+
+## mac 解决 gatsby 依赖缺失问题
+
+brew install pkg-config
+
+brew install automake autoconf libtool dpkg pkgconfig nasm libpng
+
+## 参考blog
+
+[xx](https://luzhaoyang.com/zh/posts/dai-ma-gui-fan-zhi-li-jie-eslint-prettier-editorconfig.html#%E5%89%8D%E8%A8%80)
+
+[在Vue项目中使用Eslint+Prettier+Stylelint](https://segmentfault.com/a/1190000020168436)
+
+[Vue项目使用eslint + prettier规范代码风格](https://juejin.cn/post/6844903661726875656)
+
+[闭包参考链接](https://segmentfault.com/a/1190000023425946)
+
+[闭包参考链接2](https://segmentfault.com/a/1190000023356598)
+
+[闭包参考链接3](https://zhuanlan.zhihu.com/p/37913276)
+
+## vue 社区
+
+[https://vuedose.tips/articles](https://vuedose.tips/articles)
+
+## vue 源码
+
+[https://github.com/wangweianger/myblog](https://github.com/wangweianger/myblog)
+
+## vue ssr 面点

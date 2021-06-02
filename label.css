@@ -1,0 +1,100 @@
+.gatsby-highlight[data-language="js"] pre:before {
+      content: 'js';
+      background: #f1e05a;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="ts"] pre:before {
+      content: 'ts';
+      background: #2b7489;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="css"] pre:before {
+      content: 'css';
+      background: #563d7c;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="scss"] pre:before {
+      content: 'scss';
+      background: #c6538c;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="jsx"] pre:before {
+      content: 'jsx';
+      background: #f1e05a;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="tsx"] pre:before {
+      content: 'tsx';
+      background: #2b7489;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="html"] pre:before {
+      content: 'html';
+      background: #e34c26;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="conf"] pre:before {
+      content: 'conf';
+      background: rgb(0,161,0);
+      color: #fff;
+    }
+.gatsby-highlight[data-language="ruby"] pre:before {
+      content: 'ruby';
+      background: #701516;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="bash"] pre:before {
+      content: 'sh';
+      background: #89e051;
+      color: #111;
+    }
+.gatsby-highlight[data-language="text"] pre:before {
+      content: 'text';
+      background: #fff;
+      color: #111;
+    }
+.gatsby-highlight[data-language="json"] pre:before {
+      content: 'json';
+      background: #8bc34a;
+      color: #111;
+    }
+.gatsby-highlight[data-language="yaml"] pre:before {
+      content: 'yaml';
+      background: #cb171e;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="diff"] pre:before {
+      content: 'diff';
+      background: #e6ffed;
+      color: #111;
+    }
+.gatsby-highlight[data-language="markdown"] pre:before {
+      content: 'md';
+      background: #083fa1;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="graphql"] pre:before {
+      content: 'GraphQL';
+      background: #e10098;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="docker"] pre:before {
+      content: 'docker';
+      background: #384d54;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="go"] pre:before {
+      content: 'go';
+      background: #00ADD8;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="env"] pre:before {
+      content: 'env';
+      background: #2697ed;
+      color: #fff;
+    }
+.gatsby-highlight[data-language="lua"] pre:before {
+      content: 'lua';
+      background: #000080;
+      color: #fff;
+    }

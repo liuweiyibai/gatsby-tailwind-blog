@@ -1,0 +1,117 @@
+---
+title: js 实现数组扁平化的几种方式
+date: 2019-03-22 21:55:52
+category:
+  - 编程笔记
+tags: ['js', 'es6']
+slug: js-array-flattening-of-several-ways
+thumbnail: '../thumbnails/js.png'
+---
+
+## 实现思路
+
+1. 对源数组的所有元素进行遍历
+
+2. 判断遍历的元素是否为数组
+
+3. 若不是数组则`concat`进之前的计算结果中，ps：初始计算结果为空数组`[]`
+
+4. 若是数组则递归调用函数继续遍历
+
+## 具体实现
+
+1. 方案 1
+
+   使用 `reduce` 实现，附： [reduce 用法全解析](/blog/redu)
+
+   ```js
+   function flatten(array = []) {
+     return array.reduce((result, item) => {
+       return result.concat(Array.isArray(item) ? flatten(item) : item);
+     }, []);
+   }
+   let arr = [1, [2, [3, [4, 5]]]];
+   let result = flatten(arr);
+   console.log(result);
+   // [ 1, 2, 3, 4, 5 ]
+   ```
+
+2. 方案 2
+
+   ```js
+   function flatten(array = []) {
+     return array
+       .toString()
+       .split(',')
+       .map(item => {
+         return Number(item);
+       });
+   }
+   let arr = [1, [2, [3, [4, 5]]]];
+
+   // 对象数组不适用此方法
+   let arr2 = [{ a: 1, b: 2 }, [{ c: 2 }], [[{ d: 3 }]]];
+   let result = flatten(arr);
+   console.log(result);
+   // [ 1, 2, 3, 4, 5 ]
+   ```
+
+3. 方案 3
+
+   ```js
+   function flatten(array) {
+     return array
+       .join(',')
+       .split(',')
+       .map(item => {
+         return Number(item);
+       });
+   }
+
+   let arr = [1, [2, [3, [4, 5]]]];
+   // 同样不适合对象数组降维
+   let result = flatten(arr);
+   console.log(result);
+   // [ 1, 2, 3, 4, 5 ]
+   ```
+
+4. 方案 4
+
+   ```js
+   function flatten(array) {
+     let res = [];
+     array.forEach(item => {
+       if (Array.isArray(item)) {
+         res = res.concat(flatten(item));
+       } else {
+         res.push(item);
+       }
+     });
+     return res;
+   }
+
+   let arr = [1, [2, [3, [4, 5]]]];
+   let result = flatten(arr);
+   console.log(result);
+   // [ 1, 2, 3, 4, 5 ]
+   ```
+
+5. 方案 5
+
+   ```js
+   function flatten(array) {
+     while (array.some(item => Array.isArray(item))) {
+       array = [].concat(...array);
+     }
+     return array;
+   }
+
+   let arr = [1, [2, [3, [4, 5]]]];
+   let result = flatten(arr);
+   console.log(result);
+   // [ 1, 2, 3, 4, 5 ]
+   ```
+
+## 其他方案
+
+- 使用 [lodash](https://www.lodashjs.com/) 工具函数解决
