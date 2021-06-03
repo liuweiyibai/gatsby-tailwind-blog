@@ -1,19 +1,19 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const config = {
   title: `刘威益佰的个人博客`,
   author: `刘威益佰`,
-  description: `临渊羡鱼，不如退而结网；扬汤止沸，不如釜底抽薪。知行合一, 做行动的巨人 🍀`,
+  description: `临渊羡鱼, 不如退而结网; 扬汤止沸, 不如釜底抽薪. 知行合一, 做行动的巨人 🍀`,
   lang: 'ch-ZN',
-  siteUrl: `https://blog.clearlywind.com`, // 网站地址，用来 sso
+  siteUrl: `https://lwyb.me`, // 网站地址，用来 sso
 
   // 静态资源前缀
   // assetPrefix: '//cdn.clearlywind.com/blog/public',
 
   // 路由前缀
-  pathPrefix: '/',
+  pathPrefix: '/'
   // pathPrefix: '/my-blog',
-};
+}
 
 module.exports = {
   pathPrefix: config.pathPrefix,
@@ -23,31 +23,27 @@ module.exports = {
     lang: config.lang,
     author: {
       name: config.author,
-      summary: config.description,
+      summary: config.description
     },
     description: config.description,
     siteUrl: config.siteUrl,
     social: {
       twitter: `liuweiyibai`,
-      github: 'liuweiyibai',
+      github: 'liuweiyibai'
     },
     algolia: {
       appId: process.env.ALGOLIA_APP_ID ? process.env.ALGOLIA_APP_ID : '',
-      searchOnlyApiKey: process.env.ALGOLIA_SEARCH_ONLY_API_KEY
-        ? process.env.ALGOLIA_SEARCH_ONLY_API_KEY
-        : '',
-      indexName: process.env.ALGOLIA_INDEX_NAME
-        ? process.env.ALGOLIA_INDEX_NAME
-        : '',
-    },
+      searchOnlyApiKey: process.env.ALGOLIA_SEARCH_ONLY_API_KEY ? process.env.ALGOLIA_SEARCH_ONLY_API_KEY : '',
+      indexName: process.env.ALGOLIA_INDEX_NAME ? process.env.ALGOLIA_INDEX_NAME : ''
+    }
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/`,
-        name: `blog`,
-      },
+        name: `blog`
+      }
     },
     // {
     //   resolve: `gatsby-plugin-algolia`,
@@ -72,21 +68,21 @@ module.exports = {
               maintainCase: true,
               removeAccents: true,
               isIconAfterHeader: true,
-              elements: [`h1`, `h2`, `h3`, `h4`],
-            },
+              elements: [`h1`, `h2`, `h3`, `h4`]
+            }
           },
           {
             resolve: `gatsby-remark-code-titles`,
             options: {
-              className: 'filename',
-            },
+              className: 'filename'
+            }
           },
           {
             // 可以加载 iframe 在 markdown 中
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
+              wrapperStyle: `margin-bottom: 1.0725rem`
+            }
           },
           {
             resolve: `gatsby-remark-prismjs`,
@@ -94,14 +90,14 @@ module.exports = {
               classPrefix: 'language-',
               inlineCodeMarker: null,
               showLineNumbers: false,
-              noInlineHighlight: false,
-            },
+              noInlineHighlight: false
+            }
           },
           {
             resolve: `gatsby-remark-emoji`,
             options: {
-              ascii: false,
-            },
+              ascii: false
+            }
           },
           `gatsby-remark-embedder`, // 可以将 codepen 等加载在 markdown 中
           {
@@ -109,11 +105,11 @@ module.exports = {
             resolve: 'gatsby-remark-external-links',
             options: {
               target: '_blank',
-              rel: 'nofollow',
-            },
-          },
-        ],
-      },
+              rel: 'nofollow'
+            }
+          }
+        ]
+      }
     },
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
@@ -123,9 +119,9 @@ module.exports = {
         defaults: {
           formats: [`auto`, `webp`, `avif`],
           quality: 100,
-          placeholder: 'blurred',
-        },
-      },
+          placeholder: 'blurred'
+        }
+      }
     },
     {
       resolve: `gatsby-plugin-feed`,
@@ -151,12 +147,9 @@ module.exports = {
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [
-                    { 'content:encoded': edge.node.html },
-                    { author: 'lw1140@163.com' },
-                  ],
-                });
-              });
+                  custom_elements: [{ 'content:encoded': edge.node.html }, { author: 'lw1140@163.com' }]
+                })
+              })
             },
             query: `
             {
@@ -168,8 +161,8 @@ module.exports = {
                   node {
                     excerpt
                     html
-                    fields { 
-                      slug 
+                    fields {
+                      slug
                     }
                     frontmatter {
                       title
@@ -181,10 +174,10 @@ module.exports = {
             }
           `,
             output: '/rss.xml',
-            title: '刘威益佰的个人博客 | RSS Feed',
-          },
-        ],
-      },
+            title: '刘威益佰的个人博客 | RSS Feed'
+          }
+        ]
+      }
     },
     {
       resolve: 'gatsby-plugin-manifest',
@@ -197,8 +190,8 @@ module.exports = {
         background_color: `#fff`,
         theme_color: `#fff`,
         prefer_related_applications: false,
-        icon: 'static/logo.webp',
-      },
+        icon: 'static/logo.webp'
+      }
     },
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
@@ -207,11 +200,11 @@ module.exports = {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
-          include: /src/,
-        },
-      },
+          include: /src/
+        }
+      }
     },
     `gatsby-plugin-postcss`,
     `gatsby-plugin-lodash`
-  ],
-};
+  ]
+}
