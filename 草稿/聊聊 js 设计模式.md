@@ -33,29 +33,29 @@ title: 聊聊 js 设计模式
    ```js
    // 封装一个通用的单例函数，用来管理单例
    var getSingle = function (fn) {
-     var result;
+     var result
      return function () {
-       return result || (result = fn.apply(this, arguments));
-     };
-   };
+       return result || (result = fn.apply(this, arguments))
+     }
+   }
 
    // 登录窗口类
    var createLoginLayer = function () {
-     var div = document.createElement('div');
-     div.innerHTML = '我是登录浮窗';
-     div.style.display = 'none';
-     document.body.appendChild(div);
-     return div;
-   };
+     var div = document.createElement('div')
+     div.innerHTML = '我是登录浮窗'
+     div.style.display = 'none'
+     document.body.appendChild(div)
+     return div
+   }
 
    // 使用单例模式来包装这个登录窗口类
-   var createSingleLoginLayer = getSingle(createLoginLayer);
+   var createSingleLoginLayer = getSingle(createLoginLayer)
 
    // 以后就使用这个包装类来代替登录窗口类
    document.getElementById('loginBtn').onclick = function () {
-     var loginLayer = createSingleLoginLayer();
-     loginLayer.style.display = 'block';
-   };
+     var loginLayer = createSingleLoginLayer()
+     loginLayer.style.display = 'block'
+   }
    ```
 
 2. 策略模式
@@ -66,21 +66,21 @@ title: 聊聊 js 设计模式
    // 预置策略
    var strategies = {
      S: function (salary) {
-       return salary * 4;
+       return salary * 4
      },
      A: function (salary) {
-       return salary * 3;
+       return salary * 3
      },
      B: function (salary) {
-       return salary * 2;
-     },
-   };
+       return salary * 2
+     }
+   }
    // 根据策略计算
    var calculateBonus = function (level, salary) {
-     return strategies[level](salary);
-   };
-   console.log(calculateBonus('S', 20000));
-   console.log(calculateBonus('A', 10000));
+     return strategies[level](salary)
+   }
+   console.log(calculateBonus('S', 20000))
+   console.log(calculateBonus('A', 10000))
    // 策略模式消除样板式if代码块
    ```
 
@@ -91,54 +91,54 @@ title: 聊聊 js 设计模式
    ```js
    // 缓存代理
    var mult = function () {
-     var a = 1;
+     var a = 1
      for (var i = 0, l = arguments.length; i < l; i++) {
-       a = a * arguments[i];
+       a = a * arguments[i]
      }
-     return a;
-   };
+     return a
+   }
    /**************** 计算加和 *****************/
    var plus = function () {
-     var a = 0;
+     var a = 0
      for (var i = 0, l = arguments.length; i < l; i++) {
-       a = a + arguments[i];
+       a = a + arguments[i]
      }
-     return a;
-   };
+     return a
+   }
    /**************** 创建缓存代理的工厂 *****************/
    var createProxyFactory = function (fn) {
-     var cache = {};
+     var cache = {}
      return function () {
        // 返回新的函数
-       var args = Array.prototype.join.call(arguments, ',');
+       var args = Array.prototype.join.call(arguments, ',')
        if (args in cache) {
-         return cache[args];
+         return cache[args]
        }
-       return;
-     };
-   };
+       return
+     }
+   }
    var proxyMult = createProxyFactory(mult),
-     proxyPlus = createProxyFactory(plus);
-   alert(proxyMult(1, 2, 3, 4)); // 24
-   alert(proxyMult(1, 2, 3, 4)); // 24 这次直接在缓存中取值
-   alert(proxyPlus(1, 2, 3, 4)); // 10
-   alert(proxyPlus(1, 2, 3, 4)); // 10 这次直接在缓存中取值
+     proxyPlus = createProxyFactory(plus)
+   alert(proxyMult(1, 2, 3, 4)) // 24
+   alert(proxyMult(1, 2, 3, 4)) // 24 这次直接在缓存中取值
+   alert(proxyPlus(1, 2, 3, 4)) // 10
+   alert(proxyPlus(1, 2, 3, 4)) // 10 这次直接在缓存中取值
    ```
 
    节流函数
 
    ```js
    function debounce(fn, delay = 200) {
-     let timer;
+     let timer
      return function () {
-       var args = arugments;
-       var ctx = this;
-       clearTimeout(timer);
-       timer = null;
+       var args = arugments
+       var ctx = this
+       clearTimeout(timer)
+       timer = null
        timer = setTimeout(function () {
-         fn.apply(ctx, args);
-       }, delay);
-     };
+         fn.apply(ctx, args)
+       }, delay)
+     }
    }
    ```
 
@@ -150,68 +150,64 @@ title: 聊聊 js 设计模式
    // 定义函数，返回浏览器支持哪种文件上传方法
    var getActiveUploadObj = function () {
      try {
-       return new ActiveXObject('TXFTNActiveX.FTNUpload');
+       return new ActiveXObject('TXFTNActiveX.FTNUpload')
      } catch (e) {
-       return false;
+       return false
      }
-   };
+   }
    var getFlashUploadObj = function () {
      if (supportFlash()) {
      }
-     return false;
-   };
+     return false
+   }
    var getFormUpladObj = function () {
-     var str = '<input name="file" type="file" class="ui-file"/>';
-     return $(str).appendTo($('body'));
+     var str = '<input name="file" type="file" class="ui-file"/>'
+     return $(str).appendTo($('body'))
      // 表单上传
-   };
+   }
 
    // 定义迭代器，分别执行上述函数，取支持项返回
    var iteratorUploadObj = function () {
      for (var i = 0, fn; (fn = arguments[i++]); ) {
-       var uploadObj = fn();
+       var uploadObj = fn()
        if (uploadObj !== false) {
-         return uploadObj;
+         return uploadObj
        }
      }
-   };
+   }
 
-   var uploadObj = iteratorUploadObj(
-     getActiveUploadObj,
-     getFlashUploadObj,
-     getFormUpladObj
-   );
+   var uploadObj = iteratorUploadObj(getActiveUploadObj, getFlashUploadObj, getFormUpladObj)
    ```
 
    封装一个通用的迭代器函数
 
    ```js
    function each(obj, cb) {
-     var value;
+     var value
      if (Array.isArray(obj)) {
        for (var i = 0; i < obj.length; ++i) {
-         value = cb.call(obj[i], i, obj[i]);
+         value = cb.call(obj[i], i, obj[i])
          if (value === false) {
-           break;
+           break
          }
        }
      } else {
        for (var i in obj) {
-         value = cb.call(obj[i], i, obj[i]);
+         value = cb.call(obj[i], i, obj[i])
          if (value === false) {
-           break;
+           break
          }
        }
      }
    }
 
    each([1, 2, 3], function (index, value) {
-     console.log(index, value);
-   });
+     console.log(index, value)
+   })
 
    each({ a: 1, b: 2 }, function (index, value) {
-     console.log(index, value);
-   });
+     console.log(index, value)
+   })
 
    // 0 1
    // 1 2
@@ -322,50 +318,50 @@ title: 聊聊 js 设计模式
    var MacroCommand = {
      commands: [],
      add: function (command) {
-       this.commands.push(command);
-       return this;
+       this.commands.push(command)
+       return this
      },
      remove: function (command) {
        if (!command) {
-         this.commands = [];
-         return;
+         this.commands = []
+         return
        }
        for (var i = 0; i < this.commands.length; ++i) {
          if (this.commands[i] === command) {
-           this.commands.splice(i, 1);
+           this.commands.splice(i, 1)
          }
        }
      },
      execute: function () {
        for (var i = 0; i < this.commands.length; ++i) {
-         this.commands[i].execute();
+         this.commands[i].execute()
        }
-     },
-   };
+     }
+   }
 
    var showTime = {
      execute: function () {
-       console.log('time');
-     },
-   };
+       console.log('time')
+     }
+   }
 
    var showName = {
      execute: function () {
-       console.log('name');
-     },
-   };
+       console.log('name')
+     }
+   }
 
    var showAge = {
      execute: function () {
-       console.log('age');
-     },
-   };
+       console.log('age')
+     }
+   }
 
-   MacroCommand.add(showTime).add(showName).add(showAge);
+   MacroCommand.add(showTime).add(showName).add(showAge)
 
-   MacroCommand.remove(showName);
+   MacroCommand.remove(showName)
 
-   MacroCommand.execute(); // time age
+   MacroCommand.execute() // time age
    ```
 
    接下来的例子是一个自增命令，提供执行、撤销、重做功能
@@ -375,119 +371,119 @@ title: 聊聊 js 设计模式
    // 自增
    function IncrementCommand() {
      // 当前值
-     this.val = 0;
+     this.val = 0
      // 命令栈
-     this.stack = [];
+     this.stack = []
      // 栈指针位置
-     this.stackPosition = -1;
+     this.stackPosition = -1
    }
 
    IncrementCommand.prototype = {
      constructor: IncrementCommand,
      // 执行
      execute: function () {
-       this._clearRedo();
+       this._clearRedo()
 
        // 定义执行的处理
        var command = function () {
-         this.val += 2;
-       }.bind(this);
+         this.val += 2
+       }.bind(this)
 
        // 执行并缓存起来
-       command();
+       command()
 
-       this.stack.push(command);
+       this.stack.push(command)
 
-       this.stackPosition++;
+       this.stackPosition++
 
-       this.getValue();
+       this.getValue()
      },
 
      canUndo: function () {
-       return this.stackPosition >= 0;
+       return this.stackPosition >= 0
      },
 
      canRedo: function () {
-       return this.stackPosition < this.stack.length - 1;
+       return this.stackPosition < this.stack.length - 1
      },
 
      // 撤销
      undo: function () {
        if (!this.canUndo()) {
-         return;
+         return
        }
 
-       this.stackPosition--;
+       this.stackPosition--
 
        // 命令的撤销，与执行的处理相反
        var command = function () {
-         this.val -= 2;
-       }.bind(this);
+         this.val -= 2
+       }.bind(this)
 
        // 撤销后不需要缓存
-       command();
+       command()
 
-       this.getValue();
+       this.getValue()
      },
 
      // 重做
      redo: function () {
        if (!this.canRedo()) {
-         return;
+         return
        }
 
        // 执行栈顶的命令
-       this.stack[++this.stackPosition]();
+       this.stack[++this.stackPosition]()
 
-       this.getValue();
+       this.getValue()
      },
 
      // 在执行时，已经撤销的部分不能再重做
      _clearRedo: function () {
-       this.stack = this.stack.slice(0, this.stackPosition + 1);
+       this.stack = this.stack.slice(0, this.stackPosition + 1)
      },
 
      // 获取当前值
      getValue: function () {
-       console.log(this.val);
-     },
-   };
+       console.log(this.val)
+     }
+   }
 
    // 再实例化进行测试，模拟执行、撤销、重做的操作
-   var incrementCommand = new IncrementCommand();
+   var incrementCommand = new IncrementCommand()
 
    // 模拟事件触发，执行命令
    var eventTrigger = {
      // 某个事件的处理中，直接调用命令的处理方法
      increment: function () {
-       incrementCommand.execute();
+       incrementCommand.execute()
      },
 
      incrementUndo: function () {
-       incrementCommand.undo();
+       incrementCommand.undo()
      },
 
      incrementRedo: function () {
-       incrementCommand.redo();
-     },
-   };
+       incrementCommand.redo()
+     }
+   }
 
-   eventTrigger['increment'](); // 2
-   eventTrigger['increment'](); // 4
+   eventTrigger['increment']() // 2
+   eventTrigger['increment']() // 4
 
-   eventTrigger['incrementUndo'](); // 2
+   eventTrigger['incrementUndo']() // 2
 
-   eventTrigger['increment'](); // 4
+   eventTrigger['increment']() // 4
 
-   eventTrigger['incrementUndo'](); // 2
-   eventTrigger['incrementUndo'](); // 0
-   eventTrigger['incrementUndo'](); // 无输出
+   eventTrigger['incrementUndo']() // 2
+   eventTrigger['incrementUndo']() // 0
+   eventTrigger['incrementUndo']() // 无输出
 
-   eventTrigger['incrementRedo'](); // 2
-   eventTrigger['incrementRedo'](); // 4
-   eventTrigger['incrementRedo'](); // 无输出
+   eventTrigger['incrementRedo']() // 2
+   eventTrigger['incrementRedo']() // 4
+   eventTrigger['incrementRedo']() // 无输出
 
-   eventTrigger['increment'](); // 6
+   eventTrigger['increment']() // 6
    ```
 
 7. 组合模式
@@ -503,93 +499,93 @@ title: 聊聊 js 设计模式
    ```js
    // 文件夹 组合对象
    function Folder(name) {
-     this.name = name;
-     this.parent = null;
-     this.files = [];
+     this.name = name
+     this.parent = null
+     this.files = []
    }
 
    Folder.prototype = {
      constructor: Folder,
 
      add: function (file) {
-       file.parent = this;
-       this.files.push(file);
+       file.parent = this
+       this.files.push(file)
 
-       return this;
+       return this
      },
 
      scan: function () {
        // 委托给叶对象处理
        for (var i = 0; i < this.files.length; ++i) {
-         this.files[i].scan();
+         this.files[i].scan()
        }
      },
 
      remove: function (file) {
        if (typeof file === 'undefined') {
-         this.files = [];
-         return;
+         this.files = []
+         return
        }
 
        for (var i = 0; i < this.files.length; ++i) {
          if (this.files[i] === file) {
-           this.files.splice(i, 1);
+           this.files.splice(i, 1)
          }
        }
-     },
-   };
+     }
+   }
 
    // 文件 叶对象
    function File(name) {
-     this.name = name;
-     this.parent = null;
+     this.name = name
+     this.parent = null
    }
 
    File.prototype = {
      constructor: File,
 
      add: function () {
-       console.log('文件里面不能添加文件');
+       console.log('文件里面不能添加文件')
      },
 
      scan: function () {
-       var name = [this.name];
-       var parent = this.parent;
+       var name = [this.name]
+       var parent = this.parent
 
        while (parent) {
-         name.unshift(parent.name);
-         parent = parent.parent;
+         name.unshift(parent.name)
+         parent = parent.parent
        }
 
-       console.log(name.join(' / '));
-     },
-   };
+       console.log(name.join(' / '))
+     }
+   }
 
    // 构造好组合对象与叶对象的关系后，实例化，在组合对象中插入组合或叶对象
-   var web = new Folder('Web');
-   var fe = new Folder('前端');
-   var css = new Folder('CSS');
-   var js = new Folder('js');
-   var rd = new Folder('后端');
+   var web = new Folder('Web')
+   var fe = new Folder('前端')
+   var css = new Folder('CSS')
+   var js = new Folder('js')
+   var rd = new Folder('后端')
 
-   web.add(fe).add(rd);
+   web.add(fe).add(rd)
 
-   var file1 = new File('HTML权威指南.pdf');
-   var file2 = new File('CSS权威指南.pdf');
-   var file3 = new File('JavaScript权威指南.pdf');
-   var file4 = new File('MySQL基础.pdf');
-   var file5 = new File('Web安全.pdf');
-   var file6 = new File('Linux菜鸟.pdf');
+   var file1 = new File('HTML权威指南.pdf')
+   var file2 = new File('CSS权威指南.pdf')
+   var file3 = new File('JavaScript权威指南.pdf')
+   var file4 = new File('MySQL基础.pdf')
+   var file5 = new File('Web安全.pdf')
+   var file6 = new File('Linux菜鸟.pdf')
 
-   css.add(file2);
-   fe.add(file1).add(file3).add(css).add(js);
-   rd.add(file4).add(file5);
-   web.add(file6);
+   css.add(file2)
+   fe.add(file1).add(file3).add(css).add(js)
+   rd.add(file4).add(file5)
+   web.add(file6)
 
-   rd.remove(file4);
+   rd.remove(file4)
 
    // 扫描
-   web.scan();
+   web.scan()
    ```
 
 8. 模板方法模式
@@ -600,62 +596,62 @@ title: 聊聊 js 设计模式
    // 返回一个构造器
    var Beverage = function (param) {
      var boilWater = function () {
-       console.log('把水煮沸');
-     };
+       console.log('把水煮沸')
+     }
      var brew =
        param.brew ||
        function () {
-         throw new Error('必须传递 brew 方法');
-       };
+         throw new Error('必须传递 brew 方法')
+       }
      var pourInCup =
        param.pourInCup ||
        function () {
-         throw new Error('必须传递 pourInCup 方法');
-       };
+         throw new Error('必须传递 pourInCup 方法')
+       }
      var addCondiments =
        param.addCondiments ||
        function () {
-         throw new Error('必须传递 addCondiments 方法');
-       };
-     var F = function () {};
+         throw new Error('必须传递 addCondiments 方法')
+       }
+     var F = function () {}
      F.prototype.init = function () {
-       boilWater();
-       brew();
-       pourInCup();
-       addCondiments();
-     };
-     return F;
-   };
+       boilWater()
+       brew()
+       pourInCup()
+       addCondiments()
+     }
+     return F
+   }
 
    // 实现构造器
    var Coffee = Beverage({
      brew: function () {
-       console.log('用沸水冲泡咖啡');
+       console.log('用沸水冲泡咖啡')
      },
      pourInCup: function () {
-       console.log('把咖啡倒进杯子');
+       console.log('把咖啡倒进杯子')
      },
      addCondiments: function () {
-       console.log('加糖和牛奶');
-     },
-   });
+       console.log('加糖和牛奶')
+     }
+   })
 
    var Tea = Beverage({
      brew: function () {
-       console.log('用沸水浸泡茶叶');
+       console.log('用沸水浸泡茶叶')
      },
      pourInCup: function () {
-       console.log('把茶倒进杯子');
+       console.log('把茶倒进杯子')
      },
      addCondiments: function () {
-       console.log('加柠檬');
-     },
-   });
+       console.log('加柠檬')
+     }
+   })
 
-   var coffee = new Coffee();
-   coffee.init();
-   var tea = new Tea();
-   tea.init();
+   var coffee = new Coffee()
+   coffee.init()
+   var tea = new Tea()
+   tea.init()
    ```
 
 9. 享元模式
@@ -670,20 +666,17 @@ title: 聊聊 js 设计模式
    ```js
    // 实现一个通用的对象池
    var objectPoolFactory = function (createObjFn) {
-     var objectPool = [];
+     var objectPool = []
      return {
        create: function () {
-         var obj =
-           objectPool.length === 0
-             ? createObjFn.apply(this, arguments)
-             : objectPool.shift();
-         return obj;
+         var obj = objectPool.length === 0 ? createObjFn.apply(this, arguments) : objectPool.shift()
+         return obj
        },
        recover: function (obj) {
-         objectPool.push(obj);
-       },
-     };
-   };
+         objectPool.push(obj)
+       }
+     }
+   }
    ```
 
 10. 责任链模式
@@ -693,163 +686,191 @@ title: 聊聊 js 设计模式
     ```js
     // 函数链式调用
     Function.prototype.after = function (fn) {
-      var self = this;
+      var self = this
       return function () {
-        var ret = self.apply(this, arguments);
+        var ret = self.apply(this, arguments)
         if (ret === 'nextSuccessor') {
-          return fn.apply(this, arguments);
+          return fn.apply(this, arguments)
         }
-        return ret;
-      };
-    };
+        return ret
+      }
+    }
 
     // 使用 使用责任链模式获取浏览器支持的文件上传对象
     var getActiveUploadObj = function () {
       try {
-        return new ActiveXObject('TXFTNActiveX.FTNUpload');
+        return new ActiveXObject('TXFTNActiveX.FTNUpload')
       } catch (e) {
-        return 'nextSuccessor';
+        return 'nextSuccessor'
       }
-    };
+    }
     var getFlashUploadObj = function () {
       if (supportFlash()) {
-        var str = '<object type="application/x-shockwave-flash"></object>';
-        return $(str).appendTo($('body'));
+        var str = '<object type="application/x-shockwave-flash"></object>'
+        return $(str).appendTo($('body'))
       }
-      return 'nextSuccessor';
-    };
+      return 'nextSuccessor'
+    }
     var getFormUpladObj = function () {
-      return $('<form><input name="file" type="file"/></form>').appendTo(
-        $('body')
-      );
-    };
-    var getUploadObj = getActiveUploadObj
-      .after(getFlashUploadObj)
-      .after(getFormUpladObj);
+      return $('<form><input name="file" type="file"/></form>').appendTo($('body'))
+    }
+    var getUploadObj = getActiveUploadObj.after(getFlashUploadObj).after(getFormUpladObj)
 
     // 链式调用
-    console.log(getUploadObj());
+    console.log(getUploadObj())
     ```
 
 11. 中介者模式
 
-    所有的相关 对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，只需要通知中介者对象即可。利用中介者模式设计一个泡泡堂游戏
+    所有的相关对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，只需要通知中介者对象即可。多个对象，指的不一定得是实例化的对象，也可以将其理解成互为独立的多个项。当这些项在处理时，需要知晓并通过其他项的数据来处理。如果每个项都直接处理，程序会非常复杂，修改某个地方就得在多个项内部修改。我们将这个处理过程抽离出来，封装成中介者来处理，各项需要处理时，通知中介者即可。
+
+    利用中介者模式设计一个泡泡堂游戏
 
     ```js
     function Player(name, teamColor) {
-      this.name = name; // 角色名字
-      this.teamColor = teamColor; // 队伍颜色
-      this.state = 'alive';
+      this.name = name // 角色名字
+      this.teamColor = teamColor // 队伍颜色
+      this.state = 'alive'
       // 玩家生存状态
     }
     Player.prototype.win = function () {
-      console.log(this.name + ' won ');
-    };
+      console.log(this.name + ' won ')
+    }
     Player.prototype.lose = function () {
-      console.log(this.name + ' lost');
-    };
+      console.log(this.name + ' lost')
+    }
     /*******************玩家死亡*****************/
     Player.prototype.die = function () {
-      this.state = 'dead';
-      playerDirector.reciveMessage('playerDead', this);
-    };
+      this.state = 'dead'
+      playerDirector.reciveMessage('playerDead', this)
+    }
     /*******************移除玩家*****************/
     Player.prototype.remove = function () {
-      playerDirector.reciveMessage('removePlayer', this);
+      playerDirector.reciveMessage('removePlayer', this)
       // 给中介者发送消息，移除一个玩家
-    };
+    }
     /*******************玩家换队*****************/
     Player.prototype.changeTeam = function (color) {
-      playerDirector.reciveMessage('changeTeam', this, color);
-    };
-
+      playerDirector.reciveMessage('changeTeam', this, color)
+    }
     // 玩家工厂，创建新玩家，并且通知到中间者
     var playerFactory = function (name, teamColor) {
-      var newPlayer = new Player(name, teamColor);
-      return newPlayer;
-    };
-
+      var newPlayer = new Player(name, teamColor)
+      return newPlayer
+    }
     // 实现这个中介者 playerDirector 对象
     var playerDirector = (function () {
       // 保存所有玩家
       var players = {},
         // 中介者可以执行的操作
-        operations = {};
+        operations = {}
       /****************新增一个玩家***************************/
       operations.addPlayer = function (player) {
         // 获取玩家的队伍颜色
-        var teamColor = player.teamColor;
+        var teamColor = player.teamColor
 
         // 保存该玩家的队伍，不存在则新建
-        players[teamColor] = players[teamColor] || [];
+        players[teamColor] = players[teamColor] || []
 
         // 添加该玩家进队伍
-        players[teamColor].push(player);
-      };
+        players[teamColor].push(player)
+      }
 
       /****************移除一个玩家***************************/
       operations.removePlayer = function (player) {
         // 玩家队伍颜色
         var teamColor = player.teamColor,
           // 该队伍所有成员
-          teamPlayers = players[teamColor] || [];
+          teamPlayers = players[teamColor] || []
         for (var i = teamPlayers.length - 1; i >= 0; i--) {
           // 删除这个队员
           if (teamPlayers[i] === player) {
-            teamPlayers.splice(i, 1);
+            teamPlayers.splice(i, 1)
           }
         }
-      };
+      }
 
       /****************玩家换队***************************/
       operations.changeTeam = function (player, newTeamColor) {
         // 从原队伍中删除
-        operations.removePlayer(player);
+        operations.removePlayer(player)
 
         // 修改队伍颜色
-        player.teamColor = newTeamColor;
+        player.teamColor = newTeamColor
 
         // 增加到新的队伍中
-        operations.addPlayer(player);
-      };
+        operations.addPlayer(player)
+      }
 
       /****************玩家死亡*****************/
       operations.playerDead = function (player) {
         var teamColor = player.teamColor, // 获取队伍颜色
-          teamPlayers = players[teamColor]; // 玩家所在队伍 []
+          teamPlayers = players[teamColor] // 玩家所在队伍 []
 
         // 队伍里面的人都死了
-        var all_daed = teamPlayers.every(player => player.state === 'dead');
+        var all_daed = teamPlayers.every(player => player.state === 'dead')
 
         if (all_daed) {
           teamPlayers.forEach(player => {
             // 本队所有玩家被判失败
-            player.lose();
-          });
+            player.lose()
+          })
 
           for (var color in players) {
             if (color !== teamColor) {
               // 获取其他队伍
-              var teamPlayers = players[color];
+              var teamPlayers = players[color]
               teamPlayers.forEach(player => {
                 // 其他队伍玩家胜利
-                player.win();
-              });
+                player.win()
+              })
             }
           }
         }
-      };
+      }
 
       // 对外暴露方法，供其他玩家调用
       var reciveMessage = function () {
-        var message = Array.prototype.shift.call(arguments);
-        operations[message].apply(this, arguments);
-      };
+        var message = Array.prototype.shift.call(arguments)
+        operations[message].apply(this, arguments)
+      }
 
       return {
         reciveMessage
       }
-    })();
-
+    })()
     // 通过中间者，消除玩家与玩家间的耦合，玩家间通过中间者收发消息。
     ```
+
+    但是中介者模式虽然降低了各个对象间的耦合，但中介者对象会成为一个复杂的对象。如果对象之间的复杂耦合确实导致调用和维护出现了困难，而且这些耦合度随项目的变化呈指数增长曲线，那我们就可以考虑用中介者模式来重构代码。
+
+12. 装饰者模式
+
+    装饰者模式可以动态的给某个对象添加一些额外的功能，但是不会影响从这个类中派生的其他对象。为对象动态加入行为，经过多重包装，可以形成一条装饰链。
+
+    封装一个钩子函数，在函数调用之前或者函数调用之后执行的钩子函数
+
+    ```js
+    var before = function (fn) {
+      var __self = this
+      return function () {
+        // 先执行 before 传入执行的函数
+        fn.apply(this, arguments)
+        // 返回原函数的调用
+        return __self.apply(this, arguments)
+      }
+    }
+
+    var after = functio(fn){
+      var __self = this
+      return function(){
+        var res = __self.apply(this,arguments)
+        fn.apply(this,arguments)
+        return res
+      }
+    }
+    ```
+
+13. 状态模式
+
+    事物内部状态的改变往往会带来事物的行为改变。在处理的时候，将这个处理委托给当前的状态对象即可，该状态对象会负责渲染它自身的行为。区分事物内部的状态，把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部

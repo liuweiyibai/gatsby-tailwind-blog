@@ -85,7 +85,7 @@
   },
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=8192 gatsby build --prefix-paths",
-    "develop": "gatsby develop --host 0.0.0.0 --port 9000",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
