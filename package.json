@@ -1,7 +1,7 @@
 {
   "name": "lwyb.me",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Personal website running on Gatsby, React, TypeScript and Node.js.",
   "version": "1.1.0",
   "author": "lw1140@163.com",
   "bugs": {
@@ -73,15 +73,15 @@
     "sass": "^1.32.8",
     "slash": "^3.0.0"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/liuweiyibai/lwyb.me/blob/master/README.md",
   "keywords": [
     "gatsby"
   ],
-  "license": "0BSD",
+  "license": "MIT",
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/liuweiyibai/lwyb.me.git"
   },
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=8192 gatsby build --prefix-paths",
@@ -90,7 +90,6 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "new": "gatsby-new-post",
     "gh": "gh-pages -d public"
   }
 }
