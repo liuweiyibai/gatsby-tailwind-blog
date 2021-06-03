@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src/**/*",
+    "wrap-with-provider.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

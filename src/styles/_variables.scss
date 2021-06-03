@@ -1,0 +1,61 @@
+$black: #555;
+$green: #12b886;
+$active-color: darken(#12b886, 0.5);
+$primary-color: #5183f5;
+
+$line-height: 1.3;
+$mobile: 620px;
+$pad: 1024px;
+
+// Headings
+$heading-font-color: #2c3e50;
+$heading-font-weight: 600;
+// $heading-font-family: BlinkMacSystemFont, -apple-system, 'Roboto',
+//   Helvetica Neue, Helvetica, Arial, sans-serif;
+$heading-font-family: transparent;
+$heading-line-height: 1.3;
+
+// Mobile heading font size
+$h1-mobile: 1.85rem;
+$h2-mobile: 1.7rem;
+$h3-mobile: 1.5rem;
+$h4-mobile: 1.3rem;
+$h5-mobile: 1rem;
+
+// Heading font size
+$h1: 2rem;
+$h2: 2.25rem;
+$h3: 1.55rem;
+$h4: 1.35rem;
+$h5: 1.2rem;
+
+$link-color: $primary-color;
+$link-hover-color: darken($green, 10%);
+
+$highlight: #ffeea8;
+
+$border-width: 2px;
+$border-style: solid;
+$border-color: #ccc;
+$border-radius: 4px;
+$borders: $border-width $border-style $border-color;
+
+$font-family: transparent;
+
+// new-moon 变量
+$code-font-family: Menlo, 'Roboto Mono', Courier New, monospace;
+$code-font-color: #b3b9c5;
+$comment: #848991;
+$string: #92d192;
+$punctuation: #d5d8df;
+$operator: #ac8d58;
+$variable: #f2777a;
+$property: #abb2bf;
+$number: #fca369;
+$function: #62cfcf;
+$keyword: #ffeead;
+$attribute: #ffd479;
+$class: #e1a6f2;
+$error: #f2777a;
+$tag: #6ab0f3;
+$main-color: #006cff;
