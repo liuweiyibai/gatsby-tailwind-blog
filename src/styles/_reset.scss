@@ -18,9 +18,7 @@
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Roboto',
-    Roboto, Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-family: Poppins, Lato, Calibri, Arial;
   color: var(--font-color);
   font-weight: 400;
   font-size: 1rem;
@@ -140,29 +138,33 @@ ol li ol {
 }
 
 blockquote {
-  margin: 2rem 0;
-  padding: 1rem;
-  background: var(--blockquote);
+  margin: 1rem 0;
+  // padding: 1rem;
+  // background: var(--blockquote);
   font-weight: 400;
-  border-left: 4px solid var(--link-color);
   position: relative;
-  border-radius: 0.3rem;
-  &::before {
-    background-color: var(--link-color);
-    border-radius: 100%;
-    color: #fff;
-    content: '!';
-    font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    left: -12px;
-    line-height: 20px;
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    top: 14px;
-  }
+  border-radius: 3px;
+  background-color: #f3f5f7;
+  margin: 1em 0 1em 0.5em;
+  padding: 12px 24px;
+  font-style: italic;
+  border-left: 6px solid #41b880;
+  // &::before {
+  //   background-color: var(--link-color);
+  //   border-radius: 100%;
+  //   color: #fff;
+  //   content: '!';
+  //   font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+  //   font-size: 14px;
+  //   font-weight: 700;
+  //   left: -12px;
+  //   line-height: 20px;
+  //   position: absolute;
+  //   height: 20px;
+  //   width: 20px;
+  //   text-align: center;
+  //   top: 14px;
+  // }
 }
 
 blockquote *:last-child {
@@ -383,7 +385,7 @@ tbody tr:nth-child(even) {
 @media screen and (min-width: 800px) {
   table {
     display: table;
-    border: 1px solid var(--border);
+    // border: 1px solid var(--border);
   }
   thead,
   tbody {
@@ -450,8 +452,7 @@ kbd {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 2px #fff;
   color: #333;
   display: inline-block;
-  font-family: Helvetica Neue, Inter, -apple-system, BlinkMacSystemFont,
-    Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue, Inter, -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
   line-height: 1.4;
   margin: 0 0.1em;
   padding: 0.1em 0.6em;
