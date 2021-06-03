@@ -113,3 +113,25 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+# dotenv environment variable files
+.env*
+
+# gatsby files
+.cache/
+public
+
+# Mac files
+.DS_Store
+
+# Yarn
+yarn-error.log
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity
+
+# 博客内容
+# content/
+
+# 自动生成的tag.scss
+src/styles/_tag.scss

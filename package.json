@@ -5,7 +5,7 @@
   "version": "1.1.0",
   "author": "lw1140@163.com",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/liuweiyibai/lwyb.me/issues"
   },
   "dependencies": {
     "@loadable/component": "^5.14.1",
@@ -89,7 +89,6 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "gh": "gh-pages -d public"
+    "clean": "gatsby clean"
   }
 }
