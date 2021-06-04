@@ -1,17 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 export default function HTML(props) {
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      const script = document.createElement('script')
-      script.src = 'https://hm.baidu.com/hm.js?b003ec8715c3cc2a4008d91cbed0dae6'
-      script.async = true
-      document.body.appendChild(script)
-      return () => {
-        document.body.removeChild(script)
-      }
-    }
-  }, [])
   return (
     <html {...props.htmlAttributes}>
       <head>
@@ -19,6 +8,20 @@ export default function HTML(props) {
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         {props.headComponents}
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                var hm = document.createElement('script')
+                hm.src = 'https://hm.baidu.com/hm.js?b003ec8715c3cc2a4008d91cbed0dae6'
+                hm.async = true
+                var _hmt = _hmt || []
+                var s = document.getElementsByTagName('script')[0]
+                s.parentNode.insertBefore(hm, s)
+              `
+            }}
+          />
+        )}
         <style>
           {`
             #nprogress {
