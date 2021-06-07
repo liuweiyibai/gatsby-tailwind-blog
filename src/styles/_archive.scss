@@ -20,7 +20,9 @@
     align-items: center;
     max-width: 500px;
     margin: 0 auto;
+    overflow: hidden;
     margin-bottom: 2rem;
+    position: relative;
     input {
       display: block;
       border: 1px solid #ccc;
@@ -42,6 +44,13 @@
     }
     .search {
       margin-bottom: 0;
+    }
+    svg {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: right 0.5s;
     }
   }
 

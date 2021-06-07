@@ -3,7 +3,7 @@ require('dotenv').config()
 const config = {
   title: `刘威益佰的个人博客`,
   author: `刘威益佰`,
-  description: `我听见回声, 来自山谷和心间, 以寂寞的镰刀收割空旷的灵魂, 不断地重复决绝, 又重复幸福, 终有绿洲摇曳在沙漠🍀`,
+  description: `我听见回声，来自山谷和心间，以寂寞的镰刀收割空旷的灵魂，不断地重复决绝，又重复幸福，终有绿洲摇曳在沙漠。`,
   lang: 'ch-ZN',
   siteUrl: `https://lwyb.me`, // 网站地址，用来 sso
 

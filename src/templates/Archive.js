@@ -1,62 +1,69 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { debounce, kebabCase } from 'lodash';
-import { Link } from 'gatsby';
-import { useScrollToTop } from '@/utils/hooks';
-import SpringScrollbars from '@/components/SpringScrollbars';
-import PlaceholderComponent from '@/components/Placeholder';
-import loadable from '@loadable/component';
-import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store';
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { debounce, kebabCase } from 'lodash'
+import { parse } from 'query-string'
+import { IoMdClose } from 'react-icons/io'
+import { Link } from 'gatsby'
+import { useScrollToTop } from '@/utils/hooks'
+import SpringScrollbars from '@/components/SpringScrollbars'
+import PlaceholderComponent from '@/components/Placeholder'
+import loadable from '@loadable/component'
+import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
 
 const Animated = loadable(() => import('@/components/Animated'), {
-  fallback: <PlaceholderComponent />,
-});
+  fallback: <PlaceholderComponent />
+})
 
-let _all_posts = [];
+let _all_posts = []
 
-export default ({ pageContext, navigate }) => {
-  const dispatch = useDispatch();
-  const scrollRef = useScrollToTop();
+export default ({ pageContext, navigate, location }) => {
+  const { archive_key } = parse(location.search)
+  const dispatch = useDispatch()
+  const scrollRef = useScrollToTop()
 
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState(archive_key)
 
-  const { allPosts2Year, years, postTotal } = pageContext;
-  const [posts, setPosts] = useState(allPosts2Year);
-  _all_posts = allPosts2Year;
+  const { allPosts2Year, years, postTotal } = pageContext
+  const [posts, setPosts] = useState(allPosts2Year)
+  _all_posts = allPosts2Year
   const filters = useCallback(
     debounce(key => {
       const posts = _all_posts.map(t => {
-        return t.filter(
-          tt => tt.title.toUpperCase().indexOf(key.toUpperCase()) > -1
-        );
-      });
-      setPosts(posts);
+        return t.filter(tt => tt.title.toUpperCase().indexOf(key.toUpperCase()) > -1)
+      })
+      setPosts(posts)
     }, 200),
     []
-  );
+  )
 
   useEffect(() => {
     if (searchValue !== null && searchValue !== undefined) {
-      filters(searchValue);
+      filters(searchValue)
     }
-  }, [searchValue, filters]);
+  }, [searchValue, filters])
 
   useEffect(() => {
     dispatch({
       type: SET_NAVIGATION_POSTS_IS_OPEN,
-      payload: true,
-    });
-  }, [dispatch]);
+      payload: true
+    })
+  }, [dispatch])
 
   const handleInput = event => {
-    event.preventDefault();
-    const value = event.target.value;
-    setSearchValue(value);
-  };
+    event.preventDefault()
+    const value = event.target.value
+    navigate(`?archive_key=${value}`)
+    setSearchValue(value)
+  }
+
+  const handleClear = () => {
+    navigate(`?archive_key=`)
+    setSearchValue('')
+  }
 
   const renderList = posts => {
     return years.map((year, i) => {
-      const yearPosts = posts[i];
+      const yearPosts = posts[i]
       return (
         yearPosts.length > 0 && (
           <Animated key={i} year={year} defaultOpen={true}>
@@ -80,24 +87,24 @@ export default ({ pageContext, navigate }) => {
                               tabIndex={i}
                               className={`tag-${tag}`}
                               onClick={event => {
-                                event.preventDefault();
-                                navigate(`/tag/${kebabCase(tag)}`);
+                                event.preventDefault()
+                                navigate(`/tag/${kebabCase(tag)}`)
                               }}
                             >
                               {tag}
                             </span>
-                          );
+                          )
                         })}
                     </div>
                   </Link>
-                );
+                )
               })}
             </div>
           </Animated>
         )
-      );
-    });
-  };
+      )
+    })
+  }
 
   return (
     <SpringScrollbars ref={scrollRef}>
@@ -112,6 +119,7 @@ export default ({ pageContext, navigate }) => {
             onChange={handleInput}
             autoComplete="off"
           />
+          <IoMdClose onClick={handleClear} />
         </div>
         <section className="archive-content">
           <h5>总计：{postTotal} 篇 📔</h5>
@@ -119,5 +127,5 @@ export default ({ pageContext, navigate }) => {
         </section>
       </section>
     </SpringScrollbars>
-  );
-};
+  )
+}
