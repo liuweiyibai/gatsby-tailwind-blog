@@ -200,7 +200,7 @@
         font-size: 1.4rem;
         font-weight: 700;
         transition: 0.2s ease;
-        text-decoration: underline;
+        // text-decoration: underline;
         &:hover {
           color: #4fd675;
         }
@@ -383,11 +383,7 @@
   }
 
   .post-detail {
-    background-image: linear-gradient(
-        90deg,
-        rgba(50, 0, 0, 0.047) 3%,
-        rgba(0, 0, 0, 0) 3%
-      ),
+    background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.047) 3%, rgba(0, 0, 0, 0) 3%),
       linear-gradient(360deg, rgba(50, 0, 0, 0.047) 3%, rgba(0, 0, 0, 0) 3%);
     background-size: 20px 20px;
     background-position: center center;
@@ -489,8 +485,7 @@
       content: '';
     }
     &:hover {
-      box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
-        0 2px 4px 0 rgba(232, 237, 250, 0.5);
+      box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
     }
     .post-copyright-meta {
       color: #008f68;
