@@ -138,33 +138,32 @@ ol li ol {
 }
 
 blockquote {
-  margin: 1rem 0;
-  // padding: 1rem;
-  // background: var(--blockquote);
   font-weight: 400;
   position: relative;
   border-radius: 3px;
+  border-bottom-left-radius: 0;
   background-color: #f3f5f7;
-  margin: 1em 0 1em 0.5em;
-  padding: 12px 24px;
-  font-style: italic;
-  border-left: 6px solid #41b880;
-  // &::before {
-  //   background-color: var(--link-color);
-  //   border-radius: 100%;
-  //   color: #fff;
-  //   content: '!';
-  //   font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
-  //   font-size: 14px;
-  //   font-weight: 700;
-  //   left: -12px;
-  //   line-height: 20px;
-  //   position: absolute;
-  //   height: 20px;
-  //   width: 20px;
-  //   text-align: center;
-  //   top: 14px;
-  // }
+  margin: 1rem 0 1rem 0.5rem;
+  padding: 12px 10px 15px 20px;
+  // font-style: italic;
+  color: #2a6f93;
+  background-color: #ecf7ff;
+  &::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 13px 18px 0 0;
+    position: absolute;
+    left: 0;
+    bottom: -13px;
+    border-color: #ecf7ff transparent transparent transparent;
+  }
+  a {
+    font-weight: inherit;
+    border-bottom: 0 none;
+  }
 }
 
 blockquote *:last-child {
@@ -184,7 +183,7 @@ blockquote.quotation {
 }
 
 blockquote.quotation p {
-  font-family: Georgia, serif;
+  // font-family: Georgia, serif;
   line-height: 1.6;
   color: var(--medium-font-color);
   font-size: 1.1rem;
@@ -193,7 +192,7 @@ blockquote.quotation p {
 
 @media screen and (min-width: 800px) {
   blockquote {
-    padding: 2rem;
+    padding: 1.5rem 1rem;
   }
   blockquote.quotation {
     margin: 2.5rem 0;
