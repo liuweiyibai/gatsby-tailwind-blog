@@ -8,7 +8,7 @@
       padding-right: 8px;
       margin-right: 0.5rem;
     }
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     padding-left: 0;
     display: flex;
     align-items: center;
@@ -163,7 +163,9 @@
       color: #333;
       font-weight: 700;
       // font-size: 18px;
-
+      .post-each__meta {
+        margin-bottom: 0.5rem;
+      }
       &:hover {
         // .arrow {
         //   svg {
@@ -282,7 +284,7 @@
 
 // 文章详情样式
 .post-detail__wrapper {
-  padding: 1rem;
+  padding: 0 1rem;
   padding-bottom: 0;
   @media (min-width: 620px) {
     padding: 2rem;
@@ -292,7 +294,9 @@
     display: flex;
     padding: 0;
     color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 1.5rem;
+    margin-bottom: 3.5rem;
+    padding: 0.5rem 0 15px;
+    border-bottom: 1px solid #e5e9f2;
     @media (max-width: $mobile) {
       flex-direction: column;
       margin-bottom: 1rem;
@@ -308,14 +312,16 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      z-index: 1;
       .post-title-box {
         margin-bottom: 5px;
         font-size: 20px;
       }
       h1 {
         // color: #657487;
-        font-weight: 600;
+        font-weight: 700;
         margin: 0 0 0.5rem;
+        font-size: 2.4rem;
       }
       @media (max-width: $mobile) {
         margin-left: 0;

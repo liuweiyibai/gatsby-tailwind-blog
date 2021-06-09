@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import { graphql, Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { useDispatch } from 'react-redux';
-import AvatarSmall from '@/components/Avatar/small';
-import { BiTimer } from 'react-icons/bi';
-import { CgCalendarDates } from 'react-icons/cg';
-import SpringScrollbars from '@/components/SpringScrollbars';
-import PostCopyright from '@/components/PostCopyright';
-import BlogFooter from '@/components/BlogFooter';
-import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store';
-import { getFixed } from '@/utils/helpers';
-import { useScrollToTop } from '@/utils/hooks';
-import BlogComment from '@/components/BlogComment';
-import { kebabCase } from 'lodash';
+import React, { useEffect } from 'react'
+import { graphql, Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { useDispatch } from 'react-redux'
+import AvatarSmall from '@/components/Avatar/small'
+import { BiTimer } from 'react-icons/bi'
+import { CgCalendarDates } from 'react-icons/cg'
+import SpringScrollbars from '@/components/SpringScrollbars'
+import PostCopyright from '@/components/PostCopyright'
+import BlogFooter from '@/components/BlogFooter'
+import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
+import { getFixed } from '@/utils/helpers'
+import { useScrollToTop } from '@/utils/hooks'
+import BlogComment from '@/components/BlogComment'
+import { kebabCase } from 'lodash'
 
 // import 'gitalk/dist/gitalk.css';
 // import Gitalk from 'gitalk';
@@ -23,25 +23,25 @@ import { kebabCase } from 'lodash';
 // 文章详情
 export default ({ data, pageContext, ...props }) => {
   const {
-    location: { href },
-  } = props;
+    location: { href }
+  } = props
 
-  const dispatch = useDispatch();
-  const scrollRef = useScrollToTop();
-  const postNode = data.markdownRemark;
+  const dispatch = useDispatch()
+  const scrollRef = useScrollToTop()
+  const postNode = data.markdownRemark
   const {
     frontmatter: { title, date, thumbnail, tags },
-    html: postHTML,
-  } = postNode;
+    html: postHTML
+  } = postNode
 
-  const { prev, next, slug } = pageContext;
+  const { prev, next, slug } = pageContext
 
   useEffect(() => {
     dispatch({
       type: SET_NAVIGATION_POSTS_IS_OPEN,
-      payload: true,
-    });
-  }, [dispatch]);
+      payload: true
+    })
+  }, [dispatch])
 
   // useEffect(() => {
   //   const gitalk = new Gitalk({
@@ -102,18 +102,10 @@ export default ({ data, pageContext, ...props }) => {
         <PostCopyright href={href} />
 
         <div className="post-pagination">
-          <Link
-            to={prev ? prev.fields.slug : slug}
-            className={`${!prev ? 'prev-page disable' : 'prev-page'}`}
-          >
+          <Link to={prev ? prev.fields.slug : slug} className={`${!prev ? 'prev-page disable' : 'prev-page'}`}>
             {!prev ? '没有了!' : '上一篇'}
           </Link>
-          <Link
-            to={next ? next.fields.slug : slug}
-            className={
-              !next ? `prev-page disable` : 'currentPage === totalPage'
-            }
-          >
+          <Link to={next ? next.fields.slug : slug} className={!next ? `prev-page disable` : 'currentPage === totalPage'}>
             {!next ? '没有了!' : '下一篇'}
           </Link>
         </div>
@@ -125,8 +117,8 @@ export default ({ data, pageContext, ...props }) => {
         <BlogFooter />
       </div>
     </SpringScrollbars>
-  );
-};
+  )
+}
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -141,7 +133,7 @@ export const pageQuery = graphql`
         tags
         thumbnail {
           childImageSharp {
-            gatsbyImageData(width: 120, height: 120, layout: FIXED)
+            gatsbyImageData(width: 100, height: 100, layout: FIXED)
           }
         }
       }
@@ -150,4 +142,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
