@@ -17,7 +17,7 @@ thumbnail: '../thumbnails/reactrouter.png'
   前端路由是可以通过 `hash` 来实现的。改变 `url` 的 `hash` 值是不会刷新页面的。因此可以通过 `hash` 来实现前端路由，从而实现无刷新的效果。`hash` 属性位于 `location` 对象中，在当前页面中，可以通过：
 
   ```js
-  window.location.hash = 'edit';
+  window.location.hash = 'edit'
   ```
 
   来实现改变当前 `url` 的 `hash` 值。执行上述的 `hash` 赋值后，页面的 `url` 发生改变
@@ -27,14 +27,14 @@ thumbnail: '../thumbnails/reactrouter.png'
 
   在 `url` 中多了以`#`结尾的 `hash` 值，但是赋值前后虽然页面的 `hash` 值改变导致页面完整的 `url` 发生了改变，但是页面是不会刷新的。此外，还有一个名为 `hashchange` 的事件，可以监听 `hash` 的变化,我们可以通过下面两种方式来监听 `hash` 的变化：
 
-  ```js
-  window.onhashchange = function (event) {
-    console.log(event);
-  };
-  window.addEventListener('hashchange', function (event) {
-    console.log(event);
-  });
-  ```
+      ```js
+      window.onhashchange = function (event) {
+        console.log(event)
+      }
+      window.addEventListener('hashchange', function (event) {
+        console.log(event)
+      })
+      ```
 
   当 `hash` 值改变时，输出一个 `HashChangeEvent`。该 `HashChangeEvent` 的具体值为：
 
