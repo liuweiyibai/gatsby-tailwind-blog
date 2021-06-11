@@ -1,0 +1,426 @@
+---
+title: css 预处理器 scss 的使用
+tags:
+  - scss
+  - css
+category:
+  - 编程笔记
+slug: about-scss-grammar
+thumbnail: '../../thumbnails/scss.png'
+date: 2018-03-09 14:18:16
+---
+
+本文仅简单对语法进行介绍，那么至于如何安装和编译 `Scss` 就不一一赘述， `Sass` 是基于 `ruby` 的，所以要配置 `ruby` 环境，本文对 `Scss` 语法做个总结，博主在开发过程中用 `Scss` 蛮多，所以对 `Scss` 语法还是熟知的
+
+- 自定义变量
+
+  ```scss
+  $color: pink;
+  .test1 {
+    background-color: $color;
+  }
+  ```
+
+  通过编译工具编译出来后：
+
+  ```css
+  .test1 {
+    background-color: pink;
+  }
+  ```
+
+  现有的简单的 Scss 编译工具 kaola 很好的一个编译工具，大家可以百度如何使用，再这里就不做过多介绍了。
+
+  ***
+
+- 插入一个变量
+
+  ```scss
+  $right: right;
+  .test2 {
+    border-#{$right}: 1px solid #000;
+  }
+  ```
+
+- 子元素书写
+  .text3>.text33
+
+  ```scss
+  .text3 {
+    .text33 {
+      border: 1px solid;
+    }
+  }
+  ```
+
+- 样式的加减乘除
+
+  ```scss
+  $paramer: 3;
+  .text4 {
+    height: (1px+3px);
+    width: (96px/6);
+    right: $paramer * 4;
+  }
+  ```
+
+- 继承
+
+  .class5E 的样式继承自.clsss5
+
+  ```scss
+  .class5 {
+    border: 1px solid red;
+  }
+  .class5E {
+    @extend .class5;
+    font-size: 20px;
+  }
+  ```
+
+- 代码块的复用
+
+  ```scss
+  @mixin text6 {
+    height: 50px;
+    left: 20px;
+  }
+  .text6M {
+    @include text6;
+  }
+  //这里的mixin就是定义一个可以复用的代码段，当然我们也可以给它传递一个参数，就像这样一样：
+  @mixin text66($height) {
+    height: $heigth;
+    left: 20px;
+  }
+  .text6N {
+    @include text66(100px);
+  }
+  ```
+
+- if 语法，通过对 if 的判断来决定使用那一套样式
+
+  ```scss
+  .text7 {
+    @if 1 + 2 == 3 {
+      border: 1px solid;
+    }
+    @if 5 < 3 {
+      border: 2px dsahed red;
+    }
+  }
+  // 当然，我们都知道if一般是要和else配合的，所以我们也可以这样写
+  .test77 {
+    @if lightness($color) > 30% {
+      background-color: #fff;
+    } @else {
+      background: #0ff;
+    }
+  }
+  // 这里的lightness是一个scss颜色函数，$color指向之前定义的值。
+  ```
+
+- 循环语法，包括最常见的三种循环方法，for,while,each
+
+  ```scss
+  //for 循环
+  @for $i from 1 to 5 {
+    .item-#{$i} {
+      border: #{$i}px solid;
+    }
+  }
+  //while 循环
+  $m: 8;
+  @while $m > 0 {
+    .items-#{$m} {
+      width: 2em * $m;
+    }
+    $m: $m - 2;
+  }
+  //这里可以对$m进行运算 让它每次都减去2
+  //each 语法
+  @each $img in q, w, e, r {
+    .#{$img} {
+      background-image: url('#{$img}.png');
+    }
+  }
+  ```
+
+- 函数语法
+
+  ```scss
+  @function double($number) {
+    @return $number * 2;
+  }
+  .text9 {
+    font-size: double(20px);
+  }
+  ```
+
+- `import` 导入语法
+
+  ```scss
+  @import 'other.SCSS';
+  ```
+
+`Scss` 语法并不是很多，基本就是我们常用的 `CSS` 上面临没有变量函数以及判断等问题的便利解决方案，要深刻理解 `Scss` 变量，以及如何插入变量，以及循环语法和函数思想，详细请移步[Scss 官方文档](http://sass.bootcss.com/docs/sass-reference/)
+
+## 常用代码块
+
+`Scss` 是 `CSS` 的预处理语言，它给予 `CSS` 变量以及函数条件判断等。使 `CSS` 可以复用大量的操作 🪂，本文总结一些常用的 `Scss` 代码块
+
+[官方文档](https://www.sass.hk/)
+
+[Scss 语法介绍](/blog/about-scss-grammar)
+
+## 🚀 使用示例
+
+- 清除浮动
+
+  ```scss
+  /* 添加给浮动元素的父元素 */
+  .clear {
+    *zoom: 1;
+    &:after: {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+  ```
+
+- `inline-block`
+
+  > `inline-block` 会存在字间距，所以在模块布局中不使用，在字体内、 `icon` 中可以使用
+
+  ```css
+  .in-block {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    *display: inline;
+  }
+  ```
+
+- 垂直居中
+
+  ```scss
+  .hv-wrap {
+    display: table;
+    overflow: hidden;
+    margin: 0 auto;
+    height: 100%;
+    *position: relative;
+    position: relative;
+    z-index: 1;
+    .hv-panel {
+      display: table-cell;
+      vertical-align: middle;
+      *position: absolute;
+      top: 50%;
+      .hv-inner {
+        word-break: break-all;
+        *position: relative;
+        *top: -50%;
+      }
+    }
+  }
+  ```
+
+- 一行内超出省略
+
+  ```scss
+  .els {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  ```
+
+- 强制换行
+
+  ```scss
+  .break {
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  ```
+
+- 透明度遮罩
+
+  ```scss
+  .mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: alpha(opacity=50);
+  }
+  ```
+
+- 三角
+
+  ```scss
+  .tri {
+    border: 5px solid transparent;
+    width: 0;
+    height: 0;
+    border-left: 6px solid #df1155;
+    margin-right: -6px;
+  }
+  ```
+
+- 输入框和文本域
+
+  ```scss
+  input[type='text'],
+  textarea {
+    padding: 6px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    outline: none;
+    resize: none;
+  }
+  ```
+
+- 小弹窗
+
+  ```scss
+  .alert {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0;
+    display: none;
+    .cbk {
+      background: #000;
+      filter: alpha(opacity=50);
+      -moz-opacity: 0.5;
+      -khtml-opacity: 0.5;
+      opacity: 0.5;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+    }
+    .panel {
+      width: 366px;
+      position: absolute;
+      z-index: 2;
+      top: 25%;
+      left: 50%;
+      margin-left: -150px;
+      background: #fff;
+      border-radius: 3px;
+      padding-bottom: 8px;
+    }
+  }
+  ```
+
+- 固定页脚
+
+  ```scss
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+  }
+  body {
+    padding-bottom: 110px;
+    box-sizing: border-box;
+    min-height: 100%;
+    height: auto;
+    position: relative;
+  }
+  #footer {
+    position: absolute;
+    bottom: 0px;
+  }
+  ```
+
+## 🌟 常用的 mixin
+
+- `inline-block`
+
+  ```scss
+  $inline-block-alignment: middle !default; // 设置一个默认的对齐方式
+  $legacy-support-for-ie: false !default; // 默认不兼容ie
+
+  // 提供一个跨浏览器的方法来实现`display:inline-block`
+  @mixin inline-block($alignment: $inline-block-alignment) {
+    display: inline-block;
+    @if $alignment and $alignment != none {
+      vertical-align: $alignment;
+    }
+    @if $legacy-support-for-ie {
+      *vertical-align: auto;
+      zoom: 1;
+      *display: inline;
+    }
+  }
+
+  // 使用
+  label,
+  input {
+    @include inline-block();
+  }
+  ```
+
+- 水平居中
+
+  ```scss
+  @mixin horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ```
+
+- 浮动
+
+  ```scss
+  @mixin float($side: left) {
+    float: unquote($side);
+    @if $legacy-support-for-ie {
+      _display: inline;
+    }
+  }
+
+  // 使用@mixin 和 % 分别定义
+
+  // 左浮动
+  // 定义的时候默认 left
+  @mixin fl {
+    @include float();
+  }
+  %fl {
+    @include float();
+  }
+
+  // 右浮动
+  @mixin fr {
+    @include float(right);
+  }
+  %fr {
+    @include float(right);
+  }
+  ```
+
+- 清除浮动
+
+  ```scss
+  @mixin clearfix {
+    @if $legacy-support-for-ie {
+      *zoom: 1;
+    }
+    &:before,
+    &:after {
+      content: '';
+      display: table;
+    }
+    &:after {
+      clear: both;
+      overflow: hidden;
+    }
+  }
+  ```
