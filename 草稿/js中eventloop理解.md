@@ -6,7 +6,7 @@ tags: ['js', 'nodejs', 'EventLoop']
 category:
   - 编程笔记
 slug: get-to-know-event-loop-in-javascript
-thumbnail: '../../thumbnails/event-loop.png'
+thumbnail: '../../../thumbnails/event-loop.png'
 ---
 
 `js` 是单线程语言，也就是说同时只能做一件事。
@@ -32,11 +32,11 @@ thumbnail: '../../thumbnails/event-loop.png'
 来个 🌰：
 
 ```js
-console.log(1);
+console.log(1)
 setTimeout(() => {
-  console.log(2);
-}, 2000);
-console.log(3);
+  console.log(2)
+}, 2000)
+console.log(3)
 
 // console.log(1) 同步任务，输出1
 // setTimeout异步任务，交给webapis去处理，2s后，console.log(2)进入任务队列
