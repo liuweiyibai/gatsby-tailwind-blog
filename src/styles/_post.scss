@@ -290,13 +290,17 @@
     padding: 2rem;
     padding-bottom: 0;
   }
+  @media (min-width: 960px) {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
   .article-header {
     display: flex;
     padding: 0;
     color: rgba(0, 0, 0, 0.6);
     margin-bottom: 3.5rem;
     padding: 0.5rem 0 15px;
-    border-bottom: 1px solid #e5e9f2;
+    // border-bottom: 1px solid #e5e9f2;
     @media (max-width: $mobile) {
       flex-direction: column;
       margin-bottom: 1rem;
