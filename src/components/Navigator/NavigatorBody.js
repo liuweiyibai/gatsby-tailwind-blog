@@ -1,20 +1,20 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import { useStaticQuery, graphql } from 'gatsby';
+import React from 'react'
+import { Link } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 
-import ReactLogo from '@/assets/svgs/react-logo.svg';
-import VueLogo from '@/assets/svgs/vue-logo.svg';
-import ReduxLogo from '@/assets/svgs/redux-logo.svg';
-import WebpackLogo from '@/assets/svgs/webpack-logo.svg';
-import GraphqlLogo from '@/assets/svgs/graphql-logo.svg';
-import BabelLogo from '@/assets/svgs/babel-logo.svg';
-import Es6Logo from '@/assets/svgs/es6-logo.svg';
-import Html5Logo from '@/assets/svgs/html5-logo.svg';
-import NodejsLogo from '@/assets/svgs/nodejs-logo.svg';
-import GolangLogo from '@/assets/svgs/golang-logo.svg';
+import ReactLogo from '@/assets/svgs/react-logo.svg'
+import VueLogo from '@/assets/svgs/vue-logo.svg'
+import ReduxLogo from '@/assets/svgs/redux-logo.svg'
+import WebpackLogo from '@/assets/svgs/webpack-logo.svg'
+import GraphqlLogo from '@/assets/svgs/graphql-logo.svg'
+import BabelLogo from '@/assets/svgs/babel-logo.svg'
+import Es6Logo from '@/assets/svgs/es6-logo.svg'
+import Html5Logo from '@/assets/svgs/html5-logo.svg'
+import NodejsLogo from '@/assets/svgs/nodejs-logo.svg'
+import GolangLogo from '@/assets/svgs/golang-logo.svg'
 
-import { MenuListPaths } from '@/utils/config';
-import { replaceSlash } from '@/utils/helpers';
+import { MenuListPaths } from '@/utils/config'
+import { replaceSlash } from '@/utils/helpers'
 
 /**
  * https://icons8.com/icons/set/node
@@ -23,51 +23,51 @@ import { replaceSlash } from '@/utils/helpers';
 const skills = [
   {
     logo: ReactLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: VueLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: ReduxLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: WebpackLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: GraphqlLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: BabelLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: Es6Logo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: Html5Logo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: NodejsLogo,
-    url: `https://reactjs.org/`,
+    url: `https://reactjs.org/`
   },
   {
     logo: GolangLogo,
-    url: `https://reactjs.org/`,
-  },
-];
+    url: `https://reactjs.org/`
+  }
+]
 
 export default ({ navigatorPostsIsOpen }) => {
   const {
     site: {
-      siteMetadata: { description },
-    },
+      siteMetadata: { description }
+    }
   } = useStaticQuery(
     graphql`
       query {
@@ -78,8 +78,8 @@ export default ({ navigatorPostsIsOpen }) => {
         }
       }
     `
-  );
-  const style = { bottom: '80px' };
+  )
+  const style = { bottom: '80px' }
 
   /**
    *
@@ -89,22 +89,22 @@ export default ({ navigatorPostsIsOpen }) => {
    * location.pathname startsWith href
    */
   const isHrefActive = ({ location, href }) => {
-    const finalClassName = { className: 'current' };
-    const { pathname } = location;
+    const finalClassName = { className: 'current' }
+    const { pathname } = location
     if (href === '/') {
       if (pathname.startsWith('/blog') || pathname === '/') {
-        return finalClassName;
+        return finalClassName
       }
     } else if (href === '/tag') {
       if (pathname.startsWith('/tag')) {
-        return finalClassName;
+        return finalClassName
       }
     } else {
       if (pathname.startsWith(href)) {
-        return finalClassName;
+        return finalClassName
       }
     }
-  };
+  }
 
   return (
     <div className="navigator-body" style={navigatorPostsIsOpen ? style : {}}>
@@ -113,7 +113,7 @@ export default ({ navigatorPostsIsOpen }) => {
       </div>
 
       <div className="navigator-social">
-        <a
+        {/* <a
           href="https://github.com/liuweiyibai"
           target="_blank"
           rel="noopener noreferrer"
@@ -142,7 +142,7 @@ export default ({ navigatorPostsIsOpen }) => {
           <svg viewBox="0 0 512 512">
             <path d="M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19.5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 211.9 197.4 211.9 197.4z"></path>
           </svg>
-        </a>
+        </a> */}
       </div>
 
       <nav className="navigator-menu">
@@ -162,18 +162,12 @@ export default ({ navigatorPostsIsOpen }) => {
         </h5>
         <div className="footer-list">
           {skills.map((t, i) => (
-            <a
-              key={i}
-              href="https://reactjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="react"
-            >
+            <a key={i} href="https://reactjs.org/" target="_blank" rel="noopener noreferrer" title="react">
               <t.logo />
             </a>
           ))}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
