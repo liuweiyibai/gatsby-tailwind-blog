@@ -10,93 +10,110 @@ thumbnail: '../../thumbnails/scss.png'
 date: 2018-03-09 14:18:16
 ---
 
-本文仅简单对语法进行介绍，那么至于如何安装和编译 `Scss` 就不一一赘述， `Sass` 是基于 `ruby` 的，所以要配置 `ruby` 环境，本文对 `Scss` 语法做个总结，博主在开发过程中用 `Scss` 蛮多，所以对 `Scss` 语法还是熟知的
+## 前言
 
-- 自定义变量
+sass 是 css 预处理语言，可以给提高 css 复用复用、编写效率。使用对应的编译器将 sass 解析为 css
 
-  ```scss
-  $color: pink;
-  .test1 {
-    background-color: $color;
+`sass` 语法并不是很多，基本就是我们常用的 `css` 上面临没有变量函数以及判断等问题的便利解决方案，要深刻理解 `sass` 变量，以及如何插入变量，以及循环语法和函数思想，详细请移步[sass 官方文档](http://sass.bootcss.com/docs/sass-reference/)
+
+## 变量
+
+sass 可以像大多数编程语言一样自定义变量，我们可以通过变量来复用属性值，比如颜色、边框大小、图片路径等，这样可以做到更改一处，从而进行全局更改，方便后续改动、扩展。
+
+```scss
+$color: pink;
+.test1 {
+  background-color: $color;
+}
+```
+
+通过编译工具编译出来后：
+
+```css
+.test1 {
+  background-color: pink;
+}
+```
+
+现有的简单的 Sass 编译工具 [kaola](http://koala-app.com/index-zh.html) 很好的一个编译工具，大家可以百度如何使用，再这里就不做过多介绍了。
+
+---
+
+插入一个变量
+
+```scss
+$right: right;
+.test2 {
+  border-#{$right}: 1px solid #000;
+}
+```
+
+## 选择器
+
+sass 中子元素可以嵌套书写 `.text3 > .text33`
+
+```scss
+.text3 {
+  .text33 {
+    border: 1px solid;
   }
-  ```
+}
+```
 
-  通过编译工具编译出来后：
+样式的加减乘除
 
-  ```css
-  .test1 {
-    background-color: pink;
-  }
-  ```
+```scss
+$paramer: 3;
+.text4 {
+  height: (1px+3px);
+  width: (96px/6);
+  right: $paramer * 4;
+}
+```
 
-  现有的简单的 Scss 编译工具 kaola 很好的一个编译工具，大家可以百度如何使用，再这里就不做过多介绍了。
+## 模块
 
-  ***
+- css 中的 @import 规则，它允许在一个 css 文件中导入其他 css 文件。然而，后果是只有执行到 @import 时，浏览器才会去下载其他 css 文件，这导致页面加载起来特别慢。
 
-- 插入一个变量
+- sass 中的 @import 规则，不同的是，scss 的@import 规则在生成 css 文件时就把相关文件导入进来。这意味着所有相关的样式被归纳到了同一个 css 文件中，而无需发起额外的下载请求。
 
-  ```scss
-  $right: right;
-  .test2 {
-    border-#{$right}: 1px solid #000;
-  }
-  ```
+- 局部文件命名的使用，scss 局部文件的文件名以下划线开头。这样，scss 就不会在编译时单独编译这个文件输出 css，而只把这个文件用作导入。在使用 scss 时，混合器 mixins 是最适合的使用场景，因为混合器不需要单独编译输出 css 文件。
 
-- 子元素书写
-  .text3>.text33
+## 继承
 
-  ```scss
-  .text3 {
-    .text33 {
-      border: 1px solid;
-    }
-  }
-  ```
+.class5 的样式继承自 .clsss5
 
-- 样式的加减乘除
+```scss
+.class5 {
+  border: 1px solid red;
+}
+.class5E {
+  @extend .class5;
+  font-size: 20px;
+}
+```
 
-  ```scss
-  $paramer: 3;
-  .text4 {
-    height: (1px+3px);
-    width: (96px/6);
-    right: $paramer * 4;
-  }
-  ```
+## 代码块复用
 
-- 继承
+可以将共用的代码框抽象出来复用
 
-  .class5E 的样式继承自.clsss5
-
-  ```scss
-  .class5 {
-    border: 1px solid red;
-  }
-  .class5E {
-    @extend .class5;
-    font-size: 20px;
-  }
-  ```
-
-- 代码块的复用
-
-  ```scss
-  @mixin text6 {
-    height: 50px;
-    left: 20px;
-  }
-  .text6M {
-    @include text6;
-  }
-  //这里的mixin就是定义一个可以复用的代码段，当然我们也可以给它传递一个参数，就像这样一样：
-  @mixin text66($height) {
-    height: $heigth;
-    left: 20px;
-  }
-  .text6N {
-    @include text66(100px);
-  }
-  ```
+```scss
+@mixin text6 {
+  height: 50px;
+  left: 20px;
+}
+.text6M {
+  @include text6;
+}
+//这里的mixin就是定义一个可以复用的代码段，当然我们也可以给它传递一个参数，就像这样一样：
+@mixin text66($height) {
+  height: $heigth;
+  left: 20px;
+}
+.text6N {
+  @include text66(100px);
+}
+```
 
 - if 语法，通过对 if 的判断来决定使用那一套样式
 
@@ -156,14 +173,6 @@ date: 2018-03-09 14:18:16
     font-size: double(20px);
   }
   ```
-
-- `import` 导入语法
-
-  ```scss
-  @import 'other.SCSS';
-  ```
-
-`Scss` 语法并不是很多，基本就是我们常用的 `CSS` 上面临没有变量函数以及判断等问题的便利解决方案，要深刻理解 `Scss` 变量，以及如何插入变量，以及循环语法和函数思想，详细请移步[Scss 官方文档](http://sass.bootcss.com/docs/sass-reference/)
 
 ## 常用代码块
 
