@@ -1,0 +1,259 @@
+---
+title: 使用 nuxt 开发初探
+---
+
+## 前言
+
+nuxt.js 是 vue 配套的 ssr 渲染框架。用来实现服务端渲染效果，即服务端直接返回静态 html，减少首页加载资源时白屏的时间，有利于 sso 优化，目前我们团队有几个页面要求进行 sso 优化，因为技术栈用的是 vue，所以服务端渲染框架选择了 nuxt
+
+> nuxt.js 是一个基于 Vue.js 的通用应用框架 它预设了利用 Vue.js 开发服务端渲染（SSR, Server Side Render） 的应用所需要的各种配置，同时也可以一键生成静态站点。值得一提的是，nuxt 是基于 node.js 的，后端如果是其他语言时，是否考虑到再加一层 node.js 的合理性。
+>
+> [官方中文文档](https://zh.nuxtjs.org/guide/installation)
+
+## 创建项目
+
+按照官方文档走就可以了，我选择的是 ssr 服务端渲染模式
+
+```bash
+yarn create nuxt-app nuxt-demo
+cd ./nuxt-demo
+yarn dev
+```
+
+一个基础的 nuxt 项目就已经启动起来了，接下来我们开始基于这个扩展一下这个项目，以为我们是移动端的项目，所以需要配置 css 的单位转换，postcss，vant 的按需引入等。
+
+## meta
+
+nuxt 内部使用 vue-meta 来快速配置各个页面或者，整个 website 的 meta 信息，[文档地址](https://nuxtjs.org/docs/2.x/features/meta-tags-seo)
+
+```js
+// nuxt.config.js
+export default {
+  head: {
+    title: 'my website title',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'my website description'
+      }
+    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  }
+}
+```
+
+## vant
+
+vant 按需加载
+
+```bash
+# 还是指定版本安装，不然有坑
+yarn add babel-plugin-import less@3.10.3 less-loader@5.0.0
+```
+
+```js
+// nuxt.config.js
+module.exports = {
+  build: {
+    // 添加这个是关键，添加后 babel 才会处理依赖包 vant 里面的代码
+    transpile: [/vant.*?less/],
+    babel: {
+      plugins: [
+        [
+          'import',
+          {
+            libraryName: 'vant',
+            style: name => {
+              return `${name}/style/less.js`
+            }
+          },
+          'vant'
+        ]
+      ]
+    }
+  },
+
+  // 也可以修改 vant 内部 less 变量
+  loaders: {
+    less: {
+      javascriptEnabled: true,
+      modifyVars: {
+        'nav-bar-title-font-size': '80px'
+      }
+    }
+  }
+}
+```
+
+## sass
+
+```bash
+# 安装 sass-loader 指定版本，因为高版本有兼容性的坑
+yarn add sass-loader@10 sass --dev
+
+# 加载 less styls sass 变量
+yarn add @nuxtjs/style-resources --dev
+```
+
+对应在配置文件中使用
+
+```js
+// nuxt.config.js
+module.exports = {
+  // 全局 css 样式一如，ps：单独的 scss 文件中使用变量要单独引入
+  css: ['@/assets/scss/main.scss'],
+  buildModules: ['@nuxtjs/style-resources'],
+  styleResources: {
+    // your settings here
+    sass: [],
+    scss: [
+      // 需要使用相对路径引入
+      './assets/vars/*.scss',
+      './assets/abstracts/_mixin.scss'
+    ],
+    less: [],
+    stylus: []
+  }
+}
+```
+
+就可以在 vue 组件中直接使用 scss 变量了
+
+## rem 处理
+
+```bash
+yarn add amfe-flexible
+yarn add postcss-pxtorem@5.1.1 --dev # 避免报错，安装指定版本
+```
+
+[为什么选用 postcss-pxtorem](https://www.npmtrends.com/postcss-plugin-px2rem-vs-postcss-px2rem-vs-postcss-pxtorem) npm 下载量最高！
+
+## env
+
+```bash
+# dotenv 载入环境文件
+yarn add @nuxtjs/dotenv --dev
+```
+
+对应修改配置文件：
+
+```js
+module.exports = {
+  modules: [
+    ...,
+    // Simple usage
+    '@nuxtjs/dotenv',
+
+    // With options
+    [
+      '@nuxtjs/dotenv',
+      {
+        /* module options */
+      },
+    ],
+  ],
+}
+```
+
+## 日志
+
+[npm](https://www.npmjs.com/package/nuxt-winston-log)
+
+```bash
+yarn add nuxt-winston-log
+```
+
+## 构建
+
+[构建相关配置文档](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build)，可以修改构建产物相关配置
+
+```js
+// nuxt.config.js
+module.exports = {
+  build: {
+    // css 独立打包 link 的形式加载
+    extractCSS: { allChunks: true },
+
+    // 指定打包路径为dist，默认路径为 [_nuxt] 或者可以指定cdn 域名
+    publicPath: '/static/',
+
+    // css 和 js、img 打包时指定文件夹
+    filenames: {
+      app: ({ isDev }) => (isDev ? '[name].js' : '[chunkhash].js'),
+      chunk: ({ isDev }) => (isDev ? '[name].js' : '[chunkhash].js'),
+      css: ({ isDev }) => (isDev ? '[name].js' : '[contenthash].css'),
+      img: ({ isDev }) => (isDev ? '[path][name].[ext]' : '[hash:7].[ext]')
+    }
+  }
+
+  // 输出 css link 路径会修改为： /static/[contenthash].css
+  // 注意：静态资源文件路径名不能和页面路由名称相同，publicPath 默认配置 '/' 无效
+}
+```
+
+## 其他使用细节
+
+- 可以使用 middleware 来代替 全局路由钩子的工作
+
+  在 nuxt 中使用 全局路由钩子，玩不明白就会死循环 😑
+
+- 使用 nuxt 为 vuex 提供的 nuxtServerInit 提供的函数
+
+  比如 website 载入之前 store 需要存储哪些数据
+
+## 部署
+
+- pm2
+
+  ```bash
+  build # 构建静态文件和server代码
+  yarn start # 启动 nuxt 提供的 node server
+  # pm2 启动
+  pm2 start npm --name "nuxt-demo" -- run start
+  ```
+
+- docker
+
+  docker 部署时是否依赖使用 pm2，不使用的的话
+
+  ```dockerfile
+  FROM node:alpine
+
+  WORKDIR /app
+
+  RUN npm i -g pm2
+  RUN npm i yarn -g
+
+  COPY ./package*.json ./
+
+  RUN yarn install \
+    --prefer-offline \
+    --frozen-lockfile \
+    --non-interactive \
+    --production=false
+
+  # Build app
+  RUN yarn run build
+
+  RUN rm -rf node_modules && \
+    NODE_ENV=production yarn install \
+    --prefer-offline \
+    --pure-lockfile \
+    --non-interactive \
+    --production=true
+
+  EXPOSE 3000
+
+  USER node
+
+  CMD [ "pm2-runtime", "start", "npm", "--", "start" ]
+  ```
+
+## 最后
+
+最后放一张 nuxt 的生命周期图吧！
+
+![nuxt 生命周期图](https://cdn.clearlywind.com/static/images/nuxt-lifecycle.png)
