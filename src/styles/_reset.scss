@@ -145,8 +145,6 @@ blockquote {
   background-color: #f3f5f7;
   margin: 1rem 0 1rem 0.5rem;
   padding: 12px 10px 15px 20px;
-  // font-style: italic;
-  // color: #2a6f93;
   background-color: #ecf7ff;
   &::before {
     content: '';
@@ -159,10 +157,6 @@ blockquote {
     left: 0;
     bottom: -13px;
     border-color: #ecf7ff transparent transparent transparent;
-  }
-  a {
-    font-weight: inherit;
-    border-bottom: 0 none;
   }
 }
 
