@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { SET_SCROLL_TO_TOP } from '@/store';
+import { useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { SET_SCROLL_TO_TOP } from '@/store'
 
 /**
  * @description: Hooks useDocumentTitle 改变标题钩子
@@ -9,33 +9,33 @@ import { SET_SCROLL_TO_TOP } from '@/store';
  */
 
 export function useDocumentTitle(title) {
-  const prevTitleRef = useRef(title);
+  const prevTitleRef = useRef(title)
   useEffect(() => {
-    document.title = title;
+    document.title = title
     return () => {
-      document.title = prevTitleRef.current;
-    };
-  }, [title]);
+      document.title = prevTitleRef.current
+    }
+  }, [title])
 }
 
 export function useScrollToTop() {
-  const scrollRef = useRef(null);
-  const dispatch = useDispatch();
-  const scrollToTop = useSelector(state => state.scrollToTop);
+  const scrollRef = useRef(null)
+  const dispatch = useDispatch()
+  const scrollToTop = useSelector(state => state.scrollToTop)
   const handleScrollToTop = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollToTop();
+      scrollRef.current.scrollToTop()
     }
-  };
+  }
 
   useEffect(() => {
     if (scrollToTop) {
-      handleScrollToTop();
+      handleScrollToTop()
       dispatch({
         type: SET_SCROLL_TO_TOP,
-        payload: false,
-      });
+        payload: false
+      })
     }
-  }, [scrollToTop, dispatch]);
-  return scrollRef;
+  }, [scrollToTop, dispatch])
+  return scrollRef
 }

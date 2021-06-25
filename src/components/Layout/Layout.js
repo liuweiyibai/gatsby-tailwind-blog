@@ -65,7 +65,7 @@ const Layout = ({ children, title, ...props }) => {
   }, [dispatch, throttlerResize])
   return (
     <LayoutWrapper>
-      <Seo title={title || '博客'} />
+      <Seo title={title || '刘威益佰的个人博客'} />
       <Navigator {..._props} posts={allPosts} />
       <main className="blog-main__wrapper">
         <div>{children}</div>
