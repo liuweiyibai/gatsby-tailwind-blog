@@ -14,12 +14,6 @@ import { useScrollToTop } from '@/utils/hooks'
 import BlogComment from '@/components/BlogComment'
 import { kebabCase } from 'lodash'
 
-// import 'gitalk/dist/gitalk.css';
-// import Gitalk from 'gitalk';
-// import Md5 from 'md5';
-
-// console.log(Md5('/rweriweurioweuriowe.423423432/432432432423'));
-
 // 文章详情
 export default ({ data, pageContext, ...props }) => {
   const {
@@ -42,20 +36,6 @@ export default ({ data, pageContext, ...props }) => {
       payload: true
     })
   }, [dispatch])
-
-  // useEffect(() => {
-  //   const gitalk = new Gitalk({
-  //     clientID: 'edf201be4069d160a592',
-  //     clientSecret: '1d23230f76fe6a5dd22dd4ab72010000bfc49854',
-  //     repo: 'blog-comment',
-  //     owner: 'liuweiyibai',
-  //     admin: ['liuweiyibai'],
-  //     id: Md5(slug), // Ensure uniqueness and length less than 50
-  //     distractionFreeMode: false, // Facebook-like dist
-  //   });
-
-  //   // gitalk.render('gitalk-container');
-  // });
 
   return (
     <SpringScrollbars ref={scrollRef}>
@@ -110,9 +90,6 @@ export default ({ data, pageContext, ...props }) => {
           </Link>
         </div>
 
-        {/* <div className="card">
-          <div id="gitalk-container" />
-        </div> */}
         <BlogComment />
         <BlogFooter />
       </div>

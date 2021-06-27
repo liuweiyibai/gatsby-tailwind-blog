@@ -7,7 +7,7 @@ export default ({ children, className, style }) => {
   useCanvasBg()
   return (
     <div className={classes} style={style ? { ...style } : {}}>
-      <div style={{ zIndex: 2, background: `rgba(255,255,255,.7)` }}>{children}</div>
+      <div style={{ zIndex: 2, background: `rgba(255,255,255,.9)` }}>{children}</div>
     </div>
   )
 }

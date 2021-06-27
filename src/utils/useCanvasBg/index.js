@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
-import { Ribbons } from './helper';
+import { Ribbons } from './helper'
 
 export function useCanvasBg(config) {
   useEffect(() => {
@@ -14,9 +14,11 @@ export function useCanvasBg(config) {
       parallaxAmount: -0.2,
       ribbonCount: 3,
       strokeSize: 0,
-      verticalPosition: 'random',
-    };
-    new Ribbons(config);
-    return () => {};
-  }, []);
+      verticalPosition: 'random'
+    }
+    const r = new Ribbons(config)
+    return () => {
+      r.destory()
+    }
+  }, [])
 }
