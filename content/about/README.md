@@ -13,6 +13,8 @@ slug: '/about'
 
 还有自己平时收集的 [面试题](//fe.lwyb.me)
 
+还有自己总结的前端开发 [规范](//docs.lwyb.me)
+
 ### **关于本人** ✨
 
 95 后，前端开发 + 后端搬运工。
@@ -30,3 +32,5 @@ slug: '/about'
   [github](https://github.com/jkchao/typescript-book-chinese)
 
 - [函数式编程指北](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
+
+- [](//clearlywind.com/read/)
