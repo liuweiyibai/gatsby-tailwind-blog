@@ -3,7 +3,7 @@ title: 前端 esbuild 压缩工具
 date: 2020-07-28 20:11:56
 category:
   - 编程笔记
-tags: ['go', 'js', '前端工程化', '前端工具']
+tags: ['golang', 'js', '前端工程化', '前端工具']
 slug: the-front-end-esbuild-zip-tools
 thumbnail: '../../thumbnails/esbuild.png'
 ---
