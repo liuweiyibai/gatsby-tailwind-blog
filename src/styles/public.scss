@@ -101,3 +101,21 @@ body,
     border-width: 0;
   }
 }
+
+.load-more {
+  text-align: center;
+  margin-top: 20px;
+  color: #343a40;
+  button {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #fff;
+    border: 1px solid #343a40;
+    transition: all linear 0.3s;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

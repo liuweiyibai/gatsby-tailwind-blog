@@ -1,65 +1,61 @@
-import React, { useState, useEffect, useRef } from 'react';
-import classnames from 'classnames';
-import { useSelector } from 'react-redux';
-import IconBtn from '../IconButton';
-import PostListHeader from '../PostListHeader';
-import { MdKeyboardArrowUp } from 'react-icons/md';
-import { useLocation } from '@reach/router';
-import SpringScrollbars from '../SpringScrollbars';
-import PostItem from '@/components/PostItem';
-import { getCategoryNameByKey } from '@/utils/config';
+import React, { useState, useEffect, useRef } from 'react'
+import classnames from 'classnames'
+import { useSelector } from 'react-redux'
+import IconBtn from '../IconButton'
+import PostListHeader from '../PostListHeader'
+import { MdKeyboardArrowUp } from 'react-icons/md'
+import { useLocation } from '@reach/router'
+import SpringScrollbars from '../SpringScrollbars'
+import PostItem from '@/components/PostItem'
+import { getCategoryNameByKey } from '@/utils/config'
 
-let isFirstRender = false;
+let isFirstRender = false
 
 export default ({ posts, showPostsList, callback, display = false }) => {
-  const scrollRef = useRef(null);
-  const location = useLocation();
+  const scrollRef = useRef(null)
+  const location = useLocation()
 
-  const categoryFilterKeyword = useSelector(
-    state => state.categoryFilterKeyword
-  );
-  const [allPosts, setAllPosts] = useState([]);
+  const categoryFilterKeyword = useSelector(state => state.categoryFilterKeyword)
+  const [allPosts, setAllPosts] = useState(posts)
 
   useEffect(() => {
-    if (categoryFilterKeyword === 'all') {
-      setAllPosts(posts);
+    if (categoryFilterKeyword !== 'all') {
+      const name = getCategoryNameByKey(categoryFilterKeyword)
+      const hasCategory = posts.filter(t => t.category && t.category.includes(name))
+      setAllPosts(hasCategory)
     } else {
-      const name = getCategoryNameByKey(categoryFilterKeyword);
-      const hasCategory = posts.filter(
-        t => t.category && t.category.includes(name)
-      );
-      setAllPosts(hasCategory);
+      if (posts.length !== allPosts.length) {
+        setAllPosts(posts)
+      }
     }
-  }, [posts, categoryFilterKeyword]);
+  }, [posts, categoryFilterKeyword])
 
   const classes = classnames('navigator-posts__wrapper', {
-    'is-closed': !showPostsList,
-  });
+    'is-closed': !showPostsList
+  })
 
   useEffect(() => {
     if (showPostsList) {
-      const { pathname } = location;
-      const index = allPosts.findIndex(
-        t => t.slug.replace(/(\/)/g, '') === pathname.replace(/(\/)/g, '')
-      );
+      const { pathname } = location
+      const index = allPosts.findIndex(t => t.slug.replace(/(\/)/g, '') === pathname.replace(/(\/)/g, ''))
       if (index > -1) {
         if (scrollRef.current) {
-          let scrolltop = index * 59;
+          let scrolltop = index * 59
           requestAnimationFrame(() => {
-            scrollRef.current.scrollTop(scrolltop);
-          });
+            scrollRef.current.scrollTop(scrolltop)
+          })
         }
       }
     }
-  }, [showPostsList]);
+  }, [showPostsList])
 
   const handleClick = () => {
-    callback(true);
+    callback(true)
     if (isFirstRender === false) {
-      isFirstRender = true;
-      setAllPosts(posts);
+      isFirstRender = true
+      setAllPosts(posts)
     }
-  };
+  }
 
   const buildHeader = () => {
     if (!showPostsList) {
@@ -70,36 +66,23 @@ export default ({ posts, showPostsList, callback, display = false }) => {
             <MdKeyboardArrowUp />
           </IconBtn>
         </div>
-      );
+      )
     }
-    return <PostListHeader />;
-  };
+    return <PostListHeader />
+  }
 
   return (
     <nav className={classes} style={{ display: display ? 'block' : 'none' }}>
       <div className="navigator-posts__content">
         <SpringScrollbars ref={scrollRef}>
           <div className="navigator-posts-list">
-            <header className="navigator-posts-list__header">
-              {buildHeader()}
-            </header>
+            <header className="navigator-posts-list__header">{buildHeader()}</header>
             <ul style={{ display: showPostsList ? 'block' : 'none' }}>
-              {allPosts.map(
-                (t, i) =>
-                  t.slug && (
-                    <PostItem
-                      key={i}
-                      {...t}
-                      location={location}
-                      hideDate
-                      small
-                    />
-                  )
-              )}
+              {allPosts.map((t, i) => t.slug && <PostItem key={i} {...t} location={location} hideDate small />)}
             </ul>
           </div>
         </SpringScrollbars>
       </div>
     </nav>
-  );
-};
+  )
+}

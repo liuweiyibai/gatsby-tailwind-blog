@@ -1,44 +1,44 @@
-import React, { Fragment } from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import classnames from 'classnames';
-import { Link } from 'gatsby';
-import AvatarSmall from '@/components/Avatar/small';
-import { TiArrowRightThick } from 'react-icons/ti';
-import { BiTimer } from 'react-icons/bi';
-import { getFixed } from '@/utils/helpers';
-import { CgCalendarDates } from 'react-icons/cg';
-import { kebabCase } from 'lodash';
+import React from 'react'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import classnames from 'classnames'
+import { Link } from 'gatsby'
+import AvatarSmall from '@/components/Avatar/small'
+import { TiArrowRightThick } from 'react-icons/ti'
+import { BiTimer } from 'react-icons/bi'
+import { getFixed } from '@/utils/helpers'
+import { CgCalendarDates } from 'react-icons/cg'
+import { kebabCase } from 'lodash'
 function getCurrentPath(location, slug) {
   if (location && location.pathname) {
-    return slug.replace(/(\/)/g, '') === location.pathname.replace(/(\/)/g, '');
+    return slug.replace(/(\/)/g, '') === location.pathname.replace(/(\/)/g, '')
   }
-  return false;
+  return false
 }
 
 export default ({ hideDate = false, location, small = false, ...props }) => {
-  const { slug, thumbnail, tags, date } = props;
+  const { slug, thumbnail, tags, date } = props
   // const IsLink = small ? Link : Link;
   // const IslinkProps = small ? { to: slug } : { to: slug };
   const className = classnames({
     'post-each': true,
     active: getCurrentPath(location, slug),
-    'small-post-each': small,
-  });
+    'small-post-each': small
+  })
+
+  const image = getImage(getFixed(thumbnail))
   return (
     <li className="post-each__wrapper">
       <Link to={slug}>
         <div className={className}>
-          {thumbnail ? (
+          {thumbnail && (
             <GatsbyImage
-              image={getFixed(thumbnail)}
+              image={image}
               className="post-each__image"
               alt={props.title}
               onError={err => {
-                console.log(err);
+                console.log(err)
               }}
             />
-          ) : (
-            <div />
           )}
           <div className="post-each__item">
             <h3>{props.title}</h3>
@@ -87,15 +87,15 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
 
         {!hideDate && (
           <GatsbyImage
-            image={getFixed(thumbnail)}
+            image={image}
             className="post-each__shadow"
             alt={props.title}
             onError={err => {
-              console.log(err);
+              console.log(err)
             }}
           />
         )}
       </Link>
     </li>
-  );
-};
+  )
+}

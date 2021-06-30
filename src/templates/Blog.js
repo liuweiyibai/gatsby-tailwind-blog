@@ -8,8 +8,6 @@ import PlaceholderComponent from '@/components/Placeholder'
 import PostItem from '@/components/PostItem'
 import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
 import { getCategoryNameByKey } from '@/utils/config'
-import { setBlogPageScrollTop, getBlogPageScrollTop } from '@/utils/helpers'
-import { useScrollToTop } from '@/utils/hooks'
 
 /**
  * 显示所有的文章，通过 template 重复渲染生成
@@ -17,9 +15,17 @@ import { useScrollToTop } from '@/utils/hooks'
 
 export default ({ pageContext }) => {
   const dispatch = useDispatch()
-  const scrollRef = useScrollToTop()
   const location = useLocation()
   const { posts } = pageContext
+  const _posts = posts.map(t => {
+    return {
+      ...t.node.frontmatter,
+      ...t.node.fields,
+      timeToRead: t.node.timeToRead,
+      excerpt: t.node.excerpt
+    }
+  })
+  const [allPosts, setAllPosts] = useState(_posts)
 
   useEffect(() => {
     dispatch({
@@ -28,69 +34,54 @@ export default ({ pageContext }) => {
     })
   }, [dispatch])
 
+  const [list, setList] = useState([])
+
+  const [hasMore, setHasMore] = useState(false)
+
+  const [loadMore, setLoadMore] = useState(false)
+
+  const handleLoadMore = () => setLoadMore(true)
+
   const categoryFilterKeyword = useSelector(state => state.categoryFilterKeyword)
 
-  const [allPosts, setAllPosts] = useState([])
+  useEffect(() => {
+    if (loadMore && hasMore) {
+      const currentLength = list.length
+      const isMore = currentLength < allPosts.length
+      const nextResults = isMore ? allPosts.slice(currentLength, currentLength + 10) : []
+      setList([...list, ...nextResults])
+      setLoadMore(false)
+    }
+  }, [loadMore, hasMore])
 
   useEffect(() => {
-    const _posts = posts.map(t => {
-      return {
-        ...t.node.frontmatter,
-        ...t.node.fields,
-        timeToRead: t.node.timeToRead,
-        excerpt: t.node.excerpt
-      }
-    })
-    setAllPosts(_posts)
+    const isMore = list.length < allPosts.length
+    setHasMore(isMore)
+  }, [list, allPosts])
 
-    if (categoryFilterKeyword === 'all') {
-      setAllPosts(_posts)
-    } else {
+  useEffect(() => {
+    if (categoryFilterKeyword !== 'all') {
       const name = getCategoryNameByKey(categoryFilterKeyword)
       const hasCcategory = _posts.filter(t => t.category && t.category.includes(name))
       setAllPosts(hasCcategory)
+    } else {
+      if (allPosts.length !== _posts.length) {
+        setAllPosts(_posts)
+      }
     }
-  }, [posts, categoryFilterKeyword])
+  }, [categoryFilterKeyword])
 
   useEffect(() => {
-    const requestAnimationFrame =
-      window.requestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.msRequestAnimationFrame
-    const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
-
-    let scrollTop = getBlogPageScrollTop()
-    let dustbin = null
-    if (scrollTop > 0) {
-      if (scrollRef.current) {
-        dustbin = requestAnimationFrame(() => {
-          scrollRef.current.scrollTop(Number(scrollTop))
-        })
-      }
-    }
-    return () => {
-      if (dustbin) {
-        cancelAnimationFrame(dustbin)
-      }
-    }
-  }, [])
-
-  const handleScrollStop = () => {
-    if (scrollRef.current) {
-      let scrollTop = scrollRef.current.getScrollTop()
-      setTimeout(() => {
-        setBlogPageScrollTop(scrollTop)
-      })
-    }
-  }
+    setList([...allPosts.slice(0, 10)])
+    setHasMore(allPosts.length > 10)
+  }, [allPosts])
 
   return (
-    <SpringScrollbars forceCheckOnScroll handleScrollStop={handleScrollStop} ref={scrollRef}>
+    <SpringScrollbars forceCheckOnScroll>
       <section className="blog-posts_list">
         <PostListHeader />
         <ul style={{ padding: 0 }}>
-          {allPosts.map(
+          {list.map(
             (t, i) =>
               t.slug && (
                 <LazyLoad key={i} once height={86} debounce={300} offset={100} overflow placeholder={<PlaceholderComponent />}>
@@ -99,6 +90,7 @@ export default ({ pageContext }) => {
               )
           )}
         </ul>
+        <div className="load-more">{hasMore ? <button onClick={handleLoadMore}>加 载 更 多</button> : <p>没有更多了...</p>}</div>
       </section>
     </SpringScrollbars>
   )

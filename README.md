@@ -1,11 +1,6 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  blog use Gatsby's build
-</h1>
+# 刘威益佰的个人博客
+
+[预览地址](https://lwyb.me)
 
 ## 生成关于我页面
 
@@ -23,13 +18,13 @@
 - [✅] 增加 pageloading 效果
 - [❌] 使用 tailwind 和 @emotion 重写 css <https://tjaddison.com/blog/2019/06/create-react-app-emotion-and-tailwind-css-starter-app/>
 - [❌] 抽离 layout 组件中的 graphql 查询
-- [❌] 记录滚动位置
+- [✅] 记录滚动位置
 - [✅] react-lazyload 懒加载
 - [❌] [压缩向页面传递的 json 大小](https://gersom.nl/post/reducing-gatsbys-page-preloading-bandwidth/)
 
 ## 使用 lighthouse
 
-  测试网站性能
+测试网站性能
 
 ## 博客文章
 
@@ -46,6 +41,7 @@
 
 - [❌] [如何优雅的为 PWA 注册 Service Worker](https://zhuanlan.zhihu.com/p/28161855)
 - [❌] [有必要上 ssr 吗](https://www.zhihu.com/question/308792091)
+- [使用 nxinx 转发 tcp、udp 请求](https://blog.51cto.com/moerjinrong/2287680)
 
 ## 评论解决方案
 
@@ -55,14 +51,13 @@ GITALK ✅
 
 - [Yum/RPM 安装的 Nginx 如何添加第三方模块(LuaJIT)](https://blog.csdn.net/weixin_34245749/article/details/92921021)
 
-- nginx 如何使用 lua 脚本
-  <https://www.cnblogs.com/winss/p/13605087.html>
+- [nginx 如何使用 lua 脚本](https://www.cnblogs.com/winss/p/13605087.html)
 
-- nginx 使用 lua 脚本读取 redis，<https://my.oschina.net/u/1175305/blog/1799941>
+- [nginx 使用 lua 脚本读取 redis](https://my.oschina.net/u/1175305/blog/1799941)
 
 - nginx 使用 lua 脚本向 kfuka 写入数据
 
-- 如何封装一个前端组件，<https://juejin.cn/post/6844903847874265101>
+- [如何封装一个前端组件](https://juejin.cn/post/6844903847874265101)
 
 ## prismjs
 
@@ -77,6 +72,10 @@ GITALK ✅
 [codemirror](https://codemirror.net/6/docs/)
 
 [参考地址](https://sq.163yun.com/blog/article/184733100361850880)
+
+## 首页加载更多
+
+[首页加载更多](https://www.erichowey.dev/writing/load-more-button-and-infinite-scroll-in-gatsby/)
 
 ## 生成开发文档的工具
 
@@ -123,19 +122,19 @@ brew install pkg-config
 
 brew install automake autoconf libtool dpkg pkgconfig nasm libpng
 
-## 参考blog
+## 参考 blog
 
 [xx](https://luzhaoyang.com/zh/posts/dai-ma-gui-fan-zhi-li-jie-eslint-prettier-editorconfig.html#%E5%89%8D%E8%A8%80)
 
-[在Vue项目中使用Eslint+Prettier+Stylelint](https://segmentfault.com/a/1190000020168436)
+[在 Vue 项目中使用 Eslint+Prettier+Stylelint](https://segmentfault.com/a/1190000020168436)
 
-[Vue项目使用eslint + prettier规范代码风格](https://juejin.cn/post/6844903661726875656)
+[Vue 项目使用 eslint + prettier 规范代码风格](https://juejin.cn/post/6844903661726875656)
 
 [闭包参考链接](https://segmentfault.com/a/1190000023425946)
 
-[闭包参考链接2](https://segmentfault.com/a/1190000023356598)
+[闭包参考链接 2](https://segmentfault.com/a/1190000023356598)
 
-[闭包参考链接3](https://zhuanlan.zhihu.com/p/37913276)
+[闭包参考链接 3](https://zhuanlan.zhihu.com/p/37913276)
 
 ## vue 社区
 
