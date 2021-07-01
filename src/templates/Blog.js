@@ -8,8 +8,6 @@ import PlaceholderComponent from '@/components/Placeholder'
 import PostItem from '@/components/PostItem'
 import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
 import { getCategoryNameByKey } from '@/utils/config'
-import { setBlogPageScrollTop, getBlogPageScrollTop } from '@/utils/helpers'
-import { useScrollToTop } from '@/utils/hooks'
 
 /**
  * 显示所有的文章，通过 template 重复渲染生成
@@ -17,7 +15,6 @@ import { useScrollToTop } from '@/utils/hooks'
 
 export default ({ pageContext }) => {
   const dispatch = useDispatch()
-  const scrollRef = useScrollToTop()
   const location = useLocation()
   const { posts } = pageContext
   const _posts = posts.map(t => {
@@ -29,6 +26,8 @@ export default ({ pageContext }) => {
     }
   })
 
+  const [allPosts, setAllPosts] = useState(_posts)
+
   useEffect(() => {
     dispatch({
       type: SET_NAVIGATION_POSTS_IS_OPEN,
@@ -36,11 +35,17 @@ export default ({ pageContext }) => {
     })
   }, [dispatch])
 
+  const [list, setList] = useState([...allPosts.slice(0, 10)])
+  const [hasMore, setHasMore] = useState(allPosts.length > 10)
+  const [loadMore, setLoadMore] = useState(false)
+
+  const handleLoadMore = () => setLoadMore(true)
+
   const categoryFilterKeyword = useSelector(state => state.categoryFilterKeyword)
 
-  const [allPosts, setAllPosts] = useState(_posts.slice(0, 20))
-
   useEffect(() => {
+    console.log(3333)
+    console.log(333)
     if (categoryFilterKeyword !== 'all') {
       const name = getCategoryNameByKey(categoryFilterKeyword)
       const hasCcategory = _posts.filter(t => t.category && t.category.includes(name))
@@ -49,44 +54,26 @@ export default ({ pageContext }) => {
   }, [_posts, categoryFilterKeyword])
 
   useEffect(() => {
-    const requestAnimationFrame =
-      window.requestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.msRequestAnimationFrame
-    const cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
+    if (loadMore && hasMore) {
+      const currentLength = list.length
+      const isMore = currentLength < allPosts.length
+      const nextResults = isMore ? allPosts.slice(currentLength, currentLength + 10) : []
+      setList([...list, ...nextResults])
+      setLoadMore(false)
+    }
+  }, [loadMore, hasMore, allPosts])
 
-    let scrollTop = getBlogPageScrollTop()
-    let dustbin = null
-    if (scrollTop > 0) {
-      if (scrollRef.current) {
-        dustbin = requestAnimationFrame(() => {
-          scrollRef.current.scrollTop(Number(scrollTop))
-        })
-      }
-    }
-    return () => {
-      if (dustbin) {
-        cancelAnimationFrame(dustbin)
-      }
-    }
-  }, [])
-
-  const handleScrollStop = () => {
-    if (scrollRef.current) {
-      let scrollTop = scrollRef.current.getScrollTop()
-      setTimeout(() => {
-        setBlogPageScrollTop(scrollTop)
-      })
-    }
-  }
+  useEffect(() => {
+    const isMore = list.length < allPosts.length
+    setHasMore(isMore)
+  }, [list, allPosts])
 
   return (
-    <SpringScrollbars forceCheckOnScroll handleScrollStop={handleScrollStop} ref={scrollRef}>
+    <SpringScrollbars forceCheckOnScroll>
       <section className="blog-posts_list">
         <PostListHeader />
         <ul style={{ padding: 0 }}>
-          {allPosts.map(
+          {list.map(
             (t, i) =>
               t.slug && (
                 <LazyLoad key={i} once height={86} debounce={300} offset={100} overflow placeholder={<PlaceholderComponent />}>
@@ -95,6 +82,7 @@ export default ({ pageContext }) => {
               )
           )}
         </ul>
+        {hasMore ? <button onClick={handleLoadMore}>Load More</button> : <p>No more results</p>}
       </section>
     </SpringScrollbars>
   )
