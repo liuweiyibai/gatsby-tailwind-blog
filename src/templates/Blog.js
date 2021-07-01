@@ -20,6 +20,14 @@ export default ({ pageContext }) => {
   const scrollRef = useScrollToTop()
   const location = useLocation()
   const { posts } = pageContext
+  const _posts = posts.map(t => {
+    return {
+      ...t.node.frontmatter,
+      ...t.node.fields,
+      timeToRead: t.node.timeToRead,
+      excerpt: t.node.excerpt
+    }
+  })
 
   useEffect(() => {
     dispatch({
@@ -30,27 +38,15 @@ export default ({ pageContext }) => {
 
   const categoryFilterKeyword = useSelector(state => state.categoryFilterKeyword)
 
-  const [allPosts, setAllPosts] = useState([])
+  const [allPosts, setAllPosts] = useState(_posts.slice(0, 20))
 
   useEffect(() => {
-    const _posts = posts.map(t => {
-      return {
-        ...t.node.frontmatter,
-        ...t.node.fields,
-        timeToRead: t.node.timeToRead,
-        excerpt: t.node.excerpt
-      }
-    })
-    setAllPosts(_posts)
-
-    if (categoryFilterKeyword === 'all') {
-      setAllPosts(_posts)
-    } else {
+    if (categoryFilterKeyword !== 'all') {
       const name = getCategoryNameByKey(categoryFilterKeyword)
       const hasCcategory = _posts.filter(t => t.category && t.category.includes(name))
       setAllPosts(hasCcategory)
     }
-  }, [posts, categoryFilterKeyword])
+  }, [_posts, categoryFilterKeyword])
 
   useEffect(() => {
     const requestAnimationFrame =

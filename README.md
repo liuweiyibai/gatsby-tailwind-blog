@@ -73,6 +73,10 @@ GITALK ✅
 
 [参考地址](https://sq.163yun.com/blog/article/184733100361850880)
 
+## 首页加载更多
+
+[首页加载更多](https://www.erichowey.dev/writing/load-more-button-and-infinite-scroll-in-gatsby/)
+
 ## 生成开发文档的工具
 
 - [storybook](https://storybook.js.org/)
