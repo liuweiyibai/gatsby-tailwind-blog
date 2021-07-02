@@ -167,12 +167,6 @@
         margin-bottom: 0.5rem;
       }
       &:hover {
-        // .arrow {
-        //   svg {
-        //     opacity: 1;
-        //     transform: translateX(0);
-        //   }
-        // }
       }
       @media (max-width: 600px) {
         .arrow {
@@ -202,9 +196,27 @@
         font-size: 1.4rem;
         font-weight: 700;
         transition: 0.2s ease;
-        // text-decoration: underline;
-        &:hover {
-          color: #4fd675;
+        a {
+          position: relative;
+          display: inline;
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            height: 2px;
+            width: 100%;
+            background: currentcolor;
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transition: all ease 0.2s;
+            transition: all ease 0.2s;
+          }
+          &:hover {
+            &::after {
+              transform: scaleX(1);
+            }
+          }
         }
       }
 

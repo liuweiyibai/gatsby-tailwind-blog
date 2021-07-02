@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import classnames from 'classnames'
 import { Link } from 'gatsby'
@@ -17,8 +17,10 @@ function getCurrentPath(location, slug) {
 
 export default ({ hideDate = false, location, small = false, ...props }) => {
   const { slug, thumbnail, tags, date } = props
-  // const IsLink = small ? Link : Link;
-  // const IslinkProps = small ? { to: slug } : { to: slug };
+  const IsLink = small ? Link : Fragment
+  const IsInnerLink = small ? Fragment : Link
+  const innerProp = small ? {} : { to: slug }
+  const wrapProp = small ? { to: slug } : {}
   const className = classnames({
     'post-each': true,
     active: getCurrentPath(location, slug),
@@ -28,7 +30,7 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
   const image = getImage(getFixed(thumbnail))
   return (
     <li className="post-each__wrapper">
-      <Link to={slug}>
+      <IsLink {...wrapProp}>
         <div className={className}>
           {thumbnail && (
             <GatsbyImage
@@ -41,7 +43,9 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
             />
           )}
           <div className="post-each__item">
-            <h3>{props.title}</h3>
+            <h3>
+              <IsInnerLink {...innerProp}>{props.title}</IsInnerLink>
+            </h3>
             {!hideDate && (
               <div className="arrow">
                 <TiArrowRightThick />
@@ -95,7 +99,7 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
             }}
           />
         )}
-      </Link>
+      </IsLink>
     </li>
   )
 }

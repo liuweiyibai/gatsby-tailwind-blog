@@ -104,18 +104,37 @@ body,
 
 .load-more {
   text-align: center;
-  margin-top: 20px;
-  color: #343a40;
+  margin-top: 1.5rem;
+  color: #60656c;
   button {
     display: inline-block;
     padding: 10px 30px;
     text-decoration: none;
     text-transform: uppercase;
     background: #fff;
-    border: 1px solid #343a40;
+    border: 0 none;
     transition: all linear 0.3s;
+    font-size: 1rem;
+    position: relative;
+    box-sizing: border-box;
+
+    outline: none;
     &:hover {
-      text-decoration: underline;
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+    &::after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $black;
+      transition: all ease-in 0.2s;
+      transform: scaleX(0);
     }
   }
 }

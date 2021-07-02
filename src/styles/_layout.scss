@@ -295,6 +295,13 @@
           }
           .post-each__wrapper {
             margin-bottom: 0.1rem;
+            a {
+              &:hover {
+                h3 {
+                  color: #4fd675;
+                }
+              }
+            }
             .post-each {
               box-sizing: border-box;
               padding: 0.55rem 1.25rem;
@@ -471,6 +478,7 @@
 // blog页显示所文章列表
 .blog-posts_list {
   padding: calc(3px + 1.3rem) 1.3rem calc(3px + 1.3rem) 1.3rem;
+  margin-bottom: 1.5rem;
   @media (min-width: 600px) {
     padding: 1.2rem 2rem 1.2rem 2rem;
   }
