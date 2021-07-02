@@ -25,7 +25,6 @@ export default ({ pageContext }) => {
       excerpt: t.node.excerpt
     }
   })
-
   const [allPosts, setAllPosts] = useState(_posts)
 
   useEffect(() => {
@@ -35,23 +34,15 @@ export default ({ pageContext }) => {
     })
   }, [dispatch])
 
-  const [list, setList] = useState([...allPosts.slice(0, 10)])
-  const [hasMore, setHasMore] = useState(allPosts.length > 10)
+  const [list, setList] = useState([])
+
+  const [hasMore, setHasMore] = useState(false)
+
   const [loadMore, setLoadMore] = useState(false)
 
   const handleLoadMore = () => setLoadMore(true)
 
   const categoryFilterKeyword = useSelector(state => state.categoryFilterKeyword)
-
-  useEffect(() => {
-    console.log(3333)
-    console.log(333)
-    if (categoryFilterKeyword !== 'all') {
-      const name = getCategoryNameByKey(categoryFilterKeyword)
-      const hasCcategory = _posts.filter(t => t.category && t.category.includes(name))
-      setAllPosts(hasCcategory)
-    }
-  }, [_posts, categoryFilterKeyword])
 
   useEffect(() => {
     if (loadMore && hasMore) {
@@ -61,12 +52,29 @@ export default ({ pageContext }) => {
       setList([...list, ...nextResults])
       setLoadMore(false)
     }
-  }, [loadMore, hasMore, allPosts])
+  }, [loadMore, hasMore])
 
   useEffect(() => {
     const isMore = list.length < allPosts.length
     setHasMore(isMore)
   }, [list, allPosts])
+
+  useEffect(() => {
+    if (categoryFilterKeyword !== 'all') {
+      const name = getCategoryNameByKey(categoryFilterKeyword)
+      const hasCcategory = _posts.filter(t => t.category && t.category.includes(name))
+      setAllPosts(hasCcategory)
+    } else {
+      if (allPosts.length !== _posts.length) {
+        setAllPosts(_posts)
+      }
+    }
+  }, [categoryFilterKeyword])
+
+  useEffect(() => {
+    setList([...allPosts.slice(0, 10)])
+    setHasMore(allPosts.length > 10)
+  }, [allPosts])
 
   return (
     <SpringScrollbars forceCheckOnScroll>
@@ -82,7 +90,7 @@ export default ({ pageContext }) => {
               )
           )}
         </ul>
-        {hasMore ? <button onClick={handleLoadMore}>Load More</button> : <p>No more results</p>}
+        <div className="load-more">{hasMore ? <button onClick={handleLoadMore}>加 载 更 多</button> : <p>没有更多了...</p>}</div>
       </section>
     </SpringScrollbars>
   )

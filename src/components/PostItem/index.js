@@ -1,5 +1,5 @@
 import React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import classnames from 'classnames'
 import { Link } from 'gatsby'
 import AvatarSmall from '@/components/Avatar/small'
@@ -15,10 +15,6 @@ function getCurrentPath(location, slug) {
   return false
 }
 
-function GatsbyImage2(props) {
-  return <GatsbyImage {...props} />
-}
-
 export default ({ hideDate = false, location, small = false, ...props }) => {
   const { slug, thumbnail, tags, date } = props
   // const IsLink = small ? Link : Link;
@@ -28,13 +24,15 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
     active: getCurrentPath(location, slug),
     'small-post-each': small
   })
+
+  const image = getImage(getFixed(thumbnail))
   return (
     <li className="post-each__wrapper">
       <Link to={slug}>
         <div className={className}>
           {thumbnail && (
-            <GatsbyImage2
-              image={getFixed(thumbnail)}
+            <GatsbyImage
+              image={image}
               className="post-each__image"
               alt={props.title}
               onError={err => {
@@ -88,8 +86,8 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
         </div>
 
         {!hideDate && (
-          <GatsbyImage2
-            image={getFixed(thumbnail)}
+          <GatsbyImage
+            image={image}
             className="post-each__shadow"
             alt={props.title}
             onError={err => {

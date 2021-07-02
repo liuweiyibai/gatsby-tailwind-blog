@@ -21,7 +21,7 @@
     "gatsby": "^2.32.3",
     "gatsby-plugin-algolia": "^0.11.2",
     "gatsby-plugin-feed": "^2.5.11",
-    "gatsby-plugin-image": "^1.2.1",
+    "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-manifest": "^2.4.24",
     "gatsby-plugin-no-sourcemaps": "^2.7.0",
     "gatsby-plugin-nprogress": "^2.9.0",
