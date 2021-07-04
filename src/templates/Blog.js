@@ -4,6 +4,7 @@ import { useLocation } from '@reach/router'
 import LazyLoad from 'react-lazyload'
 import SpringScrollbars from '@/components/SpringScrollbars'
 import PostListHeader from '@/components/PostListHeader'
+import { useScrollToTop } from '@/utils/hooks'
 import PlaceholderComponent from '@/components/Placeholder'
 import PostItem from '@/components/PostItem'
 import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
@@ -16,6 +17,7 @@ import { getCategoryNameByKey } from '@/utils/config'
 export default ({ pageContext }) => {
   const dispatch = useDispatch()
   const location = useLocation()
+  const scrollRef = useScrollToTop()
   const { posts } = pageContext
   const _posts = posts.map(t => {
     return {
@@ -77,7 +79,7 @@ export default ({ pageContext }) => {
   }, [allPosts])
 
   return (
-    <SpringScrollbars forceCheckOnScroll>
+    <SpringScrollbars forceCheckOnScroll ref={scrollRef}>
       <section className="blog-posts_list">
         <PostListHeader />
         <ul style={{ padding: 0 }}>
@@ -90,7 +92,7 @@ export default ({ pageContext }) => {
               )
           )}
         </ul>
-        <div className="load-more">{hasMore ? <button onClick={handleLoadMore}>加 载 更 多</button> : <p>没有更多了...</p>}</div>
+        <div className="load-more">{hasMore ? <button onClick={handleLoadMore}>加 载 更 多</button> : null}</div>
       </section>
     </SpringScrollbars>
   )

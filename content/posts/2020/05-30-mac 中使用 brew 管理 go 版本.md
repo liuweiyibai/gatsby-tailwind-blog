@@ -3,7 +3,7 @@ title: mac 中使用 brew 管理 go 版本
 date: 2020-05-30 19:59:40
 category:
   - 编程笔记
-tags: ['mac', 'brew', 'go']
+tags: ['mac', 'brew', 'golang']
 slug: the-use-of-the-brew-management-go-version-mac
 thumbnail: '../../thumbnails/homebrew.png'
 ---

@@ -1,365 +1,372 @@
 .cell.cell-tags span.tag-浏览器, .tag-card-body .tag-浏览器{
-      background-color: rgba(224, 0, 186, 0.5);
+      background-color: rgba(147, 11, 50, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #e000ba;
+        background-color: #930b32;
         color: #fff;
       }
     }.cell.cell-tags span.tag-前端, .tag-card-body .tag-前端{
-      background-color: rgba(31, 2, 124, 0.5);
+      background-color: rgba(124, 147, 5, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #1f027c;
+        background-color: #7c9305;
         color: #fff;
       }
     }.cell.cell-tags span.tag-前端工程化, .tag-card-body .tag-前端工程化{
-      background-color: rgba(82, 117, 2, 0.5);
+      background-color: rgba(1, 119, 26, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #527502;
+        background-color: #01771a;
         color: #fff;
       }
     }.cell.cell-tags span.tag-前端工具, .tag-card-body .tag-前端工具{
-      background-color: rgba(18, 130, 13, 0.5);
+      background-color: rgba(196, 76, 1, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #12820d;
+        background-color: #c44c01;
         color: #fff;
       }
     }.cell.cell-tags span.tag-小程序, .tag-card-body .tag-小程序{
-      background-color: rgba(1, 130, 80, 0.5);
+      background-color: rgba(8, 46, 99, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #018250;
+        background-color: #082e63;
         color: #fff;
       }
     }.cell.cell-tags span.tag-babel, .tag-card-body .tag-babel{
-      background-color: rgba(229, 20, 121, 0.5);
+      background-color: rgba(191, 19, 73, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #e51479;
+        background-color: #bf1349;
+        color: #fff;
+      }
+    }.cell.cell-tags span.tag-brew, .tag-card-body .tag-brew{
+      background-color: rgba(82, 155, 9, 0.5);
+      color: #1b1d25;
+      &:hover {
+        background-color: #529b09;
         color: #fff;
       }
     }.cell.cell-tags span.tag-bulma, .tag-card-body .tag-bulma{
-      background-color: rgba(196, 144, 1, 0.5);
+      background-color: rgba(168, 5, 7, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #c49001;
+        background-color: #a80507;
         color: #fff;
       }
     }.cell.cell-tags span.tag-centos, .tag-card-body .tag-centos{
-      background-color: rgba(153, 21, 12, 0.5);
+      background-color: rgba(11, 109, 124, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #99150c;
+        background-color: #0b6d7c;
         color: #fff;
       }
     }.cell.cell-tags span.tag-create-react-app, .tag-card-body .tag-create-react-app{
-      background-color: rgba(198, 11, 145, 0.5);
+      background-color: rgba(145, 37, 1, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #c60b91;
+        background-color: #912501;
         color: #fff;
       }
     }.cell.cell-tags span.tag-css, .tag-card-body .tag-css{
-      background-color: rgba(105, 163, 13, 0.5);
+      background-color: rgba(201, 14, 234, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #69a30d;
+        background-color: #c90eea;
         color: #fff;
       }
     }.cell.cell-tags span.tag-css3, .tag-card-body .tag-css3{
-      background-color: rgba(12, 158, 4, 0.5);
+      background-color: rgba(11, 116, 147, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0c9e04;
+        background-color: #0b7493;
         color: #fff;
       }
     }.cell.cell-tags span.tag-docker, .tag-card-body .tag-docker{
-      background-color: rgba(198, 97, 13, 0.5);
+      background-color: rgba(142, 47, 12, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #c6610d;
+        background-color: #8e2f0c;
         color: #fff;
       }
     }.cell.cell-tags span.tag-docker-compose, .tag-card-body .tag-docker-compose{
-      background-color: rgba(15, 170, 93, 0.5);
+      background-color: rgba(87, 132, 3, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0faa5d;
+        background-color: #578403;
         color: #fff;
       }
     }.cell.cell-tags span.tag-echarts, .tag-card-body .tag-echarts{
-      background-color: rgba(209, 124, 6, 0.5);
+      background-color: rgba(198, 166, 3, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #d17c06;
+        background-color: #c6a603;
         color: #fff;
       }
     }.cell.cell-tags span.tag-es6, .tag-card-body .tag-es6{
-      background-color: rgba(82, 8, 142, 0.5);
+      background-color: rgba(163, 44, 1, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #52088e;
+        background-color: #a32c01;
         color: #fff;
       }
     }.cell.cell-tags span.tag-eslint, .tag-card-body .tag-eslint{
-      background-color: rgba(12, 7, 132, 0.5);
+      background-color: rgba(9, 163, 60, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0c0784;
+        background-color: #09a33c;
         color: #fff;
       }
     }.cell.cell-tags span.tag-excel, .tag-card-body .tag-excel{
-      background-color: rgba(229, 114, 0, 0.5);
+      background-color: rgba(28, 137, 13, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #e57200;
+        background-color: #1c890d;
         color: #fff;
       }
     }.cell.cell-tags span.tag-git, .tag-card-body .tag-git{
-      background-color: rgba(9, 38, 124, 0.5);
+      background-color: rgba(158, 12, 15, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #09267c;
-        color: #fff;
-      }
-    }.cell.cell-tags span.tag-go, .tag-card-body .tag-go{
-      background-color: rgba(216, 167, 6, 0.5);
-      color: #1b1d25;
-      &:hover {
-        background-color: #d8a706;
+        background-color: #9e0c0f;
         color: #fff;
       }
     }.cell.cell-tags span.tag-golang, .tag-card-body .tag-golang{
-      background-color: rgba(221, 15, 170, 0.5);
+      background-color: rgba(9, 160, 24, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #dd0faa;
+        background-color: #09a018;
         color: #fff;
       }
     }.cell.cell-tags span.tag-grunt, .tag-card-body .tag-grunt{
-      background-color: rgba(29, 160, 6, 0.5);
+      background-color: rgba(79, 137, 8, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #1da006;
+        background-color: #4f8908;
         color: #fff;
       }
     }.cell.cell-tags span.tag-gulp, .tag-card-body .tag-gulp{
-      background-color: rgba(136, 150, 7, 0.5);
+      background-color: rgba(140, 9, 53, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #889607;
+        background-color: #8c0935;
         color: #fff;
       }
     }.cell.cell-tags span.tag-html, .tag-card-body .tag-html{
-      background-color: rgba(1, 32, 127, 0.5);
+      background-color: rgba(86, 6, 153, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #01207f;
+        background-color: #560699;
         color: #fff;
       }
     }.cell.cell-tags span.tag-html5, .tag-card-body .tag-html5{
-      background-color: rgba(237, 7, 125, 0.5);
+      background-color: rgba(2, 130, 85, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #ed077d;
+        background-color: #028255;
         color: #fff;
       }
     }.cell.cell-tags span.tag-http, .tag-card-body .tag-http{
-      background-color: rgba(209, 167, 2, 0.5);
+      background-color: rgba(143, 150, 1, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #d1a702;
+        background-color: #8f9601;
         color: #fff;
       }
     }.cell.cell-tags span.tag-husky, .tag-card-body .tag-husky{
-      background-color: rgba(6, 158, 13, 0.5);
+      background-color: rgba(147, 33, 4, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #069e0d;
+        background-color: #932104;
         color: #fff;
       }
     }.cell.cell-tags span.tag-iview, .tag-card-body .tag-iview{
-      background-color: rgba(10, 65, 102, 0.5);
+      background-color: rgba(242, 24, 220, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0a4166;
+        background-color: #f218dc;
         color: #fff;
       }
     }.cell.cell-tags span.tag-jenkins, .tag-card-body .tag-jenkins{
-      background-color: rgba(206, 8, 143, 0.5);
+      background-color: rgba(36, 0, 130, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #ce088f;
+        background-color: #240082;
         color: #fff;
       }
     }.cell.cell-tags span.tag-js, .tag-card-body .tag-js{
-      background-color: rgba(211, 184, 6, 0.5);
+      background-color: rgba(6, 158, 36, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #d3b806;
+        background-color: #069e24;
         color: #fff;
       }
     }.cell.cell-tags span.tag-linux, .tag-card-body .tag-linux{
-      background-color: rgba(3, 150, 111, 0.5);
+      background-color: rgba(9, 14, 117, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #03966f;
+        background-color: #090e75;
         color: #fff;
       }
     }.cell.cell-tags span.tag-lua, .tag-card-body .tag-lua{
-      background-color: rgba(68, 135, 13, 0.5);
+      background-color: rgba(216, 106, 21, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #44870d;
+        background-color: #d86a15;
         color: #fff;
       }
     }.cell.cell-tags span.tag-mac, .tag-card-body .tag-mac{
-      background-color: rgba(8, 2, 119, 0.5);
+      background-color: rgba(183, 14, 5, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #080277;
+        background-color: #b70e05;
         color: #fff;
       }
     }.cell.cell-tags span.tag-mongodb, .tag-card-body .tag-mongodb{
-      background-color: rgba(7, 145, 113, 0.5);
+      background-color: rgba(6, 51, 114, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #079171;
+        background-color: #063372;
         color: #fff;
       }
     }.cell.cell-tags span.tag-mysql, .tag-card-body .tag-mysql{
-      background-color: rgba(8, 127, 82, 0.5);
+      background-color: rgba(35, 119, 2, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #087f52;
+        background-color: #237702;
         color: #fff;
       }
     }.cell.cell-tags span.tag-nginx, .tag-card-body .tag-nginx{
-      background-color: rgba(24, 9, 102, 0.5);
+      background-color: rgba(11, 160, 143, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #180966;
+        background-color: #0ba08f;
         color: #fff;
       }
     }.cell.cell-tags span.tag-nodejs, .tag-card-body .tag-nodejs{
-      background-color: rgba(89, 11, 145, 0.5);
+      background-color: rgba(216, 4, 121, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #590b91;
+        background-color: #d80479;
         color: #fff;
       }
     }.cell.cell-tags span.tag-npm, .tag-card-body .tag-npm{
-      background-color: rgba(12, 124, 123, 0.5);
+      background-color: rgba(7, 44, 107, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0c7c7b;
+        background-color: #072c6b;
+        color: #fff;
+      }
+    }.cell.cell-tags span.tag-nuxt, .tag-card-body .tag-nuxt{
+      background-color: rgba(73, 117, 7, 0.5);
+      color: #1b1d25;
+      &:hover {
+        background-color: #497507;
         color: #fff;
       }
     }.cell.cell-tags span.tag-openresty, .tag-card-body .tag-openresty{
-      background-color: rgba(7, 2, 114, 0.5);
+      background-color: rgba(13, 122, 132, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #070272;
+        background-color: #0d7a84;
         color: #fff;
       }
     }.cell.cell-tags span.tag-pm2, .tag-card-body .tag-pm2{
-      background-color: rgba(209, 6, 141, 0.5);
+      background-color: rgba(2, 124, 118, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #d1068d;
+        background-color: #027c76;
         color: #fff;
       }
     }.cell.cell-tags span.tag-postcss, .tag-card-body .tag-postcss{
-      background-color: rgba(13, 135, 108, 0.5);
+      background-color: rgba(153, 165, 14, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0d876c;
+        background-color: #99a50e;
         color: #fff;
       }
     }.cell.cell-tags span.tag-prettier, .tag-card-body .tag-prettier{
-      background-color: rgba(120, 168, 10, 0.5);
+      background-color: rgba(190, 17, 216, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #78a80a;
+        background-color: #be11d8;
         color: #fff;
       }
     }.cell.cell-tags span.tag-pwa, .tag-card-body .tag-pwa{
-      background-color: rgba(5, 62, 132, 0.5);
+      background-color: rgba(88, 11, 122, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #053e84;
+        background-color: #580b7a;
         color: #fff;
       }
     }.cell.cell-tags span.tag-react, .tag-card-body .tag-react{
-      background-color: rgba(199, 20, 226, 0.5);
+      background-color: rgba(130, 1, 5, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #c714e2;
+        background-color: #820105;
         color: #fff;
       }
     }.cell.cell-tags span.tag-react-router, .tag-card-body .tag-react-router{
-      background-color: rgba(11, 147, 18, 0.5);
+      background-color: rgba(20, 8, 102, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0b9312;
+        background-color: #140866;
         color: #fff;
       }
     }.cell.cell-tags span.tag-scss, .tag-card-body .tag-scss{
-      background-color: rgba(14, 155, 12, 0.5);
+      background-color: rgba(191, 82, 0, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0e9b0c;
+        background-color: #bf5200;
         color: #fff;
       }
     }.cell.cell-tags span.tag-sequelize, .tag-card-body .tag-sequelize{
-      background-color: rgba(237, 23, 151, 0.5);
+      background-color: rgba(2, 127, 4, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #ed1797;
+        background-color: #027f04;
         color: #fff;
       }
     }.cell.cell-tags span.tag-vue, .tag-card-body .tag-vue{
-      background-color: rgba(224, 15, 200, 0.5);
+      background-color: rgba(4, 122, 110, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #e00fc8;
+        background-color: #047a6e;
         color: #fff;
       }
     }.cell.cell-tags span.tag-vue-cli, .tag-card-body .tag-vue-cli{
-      background-color: rgba(2, 77, 135, 0.5);
+      background-color: rgba(0, 15, 99, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #024d87;
+        background-color: #000f63;
         color: #fff;
       }
     }.cell.cell-tags span.tag-vue-router, .tag-card-body .tag-vue-router{
-      background-color: rgba(4, 92, 102, 0.5);
+      background-color: rgba(219, 8, 208, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #045c66;
+        background-color: #db08d0;
         color: #fff;
       }
     }.cell.cell-tags span.tag-webpack, .tag-card-body .tag-webpack{
-      background-color: rgba(211, 147, 8, 0.5);
+      background-color: rgba(80, 117, 1, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #d39308;
+        background-color: #507501;
         color: #fff;
       }
     }.cell.cell-tags span.tag-windows, .tag-card-body .tag-windows{
-      background-color: rgba(14, 150, 4, 0.5);
+      background-color: rgba(11, 100, 130, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #0e9604;
+        background-color: #0b6482;
         color: #fff;
       }
     }.cell.cell-tags span.tag-yarn, .tag-card-body .tag-yarn{
-      background-color: rgba(145, 20, 1, 0.5);
+      background-color: rgba(165, 0, 55, 0.5);
       color: #1b1d25;
       &:hover {
-        background-color: #911401;
+        background-color: #a50037;
         color: #fff;
       }
     }

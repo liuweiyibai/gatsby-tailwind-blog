@@ -29,8 +29,18 @@ slug: '/about'
 
 - [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
 
-  [github](https://github.com/jkchao/typescript-book-chinese)
+- [深入理解 TypeScript GitHub 开源地址](https://github.com/jkchao/typescript-book-chinese)
 
 - [函数式编程指北](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 
-- [](//clearlywind.com/read/)
+- [我的阅读器](//clearlywind.com/read/)
+
+几本 go 学习的书
+
+- [Go 语言圣经（中文版）](https://books.studygolang.com/gopl-zh/ch1/ch1-03.html)
+
+- [Golang 好书](http://www.topgoer.com/%E5%85%B3%E4%BA%8E/)
+
+- [李文周的博客](https://www.liwenzhou.com/posts/Go/use_zap_in_gin/)
+
+- [理解 go 指针](https://studygolang.com/articles/22197)

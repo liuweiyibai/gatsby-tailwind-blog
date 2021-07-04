@@ -36,7 +36,7 @@ export default ({ hideDate = false, location, small = false, ...props }) => {
             <GatsbyImage
               image={image}
               className="post-each__image"
-              alt={props.title}
+              alt={``}
               onError={err => {
                 console.log(err)
               }}
