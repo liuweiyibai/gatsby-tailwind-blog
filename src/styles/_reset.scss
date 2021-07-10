@@ -138,25 +138,15 @@ ol li ol {
 }
 
 blockquote {
-  font-weight: 700;
-  position: relative;
+  background: rgba(0, 105, 255, 0.05);
+  border: 1px solid #0069ff;
   border-radius: 3px;
-  border-bottom-left-radius: 0;
-  background-color: #f3f5f7;
-  margin: 1rem 0 1rem 0.5rem;
-  padding: 12px 10px 15px 20px;
   background-color: #ecf7ff;
-  &::before {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 13px 18px 0 0;
-    position: absolute;
-    left: 0;
-    bottom: -13px;
-    border-color: #ecf7ff transparent transparent transparent;
+  font-size: 24px;
+  padding: 16px 24px;
+  color: #0069ff;
+  > p {
+    font-size: 16px;
   }
 }
 

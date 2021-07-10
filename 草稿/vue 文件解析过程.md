@@ -1,5 +1,5 @@
 ---
-title: webpack 是怎么解析 vue 文件的
+title: vue 文件解析过程
 ---
 
 有过 vue + webpack 开发经历的人肯定都知道，webpack 是通过 vue-loader 解析 vue 文件，然后执行解析到不同的 loader 最后生成对应的静态文件。

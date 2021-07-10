@@ -62,6 +62,32 @@ const skills = [
     url: `https://reactjs.org/`
   }
 ]
+const invalidPaths = ['/', '/archive/', '/tag/', '/about/']
+
+/**
+ *
+ * @param {*}
+ * href 当前link组件的to
+ * location 当前路由对象
+ * location.pathname startsWith href
+ */
+const isHrefActive = ({ location, href }) => {
+  const finalClassName = { className: 'current' }
+  const { pathname } = location
+  if (href === '/') {
+    if (pathname.startsWith('/blog') || pathname === '/') {
+      return finalClassName
+    }
+  } else if (href === '/tag') {
+    if (pathname.startsWith('/tag')) {
+      return finalClassName
+    }
+  } else {
+    if (pathname.startsWith(href)) {
+      return finalClassName
+    }
+  }
+}
 
 export default ({ navigatorPostsIsOpen }) => {
   const {
@@ -80,31 +106,6 @@ export default ({ navigatorPostsIsOpen }) => {
     `
   )
   const style = { bottom: '80px' }
-
-  /**
-   *
-   * @param {*}
-   * href 当前link组件的to
-   * location 当前路由对象
-   * location.pathname startsWith href
-   */
-  const isHrefActive = ({ location, href }) => {
-    const finalClassName = { className: 'current' }
-    const { pathname } = location
-    if (href === '/') {
-      if (pathname.startsWith('/blog') || pathname === '/') {
-        return finalClassName
-      }
-    } else if (href === '/tag') {
-      if (pathname.startsWith('/tag')) {
-        return finalClassName
-      }
-    } else {
-      if (pathname.startsWith(href)) {
-        return finalClassName
-      }
-    }
-  }
 
   return (
     <div className="navigator-body" style={navigatorPostsIsOpen ? style : {}}>
