@@ -4,11 +4,16 @@ import { debounce, kebabCase } from 'lodash'
 import { parse } from 'query-string'
 import { IoMdClose } from 'react-icons/io'
 import { Link } from 'gatsby'
+import ArchiveTag from '@/components/ArchiveTag'
+
 import { useScrollToTop } from '@/utils/hooks'
 import SpringScrollbars from '@/components/SpringScrollbars'
 import PlaceholderComponent from '@/components/Placeholder'
 import loadable from '@loadable/component'
 import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
+
+const randomColor = require('randomcolor')
+const Color = require('color')
 
 const Animated = loadable(() => import('@/components/Animated'), {
   fallback: <PlaceholderComponent />
@@ -80,19 +85,22 @@ export default ({ pageContext, navigate, location }) => {
                     <div className="cell cell-tags">
                       {tt.tags &&
                         tt.tags.map((tag, i) => {
+                          const baseColor = randomColor({
+                            luminosity: 'dark'
+                          })
+                          const lightColor = Color(baseColor).alpha('.5').toString()
                           return (
-                            <span
-                              key={i}
-                              role="button"
-                              tabIndex={i}
-                              className={`tag-${tag}`}
+                            <ArchiveTag
                               onClick={event => {
                                 event.preventDefault()
                                 navigate(`/tag/${kebabCase(tag)}`)
                               }}
+                              key={i}
+                              lightColor={lightColor}
+                              baseColor={baseColor}
                             >
                               {tag}
-                            </span>
+                            </ArchiveTag>
                           )
                         })}
                     </div>

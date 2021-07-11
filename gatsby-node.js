@@ -2,8 +2,8 @@ const path = require(`path`)
 const fs = require('fs')
 const { kebabCase } = require('lodash')
 const dayjs = require('dayjs')
-const randomColor = require('randomcolor')
-const Color = require('color')
+// const randomColor = require('randomcolor')
+// const Color = require('color')
 // const { createFilePath } = require(`gatsby-source-filesystem`);
 
 /**
@@ -222,7 +222,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   })
 
-  createCssFile(allTags) // 创建 css
+  // createCssFile(allTags) // 创建 css
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

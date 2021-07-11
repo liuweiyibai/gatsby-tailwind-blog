@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { useDispatch } from 'react-redux'
@@ -13,6 +13,10 @@ import { getFixed } from '@/utils/helpers'
 import { useScrollToTop } from '@/utils/hooks'
 import BlogComment from '@/components/BlogComment'
 import { kebabCase } from 'lodash'
+import Viewer from 'viewerjs'
+import 'viewerjs/dist/viewer.min.css'
+
+import StyledBlogDetail from '@/styles/StyledBlogDetail'
 
 // 文章详情
 export default ({ data, pageContext, ...props }) => {
@@ -22,6 +26,7 @@ export default ({ data, pageContext, ...props }) => {
 
   const dispatch = useDispatch()
   const scrollRef = useScrollToTop()
+  const postContainerDom = useRef()
   const postNode = data.markdownRemark
   const {
     frontmatter: { title, date, thumbnail, tags },
@@ -36,6 +41,13 @@ export default ({ data, pageContext, ...props }) => {
       payload: true
     })
   }, [dispatch])
+
+  useEffect(() => {
+    const viewer = new Viewer(postContainerDom.current)
+    return () => {
+      viewer.destroy()
+    }
+  }, [])
 
   return (
     <SpringScrollbars ref={scrollRef}>
@@ -76,9 +88,10 @@ export default ({ data, pageContext, ...props }) => {
             </ul>
           </div>
         </header>
-        <div className="post-detail">
-          <article dangerouslySetInnerHTML={{ __html: postHTML }} />
-        </div>
+        <StyledBlogDetail>
+          <article dangerouslySetInnerHTML={{ __html: postHTML }} ref={postContainerDom} />
+        </StyledBlogDetail>
+
         <PostCopyright href={href} />
 
         <div className="post-pagination">

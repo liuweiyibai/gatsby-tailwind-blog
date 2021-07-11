@@ -447,3 +447,23 @@ kbd {
 //   background: #2ec458;
 //   color: white;
 // }
+
+body {
+  // viewer 样式重置
+  .viewer-close:before,
+  .viewer-flip-horizontal:before,
+  .viewer-flip-vertical:before,
+  .viewer-fullscreen-exit:before,
+  .viewer-fullscreen:before,
+  .viewer-next:before,
+  .viewer-one-to-one:before,
+  .viewer-play:before,
+  .viewer-prev:before,
+  .viewer-reset:before,
+  .viewer-rotate-left:before,
+  .viewer-rotate-right:before,
+  .viewer-zoom-in:before,
+  .viewer-zoom-out:before {
+    line-height: 20px;
+  }
+}

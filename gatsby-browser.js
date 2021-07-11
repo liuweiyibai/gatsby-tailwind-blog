@@ -1,7 +1,7 @@
 import Nprogress from 'nprogress'
 import { WrapWithLayout, WrapWithProvider } from './wrap-with'
 import './src/styles/public.scss'
-import './label.css'
+// import './label.css'
 
 Nprogress.configure({
   showSpinner: false

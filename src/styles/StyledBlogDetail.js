@@ -1,4 +1,4 @@
-const fs = require('fs');
+import styled from 'styled-components'
 
 const lables = [
   { lang: 'js', tag: 'js', bg: '#f1e05a', color: '#fff' },
@@ -12,13 +12,13 @@ const lables = [
     lang: 'conf',
     tag: 'conf',
     bg: 'rgb(0,161,0)',
-    color: '#fff',
+    color: '#fff'
   },
   {
     lang: 'ruby',
     tag: 'ruby',
     bg: '#701516',
-    color: '#fff',
+    color: '#fff'
   },
   { lang: 'bash', tag: 'sh', bg: '#89e051', color: '#111' },
   { lang: 'text', tag: 'text', bg: '#fff', color: '#111' },
@@ -30,8 +30,8 @@ const lables = [
   { lang: 'docker', tag: 'docker', bg: '#384d54', color: '#fff' },
   { lang: 'go', tag: 'go', bg: '#00ADD8', color: '#fff' },
   { lang: 'env', tag: 'env', bg: '#2697ed', color: '#fff' },
-  { lang: 'lua', tag: 'lua', bg: '#000080', color: '#fff' },
-];
+  { lang: 'lua', tag: 'lua', bg: '#000080', color: '#fff' }
+]
 
 const lablesStyles = lables
   .map(
@@ -42,6 +42,12 @@ const lablesStyles = lables
       ${color && `color: ${color};`}
     }`
   )
-  .join(`\n`);
+  .join(`\n`)
 
-fs.writeFileSync('./label.css', lablesStyles);
+const StyledBlogDetail = styled.div.attrs({
+  className: 'post-detail'
+})`
+  ${lablesStyles}
+`
+
+export default StyledBlogDetail

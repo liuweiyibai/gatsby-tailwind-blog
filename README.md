@@ -145,3 +145,25 @@ brew install automake autoconf libtool dpkg pkgconfig nasm libpng
 [https://github.com/wangweianger/myblog](https://github.com/wangweianger/myblog)
 
 ## vue ssr 面点
+
+## gatsby + ts
+
+给 link 添加 ref 属性和增加属性
+
+```ts
+import React from 'react'
+import { GatsbyLinkProps, Link as GLink } from 'gatsby'
+import clx from 'classnames'
+import styles from './Button.module.css'
+
+interface CustomGatsbyLinkProps extends Omit<GatsbyLinkProps<Record<string, unknown>>, 'ref'> {
+  active?: boolean
+}
+const Link: React.FC<CustomGatsbyLinkProps> = ({ className, children, ...props }) => (
+  <GLink className={clx(styles.link, className)} {...props}>
+    {children}
+  </GLink>
+)
+
+export default Link
+```

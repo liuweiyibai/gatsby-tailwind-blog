@@ -21,12 +21,14 @@ export default function HTML(props) {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                var hm = document.createElement('script')
-                hm.src = 'https://hm.baidu.com/hm.js?b003ec8715c3cc2a4008d91cbed0dae6'
-                hm.async = true
-                var _hmt = _hmt || []
-                var s = document.getElementsByTagName('script')[0]
-                s.parentNode.insertBefore(hm, s)
+                if(window.location.href.indexOf('lwyb.me') > -1){
+                  var hm = document.createElement('script')
+                  hm.src = 'https://hm.baidu.com/hm.js?b003ec8715c3cc2a4008d91cbed0dae6'
+                  hm.async = true
+                  var _hmt = _hmt || []
+                  var s = document.getElementsByTagName('script')[0]
+                  s.parentNode.insertBefore(hm, s)
+                }
               `
             }}
           />
