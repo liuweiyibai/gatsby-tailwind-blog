@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap:https://blog.clearlywind.com/sitemap.xml
+Sitemap:https://lwyb.me/sitemap.xml

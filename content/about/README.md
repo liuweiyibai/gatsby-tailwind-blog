@@ -5,7 +5,7 @@ slug: '/about'
 
 ## 关于博客
 
-本博客使用 `gatsby` 框架搭建，使用 react + gatsby + ts 搭建，未来会使用 [tailwind.css](https://tailwindcss.com/) + [twin.macro](https://github.com/ben-rogerson/twin.macro) ，使用 css-in-js 的方式重构样式。
+本博客使用 `gatsby` 框架搭建，使用 react + gatsby + styld-components + ts 搭建。
 
 本博客主要发布前后端项目开发中遇到的问题以及解决办法以及原理剖析。
 

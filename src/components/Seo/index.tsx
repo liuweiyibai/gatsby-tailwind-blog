@@ -1,9 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
+import React from 'react'
+import Helmet from 'react-helmet'
+import { useStaticQuery, graphql } from 'gatsby'
 
-const Seo = ({ title }) => {
+interface SeoProps {
+  description?: string
+  lang?: string
+  meta?: Array<string>
+  title: string
+}
+
+const Seo: React.FC<SeoProps> = ({ title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -19,87 +25,72 @@ const Seo = ({ title }) => {
         }
       }
     `
-  );
+  )
 
   const {
     siteMetadata: {
       description,
       author: { name: author },
-      lang,
-    },
-  } = site;
+      lang
+    }
+  } = site
 
-  title = title || site.siteMetadata.title;
+  title = title || site.siteMetadata.title
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
           name: `description`,
-          content: description,
+          content: description
         },
         {
           property: `og:title`,
-          content: title,
+          content: title
         },
         {
           property: `og:description`,
-          content: description,
+          content: description
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `website`
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary`
         },
         {
           name: `twitter:creator`,
-          content: author,
+          content: author
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: title
         },
         {
           name: `twitter:description`,
-          content: description,
+          content: description
         },
         {
           name: 'author',
-          content: author,
+          content: author
         },
         {
           name: 'apple-mobile-web-app-capable',
-          content: 'yes',
+          content: 'yes'
         },
         {
           name: 'viewport',
-          content:
-            'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
-        },
+          content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'
+        }
       ]}
     />
-  );
-};
+  )
+}
 
-Seo.defaultProps = {
-  lang: `ch-ZN`,
-  meta: [],
-  description: ``,
-  title: '',
-};
-
-Seo.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-};
-
-export default Seo;
+export default Seo

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
+import { Link, GatsbyLinkProps } from 'gatsby'
 import { kebabCase } from 'lodash'
 
 function genFontSize(count: any): string {
@@ -18,18 +18,17 @@ function genFontSize(count: any): string {
 }
 
 type StyledLinkTagProps = {
-  to: string
   count: [string, number]
-}
+} & GatsbyLinkProps<null>
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link)<StyledLinkTagProps>`
   display: inline-block;
   margin: 0.5rem;
   padding: 2px 15px;
   transition: border-color ease 0.3s;
   color: #666;
   font-weight: 400;
-  font-size: ${(props: StyledLinkTagProps) => genFontSize(props.count)};
+  font-size: ${props => genFontSize(props.count)};
   border: 0 none;
   &:hover {
     color: #000;
