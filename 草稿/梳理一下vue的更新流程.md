@@ -172,3 +172,15 @@ function patchVnode(oldVnode, vnode) {
   }
 }
 ```
+
+<!-- https://juejin.cn/post/6844903961837699079#heading-4 -->
+
+<!-- https://cloud.tencent.com/developer/article/1006029 -->
+
+<!-- https://www.jb51.net/article/140471.htm -->
+
+<!-- https://segmentfault.com/a/1190000020663531?utm_source=tag-newest -->
+
+<!-- https://blog.fundebug.com/2019/06/26/vue-virtual-dom/ -->
+
+<!-- https://segmentfault.com/a/1190000008782928 -->
