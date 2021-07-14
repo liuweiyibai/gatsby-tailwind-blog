@@ -1,10 +1,10 @@
 ---
-title: Docker Compose 构建容器
+title: 使用 Docker Compose 编排容器
 date: 2021-01-01 13:16:59
 category:
   - 编程笔记
 tags: ['Docker', 'Docker Compose']
-slug: docker-compose-to-build-the-container
+slug: docker-compose-orchestrate-containers
 thumbnail: '../../thumbnails/docker-compose.png'
 ---
 
