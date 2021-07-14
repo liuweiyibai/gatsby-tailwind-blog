@@ -1,9 +1,9 @@
 ---
-title: 使用 OpenRestry 完成日志实时采集
+title: 使用 OpenResty 完成日志实时采集
 date: 2021-03-14 21:29:40
 category:
   - 编程笔记
-tags: ['openresty', 'nginx', 'lua']
+tags: ['OpenResty', 'Nginx', 'Lua']
 slug: use-open-restry-complete-log-real-time-acquisition
 thumbnail: '../../thumbnails/OpenResty.png'
 ---
@@ -20,7 +20,7 @@ OpenResty 是由 Nginx 核心加很多第三方模块组成，默认集成了 Lu
 
 安装直接参考官网即可，这里只做简单总结
 
-- osx
+- MAC
 
   mac 推荐使用 homebrew
 
@@ -30,7 +30,7 @@ OpenResty 是由 Nginx 核心加很多第三方模块组成，默认集成了 Lu
   brew install openresty/brew/openresty
   ```
 
-- centos
+- Centos
 
   - 包管理安装
 
@@ -95,13 +95,13 @@ OpenResty 是由 Nginx 核心加很多第三方模块组成，默认集成了 Lu
         source /etc/profile
        ```
 
-- docker
+- Docker
 
-  [docker 安装与配置 OpenResty](/blog/docker-open-resty-installation-and-configuration)
+  [Docker 安装与配置 OpenRestry](/blog/docker-open-resty-installation-and-configuration)
 
-## 搭配 kafka
+## 搭配 Kafka
 
-安装 lua-resty-kafka，因为我们需要将数据通过 nginx+lua 脚本转发到 Kafka 中，编写 lua 脚本时需要用到 lua 模块中的一些关于 Kafka 的依赖。
+安装 lua-resty-kafka，因为我们需要将数据通过 nginx+lua 脚本转发到 Kafka 中，编写 Lua 脚本时需要用到 Lua 模块中的一些关于 Kafka 的依赖。
 
 ```bash
 # 下载 lua-resty-kafka
@@ -190,11 +190,11 @@ cp -rf /opt/module/lua-resty-kafka-master/lib/resty/kafka/ /opt/openresty/lualib
     end
   ```
 
-  之后重启 nginx，就不过多赘述了
+  之后重启 Nginx，就不过多赘述了
 
 ## 总结
 
-使用 Openresty+Lua+Kafka 就可以将用户的埋点数据实时采集到 kafka 集群中，并且 Openresty 是基于 Nginx 的，而 Nginx 能处理上万的并发量，所以即使用户的数据在短时间内激增，这套架构也能轻松的应对，不会导致集群崩溃。另一方面，若数据过多导致集群的超负荷，我们也可以随时加多一台机器，非常方便。
+使用 Openresty + Lua + Kafka 就可以将用户的埋点数据实时采集到 kafka 集群中，并且 OpenResty 是基于 Nginx 的，而 Nginx 能处理上万的并发量，所以即使用户的数据在短时间内激增，这套架构也能轻松的应对，不会导致集群崩溃。另一方面，若数据过多导致集群的超负荷，我们也可以随时加多一台机器，非常方便。
 
 ## 参考地址
 

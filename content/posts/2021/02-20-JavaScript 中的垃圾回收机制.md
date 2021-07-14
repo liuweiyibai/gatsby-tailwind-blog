@@ -1,9 +1,9 @@
 ---
-title: js 中的垃圾回收机制
+title: JavaScript 中的垃圾回收机制
 date: 2021-02-20 14:07:45
 category:
   - 编程笔记
-tags: ['js']
+tags: ['JavaScript']
 slug: the-garbage-collection-mechanism-in-the-js
 thumbnail: '../../thumbnails/js.png'
 ---

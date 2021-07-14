@@ -1,9 +1,9 @@
 ---
-title: docker 安装与配置 OpenResty
+title: Docker 安装与配置 OpenResty
 date: 2021-03-10 13:54:47
 category:
   - 编程笔记
-tags: ['docker', 'openresty', 'lua', 'nginx']
+tags: ['Docker', 'OpenResty', 'Lua', 'Nginx']
 slug: docker-open-resty-installation-and-configuration
 thumbnail: '../../thumbnails/OpenResty.png'
 ---
@@ -12,20 +12,22 @@ thumbnail: '../../thumbnails/OpenResty.png'
 
 ```bash
 docker run -d --name openresty -p 80:80 -v /root/docker/openresty/conf.d:/etc/nginx/conf.d:Z -v /root/docker/openresty/data:/data openresty/openresty
+
+# 解析上述参数：
+# -d 后台运行
+# -p 80:80 映射 docker 容器与宿主机端口
+# -v /root/docker/openresty/conf.d:/etc/nginx/conf.d:Z 映射宿主机目录 /root/docker/openresty/conf.d 到 docker 容器的目录 /etc/nginx/conf.d
+
+# -v /root/docker/openresty/data:/data 映射宿主机目录 /root/docker/openresty/data 到容器目录 /data
+
+# 可以添加 z 或 Z 选项来修改挂载到容器中的主机文件或目录的 selinux label：
+## - z 选项指明 bind mount 的内容在多个容器间是共享的
+## - Z 选项指明 bind mount 的内容是私有不共享的
 ```
 
-> 1. -d 后台运行
-> 2. -p 80:80 映射 docker 容器与宿主机端口
-> 3. -v /root/docker/openresty/conf.d:/etc/nginx/conf.d:Z 映射宿主机目录 /root/docker/openresty/conf.d 到 docker 容器的目录 /etc/nginx/conf.d
-> 4. -v /root/docker/openresty/data:/data 映射宿主机目录 /root/docker/openresty/data 到容器目录 /data
-> 5. 可以添加 z 或 Z 选项来修改挂载到容器中的主机文件或目录的 selinux label：
->
->    - z 选项指明 bind mount 的内容在多个容器间是共享的
->    - Z 选项指明 bind mount 的内容是私有不共享的
+上面命令中，OpenResty 容器内的 OpenResty 软件安装在 /usr/local/openresty 目录下，如果想要安装其他的插件，比如 Http 插件可以下载插件放到 /usr/local/openresty/lualib/resty 目录中。
 
-上面命令中，openresty 容器内的 openresty 软件安装在 /usr/local/openresty 目录下，如果想要安装其他的插件，比如 http 插件可以下载插件放到 /usr/local/openresty/lualib/resty 目录中。
-
-比如要安装 http 模块：
+比如要安装 Http 模块：
 
 ```bash
 # 进入 openresty 容器进入
@@ -45,7 +47,7 @@ wget https://raw.githubusercontent.com/pintsized/lua-resty-http/master/lib/resty
 exit
 ```
 
-## nginx 配置文件
+## Nginx 配置文件
 
 在 `/root/docker/openresty/conf.d` (宿主机目录) 目录下创建 `nginx.conf` 文件，并写入如下内容：
 

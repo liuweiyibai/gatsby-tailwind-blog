@@ -1,16 +1,16 @@
 ---
-title: docker-compose 构建容器
+title: Docker Compose 构建容器
 date: 2021-01-01 13:16:59
 category:
   - 编程笔记
-tags: ['docker', 'docker-compose']
+tags: ['Docker', 'Docker Compose']
 slug: docker-compose-to-build-the-container
-thumbnail: '../../thumbnails/docker.png'
+thumbnail: '../../thumbnails/docker-compose.png'
 ---
 
-## docker-compose
+## Docker Compose
 
-`docker-compose` 可以一次性开启多个 `docker` 实例，这一点比 `Dockerfile` 来构建 `docker` 容器要方便的多。`docker-compose` 的重点是对 `yml` 和 `yaml` 文件的配置。`yml` 文件的配置需要注意的是严格控制缩进。
+Docker Compose 可以一次性开启多个 Docker 实例，这一点比 Dockerfile 来构建 Docker 容器要方便的多。Docker Compose 的重点是对 yml 和 yaml 文件的配置。yml 文件的配置需要注意的是严格控制缩进。
 
 ## 使用环境变量
 
@@ -37,11 +37,11 @@ thumbnail: '../../thumbnails/docker.png'
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}%
   ```
 
-## 启动 mongodb
+## 启动 MongoDB
 
-`mongodb` 容器构建其实很简单，就是需要指定镜像来源，如果需要开启认证，需要配置环境变量 `MONGO_INITDB_ROOT_USERNAME` 和 `MONGO_INITDB_ROOT_PASSWORD`。一般我们希望对镜像中的磁盘做外部映射，这样即使容器退出了，下次启动，容器中保留的数据不会丢失
+MongoDB 容器构建其实很简单，就是需要指定镜像来源，如果需要开启认证，需要配置环境变量 `MONGO_INITDB_ROOT_USERNAME` 和 `MONGO_INITDB_ROOT_PASSWORD`。一般我们希望对镜像中的磁盘做外部映射，这样即使容器退出了，下次启动，容器中保留的数据也不会丢失。
 
-下面给出 `mongodb` 的 `docker-compose` 配置 `docker-compose-mongodb.yml`
+下面给出 `MongoDB` 的 Docker Compose 配置 `docker-compose-mongodb.yml`
 
 ```yaml
 version: '3'
@@ -78,7 +78,7 @@ docker-compose -f docker-compose-mongodb.yml up -d
 
 以上创建新用户必须要注意切换到用户所管理的数据库上。否则当我们使用的时候，可能会报错，默认不切换，我们创建的用户是管理的 `admin` 数据库
 
-## 启动 redis
+## 启动 Redis
 
 - 贴出配置
 
@@ -95,7 +95,7 @@ docker-compose -f docker-compose-mongodb.yml up -d
       - 6379:6379
   ```
 
-- redis 配置
+- Redis 配置
 
   ```conf:title=redis.conf
   # bind 127.0.0.1 # 注释掉这部分，这是限制redis只能本地访问
