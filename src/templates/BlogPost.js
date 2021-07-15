@@ -12,12 +12,14 @@ import { SET_NAVIGATION_POSTS_IS_OPEN } from '@/store'
 import { getFixed } from '@/utils/helpers'
 import { useScrollToTop } from '@/utils/hooks'
 import BlogComment from '@/components/BlogComment'
+import StyledBlogDetail from '@/styles/StyledBlogDetail'
 import { kebabCase } from 'lodash'
 import Viewer from 'viewerjs'
 import 'viewerjs/dist/viewer.min.css'
 
-import StyledBlogDetail from '@/styles/StyledBlogDetail'
-
+const createFullPostMarkup = html => {
+  return { __html: `${html}` }
+}
 // 文章详情
 export default ({ data, pageContext, ...props }) => {
   const {
@@ -53,7 +55,6 @@ export default ({ data, pageContext, ...props }) => {
     <SpringScrollbars ref={scrollRef}>
       <div className="post-detail__wrapper">
         <header className="article-header">
-          {thumbnail && <GatsbyImage image={getFixed(thumbnail)} />}
           <div className="article-header-box">
             <div className="post-title-box">
               <h1>{title}</h1>
@@ -87,9 +88,11 @@ export default ({ data, pageContext, ...props }) => {
               </li>
             </ul>
           </div>
+
+          {thumbnail && <GatsbyImage image={getFixed(thumbnail)} alt={``} />}
         </header>
         <StyledBlogDetail>
-          <article dangerouslySetInnerHTML={{ __html: postHTML }} ref={postContainerDom} />
+          <article dangerouslySetInnerHTML={createFullPostMarkup(postHTML)} ref={postContainerDom} />
         </StyledBlogDetail>
 
         <PostCopyright href={href} />

@@ -109,7 +109,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 tags
                 thumbnail {
                   childImageSharp {
-                    gatsbyImageData(width: 100, height: 100, placeholder: BLURRED, layout: FIXED)
+                    gatsbyImageData(width: 60, height: 60, placeholder: BLURRED, layout: FIXED)
                   }
                 }
               }

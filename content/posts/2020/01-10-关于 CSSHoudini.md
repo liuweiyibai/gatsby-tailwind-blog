@@ -1,16 +1,16 @@
 ---
-title: 关于 css houdini
+title: 关于 CSSHoudini
 date: 2020-01-10 17:56:00
 tags:
-  - css
-  - css3
+  - CSS
+  - CSS3
 category:
   - 编程笔记
 slug: about-css-houdini
 thumbnail: '../../thumbnails/css-houdini.jpeg'
 ---
 
-[Houdini](https://github.com/CSSHoudini) 是 W3C 新成立的一个任务小组，它的终极目标是实现 css 属性的完全兼容。Houdini 提出了一个前无古人的的设想：开放 CSS 的 API 给开发者，开发者可以通过这套接口自行扩展 CSS，并提供相应的工具允许开发者介入浏览器渲染引擎的样式和布局流程中。Houdini 目前包含 6 组 API
+[Houdini](https://github.com/CSSHoudini) 是 W3C 新成立的一个任务小组，它的终极目标是实现 CSS 属性的完全兼容。Houdini 提出了一个前无古人的的设想：开放 CSS 的 API 给开发者，开发者可以通过这套接口自行扩展 CSS，并提供相应的工具允许开发者介入浏览器渲染引擎的样式和布局流程中。Houdini 目前包含 6 组 API
 
 ## Layout API
 

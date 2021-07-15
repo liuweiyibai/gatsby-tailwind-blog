@@ -1,5 +1,11 @@
 ---
 title: Sentry 挖坑之旅
+date: 2021-04-15 19:45:07
+category:
+  - 编程笔记
+tags: ['Sentry', 'React', 'Nuxt']
+slug: the-sentry-trip-to-dig-a-hole
+thumbnail: '../../thumbnails/sentry.png'
 ---
 
 当项目上线之后，如果线上报错导致的页面无法正常渲染，或者由于报错导致操作无反应。当你的页面面对庞大的用户访问量，根本无法及时获取用户碰到的问题，这时就需要一个异常监控服务可以及时报警通知、提供有效信息和报错堆栈等排查问题。

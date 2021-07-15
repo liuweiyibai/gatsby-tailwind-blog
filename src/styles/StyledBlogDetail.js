@@ -24,6 +24,7 @@ const lables = [
   { lang: 'text', tag: 'text', bg: '#fff', color: '#111' },
   { lang: 'json', tag: 'json', bg: '#8bc34a', color: '#111' },
   { lang: 'yaml', tag: 'yaml', bg: '#cb171e', color: '#fff' },
+  { lang: 'yml', tag: 'yml', bg: '#cb171e', color: '#fff' },
   { lang: 'diff', tag: 'diff', bg: '#e6ffed', color: '#111' },
   { lang: 'markdown', tag: 'md', bg: '#083fa1', color: '#fff' },
   { lang: 'graphql', tag: 'GraphQL', bg: '#e10098', color: '#fff' },

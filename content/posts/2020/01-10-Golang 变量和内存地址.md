@@ -1,7 +1,7 @@
 ---
-title: golang 变量和内存地址
+title: Golang 变量和内存地址
 date: 2020-01-10 17:56:00
-tags: ['golang']
+tags: ['Golang']
 category:
   - 编程笔记
 slug: golang-variables-and-memory-addresses
