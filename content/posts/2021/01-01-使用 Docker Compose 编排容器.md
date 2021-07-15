@@ -112,18 +112,47 @@ docker-compose -f docker-compose-mongodb.yml up -d
 
 ```bash
 docker-compose up -d # 后台运行
-```
-
-```bash
+docker ps # 使用 Docker 查看运行的容器状态
 docker-compose ps # 查看状态
-docker ps # 查看状态
-```
 
-```bash
 docker-compose stop # 停止服务
 docker-compose down
-```
 
-```bash
 docker-compose restart # 重启容器
+
+docker-compose up -d nginx # 启动 nignx 容器
+
+docker-compose exec nginx bash  # 登录到 nginx 容器中
+
+docker-compose down # 删除所有容器、镜像
+
+docker-compose restart nginx  # 重新启动 nginx 容器
+
+# 在 php-fpm 中不启动关联容器，并容器执行 php -v 执行完成后删除容器
+docker-compose run --no-deps --rm php-fpm php -v
+
+docker-compose build nginx  # 构建镜像
+
+docker-compose build --no-cache nginx   # 不带缓存的构建
+
+docker-compose logs  nginx    # 查看 nginx 的日志
+
+docker-compose logs -f nginx  # 查看 nginx 的实时日志
+
+# 验证（docker-compose.yml）文件配置，当配置正确时，不输出任何内容，当文件配置错误，输出错误信息
+docker-compose config  -q
+
+# 以 json 的形式输出 nginx 的 docker 日志
+docker-compose events --json nginx
+
+docker-compose pause nginx # 暂停 nignx 容器
+
+docker-compose unpause nginx  # 恢复 ningx 容器
+
+docker-compose rm nginx  # 删除容器（删除前必须关闭容器）
+
+docker-compose stop nginx  # 停止nignx容器
+
+docker-compose start nginx  #  启动 nignx 容器
+docker-compose kill # 强制停止容器
 ```

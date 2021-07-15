@@ -1,10 +1,10 @@
 ---
-title: 梳理一下 vue 的更新流程
+title: 梳理一下 Vue 的更新流程
 ---
 
 ## 简介
 
-结合 vue 源码，分析、梳理一下 vue 的更新流程。
+结合 Vue 源码，分析、梳理一下 Vue 的更新流程。
 
 首先 new Vue()之后会进入初始化阶段，初始化的东西有很多，如我们的常见的生命周期，事件，属性与状态，计算属性与 watch，并实现数据的响应式。
 
@@ -18,7 +18,7 @@ title: 梳理一下 vue 的更新流程
 
 这样就走完了整个 Vue 的流程。这里介绍一下 Diff 的过程，包括具体算法，再到具体更新到 dom 上
 
-![vue 更新流程](https://cdn.clearlywind.com/static/images/vue-update-process.png)
+![Vue 更新流程](https://cdn.clearlywind.com/static/images/vue-update-process.png)
 
 ## Diff
 

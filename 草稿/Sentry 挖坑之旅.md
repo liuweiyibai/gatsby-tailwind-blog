@@ -38,6 +38,9 @@ cd .. && bash install.sh
 Nginx 配置:
 
 ```conf
+upstream sentry {
+  server localhost:9000 weight=5;
+}
 server {
   listen 80;
   server_name sentry.xx.com;
@@ -71,19 +74,199 @@ docker-compose up -d
 
 [使用 Docker Compose 编排容器](/blog/docker-compose-orchestrate-containers)
 
-<!-- https://www.cnblogs.com/moxiaoan/p/9299404.html -->
+应用启动后应该会在本机的 `9000`端口启动一个 Web 服务，可以访问页面，登录 Sentry 提供的 SaaS 平台。
+
+默认打开页面，应该会让你设置一邮箱和邮箱配置，使用设置的邮箱登录进入后可以在页面上先进行一些设置。
+
+比如语言、时区设置、生成一个 token 用来上传 SourceMap 时使用，等等一些设置。
 
 ## 常用配置
 
-- 邮箱
+Sentry 第一次登录的邮箱配置，以及通知邮件发送功能，需要配置
 
-  邮箱配置参考这个 <http://oxxd.github.io/sentry-deploy/>
-  <https://blog.csdn.net/MacwinWin/article/details/116924514>
+```bash
+# 进入到 sentry 目录，复制文件
+cp sentry/config.example.yml sentry/config.yml
+vim sentry/config.yml
+```
 
-## 前端应用
+然后找到文件中配置邮箱的部分：
 
-- SourceMap
+```yml
+mail.host: 'smtp.aliyun.com'
+mail.port: 25
+mail.username: 'youremail@aliyun.com'
+mail.password: 'yourpassword'
+mail.use-tls: false
+mail.from: 'youremail@aliyun.com'
+```
 
-- nuxt sentry
-  <https://juejin.cn/post/6844904051692453895#heading-4>
-  https://blog.csdn.net/wenziyin/article/details/89921749
+## 监控前端应用
+
+Sentry 对接前端应用的流程应该是，前端项目中引入 Sentry/browser 相关代码，次代码会捕获代码运行时的异常，上报到 自己搭建的 Sentry 服务中。
+
+前端应用构建结束，需要将 SourceMap 上传至 Sentry 服务中，这样上报的错误才能正确定位到源文件中。
+
+我们以 React 项目为例，简单看一下 Sentry 的使用：
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
+import App from './App'
+
+Sentry.init({
+  // dsn 是在 Sentry 中创建项目后，给定的一个上报地址
+  dsn: 'http://127.0.0.1@localhost:9000/5',
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0
+})
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+因为我们使用 Webpack 构架应用，sentry 有一个 Webpack 的插件，可以帮我们上传 SourceMap。
+
+```bash
+# 安装
+yarn add @sentry/webpack-plugin --dev
+```
+
+```js
+// 添加 Webpack 配置 config-overrides.js
+const { override, addWebpackPlugin } = require('customize-cra')
+const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+
+module.exports = override(
+  // production 要启用 SourceMap，后面打包结束再删除
+  process.env.NODE_ENV === 'production' &&
+    new SentryWebpackPlugin({
+      // 这个需要和 init 时保持一致，如果不写，默认使用 git commit 记录的id的来当做版本号，没有严格的版本管理，可以忽略该配置。
+      release: '版本号',
+      configFile: '.sentryclirc',
+
+      // 包括哪些文件
+      include: './public',
+
+      // 忽略哪些文件
+      ignore: ['node_modules'],
+
+      // ~/为网站根目录，线上 js 对应的 url 资源的相对路径
+      // 比如: 我的域名是 http://XXX.com/, js 静态资源都在 static/js 文件夹里面
+      urlPrefix: `~/static/js/`,
+
+      // 上传前验证 SourceMap 对应关系
+      validate: true,
+
+      // 发布前删除所有的 Sentry 中的 sourceMap
+      cleanArtifacts: true
+    })
+)
+```
+
+```yml:title=.sentryclirc
+[defaults]
+# sentry 的地址，主要要有 /
+url = http://xx.xx.xx.xx:9000/
+# 项目所属组织
+org = sentry
+# 项目名称
+project = react-demo
+
+[auth]
+# 身份令牌 在sentry服务端 setting->accout->api->auth Tokens 创建一个新的就好
+# 注意这里要有project:write 权限 下面我会给出具体页面，看着上面路径进去就好。
+token = token
+```
+
+这里，当 build 结束，项目构建产物目录中应该会有 SourceMap，我们可以修改 build 命令，然后在删除素有 map 文件。
+
+```bash
+yarn add rimraf --dev
+```
+
+```json:title=package.json
+{
+  "scripts": {
+    "build": "react-app-rewired build && rimraf .nuxt/dist/client/**/*.js.map"
+  }
+}
+```
+
+## 在 Nuxt 项目中使用
+
+Nuxt 是一个基于 Vue 的 SSR 框架。Nuxt 社区提供了一个集成 Sentry 的框架[@nuxt/sentry](https://sentry.nuxtjs.org/guide/setup/)。
+
+```bash
+yarn add @nuxtjs/sentry --dev
+```
+
+添加到配置文件
+
+```js:title=nuxt.cofig.js
+export default {
+  // 注入 sentry 框架，该框架会在配置文件中提供一个 sentry 的配置项
+  // 此插件会在 vue 中提供一个 this.$sentry 的对象，可以用来调用 sentry 的方法
+  modules: ['@nuxtjs/sentry'],
+  sentry: {
+    dsn: ``,
+    lazy: true,
+    // 开启性能监控
+    tracing: {
+      tracesSampleRate: 1.0,
+      vueOptions: {
+        tracing: true,
+        tracingOptions: {
+          hooks: ['mount', 'update'],
+          timeout: 2000,
+          trackComponents: true
+        }
+      },
+      browserOptions: {}
+    },
+    clientIntegrations: {
+      Vue: {
+        // 允许 Sentry 上报 Vue 组件 Props
+        attachProps: true,
+
+        // 引入Sentry SDK后，默认不会将报错打印到控制台，将logErrors设为true强制将报错打印到控制台
+        logErrors: true
+      }
+    },
+    // 声明其他 sentry 配置
+    config: {
+      debug: false,
+      environment: process.env.NODE_ENV
+    }
+  }
+}
+```
+
+上传 SouceMap，也是利用上述的 @sentry/webpack-plugin 插件来实现
+
+```js:title=nuxt.config.js
+export default {
+  build: {
+    extend(config, { isDev, isClient }) {
+      if (!isDev) {
+        // 指定 SourceMap 的类型
+        if (isClient) config.devtool = 'source-map'
+        const path = config.output.publicPath
+        const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+        config.plugins.push(
+          new SentryWebpackPlugin({
+            include: ['.nuxt/dist/client'],
+            ignore: ['node_modules', '.nuxt/dist/client/img'],
+            configFile: '.sentryclirc',
+            urlPrefix: path.startsWith('/') ? `~${path}` : path,
+            validate: true,
+            // 发布前删除所有的 Sentry 中的 sourceMap
+            cleanArtifacts: true
+          })
+        )
+      }
+    }
+  }
+}
+```
