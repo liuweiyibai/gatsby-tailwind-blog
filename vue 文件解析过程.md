@@ -176,7 +176,7 @@ Template 通过语法约束使得编译过程可以在模板得到更多的优�
 
 **标记生成**
 
-如上图所示，ast 生成后会经过 optimize 函数的处理，而 optimize 函数先调了 markStatic 函数后又调了 markStaticRoots 函数，接下来我们来分析这两个函数的源码：
+如上图所示，ast 生成后会经过 optimize 优化函数的处理，而 optimize 函数先调了 markStatic 函数后又调了 markStaticRoots 函数，接下来我们来分析这两个函数的源码：
 
 ```js
 // vue/src/compiler/optimizer.js
@@ -210,14 +210,20 @@ function isStatic(node: ASTNode): boolean {
     return true
   }
   return !!(
-    node.pre || // 如果具有v-pre指令 或者 没有动态绑定，没有 if,没有for 则是静态节点
-    (!node.hasBindings && // 没有绑定动态指令
-      !node.if &&
-      !node.for && // not v-if or v-for or v-else
-      !isBuiltInTag(node.tag) && // not a built-in
-      isPlatformReservedTag(node.tag) && // not a component
-      !isDirectChildOfTemplateFor(node) &&
-      Object.keys(node).every(isStaticKey))
+    // 那么 node.pre 为 true，表明所有节点都不用解析了
+    (
+      node.pre ||
+      // 当节点有绑定 Vue属性的时候，比如指令，事件等，node.hasBindings 会为 true
+      (!node.hasBindings &&
+        // 当节点有 v-if 或者 v-for 的时候，node.if 或者 node.for 为true
+        !node.if &&
+        !node.for &&
+        !isBuiltInTag(node.tag) && // not a built-in
+        // isPlatformReservedTag 是用于判断该标签是否是正常的HTML 标签
+        isPlatformReservedTag(node.tag) &&
+        !isDirectChildOfTemplateFor(node) &&
+        Object.keys(node).every(isStaticKey))
+    )
   )
 }
 ```
@@ -271,3 +277,7 @@ function genStatic(el: ASTElement, state: CodegenState): string {
   return `_m(${state.staticRenderFns.length - 1})`
 }
 ```
+
+## 参考链接
+
+[【Vue 原理】Compile - 源码版 之 optimize 标记静态节点](https://juejin.cn/post/6844903910059016200#heading-18)
