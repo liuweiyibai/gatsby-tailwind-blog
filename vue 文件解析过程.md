@@ -1,24 +1,26 @@
 ---
-title: vue 文件解析过程
+title: Vue 文件解析过程
 date: 2020-11-09 22:26:12
 category:
   - 编程笔记
-tags: ['vue', 'webpack', 'vue-loader']
+tags: ['Vue', 'Webpack', 'vue-loader']
 slug: vue-file-parsing-process
 thumbnail: ''
 ---
 
-有过 vue + webpack 开发经历的人肯定都知道，webpack 是通过 vue-loader 解析 vue 文件，然后执行解析到不同的 loader 最后生成对应的静态文件。
+有过 Vue + Webpack 开发经历的人肯定都知道，Webpack 是通过 vue-loader 解析 .vue 文件，然后执行解析到不同的 loader 最后生成对应的静态文件。
 
-在了解 vue-loader 之前，我们先看一下 vue-template-compiler。
+在了解 vue-loader 之前，我们先看一下 [vue-template-compiler](https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler)。
 
-在使用 vue 程中，安装依赖时，需要 vue 和 vue-template-compiler 版本保持一致，否则会报错。
+在 Vue 项目安装依赖时，需要 vue 和 vue-template-compiler 版本保持一致，否则会报错。
 
-为什么二者版本必须一致呢？vue-template-compiler 承担哪些作用？其和 vue-loader 又有何关联？
+为什么二者版本必须一致呢？vue-template-compiler 有哪些作用？它和 vue-loader 有什么关系呢？
+
+我们先来看一下 vue-template-compiler。
 
 ## vue-template-compiler
 
-vue-template-compiler 模块可用于将 Vue 2.0 模板预编译为渲染函数（template => ast => render），以避免运行时编译开销和 CSP 限制。它经常与 vue-loader 一起使用，只有在编写具有非常特定需求的构建工具时，才需要单独使用它，比如 vueify 等。
+vue-template-compiler 模块可用于将 Vue 2.0 模板预编译为渲染函数 `(template => ast => render)`，以避免运行时编译开销和 CSP 限制。它经常与 vue-loader 一起使用，只有在编写具有非常特定需求的构建工具时，才需要单独使用它，比如 [vueify-loader](https://github.com/vuetifyjs/vuetify-loader)、[iview-loader](https://github.com/view-design/iview-loader)等。
 
 > 内容安全策略 (CSP) 是一个附加的安全层，用于帮助检测和缓解某些类型的攻击，包括跨站脚本 (XSS) 和数据注入等攻击。
 > ps: vue 模板的插值容易发生上述问题。
@@ -134,3 +136,138 @@ vue-loader 将解析文件，提取每个语言块，将它们通过其他加载
    <style src="./style.css"></style>
    <script src="./script.js"></script>
    ```
+
+## Vue 利用模板做的优化
+
+Vue 利用模板去构建组件，而 React 中利用 JSX 来构建组件，JSX 其实是 JavaScript 的语法糖。
+
+比较一下 Template 和 JSX:
+
+**JSX 优缺点：**
+
+优点：
+
+1. 具有 JavaScript 的完整表现力、 可以在你的组件上构建任意复杂的逻辑。
+2. 渲染组件时将视图层视为数据。
+
+缺点：
+
+1. 成本很高，渲染函数的动态特性使得它难以优化。
+2. 运行时调度可提高感知性能，但需要很重的运行时代码
+
+**模板优缺点：**
+
+优点：
+
+1. 静态（编译）和严格的限制允许编译器对你的意图做更多的预判，从而给它更多的空间去做执行优化。
+2. 模板编译可以使 runtime 更轻量，因为它不需要复杂的运行时调度来尝试让事情看起来更快，因为它本身已经很快了。
+
+缺点：
+
+1. 用户受到模板语法的约束，表达能力受到限制。
+2. 较轻的运行时可能会以每个模板输出更多详细信息为代价。
+3. 运行时编译成本或构建步骤的硬性要求。
+
+Template 通过语法约束使得编译过程可以在模板得到更多的优化信息，比如将文本节点标记为静态节点，那在更新视图时可以直接跳过 diff 过程，加快页面渲染速度，提升用户体验。
+
+![vue-template-compiler](https://cdn.clearlywind.com/static/images/vue2模板编译过程.png)
+
+通过代码分析一下 Vue2 中是如何标记这些静态节点的呢?
+
+**标记生成**
+
+如上图所示，ast 生成后会经过 optimize 函数的处理，而 optimize 函数先调了 markStatic 函数后又调了 markStaticRoots 函数，接下来我们来分析这两个函数的源码：
+
+```js
+// vue/src/compiler/optimizer.js
+// markStatic，从上到下遍历所有节点，对节点打上 static 的标识
+function markStatic(node: ASTNode) {
+  node.static = isStatic(node) // 标记当前节点是不是静态节点
+  if (node.type === 1) {
+    // 如果节点为元素类型
+    for (let i = 0, l = node.children.length; i < l; i++) {
+      // 遍历当前节点的所有子节点
+      const child = node.children[i]
+      markStatic(child) // 递归标记子节点
+      if (!child.static) {
+        // 如果子节点为 非静态节点，那么当前节点也只能是 非静态节点
+        node.static = false
+      }
+    }
+  }
+}
+```
+
+```js
+// 用来判断当前节点是不是静态节点
+function isStatic(node: ASTNode): boolean {
+  if (node.type === 2) {
+    // expression 如果是表达式，则不是静态节点
+    return false
+  }
+  if (node.type === 3) {
+    // text 如果是文本节点，则是静态节点
+    return true
+  }
+  return !!(
+    node.pre || // 如果具有v-pre指令 或者 没有动态绑定，没有 if,没有for 则是静态节点
+    (!node.hasBindings && // 没有绑定动态指令
+      !node.if &&
+      !node.for && // not v-if or v-for or v-else
+      !isBuiltInTag(node.tag) && // not a built-in
+      isPlatformReservedTag(node.tag) && // not a component
+      !isDirectChildOfTemplateFor(node) &&
+      Object.keys(node).every(isStaticKey))
+  )
+}
+```
+
+```js
+// vue/src/compiler/optimizer.js
+// 标记静态根节点
+function markStaticRoots(node: ASTNode, isInFor: boolean) {
+  if (node.type === 1) {
+    // 当节点 有 children 并且 children 不是 text 类型 则标记为静态根节点
+    // 递归再去遍历 children 中的节点
+    if (node.static && node.children.length && !(node.children.length === 1 && node.children[0].type === 3)) {
+      node.staticRoot = true
+      return
+    } else {
+      node.staticRoot = false
+    }
+
+    if (node.children) {
+      // 标记子节点
+      for (let i = 0, l = node.children.length; i < l; i++) {
+        markStaticRoots(node.children[i], isInFor || !!node.for)
+      }
+    }
+  }
+}
+```
+
+![vue2编译后生成的ast](https://cdn.clearlywind.com/static/images/vue2编译后生成的ast.png)
+
+可以看到上面的 ast 树中看到了被打上的标记。
+
+**代码生成**
+
+模板被解析为 ast 后又被标记结束之后产生新的 ast，该 ast 会经过 generate 函数的处理，而 generate 函数又调用了 genElement 函数，genElement 函数又调了 genStatic 函数，整个代码生成过程同样也是递归的过程。
+
+```js
+// vue/src/compiler/codegen/index.js
+function generate() {
+  var state = new CodegenState(options)
+  var code = ast ? genElement(ast, state) : '_c("div")'
+  return {
+    render: 'with(this){return ' + code + '}',
+    staticRenderFns: state.staticRenderFns
+  }
+}
+
+// genElement 函数是根据节点类型调用不同的生成转译函数
+function genStatic(el: ASTElement, state: CodegenState): string {
+  state.staticRenderFns.push(`with(this){return ${genElement(el, state)}}`)
+  return `_m(${state.staticRenderFns.length - 1})`
+}
+```
