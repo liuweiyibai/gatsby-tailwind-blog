@@ -3,14 +3,14 @@ title: 开始使用 styled-components
 date: 2020-07-10 14:49:33
 category:
   - 编程笔记
-tags: ['react', 'gatsby', 'styled-components']
+tags: ['React', 'Gatsby', 'styled-components']
 slug: start-using-styled-components-the-md
 thumbnail: '../../thumbnails/styled-components.png'
 ---
 
-在 react 中有 css 方案 css-in-js，它是一种模式，这个 css 由 js 生成而不是在外部文件中定义，是 CSS Modules，主要是借助第三方库生成随机类名称的方式来建立一种局部类名的方式。
+在 React 中有 CSS 方案 CSS in JS，它是一种模式，这个 CSS 由 JavaScript 生成而不是在外部文件中定义，是一种 CSS Modules 方案，主要是借助第三方库生成随机类名称的方式来建立一种局部类名的方式。
 
-这种 css-in-js 的第三方模块有很多 [css-in-js 方案](https://github.com/MicheleBertoli/css-in-js)
+这种 CSS in JS 的第三方模块有很多 [CSS in JS 方案](https://github.com/MicheleBertoli/css-in-js)
 
 这里我使用 styled-components ，它可以让组件自己的样式对自己生效，不是全局生效，做到互不干扰
 

@@ -1,9 +1,9 @@
 ---
-title: 总结一下 babel 的按需导入
+title: 总结一下 Babel 的按需导入
 date: 2020-11-07 20:57:21
 category:
   - 编程笔记
-tags: ['js', 'babel']
+tags: ['Babel']
 slug: to-summarize-the-babel-of-on-demand-import
 thumbnail: '../../thumbnails/babel.png'
 ---
@@ -12,13 +12,13 @@ thumbnail: '../../thumbnails/babel.png'
 
 ## 简介
 
-为了应用能够快速访问, 需要对构建代码进行"减肥", 将无用代码剔除掉. 当前得主流构建框架 webpack 和 rollup 等都提供了 tree shaking 机制, 利用 es6 的声明式模块系统语法和语句依赖分析, 进行高精度得代码剔除. 但 tree shaking 也存在一些限制, 一般的第三方库都采用 es5 语法, 不使用 es6 的模块语法, 导致 tree shaking 失效. 对于这些第三方库, 一般采用一些转换导入语句的 babel 插件, 如 [babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)、 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component)、 [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)等.
+为了应用能够快速访问, 需要对构建代码进行"减肥", 将无用代码剔除掉. 当前得主流构建框架 webpack 和 rollup 等都提供了 tree shaking 机制, 利用 es6 的声明式模块系统语法和语句依赖分析, 进行高精度得代码剔除. 但 tree shaking 也存在一些限制, 一般的第三方库都采用 es5 语法, 不使用 es6 的模块语法, 导致 tree shaking 失效. 对于这些第三方库, 一般采用一些转换导入语句的 Babel 插件, 如 [babel-plugin-import](https://www.npmjs.com/package/babel-plugin-import)、 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component)、 [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)等.
 
 > 本文中的案例中很多采用了 antd 的例子, 其实 antd 默认是支持 tree shaking 的, 不需要使用这些插件也能按需导入.
 
 ## 导入语句转换
 
-不采用按需导入的插件, 导入一个库如 lodash, 就会这样写:
+不采用按需导入的插件, 导入一个库如 Lodash, 就会这样写:
 
 ```js
 import { trim, isEqual } from 'lodash'
@@ -27,7 +27,7 @@ trim(str)
 isEqual(1, 2)
 ```
 
-这会将整个 lodash 代码都给导入, 如果不想导入不需要的代码, 且当前库支持按需导入, 手动按需导入的代码应该为:
+这会将整个 Lodash 代码都给导入, 如果不想导入不需要的代码, 且当前库支持按需导入, 手动按需导入的代码应该为:
 
 ```js
 import isEqual from 'lodash/isequal'
@@ -54,7 +54,7 @@ import trim from 'lodash/trim'
 
 而 babel-plugin-import、babel-plugin-component、babel-plugin-transform-imports 等就是这种提供转换的工具.
 
-babel-plugin-import 是阿里为了 antd 组件库量身定做的一套转换工作, 不过在后续的更新中, 适用的范围越来越广. 它除了会导入目标组件外, 还支持导入组件附属样式文件. 转化示意:
+babel-plugin-import 是阿里为了 Antd 组件库量身定做的一套转换工作, 不过在后续的更新中, 适用的范围越来越广. 它除了会导入目标组件外, 还支持导入组件附属样式文件. 转化示意:
 
 ```js
 import { Button } from 'antd';
@@ -70,7 +70,7 @@ require('antd/lib/button/style/css');
 ReactDOM.render(<_button>xxxx</_button>);
 ```
 
-babel-plugin-component 是 element-ui 团队对 babel-plugin-import 一个低版本的 fork, 不建议使用, 基本只能对 element-ui 这个 UI 库按需导入使用. vant 使用 babel-plugin-import 进行按需导入.
+babel-plugin-component 是 element-ui 团队对 babel-plugin-import 一个低版本的 fork, 不建议使用, 基本只能对 ElementUI 这个 UI 库按需导入使用. Vant 使用 babel-plugin-import 进行按需导入.
 
 babel-plugin-transform-imports 是一个非常轻量级的转换插件, 可定制化程度非常高, 可以定制转换后的导入语句, 适应不同的目录结构. 但它只能为全量导入的每一项转换为一个单独的导入, 这不适用的对 UI 组件库按需导入. 在 babel-plugin-component 还很笨重时, babel-plugin-transform-imports 是非常好用的. 它的导入示意:
 
@@ -156,7 +156,7 @@ console.log(_Button)
 
 ## 根据实际调用进行按需导入
 
-还有一种 babel 转换导入语句的按需导入的机制, 原理来自 babel-plugin-loadash 插件, 它可以将下面的代码:
+还有一种 Babel 转换导入语句的按需导入的机制, 原理来自 babel-plugin-loadash 插件, 它可以将下面的代码:
 
 ```js
 import _ from 'loadash'
@@ -174,7 +174,7 @@ trim(str)
 isEqual(1, 2)
 ```
 
-原理是根据全量导入的变量的调用链, 分析所需要的模块, 然后按需导入. 这样的方便之处在于编码时使用模块的全量导入或者默认导入, 避免具名导入那样需要维护每一项. 比如利用 antd 组件库在开发表单时, 需要导入大量的表单组件, 随着业务的变更, 组件也需要变更, 每一次维护都需要重新在导入语句中导入添加需要的模块.
+原理是根据全量导入的变量的调用链, 分析所需要的模块, 然后按需导入. 这样的方便之处在于编码时使用模块的全量导入或者默认导入, 避免具名导入那样需要维护每一项. 比如利用 Antd 组件库在开发表单时, 需要导入大量的表单组件, 随着业务的变更, 组件也需要变更, 每一次维护都需要重新在导入语句中导入添加需要的模块.
 
 一开始控件中只使用了 input 和 button:
 
@@ -188,7 +188,7 @@ import { Button, Input, Form, FormItem } from 'antd'
 import { Button, Input, Form, FormItem, Select } from 'antd'
 ```
 
-这在当前文件代码量十分大时, 每一次使用新的组件, 都需要滚动文件顶部维护好新的导入, 然后在回到开发点继续开发, 打断流畅的开发快感. 且如果没有配置相应的 eslint 规则的话, 还会导致一些没有使用的组件依旧被导入, 导致无用代码被加载.
+这在当前文件代码量十分大时, 每一次使用新的组件, 都需要滚动文件顶部维护好新的导入, 然后在回到开发点继续开发, 打断流畅的开发快感. 且如果没有配置相应的 ESLint 规则的话, 还会导致一些没有使用的组件依旧被导入, 导致无用代码被加载.
 
 而使用全量导入就没有这种烦恼:
 
@@ -206,6 +206,6 @@ return (<Ad.Form>
 
 ## 写在最后
 
-在开发 vue 项目时, 组件注册有全局注册和局部注册之分. 全局注册后的组件在每一个其他组件中都可以使用, 无需再次导入注册, 具有良好的开发体验. 但也会导致首屏包过大, 降低用户体验.
+在开发 Vue 项目时, 组件注册有全局注册和局部注册之分. 全局注册后的组件在每一个其他组件中都可以使用, 无需再次导入注册, 具有良好的开发体验. 但也会导致首屏包过大, 降低用户体验.
 
 可以不可以有一种方式, 让开发人员开发时像全局注册一样, 实际打包又跟局部注册一样支持按需导入呢？

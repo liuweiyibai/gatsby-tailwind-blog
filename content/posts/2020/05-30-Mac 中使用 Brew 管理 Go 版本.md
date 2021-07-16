@@ -1,14 +1,14 @@
 ---
-title: mac 中使用 brew 管理 go 版本
+title: Mac 中使用 Brew 管理 Go 版本
 date: 2020-05-30 19:59:40
 category:
   - 编程笔记
-tags: ['mac', 'brew', 'golang']
+tags: ['Mac', 'Homebrew', 'Golang']
 slug: the-use-of-the-brew-management-go-version-mac
 thumbnail: '../../thumbnails/homebrew.png'
 ---
 
-Brew 是 Mac 上包管理工具，和 Linux 上的 apt 、yum、rpm 一样，可以提供非图形化软件的安装，我们也可以使用 brew 管理 Go 的版本。
+Homebrew 是 Mac 上包管理工具，和 Linux 上的 apt 、yum、rpm 一样，可以提供非图形化软件的安装，我们也可以使用 Homebrew 管理 Go 的版本。
 
 也可以通过第三方 [g](/blog/golang-development-environment-to-build) 管理 Go 版本。
 

@@ -1,17 +1,17 @@
 ---
-title: webpack 性能优化
+title: Webpack 性能优化
 slug: webpack-performance-optimization
 tags:
-  - webpack
+  - Webpack
 date: 2020-05-15 17:00:28
 thumbnail: '../../thumbnails/webpack.png'
 ---
 
-## webpack 运行时运行速度优化
+## Webpack 运行时运行速度优化
 
 - 监听文件
 
-  [webpack 可以开启监听：启动 webpack 时加上--watch 参数](https://webpack.js.org/configuration/dev-server/#root)
+  [Webpack 可以开启监听：启动 webpack 时加上--watch 参数](https://webpack.js.org/configuration/dev-server/#root)
 
   `package.json`
 
@@ -92,13 +92,13 @@ thumbnail: '../../thumbnails/webpack.png'
 
   还可以在 `vue-router` 开发时不使用懒加载路由，以提升编译速度
 
-## webpack 构建速度优化
+## Webpack 构建速度优化
 
-`webpack` 在启动后，会根据 `entry` 配置的入口，递归解析所依赖的文件。这个过程分为`「搜索文件」`和`「把匹配的文件进行分析、转化」`的两个过程，因此可以从这两个角度来进行优化配置
+Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖的文件。这个过程分为`「搜索文件」`和`「把匹配的文件进行分析、转化」`的两个过程，因此可以从这两个角度来进行优化配置
 
 - `resolve` 字段
 
-  `resolve` 字段告诉 webpack 怎么去搜索文件，所以首先要重视 `resolve` 字段的配置：[参考文档](https://webpack.docschina.org/configuration/resolve/#resolve)
+  `resolve` 字段告诉 Webpack 怎么去搜索文件，所以首先要重视 `resolve` 字段的配置：[参考文档](https://webpack.docschina.org/configuration/resolve/#resolve)
 
   ```js
     module.export = {
@@ -117,17 +117,17 @@ thumbnail: '../../thumbnails/webpack.png'
   module.exports = {
     resolve: {
       alias: {
-        // 当 webpack 遇到 @ 会自动指向 src 路径
+        // 当 Webpack 遇到 @ 会自动指向 src 路径
         '@': path.resolve(__dirname, `../src`),
         // 给对象的键后的末尾添加 $，以表示精准匹配
         vue$: 'vue/dist/vue.esm.js'
       }
     }
   }
-  // 使用 typescript 时要在 tsconfig.json 中添加配置
+  // 使用 TypeScript 时要在 tsconfig.json 中添加配置
   ```
 
-  使用 `resolve.modules` 添加 `webpack` 解析时`「应该搜索的目录」`
+  使用 `resolve.modules` 添加 Webpack 解析时`「应该搜索的目录」`
 
   [参考文档](https://www.webpackjs.com/configuration/resolve/#resolve-modules)
 
@@ -149,7 +149,7 @@ thumbnail: '../../thumbnails/webpack.png'
 
   [参考文档](https://www.webpackjs.com/configuration/resolve/#resolve-mainfields)
 
-  当从 `npm` 包中导入模块时（例如：`import * as React from "React"`），此选项将决定在 `package.json` 中使用哪个字段导入模块。根据 `webpack` 配置中指定的 `target` 不同，默认值也会有所不同
+  当从 `npm` 包中导入模块时（例如：`import * as React from "React"`），此选项将决定在 `package.json` 中使用哪个字段导入模块。根据 Webpack 配置中指定的 `target` 不同，默认值也会有所不同
 
   当 `target` 属性设置为 `webworker`， `web` 或者没有指定，默认值为：
 
@@ -180,7 +180,7 @@ thumbnail: '../../thumbnails/webpack.png'
   }
   ```
 
-  在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 `webpack` 打包的 `Node.js` 应用程序首先会尝试从 `module` 字段中解析文件
+  在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 Webpack 打包的 `Node.js` 应用程序首先会尝试从 `module` 字段中解析文件
 
   配置 `resolve.extensions` 可以自动解析确定的扩展名，合理配置 `resolve.extensions`，以减少文件查找
 
@@ -192,7 +192,7 @@ thumbnail: '../../thumbnails/webpack.png'
   extensions: ['.wasm', '.mjs', '.js', '.json']
   ```
 
-  当导入语句没带文件后缀时，`webpack` 会根据 `extensions` 定义的后缀列表进行文件查找，所以：
+  当导入语句没带文件后缀时，Webpack 会根据 `extensions` 定义的后缀列表进行文件查找，所以：
 
   列表值尽量少
   频率高的文件类型的后缀写在前面
@@ -231,7 +231,7 @@ thumbnail: '../../thumbnails/webpack.png'
   }
   ```
 
-## webpack 打包结果优化
+## Webpack 打包结果优化
 
 - 关闭 `source-map`
 
@@ -281,9 +281,9 @@ thumbnail: '../../thumbnails/webpack.png'
   })
   ```
 
-- `cdn`
+- CDN
 
-  常用的类库可以放到 `oss` 服务使用 `cdn` 加速，减少构建结果的体积，使用 `cdn` 加载的库要加在不参与构建库的列表中
+  常用的类库可以放到 OSS 服务使用 CDN 加速，减少构建结果的体积，使用 CDN 加载的库要加在不参与构建库的列表中。
 
   ```js
   // 设置不参与构建的库
@@ -320,7 +320,7 @@ thumbnail: '../../thumbnails/webpack.png'
   }
   ```
 
-- `gzip`
+- gzip
 
   使用这个包来进行 `gzip` 压缩
 

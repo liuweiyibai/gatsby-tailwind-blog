@@ -1,24 +1,24 @@
 ---
-title: golang 中的 json 结构
+title: Golang 中的 Json 结构
 date: 2020-05-24 10:11:23
 category:
   - 编程笔记
-tags: ['golang']
+tags: ['Golang']
 slug: go-in-the-json-structure
 thumbnail: '../../thumbnails/golang.png'
 ---
 
-记录一下 golang 中的 json 数据结构实现，前后端开发时，数据在交互过程传递数据是在所难免的，比较通用和流行格式便是 json ，golang 语言提供了 `encoding/json` 包，用于处理 json 数据的编码与解码。
+记录一下 Golang 中的 Json 数据结构实现，前后端开发时，数据在交互过程传递数据是在所难免的，比较通用和流行格式便是 Json ，Golang 语言提供了 `encoding/json` 包，用于处理 Json 数据的编码与解码。
 
-除了 json，XML 也常用于前后端的数据交互，不过由于简洁性、可读性和流行程度，json 用得更加广泛。
+除了 Json，XML 也常用于前后端的数据交互，不过由于简洁性、可读性和流行程度，Json 用得更加广泛。
 
-## golang 和 json
+## Golang 和 Json
 
-使用 `encoding/json` 处理 json 编码与解码时，就必须处理好 json 数据类型与 go 语言数据类型的对应关系。
+使用 `encoding/json` 处理 json 编码与解码时，就必须处理好 Json 数据类型与 go 语言数据类型的对应关系。
 
-- json 的数字、字符串、布尔等在 go 语言中相应内置数据类型一一对应。
-- json 的数组则对应 go 的数组或 Slice(切片)。
-- json 的对象则对应 go 的 struct(结构体)或 map。
+- Json 的数字、字符串、布尔等在 go 语言中相应内置数据类型一一对应。
+- Json 的数组则对应 go 的数组或 Slice(切片)。
+- Json 的对象则对应 go 的 struct(结构体)或 map。
 
 编码一个结构体时，结构体中只有首字母大写的成员才会被编码，首字母小写的成员会被忽略，另外，结构体中字段后面允许使用反引号声明成员的 Tag，用于说明成员的元信息。
 
@@ -42,7 +42,7 @@ type Person struct {
 
 ### **编码**
 
-将 go 语言的数据序列化为 json 字符串的操作，称为编码;编码后的结果为一个 json 格式的字符串。
+将 go 语言的数据序列化为 Json 字符串的操作，称为编码;编码后的结果为一个 Json 格式的字符串。
 
 1. json.Marshal 函数
 
@@ -98,7 +98,7 @@ type Person struct {
 
 ### **解码**
 
-将 json 字符串反序列化为 go 相对应类型，称为解码。
+将 Json 字符串反序列化为 go 相对应类型，称为解码。
 
 1. json.Unmarshal 函数
 

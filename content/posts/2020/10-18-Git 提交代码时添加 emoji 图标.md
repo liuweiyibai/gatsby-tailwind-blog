@@ -1,16 +1,16 @@
 ---
-title: git 提交代码时添加 emoji 图标
+title: Git 提交代码时添加 emoji 图标
 date: 2020-10-18 16:46:18
 category:
   - 编程笔记
-tags: ['git']
+tags: ['Git']
 slug: git-commits-to-add-emoj-icon
 thumbnail: '../../thumbnails/git.png'
 ---
 
 ## 前言
 
-[gitmoji](https://gitmoji.carloscuesta.me/) 是一个标准化和解释在 GitHub 提交消息上使用[emoji](https://gitmoji.carloscuesta.me/)的倡议。 gitmoji 是一个开源项目，专门规定了在 github 提交代码时应当遵循的 emoji 规范
+[gitmoji](https://gitmoji.carloscuesta.me/) 是一个标准化和解释在 GitHub 提交消息上使用[emoji](https://gitmoji.carloscuesta.me/)的倡议。 gitmoji 是一个开源项目，专门规定了在 GitHub 提交代码时应当遵循的 emoji 规范
 
 在 git commit 上使用 emoji 提供了一种简单的方法，仅通过查看所使用的表情符号来确定提交的目的或意图。
 
@@ -18,7 +18,7 @@ thumbnail: '../../thumbnails/git.png'
 
 在执行 git commit 指令时使用 emoji 图标为本次提交添加一个特别的图标， 这个本次提交的记录很容易突出重点，或者说光看图标就知道本次提交的目的。这样就方便在日后查看历史提交日子记录中快速的查找到对于的提交版本。由于有很多不同的表情符号，表情库更新后，没有一个可以帮助更轻松地使用表情符号的中文表情库列表。所以这里主要列出 gitmoji 项目中规定的 emoji 规范的表情符号列表。
 
-使用 `git` 的开发者都知道提交代码的最简单命令： `git commit -m '此次提交的内容说明'`。在 commit 时，添加了 `emoji` 表情说明，我们来看看其命令语法：
+使用 Git 的开发者都知道提交代码的最简单命令： `git commit -m '此次提交的内容说明'`。在 commit 时，添加了 `emoji` 表情说明，我们来看看其命令语法：
 
 ```bash
 git commit -m ':emoji: 此次提交的内容说明'

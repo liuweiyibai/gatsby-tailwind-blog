@@ -3,18 +3,18 @@ title: 前端 esbuild 压缩工具
 date: 2020-07-28 20:11:56
 category:
   - 编程笔记
-tags: ['golang', 'js', '前端工程化', '前端工具']
+tags: ['Golang', 'JavaScript', '前端工程化'x]
 slug: the-front-end-esbuild-zip-tools
 thumbnail: '../../thumbnails/esbuild.png'
 ---
 
 ## 简介
 
-esbuild, 是一个用 go 语言写的 js 打包工具，其性能比 webpack 快接近 100 倍，下图官方给提供的性能对比图
+esbuild 是一个用 go 语言写的 JavaScript 打包工具，其性能比 Webpack 快接近 100 倍，下图官方给提供的性能对比图
 
 ![esbuild](https://cdn.clearlywind.com/blog-images/images/esbuild-benchmark.svg)
 
-[vite](https://vitejs.dev/)和[snowpack](https://www.snowpack.dev/)底层都是用了 esbuild。从 vite 的[文档](https://vitejs.dev/guide/features.html#typescript)上可以发现 esbuild 的执行速度非常快，ts 转译成 js 要比官方的 tsc 快 20-30 倍。vite 可选择使用 esbuild 做压缩。
+[Vite](https://vitejs.dev/)和[Snowpack](https://www.snowpack.dev/)底层都是用了 esbuild。从 Vite 的[文档](https://vitejs.dev/guide/features.html#typescript)上可以发现 esbuild 的执行速度非常快，ts 转译成 js 要比官方的 tsc 快 20-30 倍。Vite 可选择使用 esbuild 做压缩。
 
 随着产物越来越大，编译上线和 CI 的时间都越来越长，而其中 1/3 及更多的时间则是在做压缩的部分。OOM(Out Of Memory) 的问题也通常来源于压缩。
 
@@ -49,4 +49,4 @@ esbuild 可以像 ts 或者 babel 一样编译 js 代码，还可以对代码进
 
 ## 总结
 
-esbuild 有两个功能，转译和压缩。转译，是将 ts 或者新语法 api 转为预先设定的 js 语法。 其功能和 babel 以及 tsc 和 webpack 相比肯定差很多，直接上风险太大；而压缩倒是可以试试，在 webpack 和 babel 产物的基础上做一次压缩，其压缩效率以及产物都比 Terser 更好些。
+esbuild 有两个功能，转译和压缩。转译，是将 ts 或者新语法 api 转为预先设定的 js 语法。 其功能和 babel 以及 tsc 和 Webpack 相比肯定差很多，直接上风险太大；而压缩倒是可以试试，在 Webpack 和 babel 产物的基础上做一次压缩，其压缩效率以及产物都比 Terser 更好些。

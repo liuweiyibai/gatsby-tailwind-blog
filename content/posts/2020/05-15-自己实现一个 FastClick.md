@@ -1,7 +1,7 @@
 ---
-title: 自己实现一个 fastclick
+title: 自己实现一个 FastClick
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 slug: implement-a-fastclick-yourself
@@ -26,7 +26,7 @@ thumbnail: '../../thumbnails/js.png'
 - 1. 设置 `<meta name="viewport" content="width=device-width">`
      解决之后， `click` 事件仍会有些许延迟，那是因为 `click` 事件执行顺序在 `touchend` 之后，正常延迟。
 - 2. 不使用 `click` 事件，改用 `touchstart` 事件
-- 3. 使用 `fastclick` 库
+- 3. 使用 `FastClick` 库
 
   ```js
   var FastClick = require('fastclick')
@@ -43,9 +43,9 @@ thumbnail: '../../thumbnails/js.png'
 
   移动端在点击第一下的时候会等待 `300ms` ，看用户是否点击第二下。
 
-  `fastclick` 的原理就是监听 `touchend` 事件，取消原本 `300ms` 后真正的 `click` 事件，自己生成分发一个点击事件
+  FastClick 的原理就是监听 `touchend` 事件，取消原本 `300ms` 后真正的 `click` 事件，自己生成分发一个点击事件
 
-- 自己实现 `fastclick`
+- 自己实现 FastClick
 
   ```js
   const FastClick = !(function () {

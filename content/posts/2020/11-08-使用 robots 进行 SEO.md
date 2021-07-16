@@ -1,16 +1,16 @@
 ---
-title: 使用 robots 进行 seo
+title: 使用 robots 进行 SEO
 date: 2020-11-08 14:05:04
 category:
   - 编程笔记
-tags: ['html']
+tags: ['HTML']
 slug: the-use-of-robots-for-seo
 thumbnail: '../../thumbnails/html5.png'
 ---
 
 ## robots 文件的作用
 
-一般来说出于安全的考虑，在网站 seo 优化时写入 robots.txt 文件，实际上就是告诉搜索引擎蜘蛛，网站上哪些内容允许抓取，哪些内容不允许抓取，这样做可以提高搜索引擎的抓取效率，增加搜索引擎对网站的友好度
+一般来说出于安全的考虑，在网站 SEO 优化时写入 robots.txt 文件，实际上就是告诉搜索引擎蜘蛛，网站上哪些内容允许抓取，哪些内容不允许抓取，这样做可以提高搜索引擎的抓取效率，增加搜索引擎对网站的友好度
 
 ## robots.txt 文件的规范写法
 

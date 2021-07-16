@@ -1,16 +1,16 @@
 ---
-title: 关于 webpack 你要知道这些
+title: 关于 Webpack 你要知道这些
 date: 2020-09-09 20:14:12
 category:
   - 编程笔记
-tags: ['webpack', 'vue', 'react']
+tags: ['Webpack', 'Vue', 'React']
 slug: about-webpack-do-you-want-to-know-that
 thumbnail: '../../thumbnails/webpack.png'
 ---
 
 ## 常用的 loader
 
-先来了解一下 `loader`，`webpack` 是属于模块化方案，他能让任意类型的文件都能运行在浏览器中，所以就将 `loader` 用于对模块的源代码进行转换。`loader` 可以使你在 `import` 或`"加载"`模块时预处理文件
+先来了解一下 loader，Webpack 是属于模块化方案，他能让任意类型的文件都能运行在浏览器中，所以就将 loader 用于对模块的源代码进行转换。loader 可以使你在 `import` 或`"加载"`模块时预处理文件
 
 - `raw-loader` 加载文件原始内容（utf-8）
 
@@ -90,19 +90,19 @@ thumbnail: '../../thumbnails/webpack.png'
 
 &nbsp;&nbsp;&nbsp;&nbsp;[更多 Plugin 请参考官网](https://webpack.docschina.org/plugins)
 
-## loader 和 plugin 区别
+## Loader 和 Plugin 区别
 
-1. `loader` 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。因为 `webpack` 只认识 `js`，所以 `loader` 就成了翻译官，对其他类型的资源进行转译的预处理工作
+1. loader 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。因为 Webpack 只认识 JavaScript，所以 loader 就成了翻译官，对其他类型的资源进行转译的预处理工作
 
-2. `plugin` 就是插件，基于事件流框架 `Tapable`，插件可以扩展 `webpack` 的功能，在 `webpack` 运行的生命周期中会广播出许多事件，`plugin` 可以监听这些事件，在合适的时机通过 `webpack` 提供的 `api` 改变输出结果。
+2. `plugin` 就是插件，基于事件流框架 `Tapable`，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，`plugin` 可以监听这些事件，在合适的时机通过 Webpack 提供的 `api` 改变输出结果。
 
 3. `loader` 在 `module.rules` 中配置，作为模块的解析规则，类型为数组。每一项都是一个 `Object`，内部包含了 `test(类型文件)`、`loader`、`options` (参数)等属性
 
 4. `plugin` 在 `plugins` 中单独配置，类型为数组，每一项是一个 `plugin` 的实例，参数都通过构造函数传入
 
-## webpack 构建流程
+## Webpack 构建流程
 
-`webpack` 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
+Webpack 的运行流程是一个串行的过程，从启动到结束会依次执行以下流程：
 
 1. 初始化参数：从配置文件和 `shell` 语句中读取与合并参数，得出最终的参数
 
@@ -118,7 +118,7 @@ thumbnail: '../../thumbnails/webpack.png'
 
 7. 输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
 
-在以上过程中，`webpack` 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 `webpack` 提供的 `api` 改变 `webpack` 的运行结果
+在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 `api` 改变 Webpack 的运行结果
 
 简单说：
 
@@ -134,15 +134,15 @@ thumbnail: '../../thumbnails/webpack.png'
 
 - `webpack-merge` 提取公共配置，减少重复配置代码
 
-- `speed-measure-webpack-plugin` 简称 `SMP`，分析出 `webpack` 打包过程中 `loader` 和 `plugin` 的耗时，有助于找到构建过程中的性能瓶颈。
+- `speed-measure-webpack-plugin` 简称 `SMP`，分析出 Webpack 打包过程中 `loader` 和 `plugin` 的耗时，有助于找到构建过程中的性能瓶颈。
 
 - `size-plugin` 监控资源体积变化，尽早发现问题
 
 - `HotModuleReplacementPlugin` 模块热替换
 
-## source map
+## Source Map
 
-`source map` 是将编译、打包、压缩后的代码映射回源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要 `soucre map`
+Source Map 是将编译、打包、压缩后的代码映射回源代码的过程。打包压缩后的代码不具备良好的可读性，想要调试源码就需要 Source Map
 
 `.map` 文件只要不打开开发者工具，浏览器是不会加载的
 
@@ -158,13 +158,13 @@ thumbnail: '../../thumbnails/webpack.png'
 
 ## 模块打包原理知道吗
 
-`webpack` 实际上为每个模块创造了一个可以导出和导入的环境，本质上并没有修改 代码的执行逻辑，代码执行顺序与模块加载顺序也完全一致
+Webpack 实际上为每个模块创造了一个可以导出和导入的环境，本质上并没有修改 代码的执行逻辑，代码执行顺序与模块加载顺序也完全一致。
 
 ## 文件监听原理
 
 作用：在发现源码发生变化时，自动重新构建出新的输出文件
 
-`webpack` 开启监听模式，有两种方式：
+Webpack 开启监听模式，有两种方式：
 
 - 启动 `webpack` 命令时，带上 `--watch` 参数
 - 在配置 `webpack.config.js` 中设置 `watch:true`
@@ -189,15 +189,15 @@ module.export = {
 }
 ```
 
-## webpack 的热更新原理
+## Webpack 的热更新原理
 
-`webpack` 的热更新又称热替换（`Hot Module Replacement`），缩写为 `HMR`。这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块
+Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `HMR`。这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块
 
 `HMR` 的核心就是客户端从服务端拉去更新后的文件，准确的说是 `chunk diff` (`chunk 需要更新的部分)`，实际上 `WDS` 与浏览器之间维护了一个 `Websocket`，当本地资源发生变化时，`WDS` 会向浏览器推送更新，并带上构建时的 `hash`，让客户端与上一次资源进行对比。客户端对比出差异后会向 `WDS` 发起 `Ajax` 请求来获取更改内容(文件列表、hash)，这样客户端就可以再借助这些信息继续向 `WDS` 发起 `jsonp` 请求获取该 `chunk` 的增量更新
 
 后续的部分(拿到增量更新之后如何处理？哪些状态该保留？哪些又需要更新？)由 `HotModulePlugin` 来完成，提供了相关 `api` 以供开发者针对自身场景进行处理，像 `react-hot-loader` 和 `vue-loader` 都是借助这些 `api` 实现 `HMR`
 
-[参考 webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
+[参考 Webpack HMR 原理解析](https://zhuanlan.zhihu.com/p/30669007)
 
 ## bundle 体积进行监控和分析
 
@@ -211,11 +211,11 @@ module.export = {
 
 `hash` 和整个项目的构建相关，只要项目文件有修改，整个项目构建的 `hash` 值就会更改
 
-`chunkhash` 和 `webpack` 打包的 `chunk` 有关，不同的 `entry` 会生出不同的 `chunkhash`
+`chunkhash` 和 Webpack 打包的 `chunk` 有关，不同的 `entry` 会生出不同的 `chunkhash`
 
 `contenthash` 根据文件内容来定义 `hash`，文件内容不变，则 `contenthash` 不变
 
-- `js` 的文件指纹设置
+- JavaScript 的文件指纹设置
 
   设置 `output` 的 `filename`，用 `chunkhash`
 
@@ -232,7 +232,7 @@ module.export = {
   }
   ```
 
-- `css` 的文件指纹设置
+- CSS 的文件指纹设置
 
   设置 `MiniCssExtractPlugin` 的 `filename`，使用 `contenthash`
 
@@ -294,9 +294,9 @@ module.export = {
   }
   ```
 
-- 如何优化 `webpack` 的构建速度
+- 如何优化 Webpack 的构建速度
 
-  - 使用高版本的 `webpack` 和 `nodejs`
+  - 使用高版本的 Webpack 和 Node.js
 
   - 多进程/多实例构建：`happyPack`(不维护了)、`thread-loader`
 
@@ -384,22 +384,22 @@ module.export = {
 
 ## 编写 plugin 的思路
 
-`webpack` 在运行的生命周期中会广播出许多事件，`plugin` 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。`webpack` 的 `tapable` 事件流机制保证了插件的有序性，使得整个系统扩展性良好
+Webpack 在运行的生命周期中会广播出许多事件，`plugin` 可以监听这些事件，在特定的阶段钩入想要添加的自定义功能。Webpack 的 `tapable` 事件流机制保证了插件的有序性，使得整个系统扩展性良好
 
 `plugin` 的 `api` 可以去[官网](https://www.webpackjs.com/api/plugins)查阅
 
-- `compiler` 暴露了和 `webpack` 整个生命周期相关的钩子
+- `compiler` 暴露了和 Webpack 整个生命周期相关的钩子
 - `compilation` 暴露了与模块和依赖有关的粒度更小的事件钩子
 - 插件需要在其原型上绑定 `apply` 方法，才能访问 `compiler` 实例
 - 传给每个插件的 `compiler` 和 `compilation` 对象都是同一个引用，若在一个插件中修改了它们身上的属性，会影响后面的插件
 - 找出合适的事件点去完成想要的功能
-  - `emit` 事件发生时，可以读取到最终输出的资源、代码块、模块及其依赖，并进行修改(`emit` 事件是修改 `webpack` 输出资源的最后时机)
+  - `emit` 事件发生时，可以读取到最终输出的资源、代码块、模块及其依赖，并进行修改(`emit` 事件是修改 Webpack 输出资源的最后时机)
   - `watch-run` 当依赖的文件发生变化时会触发
-- 异步的事件需要在插件处理完任务时调用回调函数通知 `webpack` 进入下一个流程，不然会卡住
+- 异步的事件需要在插件处理完任务时调用回调函数通知 Webpack 进入下一个流程，不然会卡住
 
-## babel 原理
+## Babel 原理
 
-大多数 `js parser` 遵循 `estree` 规范，`Babel` 最初基于 `acorn` 项目(轻量级现代 `js` 解析器) `babel` 大概分为三大部分：
+大多数 JavaScript parser 遵循 [estree](https://github.com/estree/estree) 规范，Babel 最初基于 [acorn 项目](https://github.com/acornjs/acorn)(轻量级现代 `JavaScript` 解析器) Babel 大概分为三大部分：
 
 - 解析：将代码转换成 `ast`
   - 词法分析：将代码(字符串)分割为 `token` 流，即语法单元成的数组

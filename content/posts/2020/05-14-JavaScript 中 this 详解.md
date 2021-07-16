@@ -1,7 +1,7 @@
 ---
-title: js 中 this 详解
+title: JavaScript 中 this 详解
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 slug: revisit-this-in-javascript
@@ -29,7 +29,7 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
 2. 在严格模式下也就是开启了"use strict"的情况下，尽头就是 undefined。
 
-3. nodejs 的全局环境中尽头是 global。
+3. Node.js 的全局环境中尽头是 global。
 
 非严格模式中对 this 的指向进行说明
 

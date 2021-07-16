@@ -160,7 +160,8 @@
     .post-each__item {
       margin: 0 0 0 0.8rem;
       position: relative;
-      color: #333;
+      // color: #333;
+      color: rgba(0, 0, 0, 0.6);
       font-weight: 700;
       // font-size: 18px;
       .post-each__meta {
@@ -191,7 +192,8 @@
       }
       h3 {
         margin: 0;
-        color: #343a40;
+        // color: #343a40;
+        color: rgba(0, 0, 0, 0.7);
         margin-bottom: 0.5rem;
         font-size: 1.4rem;
         font-weight: 700;
@@ -407,7 +409,10 @@
       // margin: 0;
       padding: 0;
       list-style: none;
-      font-size: 14px;
+      font-size: 13px;
+      a {
+        font-weight: 400;
+      }
     }
   }
 

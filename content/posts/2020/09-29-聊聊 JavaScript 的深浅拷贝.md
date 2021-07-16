@@ -1,9 +1,9 @@
 ---
-title: 聊聊 js 的深浅拷贝
+title: 聊聊 JavaScript 的深浅拷贝
 date: 2020-09-29 21:12:40
 category:
   - 编程笔记
-tags: ['js']
+tags: ['JavaScript']
 slug: talk-about-the-depth-of-the-js-copy
 thumbnail: '../../thumbnails/js.png'
 ---

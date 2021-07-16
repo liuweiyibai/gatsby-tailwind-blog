@@ -1,16 +1,18 @@
 ---
-title: mac 安装中 mongodb
+title: Mac 安装 MongoDB
 date: 2020-03-01 22:10:00
-tags: ['mac', 'mongodb']
+tags: ['Mac', 'MongoDB']
 category:
   - 编程笔记
 slug: macos-install-mongodb
 thumbnail: '../../thumbnails/mongodb.png'
 ---
 
-如何在 `macos` 中安装 `mongodb`
+如何在 Mac 中安装 MongoDB
 
-1. 下载 `mongodb` 所需要的二进制文件
+## 编译安装
+
+1. 下载 MongoDB 所需要的二进制文件
 
    可以通过 [官网下载](https://www.mongodb.com/download-center/enterprise)
 
@@ -49,7 +51,7 @@ thumbnail: '../../thumbnails/mongodb.png'
    source ~/.bash_profile
    ```
 
-5. 运行 `mongodb`
+5. 运行 MongoDB
 
    验证是否 `path` 是否配置成功：
 
@@ -87,7 +89,9 @@ thumbnail: '../../thumbnails/mongodb.png'
    sudo kill -9 7748
    ```
 
-## 使用 homebrew 安装
+## 使用 Homebrew 安装
+
+Homebrew 是一款 Mac 平台下的软件包管理工具，拥有安装、卸载、更新、查看、搜索等很多实用的功能。
 
 1. 先执行 `brew tap mongodb/brew`
 
