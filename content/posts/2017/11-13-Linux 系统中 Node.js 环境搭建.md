@@ -1,14 +1,16 @@
 ---
-title: linux 系统中 nodejs 环境搭建
+title: Linux 系统中 Node.js 环境搭建
 date: 2017-11-13 22:00:00
-tags: ['nodejs', 'linux']
+tags: ['Node.js', 'Linux']
 category:
   - 编程笔记
 slug: nodejs-environment-setup-in-linux-environment
 thumbnail: '../../thumbnails/nodejs.png'
 ---
 
-## **nvm 安装**
+## nvm
+
+在 Linux 中也可以使用 nvm 脚本来管理 Node.js 的版本。
 
 - 下载并且执行安装脚本
 
@@ -35,23 +37,23 @@ thumbnail: '../../thumbnails/nodejs.png'
 
   [参考链接](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-## **npm 安装**
+## npm
 
-- 使用 `nvm` 安装 `nodejs`
+使用 `nvm` 安装 `Node.js`后在 PATH 中注册一个 npm 的命令。
 
-  ```bash
-  nvm -h # 检查nvm命令是否已经安装成功
-  nvm ls # 查看 已安装的 Nodejs 版本
-  nvm install 10.1 # 安装 nodejs
-  ```
+```bash
+nvm -h # 检查nvm命令是否已经安装成功
+nvm ls # 查看 已安装的 Nodejs 版本
+nvm install 10.1 # 安装 Node.js
+```
 
-## **nrm 安装**
+## nrm
 
-- `nrm` 是一个 `npm` 工具，使用 `nrm` 来管理 `npm` 所有下载镜像
+`nrm` 是一个 `npm` 工具，使用 `nrm` 来管理 `npm` 所有下载镜像
 
-  ```bash
-  # 使用淘宝镜像全局安装 nrm
-  npm i nrm -g --registry=http://registry.npm.taobao.org
-  nrm ls # nrm 查看所有的镜像地址
-  nrm use taobao # 切换到淘宝镜像
-  ```
+```bash
+# 使用淘宝镜像全局安装 nrm
+npm i nrm -g --registry=http://registry.npm.taobao.org
+nrm ls # nrm 查看所有的镜像地址
+nrm use taobao # 切换到淘宝镜像
+```

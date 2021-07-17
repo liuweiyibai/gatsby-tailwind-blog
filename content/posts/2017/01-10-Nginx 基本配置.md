@@ -1,8 +1,8 @@
 ---
-title: nginx 基本配置
+title: Nginx 基本配置
 date: 2017-01-04 17:00:00
 tags:
-  - nginx
+  - Nginx
 category:
   - 编程笔记
 slug: nginx-basic-configuration
@@ -148,8 +148,8 @@ location ~ ^/get*text/article/(.\*)*(\d+).html$ {
 
 ## 配置只能使用域名方式访问
 
-`nginx` 禁止以 `IP` 形式访问服务的方法，只能以配置域名的方式访问
-`nginx` 中添加一个 `default_server` 即可。其他 `server` 块的 `server_name` 指定为相应的域名，不要指定为 `IP`
+Nginx 禁止以 `IP` 形式访问服务的方法，只能以配置域名的方式访问
+Nginx 中添加一个 `default_server` 即可。其他 `server` 块的 `server_name` 指定为相应的域名，不要指定为 `IP`
 
 ```conf
 server {
@@ -183,7 +183,7 @@ server{
 
 ## 反向代理配置
 
-因为业务系统需求，需要对 `web` 服务作 `nginx` 代理，在不断的尝试过程中，简单总结了一下常见的 `nginx` 代理配置，这里要注意 `location` 结束后加不加 `/` 的问题
+因为业务系统需求，需要对 Web 服务作 Nginx 代理，在不断的尝试过程中，简单总结了一下常见的 Nginx 代理配置，这里要注意 `location` 结束后加不加 `/` 的问题
 
 - `https`
 

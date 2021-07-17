@@ -1,7 +1,7 @@
 ---
-title: jsdoc 注释规范
+title: JSDoc 注释规范
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 date: 2017-01-30 14:18:16
@@ -198,7 +198,7 @@ var LBSControllerCom = Com.extends({})
 
 ## 类的属性
 
-类的属性和变量都会生成到 jsdoc 文档的 Member 模块中，在类中使用属性标识
+类的属性和变量都会生成到 JSDoc 文档的 Member 模块中，在类中使用属性标识
 
 ```js
 var LBSControllerCom = Com.extends({

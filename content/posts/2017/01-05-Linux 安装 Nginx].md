@@ -1,38 +1,38 @@
 ---
-title: linux 安装 nginx
+title: Linux 安装 Nginx
 date: 2017-01-05 12:00:00
 tags:
-  - nginx
-  - linux
+  - Linux
+  - Nginx
 category:
   - 编程笔记
 slug: linux-install-nginx
 thumbnail: '../../thumbnails/nginx.png'
 ---
 
-`nginx` 是一款轻量级的网页服务器、反向代理服务器。相较于 `Apache` 、 `lighttpd` 具有占有内存少，稳定性高等优势。它最常的用途是提供反向代理服务
+Nginx 是一款轻量级的网页服务器、反向代理服务器。相较于 `Apache` 、 `lighttpd` 具有占有内存少，稳定性高等优势。它最常的用途是提供反向代理服务
 
 ## 使用 yum 安装
 
-当使用以下命令安装 `nginx` 时，发现无法安装成功，需要做一点处理
+当使用以下命令安装 Nginx 时，发现无法安装成功，需要做一点处理
 
 ```bash
 yum install -y nginx
 ```
 
-1. 添加 `nginx` 镜像地址到 `yum` 源
+1. 添加 Nginx 镜像地址到 `yum` 源
 
    ```bash
    sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
    ```
 
-2. 安装 `nginx`
+2. 安装 Nginx
 
    ```bash
    sudo yum install -y nginx
    ```
 
-3. 启动 `nginx`
+3. 启动 Nginx
 
    ```bash
    sudo systemctl start nginx.service
@@ -67,7 +67,7 @@ whereis nginx
 
 ## 编译安装
 
-> 安装需知：首先安装必要的库（ `nginx` 中 `gzip` 模块需要 `zlib` 库， `rewrite` 模块需要 `pcre` `库，ssl` 功能需要 `openssl` 库）。选定`/usr/local`为安装目录
+> 安装需知：首先安装必要的库（ Nginx 中 `gzip` 模块需要 `zlib` 库， `rewrite` 模块需要 `pcre` `库，ssl` 功能需要 `openssl` 库）。选定`/usr/local`为安装目录
 
 - 安装环境
 
@@ -121,7 +121,7 @@ whereis nginx
   make && make install
   ```
 
-- 安装 `nginx`
+- 安装 Nginx
 
   ```bash
   cd /usr/local/
@@ -132,7 +132,7 @@ whereis nginx
   $ make && make install
   ```
 
-- 启动 `nginx`
+- 启动 Nginx
 
   ```bash
   # 启动
@@ -157,7 +157,7 @@ whereis nginx
 
 ### nginx 编译后新增模块
 
-- 停止 `nginx`
+- 停止 Nginx
 
   ```bash
   # 查询nginx主进程号
@@ -173,7 +173,7 @@ whereis nginx
   pkill -9 nginx
   ```
 
-- 查看 `nginx` 原有模块
+- 查看 Nginx 原有模块
 
   ```bash
   nginx -V
@@ -190,7 +190,7 @@ whereis nginx
   # 切记不要make install ，make install 是覆盖安装
   ```
 
-- 替换已经安装好的 `nginx` 包
+- 替换已经安装好的 Nginx 包
 
   ```bash
   # 先备份

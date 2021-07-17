@@ -1,8 +1,8 @@
 ---
-title: windows 系统中 nodejs 环境搭建
+title: Windows 系统中 Node.js 环境搭建
 slug: nodejs-development-environment-for-windows
 date: 2017-10-13 22:00:00
-tags: ['nodejs']
+tags: ['Node.js']
 category:
   - 编程笔记
 thumbnail: '../../thumbnails/nodejs.png'
@@ -10,21 +10,21 @@ thumbnail: '../../thumbnails/nodejs.png'
 
 ## nvm 安装
 
-- 安装 nvm 。nvm 是 nodejs 的版本管理工具，们可以使用它来同时安装不同版本的 nodejs，在需要的时候直接使用 nvm 切换版本即可。
+nvm 是 Node.js 的版本管理工具，们可以使用它来同时安装不同版本的 Node.js，在需要的时候直接使用 nvm 切换版本即可。
 
-  1. 下载 nvm 包，地址：[nvm 下载地址](https://github.com/coreybutler/nvm-windows/releases)
-  2. 第一个：nvm-noinstall.zip 下载完成后解压到一个地方，比如: C:\develop\nvm。
-  3. 解压后文件列表是这样的：`elevate.cmd、elevate.vbs、install.cmd、LICENSE、nvm.exe`
-  4. 在刚刚解压的目录 C:\develop\nvm 目录下新建 settings.txt 文本如下：
+1. 下载 nvm 包，地址：[nvm 下载地址](https://github.com/coreybutler/nvm-windows/releases)
+2. 第一个：nvm-noinstall.zip 下载完成后解压到一个地方，比如: C:\develop\nvm。
+3. 解压后文件列表是这样的：`elevate.cmd、elevate.vbs、install.cmd、LICENSE、nvm.exe`
+4. 在刚刚解压的目录 C:\develop\nvm 目录下新建 settings.txt 文本如下：
 
-  ```yaml
-  root: C:\develop\nvm
-  path: C:\develop\nodejs
-  arch: 64
-  proxy: none
-  node_mirror: http://npm.taobao.org/mirrors/node/
-  npm_mirror: https://npm.taobao.org/mirrors/npm/
-  ```
+```yaml
+root: C:\develop\nvm
+path: C:\develop\nodejs
+arch: 64
+proxy: none
+node_mirror: http://npm.taobao.org/mirrors/node/
+npm_mirror: https://npm.taobao.org/mirrors/npm/
+```
 
 - 配置 nvm 环境全局变量,在系统环境变量中 path 中
   ①. 变量名:`NVM_HOME`变量值: `C:\develop\nvm`
@@ -34,7 +34,7 @@ thumbnail: '../../thumbnails/nodejs.png'
 - 在命令行直接输入 nvm -v，会展示出 nvm 的运行版本，说明 nvm 安装成功![nvm](/images/nvm-v.png)
 - 通过命令 nvm install latest 安装最新版本 node
 - 查看 node 版本列表，nvm list![nvm list](/images/nvm-list.png)
-- 通过命令 nvm use node 版本号 来使用这个版本的 node(必须使用 node use 命令选中一个 node 版本投入使用，不然无法在创建 nodejs 快捷方式，导致后面安装出现问题)
+- 通过命令 nvm use node 版本号 来使用这个版本的 node(必须使用 node use 命令选中一个 Node.js 版本投入使用，不然无法在创建 Node.js 快捷方式，导致后面安装出现问题)
 - 完成上面操作，接下来安装 npm
 
 ## npm 安装
@@ -62,7 +62,7 @@ thumbnail: '../../thumbnails/nodejs.png'
 
 ## cnpm
 
-cnpm 是一个国内的镜像源
+cnpm 一个默认使用国内的镜像源的类 npm 工具，可以帮我们管理项目依赖。
 
 ```bash
 npm i cnpm -g

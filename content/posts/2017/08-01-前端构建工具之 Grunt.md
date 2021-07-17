@@ -1,8 +1,8 @@
 ---
-title: 前端构建工具之 grunt
+title: 前端构建工具之 Grunt
 tags:
   - 前端工程化
-  - grunt
+  - Grunt
 category:
   - 编程笔记
 slug: front-end-build-tool-grunt
@@ -10,7 +10,7 @@ date: 2017-08-01 14:18:16
 thumbnail: '../../thumbnails/grunt.png'
 ---
 
-**`grunt` 是基于 `nodejs` 开发的工具，所以必须要安装 `nodejs`**
+Grunt 是基于 Node.js 开发的工具，所以必须要提前配置 Node.js 环境
 
 - 安装 grunt-cli 命令行工具
 
@@ -18,10 +18,10 @@ thumbnail: '../../thumbnails/grunt.png'
   npm install -g grunt-cli
   ```
 
-- 全局安装 grunt 后，在项目中安装 grunt
+- 全局安装 Grunt 后，在项目中安装 Grunt
 
   ```bash
-  # 安装grunt在我们的项目路径下
+  # 安装 Grunt 在我们的项目路径下
   npm install grunt --save-dev
   ```
 
@@ -87,7 +87,7 @@ thumbnail: '../../thumbnails/grunt.png'
   },
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.registerTask('default', ['jshint','uglify','watch']);
-  /*运行grunt命令，watch插件会监视文件变化，包括语法错误，它很顺利的执行了jshint和uglify，执行完毕之后重新进进行监听*/
+  /*运行 grunt 命令，watch插件会监视文件变化，包括语法错误，它很顺利的执行了jshint和uglify，执行完毕之后重新进进行监听*/
   ```
 
 - 关于配置项中的 build

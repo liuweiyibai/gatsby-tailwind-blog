@@ -1,7 +1,7 @@
 ---
-title: js 中常见的异步编程模型
+title: JavaScript 异步编程模型
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 date: 2017-01-28 14:18:16
@@ -11,7 +11,7 @@ thumbnail: '../../thumbnails/js.png'
 
 ## 简介
 
-异步编程一直是 js 中最重要的一部分，也是最为人诟病的一部分。多层回调就出现了回调地狱的问题，逻辑跳跃不易控制。为了使异步编程在编写上更加科学。各种方案层出不穷，从最原始的回调函数，到 Promise，再到 Generator 函数和 async/await。
+异步编程一直是 JavaScript 中最重要的一部分，也是最为人诟病的一部分。多层回调就出现了回调地狱的问题，逻辑跳跃不易控制。为了使异步编程在编写上更加科学。各种方案层出不穷，从最原始的回调函数，到 Promise，再到 Generator 函数和 async/await。
 
 ## 回调函数
 
@@ -266,7 +266,7 @@ console.log(runGen.next()) // 输出: {value: 'ending', done: true}；
 
 ## **async + await**
 
-async 是 js 异步的终极解决方案，可以通过写同步代码的方式来写异步代码。
+async 是 JavaScript 异步的终极解决方案，可以通过写同步代码的方式来写异步代码。
 
 ```js
 var a = () =>
