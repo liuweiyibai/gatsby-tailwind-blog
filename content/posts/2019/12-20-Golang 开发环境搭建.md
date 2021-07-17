@@ -1,14 +1,14 @@
 ---
-title: golang 开发环境搭建🌈🌈
+title: Golang 开发环境搭建🌈🌈
 date: 2019-12-20 17:56:00
-tags: ['golang']
+tags: ['Golang']
 category:
   - 编程笔记
 slug: golang-development-environment-to-build
 thumbnail: '../../thumbnails/golang.png'
 ---
 
-`golang` 开发环境搭建：包括切换 `golang` 版本，修改 `golang` 镜像地址，以及其他开发工具添加
+Golang 开发环境搭建：包括切换 Golang 版本，修改 Golang 镜像地址，以及其他开发工具添加
 
 ## 🚀 安装 go 版本管理器 g
 
@@ -40,6 +40,16 @@ source ~/.bashrc # 或者 source ~/.zshrc
   go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
   ```
 
-## ⚡ 配置文件热更新工具
+## 开发常用库
 
-[file 热重载工具](/blog/fileboy-hot-reload-tool)
+- 使用 `godotenv` 库从 `.env` 文件中读取配置
+
+  ```bash
+    go get github.com/joho/godotenv
+  ```
+
+- `fileboy` 热重载工具
+
+  [github 地址](https://github.com/dengsgo/fileboy)
+
+  [gitee 地址](https://gitee.com/dengsgo/fileboy)

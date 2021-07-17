@@ -1,7 +1,7 @@
 ---
-title: create-react-app 实现自定义配置
+title: Create React App 实现自定义配置
 date: 2019-04-11 22:10:00
-tags: ['react', 'create-react-app']
+tags: ['React', 'Create React App']
 category:
   - 编程笔记
 slug: custom-config-of-create-react-app
@@ -10,7 +10,7 @@ thumbnail: '../../thumbnails/react.png'
 
 ## 方法一
 
-将 `create-react-app` 配置导出，实现修改
+将 Create React App 配置导出，实现修改
 
 ```bash
 npm run eject
@@ -18,7 +18,7 @@ npm run eject
 
 ## 方法二
 
-通过其他工具，实现 `create-react-app` 覆盖配置自定义
+通过其他工具，实现 Create React App 覆盖配置自定义
 
 - 步骤 1：
 

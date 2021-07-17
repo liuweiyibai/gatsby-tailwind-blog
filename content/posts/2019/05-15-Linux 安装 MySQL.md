@@ -1,8 +1,8 @@
 ---
-title: linux 安装 mysql
+title: Linux 安装 MySQL
 tags:
-  - linux
-  - mysql
+  - Linux
+  - MySQL
 category:
   - 编程笔记
 slug: centos-install-mysql

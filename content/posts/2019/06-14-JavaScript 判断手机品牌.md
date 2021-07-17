@@ -1,7 +1,7 @@
 ---
-title: js 判断手机品牌
+title: JavaScript 判断手机品牌
 date: 2019-06-14 16:20:00
-tags: ['js', 'html5']
+tags: ['JavaScript', 'HTML5']
 category:
   - 编程笔记
 slug: js-judge-mobile-phone-brands

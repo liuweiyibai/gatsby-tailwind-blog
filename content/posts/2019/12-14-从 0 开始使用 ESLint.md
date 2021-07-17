@@ -1,7 +1,7 @@
 ---
-title: 从 0 开始使用 eslint
+title: 从 0 开始使用 ESLint
 date: 2019-12-14 12:09:48
-tags: ['eslint', '前端工具']
+tags: ['ESLint', '前端工具']
 slug: use-eslint-from-zero
 category:
   - 编程笔记
@@ -12,15 +12,15 @@ thumbnail: '../../thumbnails/eslint.png'
 
 比如，随着项目规模增大时，很小的错误都可能导致页面异常，不仅影响用户使用，还要耗费大量时间来调试。而原因可能是有个小伙伴手抖多打了一个字符，中途去做其他事情了，导致代码写了一半……我们不能指望肉眼解决所有问题。
 
-如果能有一个趁手的代码检查工具，帮助我们去做代码检查，该有多好？这便是本文的目的，`从0到1`带领大家将 `eslint` 应用到我们的开发环境当中。让我们开始吧！
+如果能有一个趁手的代码检查工具，帮助我们去做代码检查，该有多好？这便是本文的目的，`从0到1`带领大家将 ESLint 应用到我们的开发环境当中。让我们开始吧！
 
-## eslint 基本配置
+## 基本配置
 
 ```bash
 yarn add eslint --dev
 ```
 
-有了 eslint 之后，我们就能通过它来检查指定的代码文件了。我们在 npm scripts 加入如下脚本
+有了 ESLint 之后，我们就能通过它来检查指定的代码文件了。我们在 npm scripts 加入如下脚本
 
 ```json
 {
@@ -34,7 +34,7 @@ yarn add eslint --dev
 }
 ```
 
-在命令行中运行 `yarn run test-eslint` 会提示缺少 eslint 的配置
+在命令行中运行 `yarn run test-eslint` 会提示缺少 ESLint 的配置
 
 ```bash
 yarn run v0.23.2
@@ -110,7 +110,7 @@ yarn run test-eslint
   21:7  error  Parsing error: Unexpected token <
 ```
 
-eslint 还不能识别 JSX 语法，我们添加如下配置
+ESLint 还不能识别 JSX 语法，我们添加如下配置
 
 ```json
 {
@@ -125,11 +125,11 @@ eslint 还不能识别 JSX 语法，我们添加如下配置
 }
 ```
 
-> eslint 配置文件中是支持行后注释的
+> ESLint 配置文件中是支持行后注释的
 
 如此，`test-eslint`之后，检查就通过了。
 
-怎么会这么顺利呢？怎么可能一行警告或报错都没有呢？这是因为 eslint 配置文件默认是不提供任何代码的检查规则的，这都需要我们在配置文件中进行。于是我们添加下面两行规则：
+怎么会这么顺利呢？怎么可能一行警告或报错都没有呢？这是因为 ESLint 配置文件默认是不提供任何代码的检查规则的，这都需要我们在配置文件中进行。于是我们添加下面两行规则：
 
 ```json
 {
@@ -169,9 +169,9 @@ eslint 还不能识别 JSX 语法，我们添加如下配置
 我们设置的规则 `"semi": "warn"` 生效了，规则`semi`的意思是行末必须使用分号，它的值可以是"off"(或 0), "warn"(或
 1), "error"(或 2)，具体含义也很明确。
 
-页面[规则](http://eslint.cn/docs/rules/)下列出了 eslint 内部支持的所有的规则，包含可能的错误、最佳实践、变量使用等等分类的规则，我们只要根据需要在配置文件中添加我们需要校验的规则即可。
+页面[规则](http://eslint.cn/docs/rules/)下列出了 ESLint 内部支持的所有的规则，包含可能的错误、最佳实践、变量使用等等分类的规则，我们只要根据需要在配置文件中添加我们需要校验的规则即可。
 
-当然我们不想手动的加入这么多规则，我们使用 `extends` 关键字加入 eslint 推荐的规则。同时我们关闭（覆盖）掉 `semi` 规则的检查。
+当然我们不想手动的加入这么多规则，我们使用 `extends` 关键字加入 ESLint 推荐的规则。同时我们关闭（覆盖）掉 `semi` 规则的检查。
 
 ```json
 {
@@ -259,7 +259,7 @@ eslint 还不能识别 JSX 语法，我们添加如下配置
 
 我们要做的就是，去修改这些错误就可以了。
 
-### eslint 规则的扩展
+### ESLint 规则的扩展
 
 到现在为止我们都很顺利，但是有没有针对 react、vue 甚至 angular 相关的一些检查规则呢，我们可以把测试框架比如 jest 集成到这个流程当中来呢？大家可以查看[awesome-eslint](https://github.com/dustinspecker/awesome-eslint)来查看社区为我们提供的工具、插件、配置甚至学习文档。
 
@@ -299,7 +299,7 @@ yarn add --dev eslint-plugin-react
 
 不过我们建议都安装在 node_modules 下面,并且记录到 package.json 中，方便其他小伙伴使用。
 
-### 将 eslint 整合到 git 流程
+### 将 ESLint 整合到 Git 流程
 
 So far so good ! 唯一让我们感觉不够完美的就是每次我们想做 eslitn 检查的时候，我们都要手动的执行一下`yarn run test-eslint`。能不能在我提交代码的时候给我自动检查（强制检查 😋）。
 
@@ -342,14 +342,14 @@ git commit -m 'eslint before commit' -n
 
 ### 总结
 
-在前面我们从 0 到 1 介绍了 eslint 在开发环境中的使用，我们再来回顾一下。
+在前面我们从 0 到 1 介绍了 ESLint 在开发环境中的使用，我们再来回顾一下。
 
-- 安装 eslint 及相关插件或配置
-- eslint 基本配置：语言选项、运行环境、全局变量、规则选项等
-- eslint plugin 及 config 配置：eslint 的扩展特性
-- 将 eslint 检查集成到 git hooks 当中
+- 安装 ESLint 及相关插件或配置
+- ESLint 基本配置：语言选项、运行环境、全局变量、规则选项等
+- ESLint plugin 及 config 配置：ESLint 的扩展特性
+- 将 ESLint 检查集成到 git hooks 当中
 
-所以，你准备好使用 eslint 来做代码检查了吗？
+所以，你准备好使用 ESLint 来做代码检查了吗？
 
 ### 参考资料
 

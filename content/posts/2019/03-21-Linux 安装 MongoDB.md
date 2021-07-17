@@ -1,7 +1,7 @@
 ---
-title: linux 安装 mongodb
+title: Linux 安装 MongoDB
 date: 2019-03-21 22:10:00
-tags: ['mongodb', 'linux']
+tags: ['MongoDB', 'Linux']
 category:
   - 编程笔记
 slug: install-mongodb-in-linux
@@ -10,7 +10,7 @@ thumbnail: '../../thumbnails/mongodb.png'
 
 ## 安装步骤
 
-1. 添加 mongodb 镜像到 yum 源中
+1. 添加 MongoDB 镜像到 yum 源中
 
    在 `/etc/yum.repos.d/` 目录中创建一个名为 `mongodb-org.repo` 存储库配置文件，内容如下:
 
@@ -23,7 +23,7 @@ thumbnail: '../../thumbnails/mongodb.png'
    gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
    ```
 
-   如果要安装旧版本的 `mongodb` ，可以使用浏览器访问该 `url` 并且加上对应 `版本号`，查看是否存在
+   如果要安装旧版本的 MongoDB ，可以使用浏览器访问该 `url` 并且加上对应 `版本号`，查看是否存在
 
 2. 安装
 
@@ -43,35 +43,35 @@ thumbnail: '../../thumbnails/mongodb.png'
    `mongodb-org-tools` -包含几个用于导入和导出数据，统计信息以及其他实用程序的 `mongodb` 工具。
    `mongodb-org-mongos`
 
-3. 启动 **mongodb**
+3. 启动
 
-   安装完成后，启动 `mongodb`，并且加入到开机启动
+   安装完成后，启动 MongoDB，并且加入到开机启动
 
    ```bash
    sudo systemctl start mongod # 启动
    sudo systemctl enable mongod # 加入到开机启动
    ```
 
-4. 验证 `mongodb` 是否安装成功
+4. 验证 MongoDB 是否安装成功
 
-   为了验证安装，我们将使用该 `mongo` 工具连接到 `mongodb` 数据库服务器并打印服务器版本：
+   为了验证安装，我们将使用该 mongo 工具连接到 MongoDB 数据库服务器并打印服务器版本：
 
    ```bash
    mongo
    ```
 
-   进入 `mongodb shell`，输入以下命令，以显示 `mongodb` 版本：
+   进入 `mongodb shell`，输入以下命令，以显示 MongoDB 版本：
 
    ```js
    db.version()
    // 输出-> 4.0.1
    ```
 
-## 配置 mongodb
+## 配置 MongoDB
 
-`mongodb` 默认配置文件位于 `/etc/mongo.conf`
+MongoDB 默认配置文件位于 `/etc/mongo.conf`
 
-修改完配置文件后需要重启 `mongodb`
+修改完配置文件后需要重启 MongoDB
 
 ```bash
 sudo systemctl restart mongod
@@ -91,9 +91,9 @@ sudo systemctl restart mongod
   bindIpAll: true
   ```
 
-## 创建管理 `mongodb` 用户
+## 创建管理 MongoDB 用户
 
-如果启用了 `mongodb` 身份验证，需要创建一个管理 `mongodb` 用户，使用该用户来访问和管理 `mongodb` 实例
+如果启用了 MongoDB 身份验证，需要创建一个管理 MongoDB 用户，使用该用户来访问和管理 MongoDB 实例
 
 - 首先使用以下命令访问 `mongo shell`：
 
@@ -134,6 +134,5 @@ sudo systemctl restart mongod
   use admin
 
   show users
-
   # 可以查看到所有用户
   ```

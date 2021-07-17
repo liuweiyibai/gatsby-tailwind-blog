@@ -1,8 +1,7 @@
 ---
-title: 如何使用 chrome 调试微信浏览器
+title: 如何使用 Chrome 调试微信浏览器
 tags:
-  - html5
-  - js
+  - HTML5
 category:
   - 编程笔记
 thumbnail: '../../thumbnails/html5.png'

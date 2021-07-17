@@ -1,7 +1,7 @@
 ---
-title: 使用 pm2 管理 nodejs 应用
+title: 使用 PM2 管理 Node.js 应用
 date: 2019-06-13 22:00:00
-tags: ['nodejs', 'pm2']
+tags: ['Node.js', 'PM2']
 category:
   - 编程笔记
 slug: use-pm2-to-manage-nodejs-applications
@@ -37,7 +37,7 @@ pm2 logs <id|name|all>
 pm2 flush 清空所有历史应用日志
 ```
 
-## NodeJs 负载均衡
+## 负载均衡
 
 ```bash
 pm2 start app.js -i <number | max> # 启动指定数量的子进程
@@ -137,9 +137,9 @@ pm2 startup
 pm2 unstartup
 ```
 
-## pm2 两个模式区别
+## PM2 两个模式区别
 
-fork 模式，单实例多进程，常用于多语言混编，比如 php、python 等，不支持端口复用，需要自己做应用的端口分配和负载均衡的子进程业务代码。
+fork 模式，单实例多进程，常用于多语言混编，比如 PHP、Python 等，不支持端口复用，需要自己做应用的端口分配和负载均衡的子进程业务代码。
 缺点就是单服务器实例容易由于异常会导致服务器实例崩溃。
 
 cluster 模式，多实例多进程，但是只支持 node，端口可以复用，不需要额外的端口配置，0 代码实现负载均衡。
@@ -147,7 +147,7 @@ cluster 模式，多实例多进程，但是只支持 node，端口可以复用�
 
 共同点，由于都是多进程，都需要消息机制或数据持久化来实现数据共享。
 
-## pm2 常用命令
+## PM2 常用命令
 
 ```bash
 pm2 start xxx.js              # 启动程序
@@ -170,16 +170,16 @@ pm2 scale api 10              # 把名字叫api的应用扩展到10个实例
 pm2 restart app.js
 ```
 
-## pm2 远程一键部署应用程序
+## PM2 远程一键部署应用程序
 
-## pm2 保存应用程序列表
+## PM2 保存应用程序列表
 
 ```bash
 pm2 save # 保存进程列表到 `/root/.pm2/dump.pm2`
 pm2 resurrect # 重新加载保存的应用列表
 ```
 
-## pm2 自动重启项目
+## PM2 自动重启项目
 
 应用开机自启动
 

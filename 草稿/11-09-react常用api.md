@@ -34,3 +34,5 @@ thumbnail: '../../thumbnails/react.png'
     })
   }
   ```
+
+总结 react 开发常用 api，包括组件定义，函数组件、context 等一些常用 api

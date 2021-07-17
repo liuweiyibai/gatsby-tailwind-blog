@@ -1,9 +1,9 @@
 ---
-title: react 代码开发规范
+title: React 代码开发规范
 date: 2019-11-10 13:00:00
 tags:
-  - react
-  - react-router
+  - React
+  - React Router
 category:
   - 编程笔记
 slug: react-code-development-specification
@@ -13,7 +13,7 @@ thumbnail: '../../thumbnails/react.png'
 ## 基础规则
 
 - 一个文件声明一个组件：
-  尽管可以在一个文件中声明多个 `react` 组件，但是最好不要这样做；推荐一个文件声明一个 `react` 组件，并只导出一个组件
+  尽管可以在一个文件中声明多个 React 组件，但是最好不要这样做；推荐一个文件声明一个 React 组件，并只导出一个组件
 
 - 使用 `jsx` 表达式：
   不要使用 `React.createElement` 的写法
@@ -53,7 +53,7 @@ thumbnail: '../../thumbnails/react.png'
   })
   ```
 
-## **`react`** 中的命名
+## React 中的命名
 
 - 组件名称：
 
@@ -61,7 +61,7 @@ thumbnail: '../../thumbnails/react.png'
 
 - 属性名称：
 
-  `react` 使用小驼峰命令来定义属性的名称，而不使用 `html` 属性名称的命名约定
+  React 使用小驼峰命令来定义属性的名称，而不使用 HTML 属性名称的命名约定
 
 - `style` 样式属性：
 
@@ -185,7 +185,7 @@ backgroundColor
 
 ## 样式写法
 
-`react` 中样式可以使用 `style` 行内样式，也可以使用 `className` 属性来引用外部 `css` 样式表中定义的 `css` 类，我们推荐使用 `className` 来定义样式。并且推荐使用 `scss` 来替换传统的 `css` 写法，具体 `scss` 提高效率的写法可以参照先前总结的文章。
+React 中样式可以使用 `style` 行内样式，也可以使用 `className` 属性来引用外部 CSS 样式表中定义的 CSS 类，我们推荐使用 `className` 来定义样式。并且推荐使用 SCSS 来替换传统的 CSS 写法，具体 SCSS 提高效率的写法可以参照先前总结的文章。
 
 ## `defaultProps` 使用静态属性定义
 
@@ -217,7 +217,7 @@ backgroundColor
 
 ## `key` 属性设置
 
-`key` 帮助 `react` 识别哪些元素改变了，比如被添加或删除。因此你应当给数组中的每一个元素赋予一个确定的标识。当元素没有确定 `id` 的时候，万不得已你可以使用元素索引 `index` 作为 `key` ，但是要主要如果列表项目的顺序可能会变化，如果使用索引来用作 `key` 值，因为这样做会导致性能变差，还可能引起组件状态的问题。
+`key` 帮助 React 识别哪些元素改变了，比如被添加或删除。因此你应当给数组中的每一个元素赋予一个确定的标识。当元素没有确定 `id` 的时候，万不得已你可以使用元素索引 `index` 作为 `key` ，但是要主要如果列表项目的顺序可能会变化，如果使用索引来用作 `key` 值，因为这样做会导致性能变差，还可能引起组件状态的问题。
 
 ```js
 // 推荐：
@@ -233,7 +233,7 @@ backgroundColor
 
 ## 为组件绑定事件处理器
 
-`react` 为组件绑定事件处理器提供 4 种方法，有 `public class fields 语法`、`构造函数中进行绑定`、`在回调中使用箭头函数`、`使用 Function.prototype.bind 进行绑定`，我们推荐使用 `public class fields 语法`，在不满足需求情况下使用箭头函数的写法（传递参数给事件处理器）。
+React 为组件绑定事件处理器提供 4 种方法，有 `public class fields 语法`、`构造函数中进行绑定`、`在回调中使用箭头函数`、`使用 Function.prototype.bind 进行绑定`，我们推荐使用 `public class fields 语法`，在不满足需求情况下使用箭头函数的写法（传递参数给事件处理器）。
 
 ```js
 // 推荐：
@@ -274,7 +274,7 @@ handleClick(){
 
 - `state` 的更新可能是异步的
 
-  出于性能考虑，`react` 可能会把多个 `setState()` 调用合并成一个调用；因为 `this.props` 和 `this.state` 可能会异步更新，所以这种场景下需要让 `setState()` 接收一个函数而不是一个对象
+  出于性能考虑，React 可能会把多个 `setState()` 调用合并成一个调用；因为 `this.props` 和 `this.state` 可能会异步更新，所以这种场景下需要让 `setState()` 接收一个函数而不是一个对象
 
   ```js
   // 推荐：
@@ -339,7 +339,7 @@ class Example extends Component {
 
 ## refs 写法
 
-`refs` 提供了一种方式，允许我们访问 `dom` 节点或在 `render` 方法中创建的 `react` 元素 。我们推荐使用 `createRef` API 的方式 或者 回调函数的方式使用 `refs` ，而不是使用 `this.refs.textInput` 这种过时的方式访问 `refs` ，因为它存在一些问题
+`refs` 提供了一种方式，允许我们访问 DOM 节点或在 `render` 方法中创建的 React 元素 。我们推荐使用 `createRef` API 的方式 或者 回调函数的方式使用 `refs` ，而不是使用 `this.refs.textInput` 这种过时的方式访问 `refs` ，因为它存在一些问题
 
 ## 路由加载
 

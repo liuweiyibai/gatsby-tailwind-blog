@@ -1,8 +1,8 @@
 ---
-title: golang 包管理工具 go mod 🧨
+title: Golang 包管理工具 go mod 🧨
 date: 2019-12-21 17:56:00
 tags:
-  - golang
+  - Golang
 category:
   - 编程笔记
 slug: golang-package-management-tool-go-mod
@@ -83,7 +83,7 @@ go env -w GO111MODULE=on
   如果我想要升级（降级）某个 `package` 则只需要 `go get` 即可，比如：
 
   ```bash
-    go get package@version
+  go get package@version
   ```
 
   除了指定版本，我们还可以使用如下命名使用最近的可行的版本：

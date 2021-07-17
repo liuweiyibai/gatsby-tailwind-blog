@@ -1,7 +1,7 @@
 ---
-title: js 常用工具方法
+title: JavaScript 常用工具方法
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 slug: front-end-common-tool-methods
@@ -1235,7 +1235,7 @@ function doRepeat(func, times, waits) {
   <!-- 使用 a 标签添加 -->
   <a href="#" onClick="javascript:window.external.addFavorite('www.baidu.com'，'百度')"> 添加到收藏夹 </a>
 
-  <!-- 使用 js 添加 -->
+  <!-- 使用 JavaScript 添加 -->
   <script>
     window.external.addFavorite('添加到页面收藏夹的完整页面地址', '当前页面的标题名称')
   </script>

@@ -1,8 +1,8 @@
 ---
-title: html5 的客户端 pdf 解决方案
+title: HTML5 的客户端 PDF 解决方案
 tags:
-  - html5
-  - js
+  - HTML5
+  - JavaScript
 category:
   - 编程笔记
 slug: html5-handle-pdf
