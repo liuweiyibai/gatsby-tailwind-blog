@@ -1,8 +1,8 @@
 ---
-title: sequelize 连接配置
+title: Sequelize 连接配置
 tags:
-  - nodejs
-  - sequelize
+  - Node.js
+  - Sequelize
 category:
   - 编程笔记
 date: 2018-02-20 11:57:47

@@ -1,21 +1,21 @@
 ---
-title: js 模块化历史
+title: JavaScript 模块化历史
 date: 2018-07-22 10:46:00
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 slug: the-history-of-javascript-modularity
 thumbnail: '../../thumbnails/js.png'
 ---
 
-> 总结一下 js 的模块化方案发展过程
+> 总结一下 JavaScript 的模块化方案发展过程
 
 ## **简介**
 
-一开始 `js` 也没有模块化的概念，当然 `js` 文件之间也没有太多的束缚，只是简单的堆砌 `script` 标签，没有全局变量与局部变量的概念，定义的变量都是全局的。因此很容易出现，b 文件改了 a 文件中的变量内容。导致后期开发、维护难的问题，查找、增加变量名都得全局搜索下。避免出现变量被覆盖的问题。
+一开始 `JavaScript` 也没有模块化的概念，当然 `JavaScript` 文件之间也没有太多的束缚，只是简单的堆砌 `script` 标签，没有全局变量与局部变量的概念，定义的变量都是全局的。因此很容易出现，b 文件改了 a 文件中的变量内容。导致后期开发、维护难的问题，查找、增加变量名都得全局搜索下。避免出现变量被覆盖的问题。
 
-所谓为了避代码随着 `js` 语言的发展，前端能做的事情越来越多，项目越来越庞大，处理模块之间的依赖关系成为了维护的关键。单文件维护代码已经太沉重，于是开始进行拆分，进而引入模块化，将负责不同功能的代码拆分成小粒度的模块，方便维护。
+所谓为了避代码随着 `JavaScript` 语言的发展，前端能做的事情越来越多，项目越来越庞大，处理模块之间的依赖关系成为了维护的关键。单文件维护代码已经太沉重，于是开始进行拆分，进而引入模块化，将负责不同功能的代码拆分成小粒度的模块，方便维护。
 
 ## **命名空间**
 
@@ -35,7 +35,7 @@ add(1, 2, 3)
 CommonJS 社区首先提出了模块化的规范 CommonJS（cjs），所以 CommonJS 是一个规范！
 CommonJS 规范提供 `module.exports`(或者 `exports`)接口用于对外暴露模块，使用 `require` 加载模块。
 
-nodejs 就采用了这种规范去实现模块化，所以在 nodejs 上只需要简单的 `require` 和 `exports` 就可以实现模块的导入和导出，如下：
+Node.js 就采用了这种规范去实现模块化，所以在 Node.js 上只需要简单的 `require` 和 `exports` 就可以实现模块的导入和导出，如下：
 
 ```js
 var fs = require('fs')
@@ -83,11 +83,11 @@ require([module], callback)
 
 ## **UMD**
 
-UMD 全称是 Universal Module Definition，目的兼容 CommonJS 和 AMD ，所以它会做一层判断，判断当前环境是浏览器还是 nodejs，如果是浏览器则使用 AMD，nodejs 环境使用 CommonJS 方式，UMD 实现了两种环境的兼容。
+UMD 全称是 Universal Module Definition，目的兼容 CommonJS 和 AMD ，所以它会做一层判断，判断当前环境是浏览器还是 Node.js，如果是浏览器则使用 AMD，Node.js 环境使用 CommonJS 方式，UMD 实现了两种环境的兼容。
 
 ### CMD && seaJS
 
-CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯，编写的一个 js 库 — sea.js，在推过过程，提出的一个基于 CommonJS 的新规范—CMD。该规范与 AMD 类似，写法也类似。但不同的是，CMD 遵循着依赖后置的理念。即 AMD 是一次性加载完该模块所需要的所有模块，再执行回调。而 CMD 是按需加载，即需要用到的时候，才去加载对应模块。
+CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯，编写的一个 JavaScript 库 — sea.js，在推过过程，提出的一个基于 CommonJS 的新规范—CMD。该规范与 AMD 类似，写法也类似。但不同的是，CMD 遵循着依赖后置的理念。即 AMD 是一次性加载完该模块所需要的所有模块，再执行回调。而 CMD 是按需加载，即需要用到的时候，才去加载对应模块。
 
 - 简介：是 `seajs` 推崇的规范，`cmd` 则是依赖就近，用的时候再 `require`。它写起来是这样的：
 

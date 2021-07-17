@@ -1,12 +1,12 @@
 ---
-title: excel 查看原文件密码
+title: Excel 查看原文件密码
 date: 2018-11-10 11:00:00
-tags: ['windows', 'excel']
+tags: ['Windows', 'Excel']
 slug: excel-view-the-original-file-password
 thumbnail: '../../thumbnails/excel.png'
 ---
 
-- 1、打开您需要破解保护密码的 `excel` 文件；
+- 1、打开您需要破解保护密码的 `Excel` 文件；
 - 2、依次点击菜单栏上的工具—宏----录制新宏，输入宏名字如:`aa`；
 - 3、停止录制(这样得到一个空宏)；
 - 4、依次点击菜单栏上的工具—宏----宏,选 `aa`,点编辑按钮；

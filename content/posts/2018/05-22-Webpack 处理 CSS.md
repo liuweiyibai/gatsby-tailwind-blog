@@ -1,8 +1,8 @@
 ---
-title: webpack 处理 css
+title: Webpack 处理 CSS
 tags:
-  - webpack
-  - css
+  - Webpack
+  - CSS
 category:
   - 编程笔记
 slug: webpack-handles-css
@@ -10,13 +10,13 @@ date: 2018-05-22 17:04:45
 thumbnail: '../../thumbnails/webpack.png'
 ---
 
-![webpack 处理 css 流程](https://cdn.clearlywind.com/blog-images/images/webpack-handle-css.png)
+![Webpack 处理 CSS 流程](https://cdn.clearlywind.com/blog-images/images/webpack-handle-css.png)
 
-使用 `webpack` 处理 `css`
+使用 Webpack 处理 CSS
 
 ## 安装
 
-在项目中安装 `loader` 用来解析 `css`
+在项目中安装 `loader` 用来解析 CSS
 
 ```bash
 npm install css-loader style-loader --save-dev
@@ -49,9 +49,9 @@ module: {
 ## 两个 loader 的作用
 
 - `css-loader` 使你能够使用类似`@import`和`url(...)`的方法实现 `require` 的功能
-- `style-loader` 将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入 `webpack` 打包后的 `js` 文件中
-- 我们这样配置后，遇到后缀为`.css`的文件， `webpack` 先用 `css-loader` 加载器去解析这个文件，遇到`@import`等语句就将相应样式文件引入（所以如果没有`css-loader`，就没法解析这类语句），最后计算完的 `css` ，将会使用 `style-loader` 生成一个内容为最终解析完的 `css` 代码的 `style` 标签，放到 `head` 标签里
-- 需要注意的是， `loader` 是有顺序的， `webpack` 肯定是先将所有 `css` 模块依赖解析完得到计算结果再创建 `style` 标签。因此应该把 `style-loader` 放在 `css-loader` 的前面（ `Webpack loader` 的执行顺序是从右到左）
+- `style-loader` 将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入 Webpack 打包后的 `js` 文件中
+- 我们这样配置后，遇到后缀为`.css`的文件， Webpack 先用 `css-loader` 加载器去解析这个文件，遇到`@import`等语句就将相应样式文件引入（所以如果没有`css-loader`，就没法解析这类语句），最后计算完的 CSS ，将会使用 `style-loader` 生成一个内容为最终解析完的 CSS 代码的 `style` 标签，放到 `head` 标签里
+- 需要注意的是， `loader` 是有顺序的， Webpack 肯定是先将所有 CSS 模块依赖解析完得到计算结果再创建 `style` 标签。因此应该把 `style-loader` 放在 `css-loader` 的前面（ `Webpack loader` 的执行顺序是从右到左）
 
 [关于 css-modules](/blog/about-css-modules)
 
@@ -60,16 +60,16 @@ module: {
 - 安装
 
   ```bash
-  # webpack 4.0 以下
+  # Webpack 4.0 以下
   npm install extract-text-webpack-plugin --save-dev
 
-  # webpack 4.0 推荐使用
+  # Webpack 4.0 推荐使用
   npm i mini-css-extract-plugin --save-dev
   ```
 
   [mini-css-extract-plugin 文档地址](https://webpack.js.org/plugins/mini-css-extract-plugin/)
 
-- 添加配置 `webpack@4.0` 以下
+- 添加配置 `Webpack@4.0` 以下
 
   ```js
   // 配置可以添加到 production 环境中，因为在生产环境最好将文件分离
@@ -109,7 +109,7 @@ module: {
   ]
   ```
 
-- `webpack@4.0` 配置
+- `Webpack@4.0` 配置
 
   都是通过 `loader` 来处理
 

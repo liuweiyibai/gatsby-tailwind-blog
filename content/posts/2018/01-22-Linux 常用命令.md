@@ -1,7 +1,7 @@
 ---
-title: linux 常用命令
+title: Linux 常用命令
 tags:
-  - linux
+  - Linux
 category:
   - 编程笔记
 slug: linux-common-commands
@@ -19,7 +19,7 @@ date: 2018-01-22 09:20:08
   cd /proc/pid # 通过pid查看进程 然后执行 `ls -ail`
   ```
 
-- linux 查看进程树
+- Linux 查看进程树
 
   ```bash
   # 获取 gunicorn 进程树
@@ -100,11 +100,11 @@ date: 2018-01-22 09:20:08
 
 - 完成
 
-## 查看 linux 系统版本的命令
+## 查看 Linux 系统版本的命令
 
 - 方法 1
 
-  此命令也适用于所有的 linux 发行版
+  此命令也适用于所有的 Linux 发行版
 
   ```bash
   cat /etc/issue
@@ -112,7 +112,7 @@ date: 2018-01-22 09:20:08
 
 - 方法 2
 
-  这种方法只适合 redhat 系的 linux
+  这种方法只适合 redhat 系的 Linux
 
   ```bash
   cat /etc/redhat-release
@@ -126,7 +126,7 @@ date: 2018-01-22 09:20:08
   lsb_release -a
   ```
 
-## 查看 linux 内核版本命令
+## 查看 Linux 内核版本命令
 
 ```bash
 cat /proc/version

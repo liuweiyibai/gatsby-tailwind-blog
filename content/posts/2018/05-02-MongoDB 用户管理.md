@@ -1,14 +1,14 @@
 ---
-title: mongodb 用户管理
+title: MongoDB 用户管理
 date: 2018-05-02 22:10:00
-tags: ['mongodb']
+tags: ['MongoDB']
 category:
   - 编程笔记
 slug: mongodb-user-management
 thumbnail: '../../thumbnails/mongodb.png'
 ---
 
-## mongodb 中基本角色
+## MongoDB 中基本角色
 
 1. 数据库用户角色：read、readWrite;
 2. 数据库管理角色：dbAdmin、dbOwner、userAdmin；
@@ -23,7 +23,7 @@ Mongo 相关命令
 // 显示当前系统用户
 db.system.users.find()
 
-// mongodb 登录
+// MongoDB 登录
 db.auth('test', 'test')
 ```
 
@@ -35,7 +35,7 @@ db.createUser({user:"admin",pwd:"password",roles:["root"]})
 
 ## 修改 admin 密码
 
-> 需要修改 `mongodb` 的启动方式为不需要密码，即没有`--auth` 选项
+> 需要修改 `MongoDB` 的启动方式为不需要密码，即没有`--auth` 选项
 
 ```mongo
 db.updateUser('root',{pwd:'654321',roles:[{role:'root',db:'admin'}]})

@@ -1,8 +1,8 @@
 ---
-title: js 原型链和原型链
+title: JavaScript 原型链和原型链
 date: 2018-09-05 12:20:10
 tags:
-  - js
+  - JavaScript
 category:
   - 编程笔记
 slug: about-javascript-prototype-chain
@@ -11,7 +11,7 @@ thumbnail: '../../thumbnails/js.png'
 
 ## 简介
 
-js 中所谓的类（类是对象的抽象定义，对象是类的具现化），其实是一种设计模式，由一个构造函数（consturctor）和一个用于在该类实例间共享属性和方法的原型对象（Objcet.prototype）的结合。在 es6 中已经出现了类的 api，但是使用 function 来构建类，能加深对于 js 的理解。
+JavaScript 中所谓的类（类是对象的抽象定义，对象是类的具现化），其实是一种设计模式，由一个构造函数（consturctor）和一个用于在该类实例间共享属性和方法的原型对象（Objcet.prototype）的结合。在 ES6 中已经出现了类的 api，但是使用 function 来构建类，能加深对于 JavaScript 的理解。
 
 为了达到属性继承，代码复用等目的，通过函数来模拟类来创建对象。
 
@@ -21,7 +21,7 @@ js 中所谓的类（类是对象的抽象定义，对象是类的具现化）�
 
 - 原型
 
-  原型就是一个叫做 `prototype` 的对象。在 js 中每一个数据类型都是一个对象，比如 number、string 就是构造函数 Number/String 的实例。每一个实例都有一个 `__proto__` 的属性，这个属性指向实例的构造函数的原型对象(`构造函数.prototype`)
+  原型就是一个叫做 `prototype` 的对象。在 JavaScript 中每一个数据类型都是一个对象，比如 number、string 就是构造函数 Number/String 的实例。每一个实例都有一个 `__proto__` 的属性，这个属性指向实例的构造函数的原型对象(`构造函数.prototype`)
 
   ```js
   var a = 123
@@ -278,10 +278,10 @@ js 中所谓的类（类是对象的抽象定义，对象是类的具现化）�
     extend(Super, Sub)
     ```
 
-- es6 继承
+- ES6 继承
 
-  es6 继承通过原生 api extends 完成，参考[阮老师的文档](https://es6.ruanyifeng.com/?search=extends&x=0&y=0#docs/class-extends)
+  ES6 继承通过原生 api extends 完成，参考[阮老师的文档](https://es6.ruanyifeng.com/?search=extends&x=0&y=0#docs/class-extends)
 
 ## 总结
 
-原型对象，继承机制是基于原型，要理解 js 的继承机制，需要更深入了解原型对象。
+原型对象，继承机制是基于原型，要理解 JavaScript 的继承机制，需要更深入了解原型对象。

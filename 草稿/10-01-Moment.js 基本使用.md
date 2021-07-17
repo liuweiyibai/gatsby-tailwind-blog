@@ -1,5 +1,5 @@
 ---
-title: momentjs 基本使用
+title: Moment.js 基本使用
 tags: ['前端工具']
 category:
   - 编程笔记
@@ -8,7 +8,7 @@ date: 2018-10-01 11:00:00
 thumbnail: '../../thumbnails/moment.png'
 ---
 
-`momentjs` 是一个 `js` 时间处理库
+Moment.js 是一个 JavaScript 时间处理库
 
 ## 安装
 
