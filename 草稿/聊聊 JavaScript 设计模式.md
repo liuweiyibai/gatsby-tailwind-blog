@@ -1,5 +1,5 @@
 ---
-title: 聊聊 js 设计模式
+title: 聊聊 JavaScript 设计模式
 ---
 
 花了半个月时间学习了《JavaScript 设计模式与开发实践》 这本书，总结一下书中的设计模式和自己的理解
@@ -876,3 +876,93 @@ title: 聊聊 js 设计模式
     事物内部状态的改变往往会带来事物的行为改变。在处理的时候，将这个处理委托给当前的状态对象即可，该状态对象会负责渲染它自身的行为。区分事物内部的状态，把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部。
 
 [参考链接](https://segmentfault.com/a/1190000017787537)
+
+## 备忘录模式
+
+使用备忘录模式缓存 Ajax 请求。
+
+```js
+var ReqCache = (function () {
+  // 请求缓存对象
+  var CACHE = {
+    GET: {}, // get 请求的接口数据
+    POST: {} // post 请求的接口数据
+  }
+  var FILTER_KEYS = []
+
+  // 过滤不太重要的请求参数 作为 缓存 key
+  function getFilterReqParams(data) {
+    var newData = {}
+    for (var i in data) {
+      var item = data[i]
+      var typeItem = typeof item
+      if (typeItem == 'object' && item != null) {
+        newData[i] = getFilterReqParams(item)
+      }
+      // 找不到的时候赋值
+      else if (FILTER_KEYS.indexOf(i) === -1) {
+        newData[i] = item
+      }
+    }
+    return newData
+  }
+
+  // 过滤路径中不要重要的符号 作为 缓存的 key
+  function getFilterUrl(url) {
+    return url.replace(/\.|\/|:|#|=|&|\?|-|(http|https)/g, '')
+  }
+
+  // 对象按字母排序
+  function objKeySort(obj) {
+    var newkey = Object.keys(obj).sort()
+    var newObj = {}
+    for (var i = 0; i < newkey.length; i++) {
+      newObj[newkey[i]] = obj[newkey[i]]
+    }
+    return newObj
+  }
+
+  // 过滤请求的参数，返回一个适合作为 key 保存的 字符串
+  function getCurrentKey(param) {
+    var data = JSON.stringify(objKeySort(getFilterReqParams(param.data)))
+    data = data.replace(/\.|\/|:|\{|\}|"|\?|,/g, '')
+
+    return {
+      data,
+      url: getFilterUrl(param.url),
+      method: param.method.toUpperCase()
+    }
+  }
+  return {
+    // 设置需要过滤的请求参数
+    setFilterKeys(key) {
+      if (Array.isArray(key)) FILTER_KEYS = key
+      else FILTER_KEYS = [key]
+    },
+    // 设置缓存
+    setCache(params, backData) {
+      var { method, url, data } = getCurrentKey(params)
+      var urlCache
+
+      urlCache = CACHE[method]
+      if (typeof urlCache[url] == 'undefined') urlCache[url] = {}
+
+      urlCache[url][data] = backData
+    },
+    // 获取缓存；
+    getCache(params) {
+      var { method, url, data } = getCurrentKey(params)
+      var urlCache = CACHE[method][url] || {}
+      return urlCache[data]
+    },
+    // 删除缓存
+    delCache(params) {
+      var { method, url, data } = getCurrentKey(params)
+      var urlCache = CACHE[method][url]
+      var dataCache = urlCache && urlCache[data]
+
+      dataCache && delete urlCache[data]
+    }
+  }
+})()
+```
