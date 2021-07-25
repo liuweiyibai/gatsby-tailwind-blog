@@ -39,8 +39,10 @@ slug: '/about'
 
 - [Go 语言圣经（中文版）](https://books.studygolang.com/gopl-zh/ch1/ch1-03.html)
 
-- [Golang 好书](http://www.topgoer.com/%E5%85%B3%E4%BA%8E/)
+- [Golang 好书](http://www.topgoer.com/)
 
 - [李文周的博客](https://www.liwenzhou.com/posts/Go/use_zap_in_gin/)
 
 - [理解 go 指针](https://studygolang.com/articles/22197)
+
+- [Go RPC 开发指南 [中文文档]](https://www.bookstack.cn/read/go-rpc-programming-guide/README.md) 和 [本书地址 2](https://doc.rpcx.io/)
