@@ -19,10 +19,18 @@
     "preserveConstEnums": true,
     "importHelpers": true,
     "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@@/*": [
+        "./*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+    }
   },
   "include": [
     "./src/**/*",
     "src/components/*.tsx"
-  ],
-  "extends": "./tsconfig.paths.json",
+  ]
 }

@@ -54,6 +54,9 @@ module.exports = {
     //     chunkSize: 10000,
     //   },
     // },
+
+    // gatsby-remark-code-repls
+    // gatsby-remark-copy-linked-files
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -72,6 +75,7 @@ module.exports = {
             }
           },
           {
+            // 代码块增加标题
             resolve: `gatsby-remark-code-titles`,
             options: {
               className: 'filename'
