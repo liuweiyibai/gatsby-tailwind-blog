@@ -341,3 +341,7 @@ http{
 ## 使用 lua 脚本
 
 [nginx 使用 lua 脚本](/blog/use-lua-in-nginx)
+
+## 参考地址
+
+[章亦春 的 Nginx 教程（版本 2020.03.19）](http://openresty.org/download/agentzh-nginx-tutorials-zhcn.html#00-Foreword01)
