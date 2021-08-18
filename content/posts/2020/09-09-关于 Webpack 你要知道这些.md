@@ -184,9 +184,9 @@ module.export = {
     // 监听到变化发生后会等300ms再去执行，默认300ms
     aggregateTimeout: 300,
     // 判断文件是否发生变化是通过不停询问系统指定文件有没有变化实现的，默认每秒问1000次
-    poll: 1000
-  }
-}
+    poll: 1000,
+  },
+};
 ```
 
 ## Webpack 的热更新原理
@@ -223,13 +223,13 @@ Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `H
   module.exports = {
     entry: {
       app: './scr/app.js',
-      search: './src/search.js'
+      search: './src/search.js',
     },
     output: {
       filename: '[name][chunkhash:8].js',
-      path: __dirname + '/dist'
-    }
-  }
+      path: __dirname + '/dist',
+    },
+  };
   ```
 
 - CSS 的文件指纹设置
@@ -240,18 +240,18 @@ Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `H
   module.exports = {
     entry: {
       app: './scr/app.js',
-      search: './src/search.js'
+      search: './src/search.js',
     },
     output: {
       filename: '[name][chunkhash:8].js',
-      path: __dirname + '/dist'
+      path: __dirname + '/dist',
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: `[name][contenthash:8].css`
-      })
-    ]
-  }
+        filename: `[name][contenthash:8].css`,
+      }),
+    ],
+  };
   ```
 
 - 图片的文件指纹设置
@@ -269,12 +269,12 @@ Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `H
   - `emoji` 一个随机的指代文件内容的 `emoji`
 
   ```js
-  const path = require('path')
+  const path = require('path');
   module.exports = {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -284,14 +284,14 @@ Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `H
             {
               loader: 'file-loader',
               options: {
-                name: 'img/[name][hash:8].[ext]'
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
+                name: 'img/[name][hash:8].[ext]',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  };
   ```
 
 - 如何优化 Webpack 的构建速度

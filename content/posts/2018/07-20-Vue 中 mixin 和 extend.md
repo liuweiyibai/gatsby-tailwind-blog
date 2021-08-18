@@ -85,16 +85,16 @@ date: 2018-07-20 12:11:55
   ```js
   const mixin = {
     created: function () {
-      console.log('混入对象的钩子被调用')
-    }
-  }
+      console.log('混入对象的钩子被调用');
+    },
+  };
 
   new Vue({
     mixins: [mixin],
     created: function () {
-      console.log('组件钩子被调用')
-    }
-  })
+      console.log('组件钩子被调用');
+    },
+  });
   // => "混入对象的钩子被调用"
   // => "组件钩子被调用"
   ```

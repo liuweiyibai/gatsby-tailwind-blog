@@ -22,12 +22,12 @@ thumbnail: '../../thumbnails/js.png'
 通过闭包形成命名空间，向 `window` 上添加方法，这样做的好处是避免变量全局污染，可以将模块放到单独的作用域。缺点是，它并没有一个明确的依赖树，这使得开发者只能自己确保 JS 文件的加载顺序。
 
 ```js
-;(function (win, doc) {
+(function (win, doc) {
   function add() {}
-  windwo.add = add
-})(window, document)
+  windwo.add = add;
+})(window, document);
 
-add(1, 2, 3)
+add(1, 2, 3);
 ```
 
 ### **CommonJS**
@@ -38,10 +38,10 @@ CommonJS 规范提供 `module.exports`(或者 `exports`)接口用于对外暴露
 Node.js 就采用了这种规范去实现模块化，所以在 Node.js 上只需要简单的 `require` 和 `exports` 就可以实现模块的导入和导出，如下：
 
 ```js
-var fs = require('fs')
-fs.readFile()
-exports.getFileSize = function () {}
-module.exports = {}
+var fs = require('fs');
+fs.readFile();
+exports.getFileSize = function () {};
+module.exports = {};
 ```
 
 这种写法适合服务端，因为在服务器读取模块都是在本地磁盘，加载速度很快。但是如果在客户端，加载模块的时候有可能出现[假死]状况。那么，能不能异步加载模块呢？
@@ -57,15 +57,15 @@ AMD 是一种异步加载模块，它的模块支持对象，函数，构造器�
 这种规范是异步的加载模块，requirejs 应用了这一规范。先定义所有依赖，然后在加载完成后的回调函数中执行:
 
 ```js
-require([module], callback)
+require([module], callback);
 ```
 
 - 使用 AMD 加载一个模块
 
   ```js
   require(['clock'], function (clock) {
-    clock.start()
-  })
+    clock.start();
+  });
   // AMD虽然实现了异步加载，但是开始就把所有依赖写出来是不符合书写的逻辑顺序的。
   ```
 
@@ -93,9 +93,9 @@ CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯�
 
   ```js
   define(function (require, exports, module) {
-    var clock = require('clock')
-    clock.start()
-  })
+    var clock = require('clock');
+    clock.start();
+  });
   ```
 
 - `define` 是一个全局函数， 用来定义模块。
@@ -103,7 +103,7 @@ CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯�
   ```js
   define(function (require, exports, module) {
     // 模块代码
-  })
+  });
   ```
 
 - `require` 是一个方法， 接受 模块标识 作为唯一参数， 用来获取其他模块提供的接口。
@@ -111,10 +111,10 @@ CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯�
   ```js
   define(function (require, exports) {
     // 获取模块 a 的接口
-    var a = require('./a')
+    var a = require('./a');
     // 调用模块 a 的方法
-    a.doSomething()
-  })
+    a.doSomething();
+  });
   ```
 
 - `require.async` 方法用来在模块内部异步加载模块， 并在加载完成后执行指定回调。 callback 参数可选。
@@ -123,15 +123,15 @@ CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯�
   define(function (require, exports, module) {
     // 异步加载一个模块，在加载完成时，执行回调
     require.async('./b', function (b) {
-      b.doSomething()
-    })
+      b.doSomething();
+    });
 
     // 异步加载多个模块，在加载完成时，执行回调
     require.async(['./c', './d'], function (c, d) {
-      c.doSomething()
-      d.doSomething()
-    })
-  })
+      c.doSomething();
+      d.doSomething();
+    });
+  });
   ```
 
 - `exports` 是一个对象， 用来向外提供模块接口。
@@ -139,31 +139,31 @@ CMD 全称 Common Moudle Definition 规范，是由国内前端大神，玉伯�
   ```js
   define(function (require, exports) {
     // 对外提供 foo 属性
-    exports.foo = 'bar'
+    exports.foo = 'bar';
 
     // 对外提供 doSomething 方法
-    exports.doSomething = function () {}
-  })
+    exports.doSomething = function () {};
+  });
   //除了给 exports 对象增加成员，还可以使用 return 直接向外提供接口。
   define(function (require) {
     // 通过 return 直接提供接口
     return {
       foo: 'bar',
-      doSomething: function () {}
-    }
-  })
+      doSomething: function () {},
+    };
+  });
   ```
 
 - `module` 是一个对象， 上面存储了与当前模块相关联的一些属性和方法。
 
   ```js
   define(function (require, exports, module) {
-    console.log(module.uri)
+    console.log(module.uri);
     module.exports = {
       foo: 'bar',
-      doSomething: function () {}
-    }
-  })
+      doSomething: function () {},
+    };
+  });
   ```
 
 ## **ES6 模块化**

@@ -1,8 +1,8 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import * as React from 'react';
+import { Link } from 'gatsby';
 
 // import Layout from "../Layout/AppLayout"
-import Seo from "../components/Seo"
+import Seo from '../components/Seo';
 
 const SecondPage = () => (
   <>
@@ -11,6 +11,6 @@ const SecondPage = () => (
     <p>Welcome to page 2</p>
     <Link to="/">Go back to the homepage</Link>
   </>
-)
+);
 
-export default SecondPage
+export default SecondPage;

@@ -1,7 +1,7 @@
-import * as React from "react"
+import * as React from 'react';
 
 const Archive = () => {
-  return <div>archive</div>
-}
+  return <div>archive</div>;
+};
 
-export default Archive
+export default Archive;

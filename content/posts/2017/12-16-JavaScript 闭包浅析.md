@@ -27,7 +27,7 @@ thumbnail: '../../thumbnails/js.png'
 
    ```js
    for (var a = 0; a < 10; a++) {}
-   console.log(a) // 10
+   console.log(a); // 10
    ```
 
 3. 私有变量和静态私有变量
@@ -46,15 +46,15 @@ thumbnail: '../../thumbnails/js.png'
 
    ```js
    function Person(name, age) {
-     this.name = name
-     this.age = age
+     this.name = name;
+     this.age = age;
      this.sayName = function () {
-       console.log(this.name)
-     }
+       console.log(this.name);
+     };
    }
-   const person1 = new Person('hh', 18)
-   person1.sayName() // hh
-   console.log(person1)
+   const person1 = new Person('hh', 18);
+   person1.sayName(); // hh
+   console.log(person1);
    ```
 
    可以使用 constructor 或 instanceof 识别对象实例的类型，使用 new 来创建实例。缺点是：每次创建实例时，每个方法都要被创建一次。
@@ -78,25 +78,25 @@ thumbnail: '../../thumbnails/js.png'
 ```js
 // 简单的闭包
 function makeSizer(size) {
-  var size = size ? size : 1
+  var size = size ? size : 1;
   return function () {
     // size 会被缓存，保留引用
-    console.log(size)
-  }
+    console.log(size);
+  };
 }
 // a 是外部函数，a 中还保留着对 size 变量的引用
-var a = makeSizer()
-a()
+var a = makeSizer();
+a();
 ```
 
 一般来说，函数内部可以访问函数外部的全局变量：
 
 ```js
-var a = 1 //全局变量
+var a = 1; //全局变量
 function f1() {
-  console.log(a)
+  console.log(a);
 }
-f1() // 1
+f1(); // 1
 ```
 
 但是在函数的外部是访问不到内部的变量的：
@@ -104,28 +104,28 @@ f1() // 1
 ```js
 function f2() {
   // 此时函数f2已经开辟出一个函数作用域，所以外部是访问不到a这个变量的
-  var a = 1 //局部变量
+  var a = 1; //局部变量
 }
-alert(a) // error
+alert(a); // error
 ```
 
 注意，在函数内部定义变量时，要加上 `var` ，否则该变量就是全局变量了:
 
 ```js
 function f3() {
-  a = 1 // 全局变量
+  a = 1; // 全局变量
 }
-alert(a) // 1
+alert(a); // 1
 ```
 
 但是，有时候我们想得到函数内部的局部变量，那应该如何实现呢？这就引入了闭包的概念：
 
 ```js
 function f1() {
-  var n = 1
+  var n = 1;
   return function () {
-    alert(n)
-  }
+    alert(n);
+  };
 }
 ```
 
@@ -137,25 +137,25 @@ function f1() {
 
 ```js
 function outer() {
-  var a = 1
+  var a = 1;
   function inner() {
-    return a++
+    return a++;
   }
-  return inner
+  return inner;
 }
-var abc = outer()
+var abc = outer();
 // outer 函数只要执行过，就有了引用函数内部变量 a 的可能；
 // 当 outer 函数已经执行过了，所以其中的变量 a 会被内存释放，但是在 return 的函数中 a 再次被使用，所以会在内存中保留 a 变量
 // outer 函数如果没有执行过，由于作用域的关系，看不到内部作用域，更不会被保存在内存中了
 
-console.log(abc()) // 1
-console.log(abc()) // 2
+console.log(abc()); // 1
+console.log(abc()); // 2
 
 //因为 a 已经在内存中了，所以再次执行abc()的时候，是在第一次的基础上累加的
 
-var def = outer()
-console.log(def()) //1
-console.log(def()) //2
+var def = outer();
+console.log(def()); //1
+console.log(def()); //2
 
 // 再次把 outer() 函数赋给一个新的变量def，相当于绑定了一个新的outer实例；
 
@@ -163,7 +163,7 @@ console.log(def()) //2
 // console.log(inner); //ReferenceError: a is not defined
 // 由于作用域的关系我们在外部还是无法直接访问内部作用域的变量名和函数名
 
-abc = null
+abc = null;
 //由于闭包占用内存空间，所以要谨慎使用闭包。尽量在使用完闭包后，及时解除引用，释放内存；
 ```
 
@@ -187,21 +187,21 @@ abc = null
   ```js
   // 写法 1
   for (var i = 0; i < 3; i++) {
-    setTimeout(fn(i), 1000)
+    setTimeout(fn(i), 1000);
   }
   function fn(i) {
     return function () {
-      console.log(++i) // 123
-    }
+      console.log(++i); // 123
+    };
   }
 
   // 写法 2
   for (var i = 0; i < 3; i++) {
-    ;(function (index) {
+    (function (index) {
       setTimeout(function () {
-        console.log(++index) // 123
-      }, 1000)
-    })(i)
+        console.log(++index); // 123
+      }, 1000);
+    })(i);
   }
   ```
 
@@ -212,19 +212,19 @@ abc = null
   ```js
   // 每隔 1s 分别输出 0 1 2 3 4
   for (var i = 0; i < 5; i++) {
-    ;(function (index) {
+    (function (index) {
       setTimeout(function () {
-        console.log(index)
-      }, 1000 * index)
-    })(i)
+        console.log(index);
+      }, 1000 * index);
+    })(i);
   }
 
   // es6 的 let
   // for 每次循环 let 都创建了新的作用域
   for (let i = 0; i < 3; i++) {
     setTimeout(() => {
-      console.log(i)
-    }, i * 1000)
+      console.log(i);
+    }, i * 1000);
   }
   ```
 
@@ -234,8 +234,8 @@ abc = null
 
   ```js
   function add(a, b) {
-    var sum = a + b
-    return sum
+    var sum = a + b;
+    return sum;
   }
   ```
 
@@ -243,29 +243,29 @@ abc = null
 
   ```js
   function Person(name) {
-    var privateVariable = 0
+    var privateVariable = 0;
     // 创建闭包
     function getName() {
-      return 'somethings...'
+      return 'somethings...';
     }
     this.publicMethod = function () {
-      privateVariable++
-      return getName
-    }
+      privateVariable++;
+      return getName;
+    };
   }
 
-  var p = new Person('name') // 构造函数内部变量和方法只能通过实例方法来访问
+  var p = new Person('name'); // 构造函数内部变量和方法只能通过实例方法来访问
   ```
 
 - 结果缓存
 
   ```js
   function cached(fn) {
-    var cache = Object.create(null)
+    var cache = Object.create(null);
     return function cachedFn(str) {
-      var hit = cache[str]
-      return hit || (cache[str] = fn(str))
-    }
+      var hit = cache[str];
+      return hit || (cache[str] = fn(str));
+    };
   }
   // 这个函数可以读取缓存，如果缓存中没有就存一下放到缓存中再读。闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。
   ```
@@ -297,28 +297,28 @@ function fn(){
 如果你想实现立即执行的函数，可以把要执行的函数放到一对括号里面，对于 JavaScript 来说，括弧`()`里面不能包含语句，所以在这一点上，解析器在解析 `function` 关键字的时候，会将相应的代码解析成 `function` 表达式，而不是 `function` 声明所以，只要将大括号将代码(包括函数部分和在后面加上一对大括号)全部括起来就可以了。 如下：
 
 ```js
-;(function fn() {
+(function fn() {
   //代码区...
-})()
+})();
 ```
 
 还可以写成：闭包
 
 ```js
-;(function () {
-  var a = 1
+(function () {
+  var a = 1;
   return function () {
-    console.log(a)
-  }
+    console.log(a);
+  };
   //代码区...
-})()
+})();
 ```
 
 ```js
 function fn(n) {
-  console.log(arguments) // [1]
-  console.log(n) // 1
+  console.log(arguments); // [1]
+  console.log(n); // 1
 }
-fn(1)
-fn(2)
+fn(1);
+fn(2);
 ```

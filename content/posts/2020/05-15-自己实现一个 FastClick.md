@@ -29,14 +29,14 @@ thumbnail: '../../thumbnails/js.png'
 - 3. 使用 `FastClick` 库
 
   ```js
-  var FastClick = require('fastclick')
+  var FastClick = require('fastclick');
   document.addEventListener(
     'DOMContentLoaded',
     function () {
-      FastClick.attach(document.body)
+      FastClick.attach(document.body);
     },
-    false
-  )
+    false,
+  );
   ```
 
   原理:
@@ -50,14 +50,14 @@ thumbnail: '../../thumbnails/js.png'
   ```js
   const FastClick = !(function () {
     const attach = dom => {
-      let targetElement = null
+      let targetElement = null;
       dom.addEventListener('touchstart', function (e) {
-        targetElement = e.target // 获取点击对象
-      })
+        targetElement = e.target; // 获取点击对象
+      });
       dom.addEventListener('touchend', function (e) {
-        e.preventDefault() // 阻止默认click事件
-        let touch = e.changeTouches[0] // 获取点击的位置坐标
-        let clickEvent = document.createEvent('MouseEvents')
+        e.preventDefault(); // 阻止默认click事件
+        let touch = e.changeTouches[0]; // 获取点击的位置坐标
+        let clickEvent = document.createEvent('MouseEvents');
         // 初始化自定义事件
         clickEvent.initMouseEvent(
           'click',
@@ -74,11 +74,11 @@ thumbnail: '../../thumbnails/js.png'
           false,
           false,
           0,
-          null
-        )
-        targetElement.dispatchEvent(clickEvent) // 自定义事件的触发
-      })
-    }
-    return { attach }
-  })()
+          null,
+        );
+        targetElement.dispatchEvent(clickEvent); // 自定义事件的触发
+      });
+    };
+    return { attach };
+  })();
   ```

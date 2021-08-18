@@ -1,7 +1,7 @@
-import React from "react"
-import { graphql } from "gatsby"
-import AppLayout from "../Layout/AppLayout"
-import BlogListLayout from "@/Layout/BlogListLayout"
+import React from 'react';
+import { graphql } from 'gatsby';
+import AppLayout from '../Layout/AppLayout';
+import BlogListLayout from '@/Layout/BlogListLayout';
 
 function MapObject(obj: any) {
   return {
@@ -10,22 +10,22 @@ function MapObject(obj: any) {
     ...obj,
     frontmatter: null,
     fields: null,
-  }
+  };
 }
 
 const SigleTagPageTemplate: React.FC = ({ pageContext, data }) => {
-  const result = data.allMarkdownRemark.nodes
+  const result = data.allMarkdownRemark.nodes;
 
-  const posts = result.map(MapObject)
+  const posts = result.map(MapObject);
 
   return (
     <AppLayout>
       <BlogListLayout posts={posts} pagination={null} title={pageContext.tag} />
     </AppLayout>
-  )
-}
+  );
+};
 
-export default SigleTagPageTemplate
+export default SigleTagPageTemplate;
 
 export const pageQuery = graphql`
   query ($tag: String) {
@@ -54,4 +54,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

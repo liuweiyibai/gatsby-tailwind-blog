@@ -65,14 +65,14 @@ var vnode = {
   // 存储子节点的数组，每个子节点也是vnode结构
   children: [
     {
-      el: div
+      el: div,
       // 其他属性
-    }
+    },
   ],
 
   // 如果是文本节点，对应文本节点的 textContent，否则为null
-  text: null
-}
+  text: null,
+};
 ```
 
 ## Diff 流程
@@ -95,20 +95,20 @@ var vnode = {
 function patch(oldVnode, vnode) {
   // sameVnode 函数就是看这两个节点是否值得比较，代码相当简单：
   if (sameVnode(oldVnode, vnode)) {
-    patchVnode(oldVnode, vnode)
+    patchVnode(oldVnode, vnode);
   } else {
     // 当前oldVnode对应的真实元素节点
-    const oEl = oldVnode.el
-    let parentEle = api.parentNode(oEl) // 父元素
-    createEle(vnode) // 根据Vnode生成新元素
+    const oEl = oldVnode.el;
+    let parentEle = api.parentNode(oEl); // 父元素
+    createEle(vnode); // 根据Vnode生成新元素
     if (parentEle !== null) {
-      api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)) // 将新元素添加进父元素
-      api.removeChild(parentEle, oldVnode.el) // 移除以前的旧元素节点
-      oldVnode = null
+      api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl)); // 将新元素添加进父元素
+      api.removeChild(parentEle, oldVnode.el); // 移除以前的旧元素节点
+      oldVnode = null;
     }
   }
   // some code
-  return vnode
+  return vnode;
 }
 ```
 
@@ -130,7 +130,7 @@ function sameVnode(a, b) {
     // 是否都定义了data，data包含一些具体信息，例如onclick , style
     isDef(a.data) === isDef(b.data) &&
     sameInputType(a, b) // 当标签是<input>的时候，type必须相同
-  )
+  );
 }
 ```
 
@@ -152,28 +152,28 @@ patch 最后会返回 VNode，VNode 和进入 patch 之前的不同在哪？就�
 ```js
 function patchVnode(oldVnode, vnode) {
   // 找到对应的真实dom，称为 el
-  const el = (vnode.el = oldVnode.el)
+  const el = (vnode.el = oldVnode.el);
   let i,
     oldCh = oldVnode.children,
-    ch = vnode.children
+    ch = vnode.children;
 
   // 判断 Vnode 和 oldVnode 是否指向同一个对象，如果是，那么直接 return
-  if (oldVnode === vnode) return
+  if (oldVnode === vnode) return;
 
   // 如果他们都有文本节点并且不相等，那么将 el 的文本节点设置为 Vnode 的文本节点
   if (oldVnode.text !== null && vnode.text !== null && oldVnode.text !== vnode.text) {
-    api.setTextContent(el, vnode.text)
+    api.setTextContent(el, vnode.text);
   } else {
-    updateEle(el, vnode, oldVnode)
+    updateEle(el, vnode, oldVnode);
 
     if (oldCh && ch && oldCh !== ch) {
       // 如果 oldVnode 没有子节点而 Vnode 有，则将 Vnode 的子节点真实化之后添加到 el 如果两者都有子节点，则执行 updateChildren 函数比较子节点，这一步很重要
-      updateChildren(el, oldCh, ch)
+      updateChildren(el, oldCh, ch);
     } else if (ch) {
-      createEle(vnode)
+      createEle(vnode);
     } else if (oldCh) {
       // 如果 oldVnode 有子节点而 Vnode 没有，则删除 el 的子节点
-      api.removeChildren(el)
+      api.removeChildren(el);
     }
   }
 }

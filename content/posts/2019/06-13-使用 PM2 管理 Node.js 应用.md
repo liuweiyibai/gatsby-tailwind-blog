@@ -79,14 +79,14 @@ module.exports = {
       // watch and reload
       watch: true,
       env: {
-        NODE_ENV: 'development'
+        NODE_ENV: 'development',
       },
       env_production: {
-        NODE_ENV: 'production'
-      }
-    }
-  ]
-}
+        NODE_ENV: 'production',
+      },
+    },
+  ],
+};
 // 通过--env 指定环境
 // 当进程被启动后 其环境则一般不可变，可通过--update-env 强制改变环境
 ```

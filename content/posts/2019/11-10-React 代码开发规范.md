@@ -28,13 +28,13 @@ thumbnail: '../../thumbnails/react.png'
   推荐：
 
   ```js
-  import Footer from './Footer'
+  import Footer from './Footer';
   ```
 
   不推荐：
 
   ```js
-  import Footer from './Footer/index'
+  import Footer from './Footer/index';
   ```
 
 - 不要使用 `displayName` 属性来定义组件的名称，应该在 `class` 或者 `function` 关键字后面直接声明组件的名称
@@ -49,8 +49,8 @@ thumbnail: '../../thumbnails/react.png'
 
   ```js
   export default React.Component({
-    displayName: 'MyComponent'
-  })
+    displayName: 'MyComponent',
+  });
   ```
 
 ## React 中的命名
@@ -71,11 +71,11 @@ thumbnail: '../../thumbnails/react.png'
 
 ```js
 // 组件名称
-MyComponent
+MyComponent;
 // 属性名称
-onClick
+onClick;
 // 样式属性
-backgroundColor
+backgroundColor;
 ```
 
 ## **`jsx`** 写法注意
@@ -195,8 +195,8 @@ React 中样式可以使用 `style` 行内样式，也可以使用 `className` �
   // 推荐：
   class Example extends React.Component {
     static defaultProps = {
-      name: 'stranger'
-    }
+      name: 'stranger',
+    };
 
     render() {
       // ...
@@ -211,8 +211,8 @@ React 中样式可以使用 `style` 行内样式，也可以使用 `className` �
   }
 
   Example.propTypes = {
-    name: PropTypes.string
-  }
+    name: PropTypes.string,
+  };
   ```
 
 ## `key` 属性设置
@@ -222,12 +222,12 @@ React 中样式可以使用 `style` 行内样式，也可以使用 `className` �
 ```js
 // 推荐：
 {
-  todos.map(todo => <Todo {...todo} key={todo.id} />)
+  todos.map(todo => <Todo {...todo} key={todo.id} />);
 }
 
 // 不推荐：
 {
-  todos.map((todo, index) => <Todo {...todo} key={index} />)
+  todos.map((todo, index) => <Todo {...todo} key={index} />);
 }
 ```
 
@@ -266,10 +266,10 @@ handleClick(){
 
   ```js
   // 推荐：
-  this.setState({ comment: 'Hello' })
+  this.setState({ comment: 'Hello' });
 
   // 不推荐：
-  this.state.comment = 'hello'
+  this.state.comment = 'hello';
   ```
 
 - `state` 的更新可能是异步的
@@ -279,13 +279,13 @@ handleClick(){
   ```js
   // 推荐：
   this.setState((state, props) => ({
-    counter: state.counter + props.increment
-  }))
+    counter: state.counter + props.increment,
+  }));
 
   // 不推荐：
   this.setState({
-    counter: this.state.counter + this.props.increment
-  })
+    counter: this.state.counter + this.props.increment,
+  });
   ```
 
 ## 组件的代码顺序
@@ -347,10 +347,10 @@ class Example extends Component {
 
 ```js
 // 推荐：
-const OtherComponent = React.lazy(() => import('./OtherComponent'))
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
 
 // 不推荐：
-import OtherComponent from './OtherComponent'
+import OtherComponent from './OtherComponent';
 ```
 
 ## 异步请求发起请求的时机

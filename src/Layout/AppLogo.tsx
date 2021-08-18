@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from 'styled-components';
 
-import Logo from "@/assets/svgs/logo.svg"
+import Logo from '@/assets/svgs/logo.svg';
 
 export const hueRotateAnimate = keyframes`
   0% {
@@ -9,7 +9,7 @@ export const hueRotateAnimate = keyframes`
   50% {
     filter: hue-rotate(360deg);
   }
-`
+`;
 
 export const spin = keyframes`
   0% {
@@ -18,7 +18,7 @@ export const spin = keyframes`
   100% {
     transform: rotate(360deg);
   }
-`
+`;
 
 const StyledLogo = styled(Logo)`
   width: 53.87px;
@@ -37,6 +37,6 @@ const StyledLogo = styled(Logo)`
       animation-direction: reverse;
     }
   }
-`
+`;
 
-export default StyledLogo
+export default StyledLogo;

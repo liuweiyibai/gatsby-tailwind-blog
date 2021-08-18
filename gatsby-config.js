@@ -2,13 +2,13 @@ const config = {
   title: `刘威益佰的个人博客`,
   author: `刘威益佰`,
   description: `我听见回声，来自山谷和心间，以寂寞的镰刀收割空旷的灵魂，不断地重复决绝，又重复幸福，终有绿洲摇曳在沙漠。`,
-  lang: "zh-CN",
+  lang: 'zh-CN',
   siteUrl: `https://lwyb.me`, // 网站地址，用来 sso
 
   // 路由前缀
-  pathPrefix: "/",
+  pathPrefix: '/',
   // pathPrefix: '/my-blog',
-}
+};
 module.exports = {
   siteMetadata: {
     title: config.title,
@@ -21,7 +21,7 @@ module.exports = {
     siteUrl: config.siteUrl,
     social: {
       twitter: `liuweiyibai`,
-      github: "liuweiyibai",
+      github: 'liuweiyibai',
     },
   },
   plugins: [
@@ -53,7 +53,7 @@ module.exports = {
             // 代码块增加标题
             resolve: `gatsby-remark-code-titles`,
             options: {
-              className: "remark-code-title ",
+              className: 'remark-code-title ',
             },
           },
           {
@@ -66,7 +66,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              classPrefix: "language-",
+              classPrefix: 'language-',
               inlineCodeMarker: null,
               showLineNumbers: false,
               noInlineHighlight: false,
@@ -81,10 +81,10 @@ module.exports = {
           `gatsby-remark-embedder`, // 可以将 codepen 等加载在 markdown 中
           {
             // markdown 中a标签新窗口打开设置
-            resolve: "gatsby-remark-external-links",
+            resolve: 'gatsby-remark-external-links',
             options: {
-              target: "_blank",
-              rel: "nofollow",
+              target: '_blank',
+              rel: 'nofollow',
             },
           },
         ],
@@ -117,13 +117,13 @@ module.exports = {
         defaults: {
           formats: [`auto`, `webp`, `avif`],
           quality: 100,
-          placeholder: "blurred",
+          placeholder: 'blurred',
         },
       },
     },
     // 图片处理 ==== end
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
           include: /src/,
@@ -131,4 +131,4 @@ module.exports = {
       },
     },
   ],
-}
+};

@@ -36,13 +36,13 @@ module: {
         {
           loader: 'css-loader',
           option: {
-            module: true
-          }
-        }
-      ]
+            module: true,
+          },
+        },
+      ],
       // 先用 css-loader 加载 css 文件，再用 style-loader 添加在页面中
-    }
-  ]
+    },
+  ];
 }
 ```
 
@@ -114,8 +114,8 @@ module: {
   都是通过 `loader` 来处理
 
   ```js
-  const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-  const devMode = process.env.NODE_ENV !== 'production'
+  const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+  const devMode = process.env.NODE_ENV !== 'production';
 
   module.exports = {
     module: {
@@ -132,25 +132,25 @@ module: {
                 // 如果打包后，background属性中的图片显示不出来，请检查 publicPath 的配置是否有误
                 publicPath: './',
                 // publicPath: devMode ? './' : '../',   // 根据不同环境指定不同的publicPath
-                hmr: devMode // 仅dev环境启用HMR功能
-              }
+                hmr: devMode, // 仅dev环境启用HMR功能
+              },
             },
             'css-loader',
             'post-loader',
-            'sass-loader'
-          ]
-        }
-      ]
+            'sass-loader',
+          ],
+        },
+      ],
     },
     plugins: [
       new MiniCssExtractPlugin({
         // 这里的配置和webpackOptions.output中的配置相似
         // 即可以通过在名字前加路径，来决定打包后的文件存在的路径
         filename: devMode ? 'css/[name].css' : 'css/[name].[hash].css',
-        chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css'
-      })
-    ]
-  }
+        chunkFilename: devMode ? 'css/[id].css' : 'css/[id].[hash].css',
+      }),
+    ],
+  };
   ```
 
 ## 关于 postcss

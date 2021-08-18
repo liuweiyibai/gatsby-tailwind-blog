@@ -36,19 +36,19 @@ thumbnail: '../../thumbnails/postcss.png'
           test: /\.css$/,
           use: [
             {
-              loader: 'style-loader'
+              loader: 'style-loader',
             },
             {
               loader: 'css-loader',
               options: {
-                modules: true
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
+                modules: true,
+              },
+            },
+          ],
+        },
+      ],
+    },
+  };
   ```
 
 - 全局作用域
@@ -73,9 +73,9 @@ thumbnail: '../../thumbnails/postcss.png'
       // ...
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]'
-      }
-    ]
+        loader: 'style-loader!css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
+      },
+    ];
   }
   ```
 

@@ -24,11 +24,11 @@ thumbnail: '../../thumbnails/ts.png'
   无状态组件也被称为展示组件，如果一个展示组件没有内部的 state 可以被写为纯函数组件。
 
   ```tsx
-  import React, { ReactNode, SFC } from 'react'
+  import React, { ReactNode, SFC } from 'react';
 
   export interface IProps {
-    title: string | ReactNode
-    description: string | ReactNode
+    title: string | ReactNode;
+    description: string | ReactNode;
   }
   const StepComplete: SFC<IProps> = ({ title, description, children }) => {
     return (
@@ -37,9 +37,9 @@ thumbnail: '../../thumbnails/ts.png'
         <div>{description}</div>
         <div>{children}</div>
       </div>
-    )
-  }
-  export default StepComplete
+    );
+  };
+  export default StepComplete;
   ```
 
 - hooks
@@ -50,10 +50,10 @@ thumbnail: '../../thumbnails/ts.png'
 
   ```tsx
   // 布尔类型，简单数据类型 ts 可以根据自动推导出类型
-  const [val, toggle] = React.useState(false)
-  toggle(false)
+  const [val, toggle] = React.useState(false);
+  toggle(false);
   // 如果初始值是 null 或 undefined，那就要通过泛型手动传入你期望的类型。通过泛型传入 state 类型结构
-  const [user, setUser] = React.useState<IUser | null>(null)
+  const [user, setUser] = React.useState<IUser | null>(null);
   ```
 
   useEffect
@@ -61,38 +61,38 @@ thumbnail: '../../thumbnails/ts.png'
   ```tsx
   useEffect(() => {
     const getUser = async () => {
-      const user = await getUser()
-      setUser(user)
-    }
-    getUser()
-  }, [])
+      const user = await getUser();
+      setUser(user);
+    };
+    getUser();
+  }, []);
   ```
 
   useImperativeHandle 可以让你在使用 ref 时自定义暴露给父组件的实例值
 
   ```tsx
-  import * as React from 'react'
-  import { useState, useEffect, useRef, useImperativeHandle } from 'react'
+  import * as React from 'react';
+  import { useState, useEffect, useRef, useImperativeHandle } from 'react';
 
   type ListProps = {
-    innerRef?: React.Ref<{ scrollToTop(): void }>
-  }
+    innerRef?: React.Ref<{ scrollToTop(): void }>;
+  };
 
   function List(props: ListProps) {
     useImperativeHandle(props.innerRef, () => ({
-      scrollToTop() {}
-    }))
-    return null
+      scrollToTop() {},
+    }));
+    return null;
   }
 
   function Use() {
-    const listRef = useRef<{ scrollToTop(): void }>(null!)
+    const listRef = useRef<{ scrollToTop(): void }>(null!);
 
     useEffect(() => {
-      listRef.current.scrollToTop()
-    }, [])
+      listRef.current.scrollToTop();
+    }, []);
 
-    return <List innerRef={listRef} />
+    return <List innerRef={listRef} />;
   }
   ```
 
@@ -100,44 +100,44 @@ thumbnail: '../../thumbnails/ts.png'
 
   ```tsx
   // null! 这种语法是非空断言，跟在一个值后面表示你断定它是有值的，所有可以直接获取值
-  const ref2 = useRef<HTMLElement>(null!)
+  const ref2 = useRef<HTMLElement>(null!);
 
   // 也可以使用
-  inputEl.current?.focus()
+  inputEl.current?.focus();
   ```
 
   forwardRef，函数式组件默认不可以加 ref，它不像类组件那样有自己的实例。这个 API 一般是函数式组件用来接收父组件传来的 ref。通过 forwardRef 可以将 ref 转发给子组件，子组件拿到父组件创建的 ref，绑定到自己的某一个元素中
 
   ```tsx
-  type Props = {}
-  type Ref = HTMLButtonElement
+  type Props = {};
+  type Ref = HTMLButtonElement;
   const FancyButton = React.forwardRef<Ref, Props>((props, ref) => (
     <button ref={ref} className="MyClassName">
       {props.children}
     </button>
-  ))
+  ));
 
   const App = () => {
-    const ref = useRef<HTMLButtonElement>()
-    return <FancyButton ref={ref} />
-  }
+    const ref = useRef<HTMLButtonElement>();
+    return <FancyButton ref={ref} />;
+  };
   ```
 
   通过 useImperativeHandle 的，将父组件传入的 ref 和 useImperativeHandle 第二个参数返回的对象绑定到了一起
 
   ```tsx
   function FancyInput(props, ref) {
-    const inputRef = useRef()
+    const inputRef = useRef();
     useImperativeHandle(ref, () => ({
       focus: () => {
-        inputRef.current.focus()
-      }
-    }))
-    return <input ref={inputRef} />
+        inputRef.current.focus();
+      },
+    }));
+    return <input ref={inputRef} />;
   }
-  FancyInput = React.forwardRef(FancyInput)
-  const fancyInputRef = React.createRef() // React.useRef()
-  ;<FancyInput ref={fancyInputRef}>Click me!</FancyInput>
+  FancyInput = React.forwardRef(FancyInput);
+  const fancyInputRef = React.createRef(); // React.useRef()
+  <FancyInput ref={fancyInputRef}>Click me!</FancyInput>;
   ```
 
 - 类组件
@@ -165,15 +165,15 @@ TransitionEvent<T = Element> 过渡事件对象
 具体使用
 
 ```tsx
-import { MouseEvent } from 'react'
+import { MouseEvent } from 'react';
 
 interface IProps {
-  onClick(event: MouseEvent<HTMLDivElement>): void
+  onClick(event: MouseEvent<HTMLDivElement>): void;
 }
 
 const Element: SFC<IProps> = ({ onClick }) => {
-  return <div onClick={onClick} />
-}
+  return <div onClick={onClick} />;
+};
 ```
 
 ## props
@@ -271,7 +271,7 @@ type AdminProps = {
   从 T 中排除那些可以赋值给 U 的类型。
 
   ```ts
-  type T = Exclude<1 | 2 | 3 | 4 | 5, 3 | 4> // T = 1|2|5
+  type T = Exclude<1 | 2 | 3 | 4 | 5, 3 | 4>; // T = 1|2|5
   // 此时 T 类型的值只可以为 1 、2 、 5 ，当使用其他值是 TS 会进行错误提示。
   ```
 
@@ -280,7 +280,7 @@ type AdminProps = {
   从 T 中提取那些可以赋值给 U 的类型。
 
   ```ts
-  type T = Extract<1 | 2 | 3 | 4 | 5, 3 | 4> // T = 3|4
+  type T = Extract<1 | 2 | 3 | 4 | 5, 3 | 4>; // T = 3|4
   // 此时T类型的值只可以为 3 、4 ，当使用其他值时 TS 会进行错误提示：
   ```
 
@@ -290,15 +290,15 @@ type AdminProps = {
 
   ```ts
   interface Person {
-    name: string
-    age: number
-    sex: string
+    name: string;
+    age: number;
+    sex: string;
   }
   // 只支持 Person 中的几个属性
   let person: Pick<Person, 'name' | 'age'> = {
     name: '小王',
-    age: 21
-  }
+    age: 21,
+  };
   ```
 
 - `Record<K,T>`
@@ -309,8 +309,8 @@ type AdminProps = {
   // 将 name 、 age 属性全部设为 string 类型。
   let person: Record<'name' | 'age', string> = {
     name: '小王',
-    age: '12'
-  }
+    age: '12',
+  };
   ```
 
 - `Omit<T,K>`
@@ -318,16 +318,16 @@ type AdminProps = {
   从对象 T 中排除 key 是 K 的属性。
 
   ```ts
-  type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
+  type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
   interface Person {
-    name: string
-    age: number
-    sex: string
+    name: string;
+    age: number;
+    sex: string;
   }
 
   let person: Omit<Person, 'name'> = {
     age: 1,
-    sex: '男'
-  }
+    sex: '男',
+  };
   ```

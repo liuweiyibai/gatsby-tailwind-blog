@@ -30,24 +30,24 @@ computed 和 watch 都可以观察页面的数据变化。当处理页面的数�
     data: {
       firstName: 'Foo',
       lastName: 'Bar',
-      fullName: 'Foo Bar'
+      fullName: 'Foo Bar',
     },
     // 使用watch
     watch: {
       firstName: function (val) {
-        this.fullName = val + ' ' + this.lastName
+        this.fullName = val + ' ' + this.lastName;
       },
       lastName: function (val) {
-        this.fullName = this.firstName + ' ' + val
-      }
+        this.fullName = this.firstName + ' ' + val;
+      },
     },
     // 使用计算属性
     computed: {
       fullName: function () {
-        return this.firstName + ' ' + this.lastName
-      }
-    }
-  })
+        return this.firstName + ' ' + this.lastName;
+      },
+    },
+  });
 </script>
 ```
 

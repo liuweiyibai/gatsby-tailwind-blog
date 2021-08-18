@@ -196,8 +196,10 @@ var exclaim = function (x) {
 };
 
 // 定义通用的 compose 组合函数
-var compose = (...args) => (x) =>
-  args.reduceRight((value, item) => item(value), x);
+var compose =
+  (...args) =>
+  x =>
+    args.reduceRight((value, item) => item(value), x);
 
 // 调用顺序，从右到左
 var shout = compose(exclaim, toUpperCase);

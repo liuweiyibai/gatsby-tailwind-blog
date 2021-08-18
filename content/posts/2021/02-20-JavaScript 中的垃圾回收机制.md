@@ -79,9 +79,9 @@ JavaScript 的内存生命周期的工作原理如下：
 
   ```js
   var bar = {
-    name: 'bar'
-  }
-  bar = null
+    name: 'bar',
+  };
+  bar = null;
   ```
 
   这里创建了两个变量对象：bar 和 name。既然 bar 是在最后一行接收到一个新值，那么 name 就可以进行垃圾回收了。
@@ -90,13 +90,13 @@ JavaScript 的内存生命周期的工作原理如下：
 
   ```js
   function check() {
-    var bar = {}
-    var foo = {}
-    bar.name = foo
-    foo.name = bar
-    return true
+    var bar = {};
+    var foo = {};
+    bar.name = foo;
+    foo.name = bar;
+    return true;
   }
-  check()
+  check();
   ```
 
   就对象而言，JavaScript 是一种基于引用的语言，这意味着实例化对象名称指向内存中的值。

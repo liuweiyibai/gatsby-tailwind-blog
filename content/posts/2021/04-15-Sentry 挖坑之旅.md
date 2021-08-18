@@ -116,20 +116,20 @@ Sentry 对接前端应用的流程应该是，前端项目中引入 Sentry/brows
 我们以 React 项目为例，简单看一下 Sentry 的使用：
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
+import App from './App';
 
 Sentry.init({
   // dsn 是在 Sentry 中创建项目后，给定的一个上报地址
   dsn: 'http://127.0.0.1@localhost:9000/5',
   integrations: [new Integrations.BrowserTracing()],
-  tracesSampleRate: 1.0
-})
+  tracesSampleRate: 1.0,
+});
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
 因为我们使用 Webpack 构架应用，sentry 有一个 Webpack 的插件，可以帮我们上传 SourceMap。
@@ -141,8 +141,8 @@ yarn add @sentry/webpack-plugin --dev
 
 ```js
 // 添加 Webpack 配置 config-overrides.js
-const { override, addWebpackPlugin } = require('customize-cra')
-const SentryWebpackPlugin = require('@sentry/webpack-plugin')
+const { override, addWebpackPlugin } = require('customize-cra');
+const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 
 module.exports = override(
   // production 要启用 SourceMap，后面打包结束再删除
@@ -166,9 +166,9 @@ module.exports = override(
       validate: true,
 
       // 发布前删除所有的 Sentry 中的 sourceMap
-      cleanArtifacts: true
-    })
-)
+      cleanArtifacts: true,
+    }),
+);
 ```
 
 ```yml:title=.sentryclirc

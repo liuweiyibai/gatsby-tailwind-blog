@@ -120,10 +120,10 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
         // 当 Webpack 遇到 @ 会自动指向 src 路径
         '@': path.resolve(__dirname, `../src`),
         // 给对象的键后的末尾添加 $，以表示精准匹配
-        vue$: 'vue/dist/vue.esm.js'
-      }
-    }
-  }
+        vue$: 'vue/dist/vue.esm.js',
+      },
+    },
+  };
   // 使用 TypeScript 时要在 tsconfig.json 中添加配置
   ```
 
@@ -139,10 +139,10 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
       modules: [
         path.resolve(__dirname, 'src'),
         // 将 node_modules 设置为绝对路径避免层层查找
-        path.resolve(__dirname, 'node_modules')
-      ]
-    }
-  }
+        path.resolve(__dirname, 'node_modules'),
+      ],
+    },
+  };
   ```
 
   `resolve.mainFields` 字段
@@ -156,9 +156,9 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
   ```js
   module.exports = {
     resolve: {
-      mainFields: ['browser', 'module', 'main']
-    }
-  }
+      mainFields: ['browser', 'module', 'main'],
+    },
+  };
   ```
 
   对于其他任意的 target（包括 node），默认值为：
@@ -166,9 +166,9 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
   ```js
   module.exports = {
     resolve: {
-      mainFields: ['module', 'main']
-    }
-  }
+      mainFields: ['module', 'main'],
+    },
+  };
   ```
 
   例如，一个名为 `upstream` 的 `library`，其 `package.json` 包含以下字段：
@@ -189,7 +189,7 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
   默认值：
 
   ```js
-  extensions: ['.wasm', '.mjs', '.js', '.json']
+  extensions: ['.wasm', '.mjs', '.js', '.json'];
   ```
 
   当导入语句没带文件后缀时，Webpack 会根据 `extensions` 定义的后缀列表进行文件查找，所以：
@@ -201,7 +201,7 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
   常用写法：
 
   ```js
-  extensions: ['.js', '.json', '.ts', '.tsx', '.scss']
+  extensions: ['.js', '.json', '.ts', '.tsx', '.scss'];
   ```
 
 - `module.noParse` 字段
@@ -212,7 +212,7 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
 
   ```js
   module: {
-    noParse: [/jquery|chartjs/, /react\.min\.js$/]
+    noParse: [/jquery|chartjs/, /react\.min\.js$/];
   }
   ```
 
@@ -244,7 +244,7 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
   ```js
   // 这里是对 mini-css-extract-plugin 的参数控制
   css: {
-    extract: true // 生产环境下是 true，开发环境下是 false
+    extract: true; // 生产环境下是 true，开发环境下是 false
   }
   ```
 
@@ -277,8 +277,8 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
     chunks: 'all',
     cacheGroups: {
       // 这里可以对项目公用的css js 部分根据定义的规则进行抽取独立打包
-    }
-  })
+    },
+  });
   ```
 
 - CDN
@@ -287,16 +287,16 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
 
   ```js
   // 设置不参与构建的库
-  const externals = {}
+  const externals = {};
   cdnDependencies.forEach(pkg => {
-    externals[pkg.name] = pkg.library
-  })
+    externals[pkg.name] = pkg.library;
+  });
 
   // 引入文件的 cdn 链接
   const cdn = {
     css: cdnDependencies.map(e => e.css).filter(e => e),
-    js: cdnDependencies.map(e => e.js).filter(e => e)
-  }
+    js: cdnDependencies.map(e => e.js).filter(e => e),
+  };
 
   // vue.config.js
   module.exports = {
@@ -308,16 +308,16 @@ Webpack 在启动后，会根据 `entry` 配置的入口，递归解析所依赖
       const htmlPluginNames = chain(pages)
         .keys()
         .map(page => 'html-' + page)
-        .value()
-      const targetHtmlPluginNames = htmlPluginNames.length ? htmlPluginNames : ['html']
+        .value();
+      const targetHtmlPluginNames = htmlPluginNames.length ? htmlPluginNames : ['html'];
       each(targetHtmlPluginNames, name => {
         config.plugin(name).tap(options => {
-          set(options, '[0].cdn', process.env.NODE_ENV === 'production' ? cdn : [])
-          return options
-        })
-      })
-    }
-  }
+          set(options, '[0].cdn', process.env.NODE_ENV === 'production' ? cdn : []);
+          return options;
+        });
+      });
+    },
+  };
   ```
 
 - gzip

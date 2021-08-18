@@ -39,7 +39,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   dialectOptions: {
     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
     supportBigNumbers: true,
-    bigNumberStrings: true
+    bigNumberStrings: true,
   },
 
   // sqlite 的存储引擎
@@ -68,9 +68,9 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     syncOnAssociation: true,
     charset: 'utf8',
     dialectOptions: {
-      collate: 'utf8_general_ci'
+      collate: 'utf8_general_ci',
     },
-    timestamps: true // 是否开启时间戳
+    timestamps: true, // 是否开启时间戳
   },
 
   // 类似于同步：你可以定义始终强制同步模型
@@ -93,8 +93,8 @@ const sequelize = new Sequelize('database', 'username', 'password', {
   // READ_COMMITTED
   // REPEATABLE_READ
   // SERIALIZABLE
-  isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ
-})
+  isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
+});
 ```
 
 ## 模糊查询

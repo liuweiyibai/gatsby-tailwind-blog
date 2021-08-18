@@ -15,35 +15,35 @@ thumbnail: '../../thumbnails/html5.png'
 
 ```js
 function judgeBrand(sUserAgent) {
-  var isIphone = sUserAgent.match(/iphone/i) == 'iphone'
-  var isHuawei = sUserAgent.match(/huawei/i) == 'huawei'
-  var isHonor = sUserAgent.match(/honor/i) == 'honor'
-  var isOppo = sUserAgent.match(/oppo/i) == 'oppo'
-  var isOppoR15 = sUserAgent.match(/pacm00/i) == 'pacm00'
-  var isVivo = sUserAgent.match(/vivo/i) == 'vivo'
-  var isXiaomi = sUserAgent.match(/mi\s/i) == 'mi '
-  var isXiaomi2s = sUserAgent.match(/mix\s/i) == 'mix '
-  var isRedmi = sUserAgent.match(/redmi/i) == 'redmi'
-  var isSamsung = sUserAgent.match(/sm-/i) == 'sm-'
+  var isIphone = sUserAgent.match(/iphone/i) == 'iphone';
+  var isHuawei = sUserAgent.match(/huawei/i) == 'huawei';
+  var isHonor = sUserAgent.match(/honor/i) == 'honor';
+  var isOppo = sUserAgent.match(/oppo/i) == 'oppo';
+  var isOppoR15 = sUserAgent.match(/pacm00/i) == 'pacm00';
+  var isVivo = sUserAgent.match(/vivo/i) == 'vivo';
+  var isXiaomi = sUserAgent.match(/mi\s/i) == 'mi ';
+  var isXiaomi2s = sUserAgent.match(/mix\s/i) == 'mix ';
+  var isRedmi = sUserAgent.match(/redmi/i) == 'redmi';
+  var isSamsung = sUserAgent.match(/sm-/i) == 'sm-';
 
   if (isIphone) {
-    return 'iphone'
+    return 'iphone';
   } else if (isHuawei || isHonor) {
-    return 'huawei'
+    return 'huawei';
   } else if (isOppo || isOppoR15) {
-    return 'oppo'
+    return 'oppo';
   } else if (isVivo) {
-    return 'vivo'
+    return 'vivo';
   } else if (isXiaomi || isRedmi || isXiaomi2s) {
-    return 'xiaomi'
+    return 'xiaomi';
   } else if (isSamsung) {
-    return 'samsung'
+    return 'samsung';
   } else {
-    return 'default'
+    return 'default';
   }
 }
 
-var brand = judgeBrand(navigator.userAgent.toLowerCase())
+var brand = judgeBrand(navigator.userAgent.toLowerCase());
 ```
 
 > 小米手机判断比较特殊，小米普通机型拿到的 `ua` 都类似于 `MI 6 Build`、`Mi Note 2 Build` 这样的，所以要匹配 `mi\s`，空格必须加上。如果只匹配 `mi` 的话，用户通过小米浏览器或者其他有带有 `mi` 字符的都会认为是小米手机，例如：`Microsoft`
@@ -54,8 +54,8 @@ var brand = judgeBrand(navigator.userAgent.toLowerCase())
 
 ```js
 function isWeChat() {
-  var ua = navigator.userAgent.toLowerCase()
-  return /micromessenger/.test(ua) ? true : false
+  var ua = navigator.userAgent.toLowerCase();
+  return /micromessenger/.test(ua) ? true : false;
 }
 ```
 
@@ -63,22 +63,22 @@ function isWeChat() {
 
 ```js
 function checkAgent() {
-  var sUserAgent = navigator.userAgent.toLowerCase()
-  var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad'
-  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == 'iphone os'
-  var bIsMidp = sUserAgent.match(/midp/i) == 'midp'
-  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == 'rv:1.2.3.4'
-  var bIsUc = sUserAgent.match(/ucweb/i) == 'ucweb'
-  var bIsAndroid = sUserAgent.match(/android/i) == 'android'
-  var bIsCE = sUserAgent.match(/windows ce/i) == 'windows ce'
-  var bIsWM = sUserAgent.match(/windows mobile/i) == 'windows mobile'
+  var sUserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = sUserAgent.match(/ipad/i) == 'ipad';
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == 'iphone os';
+  var bIsMidp = sUserAgent.match(/midp/i) == 'midp';
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == 'rv:1.2.3.4';
+  var bIsUc = sUserAgent.match(/ucweb/i) == 'ucweb';
+  var bIsAndroid = sUserAgent.match(/android/i) == 'android';
+  var bIsCE = sUserAgent.match(/windows ce/i) == 'windows ce';
+  var bIsWM = sUserAgent.match(/windows mobile/i) == 'windows mobile';
 
   if (!(bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM || bIsIpad)) {
-    return 'pc'
+    return 'pc';
   } else if (bIsIpad) {
-    return 'pad'
+    return 'pad';
   } else {
-    return 'phone'
+    return 'phone';
   }
 }
 ```

@@ -1,8 +1,8 @@
-import * as React from "react"
-import { graphql } from "gatsby"
-import AppLayout from "@/Layout/AppLayout"
-import DefaultPostLayout from "@/Layout/DefaultPostLayout"
-import SimplePostLyout from "@/Layout/SimplePostLyout"
+import * as React from 'react';
+import { graphql } from 'gatsby';
+import AppLayout from '@/Layout/AppLayout';
+import DefaultPostLayout from '@/Layout/DefaultPostLayout';
+import SimplePostLyout from '@/Layout/SimplePostLyout';
 
 const MapToObject = (obj: any) => {
   return {
@@ -11,23 +11,23 @@ const MapToObject = (obj: any) => {
     ...obj,
     fields: null,
     frontmatter: null,
-  }
-}
+  };
+};
 
 const PostPageTemplate = ({ data, pageContext }) => {
-  const post = MapToObject(data.markdownRemark)
+  const post = MapToObject(data.markdownRemark);
   return (
     <AppLayout>
-      {post.layout && post.layout === "simple" ? (
+      {post.layout && post.layout === 'simple' ? (
         <SimplePostLyout {...post} {...pageContext} />
       ) : (
         <DefaultPostLayout {...post} {...pageContext} />
       )}
     </AppLayout>
-  )
-}
+  );
+};
 
-export default PostPageTemplate
+export default PostPageTemplate;
 
 export const pageQuery = graphql`
   query QueryPostBySlug($slug: String!) {
@@ -48,4 +48,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

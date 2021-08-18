@@ -1,6 +1,6 @@
 ---
 title: 关于我
-slug: "/about"
+slug: '/about'
 date: 2021-01-05 12:00:00
 ---
 

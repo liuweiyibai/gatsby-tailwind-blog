@@ -20,13 +20,13 @@ thumbnail: '../../thumbnails/js.png'
 
   ```js
   // 作用在document
-  document.querySelector('#nav') // 获取文档中id="nav"的元素
-  document.querySelector('.nav') // 获取文档中class="nav"的元素
-  document.querySelector('#nav li:first-child') // 获取文档中id="nav"下面的第一个li元素
+  document.querySelector('#nav'); // 获取文档中id="nav"的元素
+  document.querySelector('.nav'); // 获取文档中class="nav"的元素
+  document.querySelector('#nav li:first-child'); // 获取文档中id="nav"下面的第一个li元素
 
   // 也可以作用在其他元素
-  let nav = dodocument.querySelector('#nav')
-  nav.querySelector('li') // 如果有多个li的话，返回第一个li
+  let nav = dodocument.querySelector('#nav');
+  nav.querySelector('li'); // 如果有多个li的话，返回第一个li
 
   // 注意：无论如何只返回一个元素，如果有多个素，那也只返第一个
   ```
@@ -36,13 +36,13 @@ thumbnail: '../../thumbnails/js.png'
   获取指定元素中匹配 CSS 选择器的所有元素
 
   ```js
-  let list = document.querySelectorAll('li')
+  let list = document.querySelectorAll('li');
   // NodeList(2) [li, li] 这里假设返回2个
 
   // 注意：返回的值是一个类数组，无法使用数组的原生方法（forEach、map等），需
   // 要转换一下：
 
-  Array.from(list).map(t => t)
+  Array.from(list).map(t => t);
   ```
 
 - losest
@@ -50,7 +50,7 @@ thumbnail: '../../thumbnails/js.png'
   跟 querySelector 相反，该元素可以向上查询，也就是可以查询到父元素
 
   ```js
-  document.querySelector('li').closest('#nav')
+  document.querySelector('li').closest('#nav');
   ```
 
 - dataset
@@ -58,9 +58,9 @@ thumbnail: '../../thumbnails/js.png'
   就跟原生微信小程序一样，能获取标签上以"data-"为前缀的属性集合
 
   ```jsx
-  ;<p data-name="蜘蛛侠" data-age="16"></p>
+  <p data-name="蜘蛛侠" data-age="16"></p>;
 
-  document.querySelector('p').dataset // {name: "蜘蛛侠", age: "16"}
+  document.querySelector('p').dataset; // {name: "蜘蛛侠", age: "16"}
 
   // 注意：虽然可以用 `getAttribute` 方法获取任何属性值，但是性质却不一样，这是开发规范问题，凡是自定义属性都要加上`data-`前缀
   ```
@@ -69,8 +69,8 @@ thumbnail: '../../thumbnails/js.png'
 
   ```jsx
   // 这是一个html属性，规定元素是否隐藏，表现跟css的display: none一致：
-  ;<div hidden>我被隐藏了</div>
-  document.querySelector('div').hidden = true / false
+  <div hidden>我被隐藏了</div>;
+  document.querySelector('div').hidden = true / false;
   ```
 
 - contenteditable
@@ -98,23 +98,23 @@ thumbnail: '../../thumbnails/js.png'
   这是一个对象，该对象里封装了许多操作元素类名的方法：
 
   ```jsx
-  ;<p class="title"></p>
-  let elem = document.querySelector('p')
+  <p class="title"></p>;
+  let elem = document.querySelector('p');
 
   // 增加类名
-  elem.classList.add('title-new') // "title title-new"
+  elem.classList.add('title-new'); // "title title-new"
 
   // 删除类名
-  elem.classList.remove('title') // "title-new"
+  elem.classList.remove('title'); // "title-new"
 
   // 切换类名（有则删、无则增，常用于一些切换操作，如显示/隐藏）
-  elem.classList.toggle('title') // "title-new title"
+  elem.classList.toggle('title'); // "title-new title"
 
   // 替换类名
-  elem.classList.replace('title', 'title-old') // "title-new title-old"
+  elem.classList.replace('title', 'title-old'); // "title-new title-old"
 
   // 是否包含指定类名
-  elem.classList.contains('title') // false
+  elem.classList.contains('title'); // false
   ```
 
 - getBoundingClientRect
@@ -144,10 +144,10 @@ thumbnail: '../../thumbnails/js.png'
   可以判断指定元素是否包含了指定的子元素：
 
   ```jsx
-  ;<div>
+  <div>
     <p></p>
-  </div>
-  document.querySelector('div').contains(document.querySelector('p')) // true
+  </div>;
+  document.querySelector('div').contains(document.querySelector('p')); // true
   ```
 
 - orientation
@@ -158,10 +158,10 @@ thumbnail: '../../thumbnails/js.png'
   window.addEventListener(
     'orientationchange',
     () => {
-      document.body.innerHTML += `<p>屏幕旋转后的角度值：${window.orientation}</p>`
+      document.body.innerHTML += `<p>屏幕旋转后的角度值：${window.orientation}</p>`;
     },
-    false
-  )
+    false,
+  );
   ```
 
   使用 CSS 的媒体查询：
@@ -189,11 +189,11 @@ thumbnail: '../../thumbnails/js.png'
   监听当前的网络状态变动，然后执行对应的方法：
 
   ```jsx
-  window.addEventListener('online', xxx)
+  window.addEventListener('online', xxx);
 
   window.addEventListener('offline', () => {
-    alert('你断网啦！')
-  })
+    alert('你断网啦！');
+  });
   ```
 
 - battery state
@@ -201,7 +201,7 @@ thumbnail: '../../thumbnails/js.png'
   获取设备的电池状态：
 
   ```js
-  navigator.getBattery().then(battery => console.log(battery))
+  navigator.getBattery().then(battery => console.log(battery));
 
   // 返回
   {
@@ -212,7 +212,7 @@ thumbnail: '../../thumbnails/js.png'
       onchargingchange, // 监听充电状态变化
       onchargingtimechange, // 监听充满电所需时间变化
       ondischargingtimechange, // 监听当前电量可使用时间变化
-      onlevelchange // 监听电量变化
+      onlevelchange; // 监听电量变化
   }
   ```
 
@@ -222,10 +222,10 @@ thumbnail: '../../thumbnails/js.png'
 
   ```js
   // 震动一次
-  navigator.vibrate(100)
+  navigator.vibrate(100);
 
   // 连续震动，震动200ms、暂停100ms、震动300ms
-  navigator.vibrate([200, 100, 300])
+  navigator.vibrate([200, 100, 300]);
   ```
 
 - page visibility
@@ -234,8 +234,8 @@ thumbnail: '../../thumbnails/js.png'
 
   ```js
   document.addEventListener('visibilitychange', () => {
-    console.log(`页面可见性：${document.visibilityState}`)
-  })
+    console.log(`页面可见性：${document.visibilityState}`);
+  });
   // 当程序切到后台的时候，如果当前有视频播放或者一些动画执行，可以先暂停
   ```
 
@@ -247,11 +247,11 @@ thumbnail: '../../thumbnails/js.png'
   // 从左到右分别为alpha、beta、gamma
 
   window.addEventListener('deviceorientation', event => {
-    let { alpha, beta, gamma } = event
-    console.log(`alpha：${alpha}`)
-    console.log(`beta：${beta}`)
-    console.log(`gamma：${gamma}`)
-  })
+    let { alpha, beta, gamma } = event;
+    console.log(`alpha：${alpha}`);
+    console.log(`beta：${beta}`);
+    console.log(`gamma：${gamma}`);
+  });
   ```
 
 - toDataURL
@@ -261,34 +261,34 @@ thumbnail: '../../thumbnails/js.png'
   ```js
   const downloadImage = (url, name) => {
     // 实例化画布
-    let canvas = document.createElement('canvas')
-    let context = canvas.getContext('2d')
+    let canvas = document.createElement('canvas');
+    let context = canvas.getContext('2d');
 
     // 实例化一个图片对象
-    let image = new Image()
-    image.crossOrigin = 'Anonymous'
-    image.src = url
+    let image = new Image();
+    image.crossOrigin = 'Anonymous';
+    image.src = url;
 
     // 当图片加载完毕
     image.onload = () => {
       // 将图片画在画布上
-      canvas.height = image.height
-      canvas.width = image.width
-      context.drawImage(image, 0, 0)
+      canvas.height = image.height;
+      canvas.width = image.width;
+      context.drawImage(image, 0, 0);
 
       // 将画布的内容转换成base64地址
-      let dataURL = canvas.toDataURL('image/png')
+      let dataURL = canvas.toDataURL('image/png');
 
       // 创建a标签模拟点击进行下载
-      let a = document.createElement('a')
-      a.hidden = true
-      a.href = dataURL
-      a.download = name
+      let a = document.createElement('a');
+      a.hidden = true;
+      a.href = dataURL;
+      a.download = name;
 
-      document.body.appendChild(a)
-      a.click()
-    }
-  }
+      document.body.appendChild(a);
+      a.click();
+    };
+  };
   ```
 
 - notification
@@ -299,7 +299,7 @@ thumbnail: '../../thumbnails/js.png'
   // 想要成功的调起通知，首先要用户的授权
   // 所以，再调用之前先向用户发起请求
 
-  let permission = Notification.permission
+  let permission = Notification.permission;
 
   if (permission == 'granted') {
     // 已同意，开始发送通知
@@ -307,19 +307,19 @@ thumbnail: '../../thumbnails/js.png'
       body: '最新通知',
       icon: '我的头像',
       data: {
-        url: 'https://www.baidu.com'
-      }
-    })
+        url: 'https://www.baidu.com',
+      },
+    });
 
     // 点击回调
     notice.onclick = () => {
-      window.open(notice.data.url) // 当用户点击通知时，在浏览器打开百度网站
-    }
+      window.open(notice.data.url); // 当用户点击通知时，在浏览器打开百度网站
+    };
   } else if (permission == 'denied') {
     // 不同意，发不了咯
   } else {
     // 其他状态，可以重新发送授权提示
-    Notification.requestPermission()
+    Notification.requestPermission();
   }
   ```
 
@@ -330,17 +330,17 @@ thumbnail: '../../thumbnails/js.png'
 ```js
 // 监听自定义事件：
 window.addEventListener('follow', event => {
-  console.log(event.detail) // 输出 {name: "hhh"}
-})
+  console.log(event.detail); // 输出 {name: "hhh"}
+});
 
 // 派发自定义事件：
 window.dispatchEvent(
   new CustomEvent('follow', {
     detail: {
-      name: 'hhh'
-    }
-  })
-)
+      name: 'hhh',
+    },
+  }),
+);
 ```
 
 ### fullScreen
@@ -354,13 +354,13 @@ window.dispatchEvent(
  */
 const launchFullScreen = (elem = document.documentElement) => {
   if (elem.requestFullScreen) {
-    elem.requestFullScreen()
+    elem.requestFullScreen();
   } else if (elem.mozRequestFullScreen) {
-    elem.mozRequestFullScreen()
+    elem.mozRequestFullScreen();
   } else if (elem.webkitRequestFullScreen) {
-    elem.webkitRequestFullScreen()
+    elem.webkitRequestFullScreen();
   }
-}
+};
 
 // 作用在 documentElement 就相当于F11开启全屏
 
@@ -371,13 +371,13 @@ const launchFullScreen = (elem = document.documentElement) => {
  */
 const exitFullScreen = () => {
   if (document.exitFullscreen) {
-    document.exitFullscreen()
+    document.exitFullscreen();
   } else if (document.mozCancelFullScreen) {
-    document.mozCancelFullScreen()
+    document.mozCancelFullScreen();
   } else if (document.webkitCancelFullScreen) {
-    document.webkitCancelFullScreen()
+    document.webkitCancelFullScreen();
   }
-}
+};
 ```
 
 ### URLSearchParams
@@ -385,7 +385,7 @@ const exitFullScreen = () => {
 ```js
 // 假设浏览器的url参数是 "?name=蜘蛛侠&age=16"：
 
-const params = new URLSearchParams(location.search).get('name') // 蜘蛛侠
+const params = new URLSearchParams(location.search).get('name'); // 蜘蛛侠
 ```
 
 ## 其他 API

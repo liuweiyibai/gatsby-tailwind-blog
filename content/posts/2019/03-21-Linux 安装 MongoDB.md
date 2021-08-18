@@ -63,7 +63,7 @@ thumbnail: '../../thumbnails/mongodb.png'
    进入 `mongodb shell`，输入以下命令，以显示 MongoDB 版本：
 
    ```js
-   db.version()
+   db.version();
    // 输出-> 4.0.1
    ```
 
@@ -113,15 +113,15 @@ sudo systemctl restart mongod
   db.createUser({
     user: 'username',
     pwd: 'password',
-    roles: [{ role: 'userAdminAnyDatabase', db: 'admin' }]
-  })
+    roles: [{ role: 'userAdminAnyDatabase', db: 'admin' }],
+  });
 
   // 先登录admin相关账号，给某个数据库增加用户，先 use xxx
   db.createUser({
     user: 'yunzhu',
     pwd: 'yunzhu1qaz2wsxmongo',
-    roles: [{ role: 'readWrite', db: 'yunzhu' }]
-  })
+    roles: [{ role: 'readWrite', db: 'yunzhu' }],
+  });
   // 回车新建会提示 Successfully added user ...
   ```
 

@@ -46,17 +46,17 @@ JavaScript 代码的执行是由 JavaScript 来执行的。JavaScript 解析器�
   比如：
 
   ```js
-  console.log(a) // undefined
-  var a = '1'
+  console.log(a); // undefined
+  var a = '1';
   /**
    * 这其中包括：一次提升，两次赋值
    * 预解析阶段会进行提升 提升 var a = undefined
    * 执行的时候 a 进行赋值 a='1'
    */
 
-  console.log(str) // undefined
-  var str = 123
-  console.log(str) // 123
+  console.log(str); // undefined
+  var str = 123;
+  console.log(str); // 123
   // 一次提升一次赋值
   ```
 
@@ -67,10 +67,10 @@ JavaScript 代码的执行是由 JavaScript 来执行的。JavaScript 解析器�
   `function` 进行预解析的时候，不仅是声明而且还定义了，但是它存储的数据的那个空间里面存储的是代码是字符串，没有任何意义
 
   ```js
-  alert(a) // 弹出的是下面的 function 的定义声明
-  a() // 可以被调用
+  alert(a); // 弹出的是下面的 function 的定义声明
+  a(); // 可以被调用
   function a() {
-    alert('预解析function')
+    alert('预解析function');
   }
   ```
 
@@ -84,9 +84,9 @@ JavaScript 代码的执行是由 JavaScript 来执行的。JavaScript 解析器�
   预解析是发生在当前作用域下的，刚开始的时候，我们预解析的是全局作用域，在 JavaScript 中的 `global` 就是我们的 `window`。我们运行函数的时候会生成一个新的私有作用域（每次执行都是新的，执行完成就销毁），这个作用域下我们可以理解为开辟了一个新的内存空间。在这个内存中也会执行预解析，当我们的函数执行完成后，这个内存或者作用域就会销毁，如果在当前作用域下的一个变量没有预解析，就会向它的上一级去找，直到找到 `window`，如果 `window` 下也没有定义，就会报错。所以，在函数内通过 `var` 定义的变量是局部变量，没有能过 `var` 定义的变量是全局变量。预解析不会在同一个变量上重复的发生，也就是一个变量如果已经在当前作用域下预解析了，不会再重复解析。等号右边的 `function` 不会进行预解析
 
   ```js
-  alert(a)
-  fn()
-  var a = function fn() {}
+  alert(a);
+  fn();
+  var a = function fn() {};
   // 第一次打印undefined，第二次报错，未定义，因为预解析的时候，=号右边是不进行预解析的。
   ```
 
@@ -103,13 +103,13 @@ JavaScript 代码的执行是由 JavaScript 来执行的。JavaScript 解析器�
   后面定义的会覆盖前面定义的
 
   ```js
-  alert(a) //弹出后面的function
+  alert(a); //弹出后面的function
   function a() {
-    var b
+    var b;
   }
-  alert(a) //仍然弹出后面的function，因为function是提前预解析的
+  alert(a); //仍然弹出后面的function，因为function是提前预解析的
   function a() {
-    var c
+    var c;
   }
   ```
 

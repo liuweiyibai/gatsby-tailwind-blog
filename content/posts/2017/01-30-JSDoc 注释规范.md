@@ -19,7 +19,7 @@ thumbnail: '../../thumbnails/js.png'
  * @desc func 方法
  */
 function func(value) {
-  return '返回对象'
+  return '返回对象';
 }
 ```
 
@@ -39,7 +39,7 @@ function func(value) {
  * @desc 根据目标对象获取运营商
  */
 function matchedNumber(data) {
-  return '返回对象'
+  return '返回对象';
 }
 ```
 
@@ -57,7 +57,7 @@ function matchedNumber(data) {
  * @desc 根据目标对象获取运营商
  */
 function matchedNumber(data) {
-  return '返回对象'
+  return '返回对象';
 }
 ```
 
@@ -75,7 +75,7 @@ function matchedNumber(data) {
  * @desc 根据目标对象获取运营商
  */
 function matchedNumber(data) {
-  return '返回对象'
+  return '返回对象';
 }
 ```
 
@@ -95,7 +95,7 @@ function matchedNumber(data) {
  * add(1, 2);    // 返回3
  */
 function matchedNumber(data) {
-  return '返回对象'
+  return '返回对象';
 }
 ```
 
@@ -127,8 +127,8 @@ function matchedNumber(data) {
  */
 var foo = {
   a: 'a',
-  b: 'b'
-}
+  b: 'b',
+};
 ```
 
 ## 常量注释
@@ -141,7 +141,7 @@ var foo = {
  * @default #000
  * @desc 常量定义
  */
-const COLOR_WHITE = '#fff'
+const COLOR_WHITE = '#fff';
 ```
 
 ## 枚举注释
@@ -166,8 +166,8 @@ var RETCODE = {
    * @type {string}
    * @desc 未知错误
    */
-  UNKOWN_ERROR: 'unkown'
-}
+  UNKOWN_ERROR: 'unkown',
+};
 ```
 
 ## 类的注释
@@ -193,7 +193,7 @@ ES6 中使用 Class 来表示一个类
  * @classdesc LBS控制类
  * @desc 初始化ws
  */
-var LBSControllerCom = Com.extends({})
+var LBSControllerCom = Com.extends({});
 ```
 
 ## 类的属性
@@ -207,6 +207,6 @@ var LBSControllerCom = Com.extends({
    * @desc 这样标识类的属性
    */
   foo1: 'a',
-  init: function () {}
-})
+  init: function () {},
+});
 ```

@@ -32,18 +32,18 @@ yarn add jspdf
 ```js
 // 默认导出为a4纸张，纵向，使用毫米表示单位
 
-var doc = new jsPDF()
-doc.text('Hello world!', 10, 10)
-doc.save('name.pdf')
+var doc = new jsPDF();
+doc.text('Hello world!', 10, 10);
+doc.save('name.pdf');
 
 // 如果要更改纸张尺寸，方向或单位，可以执行以下操作：
 var doc = new jsPDF({
   orientation: 'landscape',
   unit: 'in',
-  format: [4, 2]
-})
-doc.text('Hello world!', 1, 1)
-doc.save('two-by-four.pdf')
+  format: [4, 2],
+});
+doc.text('Hello world!', 1, 1);
+doc.save('two-by-four.pdf');
 ```
 
 ## 使用 UTF-8 / TTF
@@ -55,7 +55,7 @@ PDF 中的 14 种标准字体仅限于 ASCII 代码页。如果要使用 UTF-8�
 ## Angular/React/Vue 中使用
 
 ```js
-import * as jsPDF from 'jspdf'
+import * as jsPDF from 'jspdf';
 // 有些框架，必须像下面这样
-import jsPDF from 'jspdf'
+import jsPDF from 'jspdf';
 ```

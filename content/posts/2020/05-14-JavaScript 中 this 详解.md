@@ -36,23 +36,23 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 - 栗子 1：普通函数中
 
   ```js
-  var log = console.log
+  var log = console.log;
   function demo() {
-    var user = 'github'
-    log(this.user) // undefined
-    log(this) // window
+    var user = 'github';
+    log(this.user); // undefined
+    log(this); // window
   }
-  demo()
+  demo();
 
   // 这里的函数demo实际上是被window对象使用点语法所点出来的，如下：
 
   function demo() {
-    var user = 'github'
-    console.log(this.user) // undefined
-    console.log(this) // window
+    var user = 'github';
+    console.log(this.user); // undefined
+    console.log(this); // window
   }
 
-  window.demo()
+  window.demo();
   ```
 
 - 栗子 2：对象中
@@ -61,11 +61,11 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   var obj = {
     user: 'github',
     fn: function () {
-      console.log(this.user) // github
-    }
-  }
+      console.log(this.user); // github
+    },
+  };
 
-  obj.fn()
+  obj.fn();
 
   // 这里的 this 指向对象obj
   // 注意看最后一行调用函数的代码
@@ -84,10 +84,10 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   var obj = {
     user: 'github',
     fn: function () {
-      console.log(this.user) // github
-    }
-  }
-  window.obj.fn()
+      console.log(this.user); // github
+    },
+  };
+  window.obj.fn();
 
   // 这段代码跟上面的代码几乎是一样的
   // 但是这里为什么没有指向 window 呢？
@@ -100,15 +100,15 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
     b: {
       a: 2,
       fn: function () {
-        console.log(this.a) // 2
-      }
-    }
-  }
+        console.log(this.a); // 2
+      },
+    },
+  };
 
-  obj.b.fn()
+  obj.b.fn();
 
   // 通过 bind、apply、call 手动修改 fn函数中 this为 obj
-  obj.b.fn.call(obj, '')
+  obj.b.fn.call(obj, '');
 
   // 这里执行的时候同样是对象 obj 通过点语法进行的执行
   // 但是 this 同样没有指向 window，这是为什么呢？
@@ -133,13 +133,13 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
     b: {
       // a:2,
       fn: function () {
-        console.log(this.a) // undefined
-      }
-    }
-  }
+        console.log(this.a); // undefined
+      },
+    },
+  };
 
   // fn 函数实际是 b 调用的，b 中没有 a 属性
-  obj.b.fn()
+  obj.b.fn();
 
   // 我们可以看到，对象 b 中没有属性 a，这个 this 指向
   // 的也是对象b，因为this只会指向它的上一级对象
@@ -152,13 +152,13 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
     b: {
       a: 2,
       fn: function () {
-        console.log(this.a) // undefined
-        console.log(this) // window
-      }
-    }
-  }
-  var demo = obj.b.fn
-  demo()
+        console.log(this.a); // undefined
+        console.log(this); // window
+      },
+    },
+  };
+  var demo = obj.b.fn;
+  demo();
 
   // 在上面的代码中，this 指向的是window
   // 你们可能会觉得很奇怪
@@ -176,14 +176,14 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
   ```js
   function returnThis() {
-    return this
+    return this;
   }
-  var user = { name: 'github' }
+  var user = { name: 'github' };
 
-  returnThis() // window 等同于 window.returnThis() 所以是 window
+  returnThis(); // window 等同于 window.returnThis() 所以是 window
 
-  returnThis.call(user) // github
-  returnThis.apply(user) // github
+  returnThis.call(user); // github
+  returnThis.apply(user); // github
   // returnThis.bind(user)() // github
 
   // 这里就是Object.prototype.call
@@ -195,15 +195,15 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
   ```js
   function returnThis() {
-    return this
+    return this;
   }
 
-  var user1 = { name: 'github' }
-  var user1returnThis = returnThis.bind(user1)
-  user1returnThis() // github
+  var user1 = { name: 'github' };
+  var user1returnThis = returnThis.bind(user1);
+  user1returnThis(); // github
 
-  var user2 = { name: 'gitee' }
-  user1returnThis.call(user2) // github
+  var user2 = { name: 'gitee' };
+  user1returnThis.call(user2); // github
 
   // Object.prototype.bind 通过一个新函数来提供了永久的绑定
   // 而且不会被 call 和 apply 修改新的指向
@@ -213,10 +213,10 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
   ```js
   function Fn() {
-    this.user = 'github'
+    this.user = 'github';
   }
-  var demo = new Fn()
-  console.log(demo.user) // github
+  var demo = new Fn();
+  console.log(demo.user); // github
 
   // 这里 new 关键字改变了 this 的指向
   // new 关键字创建了一个对象实例
@@ -225,18 +225,18 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
   // 注意：这里 new 会覆盖 bind 的绑定
   function Cat() {
-    console.log(this)
+    console.log(this);
   }
 
-  Cat() // window ，为普通函数时 this 指向 window
-  new Cat() // Cat{} 为构造函数时，指向 new 实例对象
+  Cat(); // window ，为普通函数时 this 指向 window
+  new Cat(); // Cat{} 为构造函数时，指向 new 实例对象
 
-  var user1 = { name: 'github' }
-  Cat.call(user1) // {name: "github"}
+  var user1 = { name: 'github' };
+  Cat.call(user1); // {name: "github"}
 
-  var user2 = Cat.bind(user1)
-  user2() // github
-  new user2() // Cat()
+  var user2 = Cat.bind(user1);
+  user2(); // github
+  new user2(); // Cat()
 
   // new > bind > apply = call > object > 普通函数
   ```
@@ -246,32 +246,32 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   ```js
   // 当 this 遇上 return 时
   function fn() {
-    this.user = 'github'
-    return {}
+    this.user = 'github';
+    return {};
   }
-  var a = new fn() // {}
-  console.log(a.user) // undefined
+  var a = new fn(); // {}
+  console.log(a.user); // undefined
 
   function fn() {
-    this.user = 'github'
-    return function () {}
+    this.user = 'github';
+    return function () {};
   }
-  var a = new fn()
-  console.log(a.user) // undefined
+  var a = new fn();
+  console.log(a.user); // undefined
 
   function fn() {
-    this.user = 'github'
-    return 1
+    this.user = 'github';
+    return 1;
   }
-  var a = new fn()
-  console.log(a.user) // github
+  var a = new fn();
+  console.log(a.user); // github
 
   function fn() {
-    this.user = 'github'
-    return undefined
+    this.user = 'github';
+    return undefined;
   }
-  var a = new fn()
-  console.log(a.user) // github
+  var a = new fn();
+  console.log(a.user); // github
 
   // 总结：如果返回值是一个对象
   // 那么 this 指向就是返回的对象
@@ -282,11 +282,11 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   // 但是这里 this 还是指向那个函数的实例
 
   function fn() {
-    this.user = 'github'
-    return null
+    this.user = 'github';
+    return null;
   }
-  var a = new fn()
-  console.log(a.user) // github
+  var a = new fn();
+  console.log(a.user); // github
   ```
 
 - 栗子 8：es6 中 this
@@ -302,28 +302,28 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   // 我们只要看它创建的位置即可
 
   function callback(qdx) {
-    qdx()
+    qdx();
   }
   callback(() => {
-    console.log(this) // window
-  })
+    console.log(this); // window
+  });
 
   var user = {
     name: '前端食堂',
     callback: callback, // 这个函数的创建位置其实是在上面 callback 定义
     callback1() {
       callback(() => {
-        console.log(this)
-      })
-    }
-  }
+        console.log(this);
+      });
+    },
+  };
   user.callback(() => {
     // 箭头函数的 this 在上层寻找
-    console.log(this) //  window
-  })
+    console.log(this); //  window
+  });
   user.callback1(() => {
-    console.log(this) // user
-  })
+    console.log(this); // user
+  });
   ```
 
 ## this 取值
@@ -334,11 +334,11 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
   function Person() {
     // 函数中的 this 默认指向window
     // 但是如果函数被 new 过(当做构造函数)，this 指的就是 new 出来的实例对象
-    this.a = 100
+    this.a = 100;
   }
   // 当函数作为构造函数用，那么其中的 this 就代表它即将 new 出来的实例对象。
-  var p = new Person()
-  console.log(p.a) // 100
+  var p = new Person();
+  console.log(p.a); // 100
   ```
 
 - 函数作为对象的一个属性
@@ -364,19 +364,19 @@ this 提供给我们更优雅的方式来隐式的传递对象引用，this 可�
 
   ```js
   var fun = function (aa) {
-    this.a = 100
-    console.log(aa)
-    console.log(this.b)
-  }
+    this.a = 100;
+    console.log(aa);
+    console.log(this.b);
+  };
   var obj = {
-    b: 1001
-  }
+    b: 1001,
+  };
 
-  fun.apply(obj, [11]) // 11 1001
-  fun.call(obj, 12) // 12 1001
+  fun.apply(obj, [11]); // 11 1001
+  fun.call(obj, 12); // 12 1001
   // fun 函数中的 this 被 apply 或 call 改写为 obj ，绑定 this 且直接调用
 
-  fun.bind(obj, 13)() // 13 1001
+  fun.bind(obj, 13)(); // 13 1001
   // 单纯的绑定 this，需要单独调用
   ```
 

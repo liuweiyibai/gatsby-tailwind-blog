@@ -93,7 +93,7 @@ html {
 }
 
 .token.deleted:not(.prefix)::after {
-  content: "";
+  content: '';
   @apply pointer-events-none absolute inset-0 block bg-rose-400 bg-opacity-25;
 }
 

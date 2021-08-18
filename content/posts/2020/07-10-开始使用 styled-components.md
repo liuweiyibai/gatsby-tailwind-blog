@@ -26,9 +26,9 @@ yarn add @types/styled-components --dev
 简单使用
 
 ```js
-import React, { Fragment, Component } from 'react'
-import ReactDOM from 'react-dom'
-import styled from 'styled-components'
+import React, { Fragment, Component } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 // 声明样式 ButtonA 组件,通过 styled 对象进行创建,注意 styled.html 元素,后面是反引号
 const ButtonA = styled.button`
@@ -40,7 +40,7 @@ const ButtonA = styled.button`
   cursor: pointer;
   background: #abcdef;
   color: #fff;
-`
+`;
 
 // 样式化声明ButtonB组件
 const ButtonB = styled.button`
@@ -52,7 +52,7 @@ const ButtonB = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-`
+`;
 
 class Header extends Component {
   // 样式最好不要在组件中定义
@@ -62,7 +62,7 @@ class Header extends Component {
         <ButtonA>按钮A</ButtonA>
         <ButtonB>按钮B</ButtonB>
       </Fragment>
-    )
+    );
   }
 }
 ```
@@ -70,40 +70,40 @@ class Header extends Component {
 给组件添加样式
 
 ```tsx
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const StyledLink = styled(Link)`
   font-size: 22px;
   color: ${props => props.color};
-`
+`;
 function IsLink(props) {
-  return <StyledLink color={props.color} />
+  return <StyledLink color={props.color} />;
 }
 ```
 
 背景图
 
 ```tsx
-import BgImg from './react.jpg' // 将图片定义成一个变量的方式来引用
+import BgImg from './react.jpg'; // 将图片定义成一个变量的方式来引用
 
 const Content = styled.div`
   width: 550px;
   height: 290px;
   background: url(${BgImg});
-`
+`;
 ```
 
 给组件添加属性
 
 ```tsx
 // 比如定义一个 input 组件，通过 styled-components 给组件添加 attr
-import styled from 'styled-components' // 引入styled-components
+import styled from 'styled-components'; // 引入styled-components
 
 // 参数是一个对象
 const Input = styled.input.attrs({
   placeholder: '请输入信息',
-  type: 'text'
+  type: 'text',
 })`
   width: ${props => props.width};
   height: ${props => (props.size === 'small' ? '24px' : '40px')};
@@ -116,15 +116,15 @@ const Input = styled.input.attrs({
   &::placeholder {
     color: palevioletred;
   }
-`
+`;
 // attr 中使用 props
 const Input2 = styled.input.attrs(props => ({
   placeholder: '请输入信息',
-  type: 'text'
+  type: 'text',
 }))`
   width: ${props => props.width};
   height: ${props => (props.size === 'small' ? '24px' : '40px')};
-`
+`;
 ```
 
 覆盖默认样式
@@ -136,7 +136,7 @@ const ButtonB = styled(ButtonA)`
     color: palevioletred;
     font-weight: bold;
   }
-`
+`;
 ```
 
 覆盖内联样式，style 内联样式的优先级是最高的，始终优先于外部 CSS，因此无法通过简单地样式组件覆盖它，但是有具体的解决办法的：
@@ -147,14 +147,14 @@ const ButtonB = styled(ButtonA)`
     background: blue !important;
     font-weight: bold;
   }
-`
+`;
 ```
 
 重置全局样式
 
 ```tsx
 // 定义全局样式，这其实一个根级组件
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 const globalStyle = createGlobalStyle`
    html, body, div, span, applet, object, iframe,
@@ -206,25 +206,25 @@ const globalStyle = createGlobalStyle`
             font-family: sans-serif;
         }
 
-`
-export default globalStyle
+`;
+export default globalStyle;
 ```
 
 重复样式混入 🎨
 
 ```tsx
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 const baseShadow = css`
   box-shadow: ${({ color }) => `0 10px 6px -6px ${color || '#777'}`};
-`
+`;
 
 // 共用样式使用普通函数进行定义也可以
 
 const StyledLink = styled`
   ${baseShadow}
-`
+`;
 
 const Btn = () => {
-  return <StyledLink color="#fff" />
-}
+  return <StyledLink color="#fff" />;
+};
 ```

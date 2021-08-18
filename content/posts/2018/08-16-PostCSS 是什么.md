@@ -78,10 +78,10 @@ CSS 是没有变量和作用域的，所以看起来不像一门语言，所以�
   module.exports = {
     plugins: {
       autoprefixer: {
-        browsers: ['last 7 iOS versions', 'last 3 versions', '> 1%']
-      }
-    }
-  }
+        browsers: ['last 7 iOS versions', 'last 3 versions', '> 1%'],
+      },
+    },
+  };
   ```
 
   然后直接执行如下命令，能得到和上面处理一样的结果
@@ -99,16 +99,16 @@ CSS 是没有变量和作用域的，所以看起来不像一门语言，所以�
     rules: [
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'scss-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'scss-loader'],
       },
       {
         test: /\.scss|css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader?sourceMap', 'resolve-url-loader', 'sass-loader?sourceMap']
-      }
-    ]
-  }
+        use: ['style-loader', 'css-loader', 'postcss-loader?sourceMap', 'resolve-url-loader', 'sass-loader?sourceMap'],
+      },
+    ],
+  };
   ```

@@ -1,11 +1,11 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
-import Tag from "../components/Tag"
-import { getFixed } from "../utils"
+import * as React from 'react';
+import { Link } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import Tag from '../components/Tag';
+import { getFixed } from '../utils';
 
 const PostItemSmall = ({ slug, title, date, tags, thumbnail, excerpt }) => {
-  const image = getFixed(thumbnail)
+  const image = getFixed(thumbnail);
   return (
     <li className="py-4">
       <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-center">
@@ -20,20 +20,15 @@ const PostItemSmall = ({ slug, title, date, tags, thumbnail, excerpt }) => {
               </Link>
             </h3>
             <div className="flex flex-wrap">
-              {Array.isArray(tags) &&
-                tags.map(tag => <Tag key={tag} text={tag} />)}
-              <time className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                {date}
-              </time>
+              {Array.isArray(tags) && tags.map(tag => <Tag key={tag} text={tag} />)}
+              <time className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">{date}</time>
             </div>
           </div>
-          <div className="prose text-gray-500 max-w-none dark:text-gray-400">
-            {excerpt}
-          </div>
+          <div className="prose text-gray-500 max-w-none dark:text-gray-400">{excerpt}</div>
         </div>
       </article>
     </li>
-  )
-}
+  );
+};
 
-export default PostItemSmall
+export default PostItemSmall;

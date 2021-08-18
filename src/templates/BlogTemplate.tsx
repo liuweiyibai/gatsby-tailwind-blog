@@ -1,21 +1,21 @@
-import React from "react"
-import { graphql } from "gatsby"
-import AppLayout from "../Layout/AppLayout"
-import BlogListLayout from "@/Layout/BlogListLayout"
+import React from 'react';
+import { graphql } from 'gatsby';
+import AppLayout from '../Layout/AppLayout';
+import BlogListLayout from '@/Layout/BlogListLayout';
 
 function MapObject(obj: any) {
   return {
     ...obj.frontmatter,
     ...obj.fields,
     ...obj,
-    frontmatter: "",
-  }
+    frontmatter: '',
+  };
 }
 
 const BlogTemplate: React.FC = ({ data, pageContext }) => {
-  const result = data.allMarkdownRemark.edges
+  const result = data.allMarkdownRemark.edges;
 
-  const posts = result.map((t: any) => t.node).map(MapObject)
+  const posts = result.map((t: any) => t.node).map(MapObject);
 
   return (
     <AppLayout>
@@ -26,10 +26,10 @@ const BlogTemplate: React.FC = ({ data, pageContext }) => {
         }}
       />
     </AppLayout>
-  )
-}
+  );
+};
 
-export default BlogTemplate
+export default BlogTemplate;
 
 export const blogListQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!) {
@@ -61,4 +61,4 @@ export const blogListQuery = graphql`
       }
     }
   }
-`
+`;

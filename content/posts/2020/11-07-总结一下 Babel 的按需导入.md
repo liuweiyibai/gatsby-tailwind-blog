@@ -21,33 +21,33 @@ thumbnail: '../../thumbnails/babel.png'
 不采用按需导入的插件, 导入一个库如 Lodash, 就会这样写:
 
 ```js
-import { trim, isEqual } from 'lodash'
+import { trim, isEqual } from 'lodash';
 
-trim(str)
-isEqual(1, 2)
+trim(str);
+isEqual(1, 2);
 ```
 
 这会将整个 Lodash 代码都给导入, 如果不想导入不需要的代码, 且当前库支持按需导入, 手动按需导入的代码应该为:
 
 ```js
-import isEqual from 'lodash/isequal'
-import trim from 'lodash/trim'
+import isEqual from 'lodash/isequal';
+import trim from 'lodash/trim';
 
-trim(str)
-isEqual(1, 2)
+trim(str);
+isEqual(1, 2);
 ```
 
 但当前模块中大量使用了这个库的模块(函数)时, 手动按需导入就会非常繁琐, 代码整洁度大大降低了. 如果能够将全量导入代码:
 
 ```js
-import { trim, isEqual } from 'lodash'
+import { trim, isEqual } from 'lodash';
 ```
 
 利用工具转换成按需导入代码:
 
 ```js
-import isEqual from 'lodash/isequal'
-import trim from 'lodash/trim'
+import isEqual from 'lodash/isequal';
+import trim from 'lodash/trim';
 ```
 
 这样既能享受全量导入的简洁, 又可以不用担心导入过多的无用代码.
@@ -88,43 +88,43 @@ import FaCheck from 'react-icons/lib/fa/check'
 在 babel-plugin-import 中对于如下代码:
 
 ```js
-import { Button } from 'element-ui'
+import { Button } from 'element-ui';
 
-console.log(Button)
+console.log(Button);
 ```
 
 插件解析出来所需要按需导入的模块后, 会在新的一行中添加按需导入语句(使用 babel@/helper-module-imports 库中的工具), 此时的代码会变为:
 
 ```js
-import _Button from 'element-ui/lib/button'
+import _Button from 'element-ui/lib/button';
 
-import 'components/lib/button/style.css'
+import 'components/lib/button/style.css';
 
-import { Button } from 'element-ui'
+import { Button } from 'element-ui';
 
-console.log(Button)
+console.log(Button);
 ```
 
 此时还需要需要将所有使用变量 Button 的地方改为 `_Button`:
 
 ```js
-import _Button from 'element-ui/lib/button'
+import _Button from 'element-ui/lib/button';
 
-import 'components/lib/button/style.css'
+import 'components/lib/button/style.css';
 
-import { Button } from 'element-ui'
+import { Button } from 'element-ui';
 
-console.log(_Button)
+console.log(_Button);
 ```
 
 然后删除原有导入:
 
 ```js
-import _Button from 'element-ui/lib/button'
+import _Button from 'element-ui/lib/button';
 
-import 'components/lib/button/style.css'
+import 'components/lib/button/style.css';
 
-console.log(_Button)
+console.log(_Button);
 ```
 
 为了将 Button 变量转为 `_Button`, 需要对可能使用变量语句转换, 在 babel-plugin-import 当前最新代码中, 检测的语句(表达式)类型有:
@@ -159,19 +159,19 @@ console.log(_Button)
 还有一种 Babel 转换导入语句的按需导入的机制, 原理来自 babel-plugin-loadash 插件, 它可以将下面的代码:
 
 ```js
-import _ from 'loadash'
-_.trim(str)
-_.isEqual(1, 2)
+import _ from 'loadash';
+_.trim(str);
+_.isEqual(1, 2);
 ```
 
 转换为:
 
 ```js
-import isEqual from 'lodash/isequal'
-import trim from 'lodash/trim'
+import isEqual from 'lodash/isequal';
+import trim from 'lodash/trim';
 
-trim(str)
-isEqual(1, 2)
+trim(str);
+isEqual(1, 2);
 ```
 
 原理是根据全量导入的变量的调用链, 分析所需要的模块, 然后按需导入. 这样的方便之处在于编码时使用模块的全量导入或者默认导入, 避免具名导入那样需要维护每一项. 比如利用 Antd 组件库在开发表单时, 需要导入大量的表单组件, 随着业务的变更, 组件也需要变更, 每一次维护都需要重新在导入语句中导入添加需要的模块.
@@ -179,13 +179,13 @@ isEqual(1, 2)
 一开始控件中只使用了 input 和 button:
 
 ```js
-import { Button, Input, Form, FormItem } from 'antd'
+import { Button, Input, Form, FormItem } from 'antd';
 ```
 
 后续扩展了业务时, 需要使用下拉框,需要改写:
 
 ```js
-import { Button, Input, Form, FormItem, Select } from 'antd'
+import { Button, Input, Form, FormItem, Select } from 'antd';
 ```
 
 这在当前文件代码量十分大时, 每一次使用新的组件, 都需要滚动文件顶部维护好新的导入, 然后在回到开发点继续开发, 打断流畅的开发快感. 且如果没有配置相应的 ESLint 规则的话, 还会导致一些没有使用的组件依旧被导入, 导致无用代码被加载.

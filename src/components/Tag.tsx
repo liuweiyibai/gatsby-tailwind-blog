@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react';
 
-import { Link } from "gatsby"
-import { kebabCase } from "lodash-es"
+import { Link } from 'gatsby';
+import { kebabCase } from 'lodash-es';
 
 const Tag = ({ text }: any) => {
   return (
@@ -10,7 +10,7 @@ const Tag = ({ text }: any) => {
         {text}
       </span>
     </Link>
-  )
-}
+  );
+};
 
-export default Tag
+export default Tag;

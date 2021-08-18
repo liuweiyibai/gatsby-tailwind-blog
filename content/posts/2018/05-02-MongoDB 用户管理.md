@@ -21,10 +21,10 @@ Mongo 相关命令
 
 ```js
 // 显示当前系统用户
-db.system.users.find()
+db.system.users.find();
 
 // MongoDB 登录
-db.auth('test', 'test')
+db.auth('test', 'test');
 ```
 
 ## 给 `admin` 设置密码
