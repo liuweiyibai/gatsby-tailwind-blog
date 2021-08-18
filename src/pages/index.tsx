@@ -1,20 +1,20 @@
-import * as React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import * as React from 'react';
+import { Link, useStaticQuery, graphql } from 'gatsby';
 
-import PostItem from "../components/PostItem"
+import PostItem from '../components/PostItem';
 
-import Seo from "../components/Seo"
+import Seo from '../components/Seo';
 
-import AppLayout from "../Layout/AppLayout"
+import AppLayout from '../Layout/AppLayout';
 
 function mapObj(obj: any) {
   return {
     ...obj.frontmatter,
     ...obj.fields,
     ...obj,
-    frontmatter: "",
+    frontmatter: '',
     fields: null,
-  }
+  };
 }
 
 export default function Home() {
@@ -48,21 +48,18 @@ export default function Home() {
           }
         }
       }
-    `
-  )
+    `,
+  );
 
   const posts = result.allMarkdownRemark.edges
     .map((t: any) => {
-      return t.node
+      return t.node;
     })
-    .map(mapObj)
+    .map(mapObj);
 
   return (
     <AppLayout>
-      <Seo
-        title={"siteMetadata.title"}
-        description={"siteMetadata.description"}
-      />
+      <Seo title="siteMetadata.title" description="siteMetadata.description" />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
@@ -73,8 +70,8 @@ export default function Home() {
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {posts.map((t: any) => (
-            <PostItem {...t} />
+          {posts.map((t: any, i) => (
+            <PostItem {...t} key={i} />
           ))}
         </ul>
       </div>
@@ -90,5 +87,5 @@ export default function Home() {
         </div>
       )}
     </AppLayout>
-  )
+  );
 }

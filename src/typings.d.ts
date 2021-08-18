@@ -1,15 +1,15 @@
 interface CSSModule {
-  [className: string]: string
+  [className: string]: string;
 }
 
-declare module "*.module.scss" {
-  const cssModule: CSSModule
-  export = cssModule
+declare module '*.module.scss' {
+  const cssModule: CSSModule;
+  export = cssModule;
 }
 
-declare module "*.module.css" {
-  const cssModule: CSSModule
-  export = cssModule
+declare module '*.module.css' {
+  const cssModule: CSSModule;
+  export = cssModule;
 }
 
 // declare module "*.svg" {
@@ -19,22 +19,23 @@ declare module "*.module.css" {
 //   export default src
 // }
 
-declare module "*.svg" {
-  import { ReactElement, SVGProps } from "react";
+declare module '*.svg' {
+  import { ReactElement, SVGProps } from 'react';
   const content: (props: SVGProps<SVGElement>) => ReactElement;
-  export default cont
-
-declare module "*.jpg" {
-  const content: string
-  export default content
+  export default content;
 }
 
-declare module "*.png" {
-  const content: string
-  export default content
+declare module '*.jpg' {
+  const content: string;
+  export default content;
 }
 
-declare module "*.json" {
-  const content: string
-  export default content
+declare module '*.png' {
+  const content: string;
+  export default content;
+}
+
+declare module '*.json' {
+  const content: string;
+  export default content;
 }

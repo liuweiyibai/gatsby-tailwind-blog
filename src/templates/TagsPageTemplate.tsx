@@ -1,38 +1,38 @@
-import React from "react"
-import styled from "styled-components"
-import AppLayout from "../Layout/AppLayout"
-import Tag from "@/components/Tag"
+import React from 'react';
+import styled from 'styled-components';
+import AppLayout from '../Layout/AppLayout';
+import Tag from '@/components/Tag';
 
 function genFontSize(count: any): string {
-  let fontSize: number
+  let fontSize: number;
   if (count <= 2) {
-    fontSize = 1.1
+    fontSize = 1.1;
   } else if (count > 2 && count <= 5) {
-    fontSize = 2
+    fontSize = 2;
   } else if (count > 5 && count <= 8) {
-    fontSize = 2.8
+    fontSize = 2.8;
   } else {
-    fontSize = 3.2
+    fontSize = 3.2;
   }
-  return `${fontSize}rem`
+  return `${fontSize}rem`;
 }
 
 const StyledDiv = styled.div.attrs({
-  className: "mt-2 mb-2 mr-5",
+  className: 'mt-2 mb-2 mr-5',
 })`
   > a span {
     font-size: ${t => genFontSize(t.count)};
     font-weight: 300;
   }
-`
+`;
 
 const StyledTag = ({ count, tag }) => {
   return (
     <StyledDiv count={count}>
       <Tag text={tag} />
     </StyledDiv>
-  )
-}
+  );
+};
 
 const TagsPageTemplate: React.FC = ({ pageContext: { tags } }) => {
   return (
@@ -44,12 +44,11 @@ const TagsPageTemplate: React.FC = ({ pageContext: { tags } }) => {
           </h1>
         </div>
         <div className="flex flex-wrap max-w-lg">
-          {Array.isArray(tags) &&
-            tags.map((t, i) => <StyledTag {...t} index={i} />)}
+          {Array.isArray(tags) && tags.map((t, i) => <StyledTag {...t} index={i} key={i} />)}
         </div>
       </div>
     </AppLayout>
-  )
-}
+  );
+};
 
-export default TagsPageTemplate
+export default TagsPageTemplate;

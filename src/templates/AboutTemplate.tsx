@@ -1,15 +1,15 @@
-import * as React from "react"
-import styled from "styled-components"
-import AppLayout from "@/Layout/AppLayout"
-import SocialIcon from "@/Layout/SocialIcon"
-import Avatar from "@/assets/svgs/avatar.svg"
-import { hueRotateAnimate, spin } from "@/Layout/AppLogo"
+import * as React from 'react';
+import styled from 'styled-components';
+import AppLayout from '@/Layout/AppLayout';
+import SocialIcon from '@/Layout/SocialIcon';
+import Avatar from '@/assets/svgs/avatar.svg';
+import { hueRotateAnimate, spin } from '@/Layout/AppLogo';
 
 const StyledAvatar = styled(Avatar).attrs({
-  className: "w-48 h-48 rounded-full",
+  className: 'w-48 h-48 rounded-full',
 })`
-  width: "192px";
-  height: "192px";
+  width: '192px';
+  height: '192px';
   transition: all 0.3s;
   transition-timing-function: ease;
   &:hover {
@@ -22,10 +22,10 @@ const StyledAvatar = styled(Avatar).attrs({
       animation-direction: reverse;
     }
   }
-`
+`;
 
 const AboutTemplate: React.FC = ({ pageContext }) => {
-  const { html } = pageContext
+  const { html } = pageContext;
   return (
     <AppLayout>
       <div className="divide-y">
@@ -37,18 +37,14 @@ const AboutTemplate: React.FC = ({ pageContext }) => {
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
           <div className="flex flex-col items-center pt-8 space-x-2">
             <StyledAvatar />
-            <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">
-              刘威益佰
-            </h3>
-            <div className="text-gray-500 dark:text-gray-400">
-              {"occupation"}
-            </div>
-            <div className="text-gray-500 dark:text-gray-400">{"company"}</div>
+            <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">刘威益佰</h3>
+            <div className="text-gray-500 dark:text-gray-400">occupation</div>
+            <div className="text-gray-500 dark:text-gray-400">company</div>
             <div className="flex pt-6 space-x-3">
-              <SocialIcon kind="mail" href={`mailto:${"email"}`} />
-              <SocialIcon kind="github" href={"github"} />
-              <SocialIcon kind="linkedin" href={"linkedin"} />
-              <SocialIcon kind="twitter" href={"twitter"} />
+              <SocialIcon kind="mail" href={`mailto:${'email'}`} />
+              <SocialIcon kind="github" href="github" />
+              <SocialIcon kind="linkedin" href="linkedin" />
+              <SocialIcon kind="twitter" href="twitter" />
             </div>
           </div>
           <div className="pt-8 pb-8 prose dark:prose-dark max-w-none xl:col-span-2">
@@ -57,7 +53,7 @@ const AboutTemplate: React.FC = ({ pageContext }) => {
         </div>
       </div>
     </AppLayout>
-  )
-}
+  );
+};
 
-export default AboutTemplate
+export default AboutTemplate;

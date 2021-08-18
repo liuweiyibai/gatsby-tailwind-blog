@@ -1,25 +1,22 @@
-import React, { useState, FC } from "react"
+import React, { useState, FC } from 'react';
 
-import PostItemSmall from "@/components/PostItemSmall"
-import Pagination from "@/components/Pagination"
+import PostItemSmall from '@/components/PostItemSmall';
+import Pagination from '@/components/Pagination';
 
-interface PropsListLayout {}
+interface PropsListLayout {
+  posts: Array<any>;
+  title: string;
+}
 
-const ListLayout: FC<PropsListLayout> = ({
-  posts,
-  title = "全部文章",
-  initialDisplayPosts = [],
-  pagination,
-}) => {
-  const [searchValue, setSearchValue] = useState("")
+const ListLayout: FC<PropsListLayout> = ({ posts, title = '全部文章', initialDisplayPosts = [], pagination }) => {
+  const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter(post => {
-    const tag = Array.isArray(post.tag) ? post.tag.join("") : ""
-    const searchContent = post.title + post.excerpt + tag
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
-  })
+    const tag = Array.isArray(post.tag) ? post.tag.join('') : '';
+    const searchContent = post.title + post.excerpt + tag;
+    return searchContent.toLowerCase().includes(searchValue.toLowerCase());
+  });
 
-  const displayPosts =
-    posts.length > 0 && !searchValue ? posts : filteredBlogPosts
+  const displayPosts = posts.length > 0 && !searchValue ? posts : filteredBlogPosts;
 
   return (
     <>
@@ -53,19 +50,16 @@ const ListLayout: FC<PropsListLayout> = ({
           </div>
         </div>
         <ul>
-          {displayPosts.map((t: any) => (
-            <PostItemSmall {...t} />
+          {displayPosts.map((t: any, i) => (
+            <PostItemSmall {...t} key={i} />
           ))}
         </ul>
       </div>
       {pagination && pagination.numPages > 1 && !searchValue && (
-        <Pagination
-          currentPage={pagination.currentPage}
-          totalPages={pagination.numPages}
-        />
+        <Pagination currentPage={pagination.currentPage} totalPages={pagination.numPages} />
       )}
     </>
-  )
-}
+  );
+};
 
-export default ListLayout
+export default ListLayout;

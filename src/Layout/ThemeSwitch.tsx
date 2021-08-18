@@ -1,21 +1,23 @@
-import React from "react"
-import useDarkMode from "use-dark-mode"
+import React from 'react';
+import useDarkMode from 'use-dark-mode';
 
-const noop = () => {}
-
+const noop = () => {};
+/* eslint-disable */
 const defaultElement = (global.document && global.document.documentElement) || {
   classList: {
     add: noop,
     remove: noop,
   },
-}
+};
+/* eslint-disable */
+
 const ThemeSwitch = () => {
   const darkMode = useDarkMode(false, {
-    classNameDark: "dark",
-    classNameLight: "light",
-    storageKey: "theme",
+    classNameDark: 'dark',
+    classNameLight: 'light',
+    storageKey: 'theme',
     element: defaultElement,
-  })
+  });
 
   return (
     <button
@@ -41,7 +43,7 @@ const ThemeSwitch = () => {
         )}
       </svg>
     </button>
-  )
-}
+  );
+};
 
-export default ThemeSwitch
+export default ThemeSwitch;

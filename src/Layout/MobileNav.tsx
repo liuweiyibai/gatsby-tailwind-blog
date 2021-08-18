@@ -1,29 +1,24 @@
-import React, { useState } from "react"
-import { Link } from "gatsby"
-import { headerNavLinks } from "./AppLayout"
+import React, { useState } from 'react';
+import { Link } from 'gatsby';
+import { headerNavLinks } from './AppLayout';
 
 const MobileNav = () => {
-  const [navShow, setNavShow] = useState(false)
+  const [navShow, setNavShow] = useState(false);
 
   const onToggleNav = () => {
     setNavShow(status => {
       if (status) {
-        document.body.style.overflow = "auto"
+        document.body.style.overflow = 'auto';
       } else {
-        document.body.style.overflow = "hidden"
+        document.body.style.overflow = 'hidden';
       }
-      return !status
-    })
-  }
+      return !status;
+    });
+  };
 
   return (
     <div className="sm:hidden">
-      <button
-        type="button"
-        className="w-8 h-8 ml-1 mr-1 rounded"
-        aria-label="Toggle Menu"
-        onClick={onToggleNav}
-      >
+      <button type="button" className="w-8 h-8 ml-1 mr-1 rounded" aria-label="Toggle Menu" onClick={onToggleNav}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -47,7 +42,7 @@ const MobileNav = () => {
       </button>
       <div
         className={`fixed w-full h-full top-24 right-0 bg-gray-200 dark:bg-gray-800 opacity-95 z-10 transform ease-in-out duration-300 ${
-          navShow ? "translate-x-0" : "translate-x-full"
+          navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <button
@@ -55,7 +50,7 @@ const MobileNav = () => {
           aria-label="toggle modal"
           className="fixed w-full h-full cursor-auto focus:outline-none"
           onClick={onToggleNav}
-        ></button>
+        />
         <nav className="fixed h-full mt-8">
           {headerNavLinks.map(link => (
             <div key={link.title} className="px-12 py-4">
@@ -71,7 +66,7 @@ const MobileNav = () => {
         </nav>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MobileNav
+export default MobileNav;

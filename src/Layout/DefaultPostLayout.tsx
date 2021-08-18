@@ -1,29 +1,22 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
-import dayjs from "dayjs"
-import Tag from "@/components/Tag"
-import PageTitle from "@/components/PageTitle"
-import Avatar from "@/assets/svgs/avatar.svg"
-import { getWeek } from "@/utils"
+import * as React from 'react';
+import { Link } from 'gatsby';
+import styled from 'styled-components';
+import dayjs from 'dayjs';
+import Tag from '@/components/Tag';
+import PageTitle from '@/components/PageTitle';
+import Avatar from '@/assets/svgs/avatar.svg';
+import { getWeek } from '@/utils';
 
 const StyledAvatar = styled(Avatar).attrs({
-  className: "w-10 h-10 rounded-full",
-  alt: "avatar",
+  className: 'w-10 h-10 rounded-full',
+  alt: 'avatar',
 })`
-  width: "38px";
-  height: "38px";
-`
+  width: '38px';
+  height: '38px';
+`;
 
-const DefaultPostLayout: React.FC = ({
-  tags,
-  title,
-  next,
-  date,
-  prev,
-  html,
-}) => {
-  const _date = dayjs(date)
+const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) => {
+  const _date = dayjs(date);
   return (
     <article>
       <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
@@ -33,9 +26,7 @@ const DefaultPostLayout: React.FC = ({
               <div>
                 <dt className="sr-only">Published on</dt>
                 <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                  <time>{`${_date.format("YYYY-MM-DD")} ${getWeek(
-                    _date.format("d")
-                  )}`}</time>
+                  <time>{`${_date.format('YYYY-MM-DD')} ${getWeek(_date.format('d'))}`}</time>
                 </dd>
               </div>
             </dl>
@@ -46,7 +37,7 @@ const DefaultPostLayout: React.FC = ({
         </header>
         <div
           className="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6"
-          style={{ gridTemplateRows: "auto 1fr" }}
+          style={{ gridTemplateRows: 'auto 1fr' }}
         >
           <dl className="pt-6 pb-10 xl:pt-11 xl:border-b xl:border-gray-200 xl:dark:border-gray-700">
             <dt className="sr-only">Author</dt>
@@ -56,15 +47,10 @@ const DefaultPostLayout: React.FC = ({
                   <StyledAvatar />
                   <dl className="text-sm font-medium leading-5 whitespace-nowrap">
                     <dt className="sr-only">Name</dt>
-                    <dd className="text-gray-900 dark:text-gray-100">
-                      刘威益佰
-                    </dd>
+                    <dd className="text-gray-900 dark:text-gray-100">刘威益佰</dd>
                     <dd>
                       <dt className="sr-only">Twitter</dt>
-                      <Link
-                        to=""
-                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      >
+                      <Link to="" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         @Twitter
                       </Link>
                     </dd>
@@ -78,11 +64,11 @@ const DefaultPostLayout: React.FC = ({
               <article dangerouslySetInnerHTML={{ __html: html }} />
             </div>
             <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-              <Link to={"discussUrl(slug)"} rel="nofollow">
-                {"Discuss on Twitter"}
+              <Link to="discussUrl(slug)" rel="nofollow">
+                Discuss on Twitter
               </Link>
               {` • `}
-              <Link to={"editUrl(fileName)"}>{"View on GitHub"}</Link>
+              <Link to="editUrl(fileName)">View on GitHub</Link>
             </div>
             {/* <Comments frontMatter={frontMatter} /> */}
           </div>
@@ -90,12 +76,9 @@ const DefaultPostLayout: React.FC = ({
             <div className="text-sm font-medium leading-5 divide-gray-200 xl:divide-y dark:divide-gray-700 xl:col-start-1 xl:row-start-2">
               {tags && (
                 <div className="py-4 xl:py-8">
-                  <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                    Tags
-                  </h2>
+                  <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">Tags</h2>
                   <div className="flex flex-wrap">
-                    {Array.isArray(tags) &&
-                      tags.map(tag => <Tag key={tag} text={tag} />)}
+                    {Array.isArray(tags) && tags.map(tag => <Tag key={tag} text={tag} />)}
                   </div>
                 </div>
               )}
@@ -107,21 +90,15 @@ const DefaultPostLayout: React.FC = ({
                         Previous Article
                       </h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link to={`${prev.fields.slug}`}>
-                          {prev.frontmatter.title}
-                        </Link>
+                        <Link to={`${prev.fields.slug}`}>{prev.frontmatter.title}</Link>
                       </div>
                     </div>
                   )}
                   {next && (
                     <div>
-                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                        Next Article
-                      </h2>
+                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">Next Article</h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link to={`${next.fields.slug}`}>
-                          {next.frontmatter.title}
-                        </Link>
+                        <Link to={`${next.fields.slug}`}>{next.frontmatter.title}</Link>
                       </div>
                     </div>
                   )}
@@ -129,10 +106,7 @@ const DefaultPostLayout: React.FC = ({
               )}
             </div>
             <div className="pt-4 xl:pt-8">
-              <Link
-                to="/blog"
-                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              >
+              <Link to="/blog" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                 &larr; 返回首页
               </Link>
             </div>
@@ -140,7 +114,7 @@ const DefaultPostLayout: React.FC = ({
         </div>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default DefaultPostLayout
+export default DefaultPostLayout;

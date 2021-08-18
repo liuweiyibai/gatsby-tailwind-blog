@@ -1,18 +1,18 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import * as React from 'react';
+import { Link } from 'gatsby';
 
-import AppLogo from "./AppLogo"
-import SectionContainer from "./SectionContainer"
-import ThemeSwitch from "./ThemeSwitch"
-import AppFooter from "./AppFooter"
-import MobileNav from "./MobileNav"
+import AppLogo from './AppLogo';
+import SectionContainer from './SectionContainer';
+import ThemeSwitch from './ThemeSwitch';
+import AppFooter from './AppFooter';
+import MobileNav from './MobileNav';
 
 export const headerNavLinks = [
-  { href: "/blog", title: "首页" },
-  { href: "/tags", title: "标签" },
-  { href: "/projects", title: "项目" },
-  { href: "/about", title: "关于我" },
-]
+  { href: '/blog', title: '首页' },
+  { href: '/tags', title: '标签' },
+  { href: '/projects', title: '项目' },
+  { href: '/about', title: '关于我' },
+];
 
 const AppLayout = ({ children }: any) => {
   return (
@@ -49,7 +49,7 @@ const AppLayout = ({ children }: any) => {
         <AppFooter />
       </div>
     </SectionContainer>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;
