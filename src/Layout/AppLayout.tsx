@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
-
+import { Link, useStaticQuery, graphql } from 'gatsby';
 import AppLogo from './AppLogo';
 import SectionContainer from './SectionContainer';
 import ThemeSwitch from './ThemeSwitch';
@@ -15,6 +14,33 @@ export const headerNavLinks = [
 ];
 
 const AppLayout = ({ children }: any) => {
+  const resp = useStaticQuery(graphql`
+    query SiteInfo {
+      site {
+        siteMetadata {
+          author {
+            name
+            description
+          }
+          footerDes
+          lang
+          siteUrl
+          social {
+            github
+            twitter
+          }
+          title
+        }
+      }
+    }
+  `);
+  const {
+    site: { siteMetadata },
+  } = resp;
+  console.log(resp);
+
+  const { author, footerDes, title } = siteMetadata;
+
   return (
     <SectionContainer>
       <div className="flex flex-col justify-between h-screen">
@@ -25,7 +51,7 @@ const AppLayout = ({ children }: any) => {
                 <div>
                   <AppLogo />
                 </div>
-                <div className="hidden text-2xl sm:block">刘威益佰</div>
+                <div className="hidden text-2xl sm:block">{author.name}</div>
               </div>
             </Link>
           </div>
@@ -46,7 +72,7 @@ const AppLayout = ({ children }: any) => {
           </div>
         </header>
         <main className="mb-auto">{children}</main>
-        <AppFooter />
+        <AppFooter des={footerDes} title={title} author={author.name} />
       </div>
     </SectionContainer>
   );

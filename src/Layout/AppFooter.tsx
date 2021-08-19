@@ -1,8 +1,14 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import React, { FC } from 'react';
 import SocialIcon from './SocialIcon';
 
-export default function Footer() {
+interface FooterRrops {
+  des?: string;
+  author?: string;
+  title?: string;
+}
+
+const Footer: FC<FooterRrops> = ({ des, author, title }) => {
   return (
     <footer>
       <div className="flex flex-col items-center mt-16">
@@ -15,16 +21,18 @@ export default function Footer() {
           <SocialIcon kind="twitter" href="siteMetadata.twitter" size="6" />
         </div>
         <div className="flex mb-2 space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>siteMetadata.autho</div>
+          <div>{author}</div>
           <div>{` • `}</div>
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
-          <Link to="/">siteMetadata.title</Link>
+          <Link to="/">{title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link to="https://github.com/timlrx/tailwind-nextjs-starter-blog">Tailwind Nextjs Theme</Link>
+          <Link to="https://github.com/liuweiyibai/lwyb.me">{des}</Link>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
