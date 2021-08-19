@@ -66,7 +66,7 @@ export default function Home() {
             最近更新
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            A blog created with Next.js and Tailwind.css
+            🚀🚀🚀 我是刘威💯, 前端攻城狮, 后端搬运工...
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">

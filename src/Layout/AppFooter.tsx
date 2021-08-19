@@ -27,7 +27,7 @@ const Footer: FC<FooterRrops> = ({ des, author, title }) => {
           <div>{` • `}</div>
           <Link to="/">{title}</Link>
         </div>
-        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
+        <div className="mb-8 text-sm text-center text-gray-500 dark:text-gray-400">
           <Link to="https://github.com/liuweiyibai/lwyb.me">{des}</Link>
         </div>
       </div>
