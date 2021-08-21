@@ -79,7 +79,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const TagsPageTemplate = path.resolve('src/templates/TagsPageTemplate.tsx');
   const SigleTagPageTemplate = path.resolve('src/templates/SigleTagPageTemplate.tsx');
   const PostPageTemplate = path.resolve('src/templates/PostPageTemplate.tsx');
-
+  const ArchiveTemplate = path.resolve('src/templates/ArchiveTemplate.tsx');
   const AboutTemplate = path.resolve('src/templates/AboutTemplate.tsx');
   /**
    * childImageSharp 参数修改
@@ -143,7 +143,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const posts = result.data.allMarkdownRemark.edges;
 
   const numPages = Math.ceil(posts.length / postsPerPage);
-  const expandedPosts = expandTheNesting(posts);
 
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -157,10 +156,21 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
-  // const postsByYear = filterAllPostsByYear(expandedPosts)
 
-  // const years = Object.keys(postsByYear).reverse()
-  // const allPosts2Year = Object.values(postsByYear).reverse()
+  const expandedPosts = expandTheNesting(posts);
+  const postsByYear = filterAllPostsByYear(expandedPosts);
+  const years = Object.keys(postsByYear).reverse();
+  const allPosts2Year = Object.values(postsByYear).reverse();
+
+  createPage({
+    path: '/archive',
+    component: ArchiveTemplate,
+    context: {
+      postTotal: expandedPosts.length,
+      years,
+      allPosts2Year,
+    },
+  });
 
   // 创建文章详情页
   posts.forEach((post, index) => {

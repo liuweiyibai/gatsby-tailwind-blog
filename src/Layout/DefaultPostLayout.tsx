@@ -6,6 +6,7 @@ import Tag from '@/components/Tag';
 import PageTitle from '@/components/PageTitle';
 import Avatar from '@/assets/svgs/avatar.svg';
 import { getWeek } from '@/utils';
+import StyledCodeType from '@/components/StyledCodeType';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-10 h-10 rounded-full',
@@ -60,9 +61,9 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
             </dd>
           </dl>
           <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
-            <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">
+            <StyledCodeType className="pt-10 pb-8 prose dark:prose-dark max-w-none">
               <article dangerouslySetInnerHTML={{ __html: html }} />
-            </div>
+            </StyledCodeType>
             <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
               <Link to="discussUrl(slug)" rel="nofollow">
                 Discuss on Twitter
