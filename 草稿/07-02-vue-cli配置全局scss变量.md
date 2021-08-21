@@ -23,11 +23,11 @@ module.exports = {
         /**
          * 这里引入只对于 .vue 文件中使用变量起作用，.scss 文件中需要单独引入
          */
-        prependData: '@import "~@/styles/var.scss";'
-      }
+        prependData: '@import "~@/styles/var.scss";',
+      },
       // 是否开启 css module
-    }
-  }
+    },
+  },
   // ...
-}
+};
 ```

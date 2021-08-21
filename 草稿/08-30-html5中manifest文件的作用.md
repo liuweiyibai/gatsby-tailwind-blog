@@ -90,16 +90,16 @@ window.addEventListener(
         if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
           // 更新缓存
           // 重新加载
-          window.applicationCache.swapCache()
-          window.location.reload()
+          window.applicationCache.swapCache();
+          window.location.reload();
         } else {
         }
       },
-      false
-    )
+      false,
+    );
   },
-  false
-)
+  false,
+);
 ```
 
 建议对 `tc.mymanifest` 缓存清单设置永不缓存，不过，`manifest` 也有很多缺点，比如需要手动一个个填写缓存的文件，更新文件之后需要二次刷新，如果更新的资源中有一个资源更新失败了，将导致全部更新失败，将用回上一版本的缓存，并且 `html5` 规范也废弃了这个属性，因此不建议使用
@@ -174,11 +174,11 @@ window.addEventListener(
 - 新增到 `webpack.config.js` 中
 
   ```js
-  const ManifestPlugin = require('webpack-manifest-plugin')
+  const ManifestPlugin = require('webpack-manifest-plugin');
   module.exports = {
     // 其他配置
-    plugins: [new ManifestPlugin()]
-  }
+    plugins: [new ManifestPlugin()],
+  };
   ```
 
 重新打包后，可以看见 `dist` 目录新生成了一个 `manifest.json`，内容大约是这个样子：
@@ -194,7 +194,7 @@ window.addEventListener(
 比如在 SSR（服务端渲染） 开发时，前端打包后，node 后端就可以通过这个 json 数据，返回正确资源路径的 html 模板
 
 ```js
-const buildPath = require('./dist/manifest.json')
+const buildPath = require('./dist/manifest.json');
 
 res.send(`
 <!DOCTYPE html>
@@ -209,7 +209,7 @@ res.send(`
   <div id="app"></div>
 <script type="text/javascript" src="${buildPath['main.js']}"></script></body>
 </html>
-`)
+`);
 ```
 
 ## 代码分割
@@ -248,17 +248,17 @@ dll 打包原理就是：
 ```js
 module.exports = {
   entry: {
-    vendors: ['react', 'react-dom'] // 手动指定打包哪些库
+    vendors: ['react', 'react-dom'], // 手动指定打包哪些库
   },
   // ...
   plugins: [
     new webpack.DllPlugin({
       // 生成对应的manifest.json，给 webpack 打包用
       path: path.join(__dirname, './dll/[name].manifest.json'),
-      name: '[name]'
-    })
-  ]
-}
+      name: '[name]',
+    }),
+  ],
+};
 ```
 
 添加一条命令:
@@ -281,9 +281,9 @@ npm run build:dll
 plugins: [
   new webpack.DllReferencePlugin({
     // 读取dll打包后的manifest.json，分析哪些代码跳过
-    manifest: path.resolve(__dirname, './dll/vendors.manifest.json')
-  })
-]
+    manifest: path.resolve(__dirname, './dll/vendors.manifest.json'),
+  }),
+];
 ```
 
 重新 `npm run build` ，发现 `dist` 目录里，`vendor.js` 没有了
@@ -302,13 +302,13 @@ npm i add-asset-html-webpack-plugin -D
 plugins: [
   // 把 dll.js 加进 index.html 里，并且拷贝文件到 dist 目录
   new AddAssetHtmlPlugin({
-    filepath: path.resolve(__dirname, './dll/*.dll.js')
+    filepath: path.resolve(__dirname, './dll/*.dll.js'),
   }),
   new webpack.DllReferencePlugin({
     // 读取dll打包后的manifest.json，分析哪些代码跳过
-    manifest: path.resolve(__dirname, './dll/vendors.manifest.json')
-  })
-]
+    manifest: path.resolve(__dirname, './dll/vendors.manifest.json'),
+  }),
+];
 ```
 
 重新 `npm run build` ，可以看见 `dll.js` 也被打包进 `dist` 目录了，同时 `index.html` 也正确引用
@@ -324,7 +324,7 @@ plugins: [
 ```js
 optimization: {
   runtimeChunk: {
-    name: 'manifest'
+    name: 'manifest';
   }
 }
 ```

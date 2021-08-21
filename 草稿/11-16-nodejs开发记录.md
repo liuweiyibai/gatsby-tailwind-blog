@@ -20,59 +20,59 @@ thumbnail: '../../thumbnails/nodejs.png'
   /**
    * 文件操作过程中必须物理路径（绝对路径，以盘符开头）
    */
-  const path = require('path')
-  const basePath = path.join(__dirname, '../node/fs.js')
+  const path = require('path');
+  const basePath = path.join(__dirname, '../node/fs.js');
 
   // 基本名称，获取文件名(文件名,[是否删除扩展名.js])
-  path.basename('./fs.js')
+  path.basename('./fs.js');
 
   // 获取不同操作系统中默认的路径分隔符
-  console.log(path.delimiter) // ; 或者 :
+  console.log(path.delimiter); // ; 或者 :
 
   // node中获取环境变量
-  console.log(process.env.path.split(path.delimiter))
+  console.log(process.env.path.split(path.delimiter));
 
   // 获取目录名称 (文件地址)
-  console.log(path.dirname(basePath)) // C:\Users\Administrator\Desktop\Node
+  console.log(path.dirname(basePath)); // C:\Users\Administrator\Desktop\Node
 
   // 获取扩展名(文件地址)
-  console.log(path.extname(basePath)) // .js 包含点.
+  console.log(path.extname(basePath)); // .js 包含点.
 
   // 将一个路径字符串转换为一个对象，包含文件目录，路径，扩展名
-  let obj = path.parse(basePath)
-  console.log(obj)
+  let obj = path.parse(basePath);
+  console.log(obj);
 
   // 将对象路径转换为路径字符串(obj)
-  path.format(obj)
+  path.format(obj);
 
   // 判断一个路径是不是一个绝对路径
-  console.log(path.isAbsolute(basePath)) //  true
+  console.log(path.isAbsolute(basePath)); //  true
 
   // 拼合路径(n个参数);
-  path.join(__dirname, '')
+  path.join(__dirname, '');
 
   // 常规化一个路径(针对于window设计)；根据操作系统
-  let a = path.normalize('c://dev')
+  let a = path.normalize('c://dev');
 
   // (from,to)获取从to相对于from的一个相对路径
-  console.log(path.relative(__dirname, 'C:UsersAdministratorDesktopNodepath.js'))
+  console.log(path.relative(__dirname, 'C:UsersAdministratorDesktopNodepath.js'));
 
   // 于join不同
-  path.resolve(__dirname, '../', '/code')
+  path.resolve(__dirname, '../', '/code');
 
   // 路径里的分隔符，当前操作系统中的路径成员分隔符
-  console.log(path.sep) // / or \
+  console.log(path.sep); // / or \
 
   // win 指的就是windows
   // 允许在任意操作系统使用widow的方式操作路径
-  console.log(path.win32)
-  console.log(path === path.win32) // true
+  console.log(path.win32);
+  console.log(path === path.win32); // true
   var a = {
-    win32: p
-  }
-  a.win32 = a
+    win32: p,
+  };
+  a.win32 = a;
   // 允许在任意操作系统使用linux的方式操作路径
-  console.log(path.posix)
+  console.log(path.posix);
   ```
 
 - os 模块
@@ -80,102 +80,106 @@ thumbnail: '../../thumbnails/nodejs.png'
   获取操作系统相关信息，获取当前机器在当前局域网下的 ip 地址
 
   ```js
-  const os = require('os')
+  const os = require('os');
 
   var dealTime = seconds => {
-    var seconds = seconds | 0
-    var day = (seconds / (3600 * 24)) | 0
-    var hours = ((seconds - day * 3600) / 3600) | 0
-    var minutes = ((seconds - day * 3600 * 24 - hours * 3600) / 60) | 0
-    var second = seconds % 60
-    day < 10 && (day = '0' + day)
-    hours < 10 && (hours = '0' + hours)
-    minutes < 10 && (minutes = '0' + minutes)
-    second < 10 && (second = '0' + second)
+    var seconds = seconds | 0;
+    var day = (seconds / (3600 * 24)) | 0;
+    var hours = ((seconds - day * 3600) / 3600) | 0;
+    var minutes = ((seconds - day * 3600 * 24 - hours * 3600) / 60) | 0;
+    var second = seconds % 60;
+    day < 10 && (day = '0' + day);
+    hours < 10 && (hours = '0' + hours);
+    minutes < 10 && (minutes = '0' + minutes);
+    second < 10 && (second = '0' + second);
     // join 将数组中元素拼接为一个字符串。
-    return [day, hours, minutes, second].join(':')
-  }
+    return [day, hours, minutes, second].join(':');
+  };
 
   var dealMem = mem => {
     var G = 0,
       M = 0,
-      KB = 0
-    mem > 1 << 30 && (G = (mem / (1 << 30)).toFixed(2))
-    mem > 1 << 20 && mem < 1 << 30 && (M = (mem / (1 << 20)).toFixed(2))
-    mem > 1 << 10 && mem > 1 << 20 && (KB = (mem / (1 << 10)).toFixed(2))
-    return G > 0 ? G + 'G' : M > 0 ? M + 'M' : KB > 0 ? KB + 'KB' : mem + 'B'
-  }
+      KB = 0;
+    mem > 1 << 30 && (G = (mem / (1 << 30)).toFixed(2));
+    mem > 1 << 20 && mem < 1 << 30 && (M = (mem / (1 << 20)).toFixed(2));
+    mem > 1 << 10 && mem > 1 << 20 && (KB = (mem / (1 << 10)).toFixed(2));
+    return G > 0 ? G + 'G' : M > 0 ? M + 'M' : KB > 0 ? KB + 'KB' : mem + 'B';
+  };
 
   //cpu架构
-  const arch = os.arch()
-  console.log('cpu架构：' + arch)
+  const arch = os.arch();
+  console.log('cpu架构：' + arch);
 
   //操作系统内核
-  const kernel = os.type()
-  console.log('操作系统内核：' + kernel)
+  const kernel = os.type();
+  console.log('操作系统内核：' + kernel);
 
   //操作系统平台
-  const pf = os.platform()
-  console.log('平台：' + pf)
+  const pf = os.platform();
+  console.log('平台：' + pf);
 
   //系统开机时间
-  const uptime = os.uptime()
-  console.log('开机时间：' + dealTime(uptime))
+  const uptime = os.uptime();
+  console.log('开机时间：' + dealTime(uptime));
 
   //主机名
-  const hn = os.hostname()
-  console.log('主机名：' + hn)
+  const hn = os.hostname();
+  console.log('主机名：' + hn);
 
   //主目录
-  const hdir = os.homedir()
-  console.log('主目录：' + hdir)
+  const hdir = os.homedir();
+  console.log('主目录：' + hdir);
 
   //内存
-  const totalMem = os.totalmem()
-  const freeMem = os.freemem()
-  console.log('内存大小：' + dealMem(totalMem) + ' 空闲内存：' + dealMem(freeMem))
+  const totalMem = os.totalmem();
+  const freeMem = os.freemem();
+  console.log('内存大小：' + dealMem(totalMem) + ' 空闲内存：' + dealMem(freeMem));
 
   //cpu
-  const cpus = os.cpus()
-  console.log('*****cpu信息*******')
+  const cpus = os.cpus();
+  console.log('*****cpu信息*******');
   cpus.forEach((cpu, idx, arr) => {
-    var times = cpu.times
-    console.log(`cpu${idx}：`)
-    console.log(`型号：${cpu.model}`)
-    console.log(`频率：${cpu.speed}MHz`)
-    console.log(`使用率：${((1 - times.idle / (times.idle + times.user + times.nice + times.sys + times.irq)) * 100).toFixed(2)}%`)
-  })
+    var times = cpu.times;
+    console.log(`cpu${idx}：`);
+    console.log(`型号：${cpu.model}`);
+    console.log(`频率：${cpu.speed}MHz`);
+    console.log(
+      `使用率：${((1 - times.idle / (times.idle + times.user + times.nice + times.sys + times.irq)) * 100).toFixed(
+        2,
+      )}%`,
+    );
+  });
 
   //网卡
-  console.log('*****网卡信息*******')
-  const networksObj = os.networkInterfaces()
+  console.log('*****网卡信息*******');
+  const networksObj = os.networkInterfaces();
   for (let nw in networksObj) {
-    let objArr = networksObj[nw]
-    console.log(`\r\n${nw}：`)
+    let objArr = networksObj[nw];
+    console.log(`\r\n${nw}：`);
     objArr.forEach((obj, idx, arr) => {
-      console.log(`地址：${obj.address}`)
-      console.log(`掩码：${obj.netmask}`)
-      console.log(`物理地址：${obj.mac}`)
-      console.log(`协议族：${obj.family}`)
-    })
+      console.log(`地址：${obj.address}`);
+      console.log(`掩码：${obj.netmask}`);
+      console.log(`物理地址：${obj.mac}`);
+      console.log(`协议族：${obj.family}`);
+    });
   }
 
   // 局域网ip地址
   function getIpAddress() {
     // 在开发环境中获取局域网中的本机 iP 地址
-    const interfaces = require('os').networkInterfaces()
-    let IPAddress = ''
+    const interfaces = require('os').networkInterfaces();
+    let IPAddress = '';
     for (let name in interfaces) {
-      let iFace = interfaces[name]
+      let iFace = interfaces[name];
       for (let i = 0; i < iFace.length; i++) {
-        let alias = iFace[i]
+        let alias = iFace[i];
         if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-          IPAddress = alias.address
+          IPAddress = alias.address;
         }
       }
     }
-    console.log('本机IP地址： IPAddress')
-    return IPAddress
+    console.log('本机IP地址： IPAddress');
+    return IPAddress;
   }
   ```
 
@@ -184,13 +188,13 @@ thumbnail: '../../thumbnails/nodejs.png'
   - http
 
     ```js
-    const http = require('http')
+    const http = require('http');
     http
       .creatServer(function (req, res) {
-        res.writeHead(200, { 'Cotent-Type': 'text/plain' })
-        res.end('ending')
+        res.writeHead(200, { 'Cotent-Type': 'text/plain' });
+        res.end('ending');
       })
-      .listen(3000)
+      .listen(3000);
     ```
 
   - socket
@@ -225,27 +229,27 @@ thumbnail: '../../thumbnails/nodejs.png'
 
     ```js
     // 利用 fs 模块监控 markdown 然后通过工具转化为 html
-    var fs = rquire('fs')
-    var path = reqire('path')
+    var fs = rquire('fs');
+    var path = reqire('path');
     // 将 md 转为 html
-    var marked = require('marked')
+    var marked = require('marked');
 
-    var template = `html 模板<style>github的markdown样式</style>`
-    const target = path.join(__dirname, process.argv[2] || '../readme.md')
+    var template = `html 模板<style>github的markdown样式</style>`;
+    const target = path.join(__dirname, process.argv[2] || '../readme.md');
     // 监视文件变化
     fs.watchFile(target, (current, prevent) => {
-      console.log(current)
+      console.log(current);
       if ((current.mtime = prevent.mtime)) {
-        return false
+        return false;
       }
       // 读取文件
       fs.readFile(target, 'utf8', function (err, data) {
-        if (!!err) return false
-        var html = marked(data, '')
-        template.replace('{{{content}}}', html)
-        fs.writeFile(target.reaplace('.md', '.html'), html)
-      })
-    })
+        if (!!err) return false;
+        var html = marked(data, '');
+        template.replace('{{{content}}}', html);
+        fs.writeFile(target.reaplace('.md', '.html'), html);
+      });
+    });
     ```
 
   - 文件流
@@ -255,30 +259,30 @@ thumbnail: '../../thumbnails/nodejs.png'
     ```js
     // 文件的复制
     // 通过简单的先读后写的方式
-    const fs = require('fs')
-    const path = require('path')
+    const fs = require('fs');
+    const path = require('path');
     fs.readFile(
       path.join(__dirname, 'xx.txt', (err, data) => {
         // 向里边写入data
         fs.writeFile('demo.txt', (data, err) => {
-          if (!!err) return false
+          if (!!err) return false;
           else {
-            console.log('拷贝完成')
+            console.log('拷贝完成');
           }
-        })
-      })
-    )
+        });
+      }),
+    );
 
     // 使用流的方式读取
     // 1. 创建文件读取流
-    var readline = require('readline')
-    var reader = fs.createReadStream(path.join(__dirname, 'xx.txt'))
+    var readline = require('readline');
+    var reader = fs.createReadStream(path.join(__dirname, 'xx.txt'));
     // 获取文件的信息
     fs.stat('xx.txt', (err, data) => {
-      console.log(data.size)
-    })
+      console.log(data.size);
+    });
     // 创建写入流
-    var writer = fs.createWriteStream('x11x.txt')
+    var writer = fs.createWriteStream('x11x.txt');
     // 通过 readline 读取流
     // var rl = readline.createInteraface({input: reader});
 
@@ -287,26 +291,26 @@ thumbnail: '../../thumbnails/nodejs.png'
     //  console.log(line);
     // });
 
-    var total = 0
+    var total = 0;
     // 事件 data 我读到了一点文件，就会触发这个 data 事件
     reader.on('data', chunk => {
       // 每次读了多少，chunk 是一个 buffer(字节数组，存储在缓存区中)
-      console.log((total += chunk.length))
+      console.log((total += chunk.length));
       // 4.  写入流
       writer.write(chunk, err => {
-        if (!!err) return false
-      })
-    })
+        if (!!err) return false;
+      });
+    });
 
     // pipe 的认识
-    var reader = fs.createReadStream(path.join(__dirname, 'xx.txt'))
-    var writer = fs.createWriteStream('x11x.txt')
+    var reader = fs.createReadStream(path.join(__dirname, 'xx.txt'));
+    var writer = fs.createWriteStream('x11x.txt');
     // 读取流 流向（pipe） 写入流 可以继续 流 式操作
-    reader.pipe(writer).pipe(xx)
+    reader.pipe(writer).pipe(xx);
     reader.on('end', function (err) {
       // 事件，end事件
-    })
-    writer.on('pipe', src => {})
+    });
+    writer.on('pipe', src => {});
     ```
 
 ## 第三方模块
@@ -349,14 +353,14 @@ thumbnail: '../../thumbnails/nodejs.png'
     ```
 
     ```js
-    const schedule = require('node-schedule')
+    const schedule = require('node-schedule');
     const scheduleCronstyle = () => {
       // 每分钟的第30秒定时执行一次:
       schedule.scheduleJob('30 * * * * *', () => {
-        console.log('scheduleCronstyle:' + new Date())
-      })
-    }
-    scheduleCronstyle()
+        console.log('scheduleCronstyle:' + new Date());
+      });
+    };
+    scheduleCronstyle();
 
     // 每隔 12 个小时: 0 0 */12 * * *
 
@@ -379,15 +383,15 @@ thumbnail: '../../thumbnails/nodejs.png'
 
     ```js
     // 定时占位符可以传入范围
-    var schedule = require('node-schedule')
+    var schedule = require('node-schedule');
 
     function scheduleCronstyle() {
       // 每分钟的1-10秒都会触发
       schedule.scheduleJob('1-10 * * * * *', function () {
-        console.log('scheduleCronstyle:' + new Date())
-      })
+        console.log('scheduleCronstyle:' + new Date());
+      });
     }
-    scheduleCronstyle()
+    scheduleCronstyle();
     ```
 
   - 递归规则定时器
@@ -395,27 +399,27 @@ thumbnail: '../../thumbnails/nodejs.png'
     另一种风格的定时器
 
     ```js
-    var schedule = require('node-schedule')
+    var schedule = require('node-schedule');
     function scheduleRecurrenceRule() {
-      var rule = new schedule.RecurrenceRule()
+      var rule = new schedule.RecurrenceRule();
       // rule.dayOfWeek = 2;
       // rule.month = 3;
       // rule.dayOfMonth = 1;
       // rule.hour = 1;
       // rule.minute = 42;
-      rule.second = 0
+      rule.second = 0;
       // 从结果中可以看出，每分钟第60秒时就会触发
       schedule.scheduleJob(rule, function () {
-        console.log('scheduleRecurrenceRule:' + new Date())
-      })
+        console.log('scheduleRecurrenceRule:' + new Date());
+      });
     }
-    scheduleRecurrenceRule()
+    scheduleRecurrenceRule();
     ```
 
   - 对象文本语法定时器
 
     ```js
-    const schedule = require('node-schedule')
+    const schedule = require('node-schedule');
     function scheduleObjectLiteralSyntax() {
       // dayOfWeek
       // month
@@ -425,10 +429,10 @@ thumbnail: '../../thumbnails/nodejs.png'
       // second
       // 每周一的下午16：11分触发，其它组合可以根据我代码中的注释参数名自由组合
       schedule.scheduleJob({ hour: 16, minute: 11, dayOfWeek: 1 }, function () {
-        console.log('scheduleObjectLiteralSyntax:' + new Date())
-      })
+        console.log('scheduleObjectLiteralSyntax:' + new Date());
+      });
     }
-    scheduleObjectLiteralSyntax()
+    scheduleObjectLiteralSyntax();
     ```
 
   - 取消定时器
@@ -436,22 +440,22 @@ thumbnail: '../../thumbnails/nodejs.png'
     调用定时器对象的 cancel 方法
 
     ```js
-    var schedule = require('node-schedule')
+    var schedule = require('node-schedule');
 
     function scheduleCancel() {
-      var counter = 1
+      var counter = 1;
       var j = schedule.scheduleJob('* * * * * *', function () {
-        console.log('定时器触发次数：' + counter)
-        counter++
-      })
+        console.log('定时器触发次数：' + counter);
+        counter++;
+      });
 
       setTimeout(function () {
-        console.log('定时器取消')
-        j.cancel()
-      }, 5000)
+        console.log('定时器取消');
+        j.cancel();
+      }, 5000);
     }
 
-    scheduleCancel()
+    scheduleCancel();
     ```
 
 ## 性能优化
@@ -460,7 +464,7 @@ thumbnail: '../../thumbnails/nodejs.png'
 
   ```js
   // 细节看官方文档
-  const fastJson = require('fast-json-stringify')
+  const fastJson = require('fast-json-stringify');
   ```
 
 - 提升 promise 的性能
@@ -468,7 +472,7 @@ thumbnail: '../../thumbnails/nodejs.png'
   ```js
   // 原生的 Promise 性能低于 callback 的方式
   // 可以在代码中将Promise 换为 地三方库的 Promise
-  global.Promise = require('bluebird')
+  global.Promise = require('bluebird');
   ```
 
 - 正确的编写异步代码
@@ -481,7 +485,7 @@ thumbnail: '../../thumbnails/nodejs.png'
    * Promise.any([])
    */
   async function aa() {
-    return await Promise.all([a(), b()])
+    return await Promise.all([a(), b()]);
   }
   ```
 

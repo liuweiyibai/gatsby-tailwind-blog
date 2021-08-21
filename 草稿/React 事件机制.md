@@ -10,9 +10,9 @@ thumbnail: '../../thumbnails/react.png'
 我们在使用 React 来开发时，绑定事件一般是直接通过属性的方式定义在组件或者元素上，比如：
 
 ```js
-const log = args => console.log(args)
+const log = args => console.log(args);
 function App() {
-  return <div onClick={log} />
+  return <div onClick={log} />;
 }
 ```
 

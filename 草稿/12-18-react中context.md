@@ -13,23 +13,23 @@ thumbnail: '../../thumbnails/react.png'
 
 ```js
 // 创建Context组件
-const TopComponent = React.createContext()
+const TopComponent = React.createContext();
 
 // 使用 Context，并且利用 Provider 传值，修改指定值
 class UseTop extends React.Component {
-  state = { show: true, toggle: this.handleToggleShow }
+  state = { show: true, toggle: this.handleToggleShow };
   handleToggleShow = () => {
     this.setState({
-      show: !this.state.show
-    })
-  }
+      show: !this.state.show,
+    });
+  };
   render() {
     return (
       // 提供一个value
       <TopComponent.Provider value={this.state}>
         <Content />
       </TopComponent.Provider>
-    )
+    );
   }
 }
 // Content 中间组件，因为是跨组件传值，所以需要一个中间组件
@@ -38,7 +38,7 @@ function Content() {
     <div>
       <Button />
     </div>
-  )
+  );
 }
 
 // 接收组件,并且和可以调用回调
@@ -56,7 +56,7 @@ function Button() {
         ) : null
       }
     </TopComponent.Consumer>
-  )
+  );
 }
 ```
 
@@ -74,10 +74,10 @@ componentDidUpdate(prevProps, prevState, prevContext){};
 
 ```js
 function D(props, context) {
-  return <div>{context.user.name}</div>
+  return <div>{context.user.name}</div>;
 }
 
 D.contextTypes = {
-  user: PropTypes.object.isRequired
-}
+  user: PropTypes.object.isRequired,
+};
 ```

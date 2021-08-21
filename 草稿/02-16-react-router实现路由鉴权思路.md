@@ -34,12 +34,12 @@ thumbnail: '../../thumbnails/reactrouter.png'
 1. 定义 `App.js`
 
    ```js
-   import React from 'react'
-   import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-   import Home from './pages/Home'
-   import Login from './pages/Login'
-   import Backend from './pages/Backend'
-   import Admin from './pages/Admin'
+   import React from 'react';
+   import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+   import Home from './pages/Home';
+   import Login from './pages/Login';
+   import Backend from './pages/Backend';
+   import Admin from './pages/Admin';
 
    function App() {
      return (
@@ -51,16 +51,16 @@ thumbnail: '../../thumbnails/reactrouter.png'
            <Route path="/" component={Home} />
          </Switch>
        </Router>
-     )
+     );
    }
-   export default App
+   export default App;
    ```
 
 2. `Home.js` 中添加跳转逻辑
 
    ```js
-   import React, { Fragment } from 'react'
-   import { Link } from 'react-router-dom'
+   import React, { Fragment } from 'react';
+   import { Link } from 'react-router-dom';
    function Home() {
      return (
        <Fragment>
@@ -77,9 +77,9 @@ thumbnail: '../../thumbnails/reactrouter.png'
            </li>
          </ul>
        </Fragment>
-     )
+     );
    }
-   export default Home
+   export default Home;
    ```
 
 ## 路由模块拆分
@@ -88,22 +88,22 @@ thumbnail: '../../thumbnails/reactrouter.png'
 
   ```js
   // 拆分 所有用户可以访问到的到一个单独的模块 publicRoutes.js
-  import Login from '../pages'
-  import Home from '../pages/Home'
+  import Login from '../pages';
+  import Home from '../pages/Home';
   const publicRoutes = [
     {
       path: '/login',
       component: Login,
-      exact: true
+      exact: true,
     },
     {
       path: '/',
       component: Home,
-      exact: true
-    }
-  ]
+      exact: true,
+    },
+  ];
 
-  export default publicRoutes
+  export default publicRoutes;
   ```
 
 - 分别定义应用公共模块
@@ -111,37 +111,37 @@ thumbnail: '../../thumbnails/reactrouter.png'
   - 普通用户
 
     ```js
-    import Backend from '../pages/Backend'
+    import Backend from '../pages/Backend';
     export default [
       {
         path: '/backend',
         component: Backend,
         exact: true,
         role: 'user', // 当前路由需要的角色权限
-        backUrl: '/login' // 不满足权限跳转的路由
-      }
-    ]
+        backUrl: '/login', // 不满足权限跳转的路由
+      },
+    ];
     ```
 
   - 管理用户
 
     ```js
-    import Admin from '../pages/Admin'
+    import Admin from '../pages/Admin';
     export default [
       {
         path: '/admin',
         component: Admin,
         exact: true,
         role: 'admin', // 需要的权限是admin
-        backUrl: '/backend' // 不满足权限跳回后台页面
-      }
-    ]
+        backUrl: '/backend', // 不满足权限跳回后台页面
+      },
+    ];
     ```
 
   - 公共模块 未登录用户
 
     ```js
-    import publicRoutes from './routes/publicRoutes'
+    import publicRoutes from './routes/publicRoutes';
     function App() {
       return (
         <Router>
@@ -153,7 +153,7 @@ thumbnail: '../../thumbnails/reactrouter.png'
             <Route path="/admin" component={Admin} />
           </Switch>
         </Router>
-      )
+      );
     }
     ```
 
@@ -165,8 +165,8 @@ thumbnail: '../../thumbnails/reactrouter.png'
 
 ```js
 // AuthRoute.js
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 function AuthRoute(props) {
   const {
@@ -175,28 +175,28 @@ function AuthRoute(props) {
     backUrl,
     token,
     ...otherProps
-  } = props
+  } = props;
 
   // 如果用户有权限，就渲染对应的路由
   if (userRole && userRole.indexOf(routeRole) > -1 && token) {
-    return <Route {...otherProps} />
+    return <Route {...otherProps} />;
   } else {
     // 如果没有权限，返回配置的默认路由
-    return <Redirect to={backUrl} />
+    return <Redirect to={backUrl} />;
   }
 }
 
-export default AuthRoute
+export default AuthRoute;
 ```
 
 使用 AuthRoute 包装需要角色验证的组件
 
 ```js
 {
-  privateRoutes.map(route => <AuthRoute key={route.path} {...route} />)
+  privateRoutes.map(route => <AuthRoute key={route.path} {...route} />);
 }
 {
-  adminRoutes.map(route => <AuthRoute key={route.path} {...route} />)
+  adminRoutes.map(route => <AuthRoute key={route.path} {...route} />);
 }
 ```
 
@@ -205,19 +205,19 @@ export default AuthRoute
 在我们的 `AuthRoute` 里面用到了 `user: { role }` 这个变量，但是我们还没设置它。真实项目中一般是登录的时候后端 `API` 会返回当前用户的角色，然后前端将这个权限信息保存在一些状态管理工具里面，比如 `Redux`。我们这里直接在 `Login` 页面写死两个按钮来模拟这个权限了，用户的配置就用根组件的 `state` 来管理了，`Login` 页面的两个按钮会改变对应的 `state`
 
 ```js
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Login(props) {
-  const { loginAsUser, loginAsAdmin, history } = props
+  const { loginAsUser, loginAsAdmin, history } = props;
   const userLoginHandler = () => {
-    loginAsUser() // 调用父级方法设置用户权限
-    history.replace('/backend') // 登录后跳转后台页面
-  }
+    loginAsUser(); // 调用父级方法设置用户权限
+    history.replace('/backend'); // 登录后跳转后台页面
+  };
   const adminLoginHandler = () => {
-    loginAsAdmin() // 调用父级方法设置管理员权限
-    history.replace('/admin') // 登录后跳转管理员页面
-  }
+    loginAsAdmin(); // 调用父级方法设置管理员权限
+    history.replace('/admin'); // 登录后跳转管理员页面
+  };
   return (
     <>
       <h1>登录页</h1>
@@ -229,8 +229,8 @@ function Login(props) {
       <br />
       <Link to="/">回首页</Link>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;
 ```

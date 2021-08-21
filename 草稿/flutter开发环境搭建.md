@@ -20,5 +20,5 @@ source ~/.zshrc
 ```bash
 echo "~/bin/flutter/bin:$PATH" >> ~/.zshrc
 source ~/.zshrc
-flutter -h 
+flutter -h
 ```

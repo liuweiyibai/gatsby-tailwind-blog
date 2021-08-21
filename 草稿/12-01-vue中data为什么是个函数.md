@@ -25,10 +25,10 @@ date: 2018-12-01 21:11:08
     name: 'BtnCount',
     data() {
       return {
-        count: 0
-      }
-    }
-  }
+        count: 0,
+      };
+    },
+  };
 </script>
 <style scoped>
   .title {

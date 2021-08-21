@@ -2,7 +2,7 @@
 title: js 实现 promise 系列 api
 ---
 
-Promise 是 es6 出现的新api，用来解决回调地狱的额问题
+Promise 是 es6 出现的新 api，用来解决回调地狱的额问题
 
 ```js
 Promise.prototype.all = function (iterators) {

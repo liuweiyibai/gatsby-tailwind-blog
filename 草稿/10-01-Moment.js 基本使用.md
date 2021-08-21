@@ -33,11 +33,11 @@ npm i moment --save
   const startDate = moment()
     .week(moment().week() - 1)
     .startOf('week')
-    .valueOf()
+    .valueOf();
   const endDate = moment()
     .week(moment().week() - 1)
     .endOf('week')
-    .valueOf()
+    .valueOf();
   ```
 
 - `上个月一号的00:00:00`~`上个月最后一天的23:59:59`
@@ -46,11 +46,11 @@ npm i moment --save
   const startDate = moment()
     .month(moment().month() - 1)
     .startOf('month')
-    .valueOf()
+    .valueOf();
   const endDate = moment()
     .month(moment().month() - 1)
     .endOf('month')
-    .valueOf()
+    .valueOf();
   ```
 
 - `上个季度第一个月一号的00:00:00`~`上个季度最后一个月最后一天的23:59:59`
@@ -59,23 +59,23 @@ npm i moment --save
   const startDate = moment()
     .quarter(moment().quarter() - 1)
     .startOf('quarter')
-    .valueOf()
+    .valueOf();
   const endDate = moment()
     .quarter(moment().quarter() - 1)
     .endOf('quarter')
-    .valueOf()
+    .valueOf();
   ```
 
 ### 其他
 
 ```js
-moment().format('YYYY-MM-DD HH:mm:ss') //当前时间
+moment().format('YYYY-MM-DD HH:mm:ss'); //当前时间
 
-moment().subtract(10, 'days').format('YYYY-MM-DD') //当前时间的前10天时间
+moment().subtract(10, 'days').format('YYYY-MM-DD'); //当前时间的前10天时间
 
-moment().subtract(1, 'years').format('YYYY-MM-DD') //当前时间的前1年时间
+moment().subtract(1, 'years').format('YYYY-MM-DD'); //当前时间的前1年时间
 
-moment().subtract(3, 'months').format('YYYY-MM-DD') //当前时间的前3个月时间
+moment().subtract(3, 'months').format('YYYY-MM-DD'); //当前时间的前3个月时间
 
-moment().subtract(1, 'weeks').format('YYYY-MM-DD') //当前时间的前一个星期时间
+moment().subtract(1, 'weeks').format('YYYY-MM-DD'); //当前时间的前一个星期时间
 ```
