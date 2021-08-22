@@ -18,13 +18,21 @@ const ThemeSwitch = () => {
     storageKey: 'theme',
     element: defaultElement,
   });
+  const handleClick = () => {
+    darkMode.toggle();
+    window.dispatchEvent(
+      new CustomEvent<any>('changeTheme', {
+        detail: !darkMode.value,
+      }),
+    );
+  };
 
   return (
     <button
       aria-label="Toggle Dark Mode"
       type="button"
       className="w-8 h-8 p-1 ml-1 mr-1 rounded sm:ml-4"
-      onClick={darkMode.toggle}
+      onClick={handleClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

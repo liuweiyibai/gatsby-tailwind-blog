@@ -6,6 +6,7 @@ import loadable from '@loadable/component';
 import ArchiveTag from '@/components/ArchiveTag';
 import PlaceholderComponent from '@/components/Placeholder';
 import AppLayout from '@/Layout/AppLayout';
+import Seo from '@/components/Seo';
 
 /* eslint-disable @typescript-eslint/no-require-imports */
 const randomColor = require('randomcolor');
@@ -73,6 +74,7 @@ const ArchiveTemplate = ({ pageContext, navigate, location }: any) => {
 
   return (
     <AppLayout>
+      <Seo title="归档" />
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">

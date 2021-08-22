@@ -24,7 +24,7 @@ const Animated = ({ children, defaultOpen = false, year }: any) => {
 
   return (
     <>
-      <h2 className="flex flex-row justify-between text-4xl leading-normal font-semibold items-center text-gray-600 border-b border-gray-500 mb-7 dark:text-gray-100">
+      <h2 className="flex flex-row justify-between text-4xl leading-normal font-semibold items-center text-gray-600 border-b border-gray-200 mb-7 dark:text-gray-100">
         {year}
         <span onClick={() => setOpen(!isOpen)}>
           <MdExpandLess className={`transition delay-150 duration-300 ease-in-out ${!isOpen ? 'rotate-180' : ''}`} />

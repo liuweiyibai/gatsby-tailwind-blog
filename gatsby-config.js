@@ -131,5 +131,85 @@ module.exports = {
         },
       },
     },
+    // rss 文件生成
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              site_url: siteUrl
+            }
+          }
+        }
+      `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [{ 'content:encoded': edge.node.html }, { author: 'lw1140@163.com' }],
+                });
+              });
+            },
+            query: `
+            {
+              allMarkdownRemark(
+                limit: 30,
+                sort: { order: DESC, fields: [frontmatter___date] }
+              ) {
+                edges {
+                  node {
+                    excerpt
+                    html
+                    fields {
+                      slug
+                    }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            }
+          `,
+            output: '/rss.xml',
+            title: '刘威益佰的个人博客 | RSS Feed',
+          },
+        ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: config.title,
+        short_name: config.author,
+        description: config.description,
+        start_url: config.pathPrefix,
+        display: 'minimal-ui',
+        background_color: `#fff`,
+        theme_color: `#fff`,
+        prefer_related_applications: false,
+        icon: 'static/logo.webp',
+      },
+    },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `tomato`,
+        showSpinner: true,
+      },
+    },
   ],
 };

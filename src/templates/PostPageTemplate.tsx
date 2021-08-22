@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import AppLayout from '@/Layout/AppLayout';
 import DefaultPostLayout from '@/Layout/DefaultPostLayout';
 import SimplePostLyout from '@/Layout/SimplePostLyout';
+import Seo from '@/components/Seo';
 
 const MapToObject = (obj: any) => {
   return {
@@ -18,6 +19,7 @@ const PostPageTemplate = ({ data, pageContext }) => {
   const post = MapToObject(data.markdownRemark);
   return (
     <AppLayout>
+      <Seo title={post.title} />
       {post.layout && post.layout === 'simple' ? (
         <SimplePostLyout {...post} {...pageContext} />
       ) : (

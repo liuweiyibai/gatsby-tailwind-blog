@@ -20,6 +20,7 @@ const Seo: React.FC<SeoProps> = ({ title }) => {
             lang
             author {
               name
+              description
             }
           }
         }
@@ -29,8 +30,7 @@ const Seo: React.FC<SeoProps> = ({ title }) => {
 
   const {
     siteMetadata: {
-      description,
-      author: { name: author },
+      author: { name: author, description },
       lang,
     },
   } = site;
@@ -86,7 +86,8 @@ const Seo: React.FC<SeoProps> = ({ title }) => {
         },
         {
           name: 'viewport',
-          content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no',
+          content:
+            'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,shrink-to-fit=no',
         },
       ]}
     />

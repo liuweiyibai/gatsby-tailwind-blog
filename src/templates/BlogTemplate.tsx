@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import AppLayout from '../Layout/AppLayout';
 import BlogListLayout from '@/Layout/BlogListLayout';
+import Seo from '@/components/Seo';
 
 function MapObject(obj: any) {
   return {
@@ -19,6 +20,7 @@ const BlogTemplate: React.FC = ({ data, pageContext }) => {
 
   return (
     <AppLayout>
+      <Seo title="首页" />
       <BlogListLayout
         posts={posts}
         pagination={{

@@ -26,9 +26,9 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
             <dl className="space-y-10">
               <div>
                 <dt className="sr-only">Published on</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                <dt className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                   <time>{`${_date.format('YYYY-MM-DD')} ${getWeek(_date.format('d'))}`}</time>
-                </dd>
+                </dt>
               </div>
             </dl>
             <div>
@@ -50,7 +50,7 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                     <dt className="sr-only">Name</dt>
                     <dd className="text-gray-900 dark:text-gray-100">刘威益佰</dd>
                     <dd>
-                      <dt className="sr-only">Twitter</dt>
+                      <span className="sr-only">Twitter</span>
                       <Link to="" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         @Twitter
                       </Link>

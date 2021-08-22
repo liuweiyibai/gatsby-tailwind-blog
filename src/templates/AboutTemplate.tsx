@@ -4,6 +4,7 @@ import AppLayout from '@/Layout/AppLayout';
 import SocialIcon from '@/Layout/SocialIcon';
 import Avatar from '@/assets/svgs/avatar.svg';
 import { hueRotateAnimate, spin } from '@/Layout/AppLogo';
+import Seo from '@/components/Seo';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-48 h-48 rounded-full',
@@ -28,6 +29,7 @@ const AboutTemplate: React.FC = ({ pageContext }) => {
   const { html } = pageContext;
   return (
     <AppLayout>
+      <Seo title="关于我" />
       <div className="divide-y">
         <div className="pt-6 pb-8 space-y-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
