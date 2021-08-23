@@ -1,5 +1,7 @@
 # 刘威益佰的个人博客
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cdf3d0ab-748b-4d58-b365-b66beb6f4464/deploy-status)](https://app.netlify.com/sites/lwyb/deploys)
+
 使用 tailwindcss + typescript + gatsby 搭建的 Blog
 
 [预览地址](https://lwyb.me)
