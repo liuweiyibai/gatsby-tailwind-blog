@@ -140,3 +140,20 @@ html {
   border-radius: 0px 0px 4px 4px;
   padding: 0.25rem 0.5rem;
 }
+
+.link-active {
+  position: relative;
+}
+.link-active::before {
+  content: '';
+  position: absolute;
+  background-color: rgba(20, 184, 166, var(--tw-text-opacity));
+  transition: all 0.6s;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  bottom: 0;
+  border-radius: 12px;
+  height: 13px;
+  opacity: 0.2;
+}

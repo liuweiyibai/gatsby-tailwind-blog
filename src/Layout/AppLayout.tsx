@@ -42,6 +42,10 @@ const AppLayout = ({ children }: any) => {
   } = resp;
 
   const { author, footerDes, title } = siteMetadata;
+  const isPartiallyActive = ({ href, location }) => {
+    const isCurrent = location.pathname.startsWith(href);
+    return isCurrent ? { className: 'link-active' } : {};
+  };
 
   return (
     <SectionContainer>
@@ -56,6 +60,8 @@ const AppLayout = ({ children }: any) => {
                 <Link
                   key={link.title}
                   to={link.href}
+                  getProps={isPartiallyActive}
+                  activeClassName="link-active"
                   className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100"
                 >
                   {link.title}
