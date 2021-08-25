@@ -3,8 +3,9 @@ import { Link } from 'gatsby';
 import dayjs from 'dayjs';
 import PageTitle from '@/components/PageTitle';
 import { getWeek } from '@/utils';
+import { DefaultPostLayoutProps } from './DefaultPostLayout';
 
-const SimplePostLayout = ({ tags, title, next, date, prev, html }) => {
+const SimplePostLayout: React.FC<DefaultPostLayoutProps> = ({ title, next, date, prev, html }) => {
   const _date = dayjs(date);
   return (
     <article>

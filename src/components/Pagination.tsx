@@ -6,7 +6,7 @@ export interface PaginationProps {
   currentPage: number & string;
 }
 
-const Pagination: FC<PaginationProps> = ({ totalPages, currentPage }) => {
+const Pagination: FC<PaginationProps> = ({ totalPages, currentPage }): JSX.Element => {
   const prevPage = parseInt(currentPage, 10) - 1 > 0;
   const nextPage = parseInt(currentPage, 10) + 1 <= parseInt(totalPages, 10);
 

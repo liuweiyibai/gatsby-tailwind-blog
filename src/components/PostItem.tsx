@@ -18,7 +18,7 @@ export interface PropsPostItem {
 //   className: props.hiddenMore ? "py-8" : "py-4",
 // }))``
 
-const PostItem: React.FC<PropsPostItem> = ({ slug, title, date, tags, excerpt, thumbnail }) => {
+const PostItem: React.FC<PropsPostItem> = ({ slug, title, date, tags, excerpt, thumbnail }): JSX.Element => {
   const image = getFixed(thumbnail);
   return (
     <li className="py-8">
@@ -48,7 +48,7 @@ const PostItem: React.FC<PropsPostItem> = ({ slug, title, date, tags, excerpt, t
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label={`Read "${title}"`}
               >
-                Read more &rarr;
+                查看更多 &rarr;
               </Link>
             </div>
           </div>

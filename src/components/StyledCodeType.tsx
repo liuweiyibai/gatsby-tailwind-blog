@@ -51,8 +51,12 @@ const lablesStyles = lables
   )
   .join(`\n`);
 
-const StyledBlogDetail = styled.div.attrs({
-  className: props => props.className,
+interface Props {
+  className?: string;
+}
+
+const StyledBlogDetail = styled.div.attrs<Props>({
+  className: (props: Props) => props.className,
 })`
   ${lablesStyles}
 `;

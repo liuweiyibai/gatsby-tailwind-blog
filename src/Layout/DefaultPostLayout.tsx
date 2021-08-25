@@ -28,7 +28,7 @@ interface Post {
   };
 }
 
-interface DefaultPostLayoutProps {
+export interface DefaultPostLayoutProps {
   tags: any[];
   title: string;
   next: Post;

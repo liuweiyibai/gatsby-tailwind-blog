@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { headerNavLinks } from './AppLayout';
 
-const MobileNav = () => {
+const MobileNav = (): JSX.Element => {
   const [navShow, setNavShow] = useState(false);
 
   const onToggleNav = () => {
