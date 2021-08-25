@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import { LinkGetProps } from '@reach/router';
+import type { LinkGetProps } from '@reach/router';
 // import AppLogo from './AppLogo';
 import SectionContainer from './SectionContainer';
 import ThemeSwitch from './ThemeSwitch';

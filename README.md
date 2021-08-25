@@ -154,7 +154,8 @@ brew install automake autoconf libtool dpkg pkgconfig nasm libpng
 
 ```ts
 import React from 'react';
-import { GatsbyLinkProps, Link as GLink } from 'gatsby';
+import { Link as GLink } from 'gatsby';
+import type { GatsbyLinkProps } from 'gatsby';
 import clx from 'classnames';
 import styles from './Button.module.css';
 
