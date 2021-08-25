@@ -16,7 +16,28 @@ const StyledAvatar = styled(Avatar).attrs({
   height: '38px';
 `;
 
-const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) => {
+interface Post {
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+    date: string;
+    tags: any[];
+    timeToRead: any;
+  };
+}
+
+interface DefaultPostLayoutProps {
+  tags: any[];
+  title: string;
+  next: Post;
+  prev: Post;
+  date: string;
+  html: string;
+}
+
+const DefaultPostLayout: React.FC<DefaultPostLayoutProps> = ({ tags, title, next, date, prev, html }) => {
   const _date = dayjs(date);
   return (
     <article>
@@ -87,9 +108,7 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                 <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                   {prev && (
                     <div>
-                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                        Previous Article
-                      </h2>
+                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">上一篇</h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         <Link to={`${prev.fields.slug}`}>{prev.frontmatter.title}</Link>
                       </div>
@@ -97,7 +116,7 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                   )}
                   {next && (
                     <div>
-                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">Next Article</h2>
+                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">下一篇</h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         <Link to={`${next.fields.slug}`}>{next.frontmatter.title}</Link>
                       </div>
