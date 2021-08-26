@@ -20,7 +20,7 @@ const Pagination: FC<PaginationProps> = ({ totalPages, currentPage }): JSX.Eleme
         )}
         {prevPage && (
           <Link to={currentPage - 1 === 1 ? `/blog/` : `/blog/page/${currentPage - 1}`}>
-            <button role="previous">Previous</button>
+            <button role="previous">上一页</button>
           </Link>
         )}
         <span>

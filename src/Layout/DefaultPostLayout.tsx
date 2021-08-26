@@ -7,6 +7,7 @@ import PageTitle from '@/components/PageTitle';
 import Avatar from '@/assets/svgs/avatar.svg';
 import { getWeek } from '@/utils';
 import StyledCodeType from '@/components/StyledCodeType';
+import ToolTipQrCode from '@/components/ToolTipQrCode';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-10 h-10 rounded-full',
@@ -71,10 +72,8 @@ const DefaultPostLayout: React.FC<DefaultPostLayoutProps> = ({ tags, title, next
                     <dt className="sr-only">Name</dt>
                     <dd className="text-gray-900 dark:text-gray-100">刘威益佰</dd>
                     <dd>
-                      <span className="sr-only">Twitter</span>
-                      <Link to="" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        @Twitter
-                      </Link>
+                      <span className="sr-only">微信</span>
+                      <ToolTipQrCode />
                     </dd>
                   </dl>
                 </li>
