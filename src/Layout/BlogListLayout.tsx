@@ -1,14 +1,15 @@
 import React, { useState, FC } from 'react';
 
 import PostItemSmall from '@/components/PostItemSmall';
-import Pagination from '@/components/Pagination';
+import Pagination, { PaginationProps } from '@/components/Pagination';
 
 interface PropsListLayout {
   posts: Array<any>;
   title: string;
+  pagination: PaginationProps;
 }
 
-const ListLayout: FC<PropsListLayout> = ({ posts, title = '全部文章', initialDisplayPosts = [], pagination }) => {
+const ListLayout: FC<PropsListLayout> = ({ posts, title = '全部文章', pagination }) => {
   const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter(post => {
     const tag = Array.isArray(post.tag) ? post.tag.join('') : '';
@@ -55,8 +56,8 @@ const ListLayout: FC<PropsListLayout> = ({ posts, title = '全部文章', initia
           ))}
         </ul>
       </div>
-      {pagination && pagination.numPages > 1 && !searchValue && (
-        <Pagination currentPage={pagination.currentPage} totalPages={pagination.numPages} />
+      {pagination && pagination.totalPages > 1 && !searchValue && (
+        <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
       )}
     </>
   );

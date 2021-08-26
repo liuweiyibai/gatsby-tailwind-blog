@@ -7,6 +7,7 @@ import PageTitle from '@/components/PageTitle';
 import Avatar from '@/assets/svgs/avatar.svg';
 import { getWeek } from '@/utils';
 import StyledCodeType from '@/components/StyledCodeType';
+import ToolTipQrCode from '@/components/ToolTipQrCode';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-10 h-10 rounded-full',
@@ -16,7 +17,28 @@ const StyledAvatar = styled(Avatar).attrs({
   height: '38px';
 `;
 
-const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) => {
+interface Post {
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+    date: string;
+    tags: any[];
+    timeToRead: any;
+  };
+}
+
+export interface DefaultPostLayoutProps {
+  tags: any[];
+  title: string;
+  next: Post;
+  prev: Post;
+  date: string;
+  html: string;
+}
+
+const DefaultPostLayout: React.FC<DefaultPostLayoutProps> = ({ tags, title, next, date, prev, html }) => {
   const _date = dayjs(date);
   return (
     <article>
@@ -50,10 +72,8 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                     <dt className="sr-only">Name</dt>
                     <dd className="text-gray-900 dark:text-gray-100">刘威益佰</dd>
                     <dd>
-                      <span className="sr-only">Twitter</span>
-                      <Link to="" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        @Twitter
-                      </Link>
+                      <span className="sr-only">微信</span>
+                      <ToolTipQrCode />
                     </dd>
                   </dl>
                 </li>
@@ -87,9 +107,7 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                 <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                   {prev && (
                     <div>
-                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                        Previous Article
-                      </h2>
+                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">上一篇</h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         <Link to={`${prev.fields.slug}`}>{prev.frontmatter.title}</Link>
                       </div>
@@ -97,7 +115,7 @@ const DefaultPostLayout: React.FC = ({ tags, title, next, date, prev, html }) =>
                   )}
                   {next && (
                     <div>
-                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">Next Article</h2>
+                      <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">下一篇</h2>
                       <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                         <Link to={`${next.fields.slug}`}>{next.frontmatter.title}</Link>
                       </div>

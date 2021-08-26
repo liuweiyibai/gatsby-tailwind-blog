@@ -142,16 +142,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const tagsMap = new Map();
   const posts = result.data.allMarkdownRemark.edges;
 
-  const numPages = Math.ceil(posts.length / postsPerPage);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
-  Array.from({ length: numPages }).forEach((_, i) => {
+  Array.from({ length: totalPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/blog` : `/blog/page/${i + 1}`,
       component: BlogTemplate,
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,
-        numPages,
+        totalPages,
         currentPage: i + 1,
       },
     });

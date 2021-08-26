@@ -80,9 +80,9 @@ export default function Home() {
           <Link
             to="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="all posts"
+            aria-label="查看全部"
           >
-            All Posts &rarr;
+            查看全部 &rarr;
           </Link>
         </div>
       )}

@@ -4,7 +4,16 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import Tag from '../components/Tag';
 import { getFixed } from '../utils';
 
-const PostItemSmall = ({ slug, title, date, tags, thumbnail, excerpt }) => {
+export interface PostProps {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  thumbnail: any;
+  excerpt: string;
+}
+
+const PostItemSmall: React.FC<PostProps> = ({ slug, title, date, tags = [], thumbnail, excerpt }): JSX.Element => {
   const image = getFixed(thumbnail);
   return (
     <li className="py-4">

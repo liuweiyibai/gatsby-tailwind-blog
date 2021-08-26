@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
+import type { LinkGetProps } from '@reach/router';
 // import AppLogo from './AppLogo';
 import SectionContainer from './SectionContainer';
 import ThemeSwitch from './ThemeSwitch';
@@ -16,11 +17,31 @@ export const headerNavLinks = [
   { href: '/about', title: '关于我' },
 ];
 
-const AppLayout = ({ children }: any) => {
-  const resp = useStaticQuery(graphql`
+interface SiteInfoProps {
+  site: {
+    siteMetadata: {
+      title: string;
+      author: {
+        name?: string;
+        description?: string;
+      };
+      footerDes: string;
+      lang: string;
+      siteUrl: string;
+      social: {
+        github: string;
+        twitter: string;
+      };
+    };
+  };
+}
+
+const AppLayout: React.FC = ({ children }) => {
+  const resp = useStaticQuery<SiteInfoProps>(graphql`
     query SiteInfo {
       site {
         siteMetadata {
+          title
           author {
             name
             description
@@ -32,7 +53,6 @@ const AppLayout = ({ children }: any) => {
             github
             twitter
           }
-          title
         }
       }
     }
@@ -42,7 +62,7 @@ const AppLayout = ({ children }: any) => {
   } = resp;
 
   const { author, footerDes, title } = siteMetadata;
-  const isPartiallyActive = ({ href, location }) => {
+  const isPartiallyActive = ({ href, location }: LinkGetProps) => {
     const isCurrent = location.pathname.startsWith(href);
     return isCurrent ? { className: 'link-active' } : {};
   };
