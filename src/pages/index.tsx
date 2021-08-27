@@ -7,9 +7,6 @@ import Seo from '../components/Seo';
 
 import AppLayout from '../Layout/AppLayout';
 
-// @ts-ignore
-import jinrishici from 'jinrishici';
-
 function mapObj(obj: any) {
   return {
     ...obj.frontmatter,
@@ -56,10 +53,12 @@ export default function Home() {
 
   const [text, setText] = React.useState('🚀🚀🚀 我是刘威💯, 前端攻城狮, 后端搬运工...');
   React.useEffect(() => {
+    /* eslint-disable @typescript-eslint/no-require-imports */
+    const jinrishici = require('jinrishici');
     // @ts-ignore
     jinrishici.load(result => {
-      console.log(result);
-      // setText
+      const name = `${result.data.origin.author} 《${result.data.origin.title}》`;
+      setText(`${result.data.content} - ${name}`);
     });
     return () => {};
   }, []);
