@@ -24,7 +24,7 @@ const PostItem: React.FC<PropsPostItem> = ({ slug, title, date, tags, excerpt, t
     <li className="py-8">
       <article>
         <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-center">
-          <div className="hidden lg:grid justify-items-center">
+          <div className="hidden xl:grid justify-items-center">
             <GatsbyImage image={image} className="opacity-70" alt={title} />
           </div>
           <div className="space-y-5 xl:col-span-3">

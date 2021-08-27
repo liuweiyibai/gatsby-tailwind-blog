@@ -51,6 +51,18 @@ export default function Home() {
     `,
   );
 
+  const [text, setText] = React.useState('🚀🚀🚀 我是刘威💯, 前端攻城狮, 后端搬运工...');
+  React.useEffect(() => {
+    /* eslint-disable @typescript-eslint/no-require-imports */
+    const jinrishici = require('jinrishici');
+    // @ts-ignore
+    jinrishici.load(result => {
+      const name = `${result.data.origin.author} 《${result.data.origin.title}》`;
+      setText(`${result.data.content} - ${name}`);
+    });
+    return () => {};
+  }, []);
+
   const posts = result.allMarkdownRemark.edges
     .map((t: any) => {
       return t.node;
@@ -65,9 +77,7 @@ export default function Home() {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             最近更新
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            🚀🚀🚀 我是刘威💯, 前端攻城狮, 后端搬运工...
-          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{text}</p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {posts.map((t: any, i) => (
