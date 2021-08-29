@@ -36,6 +36,13 @@ interface SiteInfoProps {
   };
 }
 
+const isPartiallyActive = ({ href, location }: LinkGetProps) => {
+  const isCurrent = location.pathname.startsWith(href);
+  return isCurrent
+    ? { className: 'link-active p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100' }
+    : { className: 'p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100' };
+};
+
 const AppLayout: React.FC = ({ children }) => {
   const resp = useStaticQuery<SiteInfoProps>(graphql`
     query SiteInfo {
@@ -62,10 +69,6 @@ const AppLayout: React.FC = ({ children }) => {
   } = resp;
 
   const { author, footerDes, title } = siteMetadata;
-  const isPartiallyActive = ({ href, location }: LinkGetProps) => {
-    const isCurrent = location.pathname.startsWith(href);
-    return isCurrent ? { className: 'link-active' } : {};
-  };
 
   return (
     <SectionContainer>
@@ -81,7 +84,6 @@ const AppLayout: React.FC = ({ children }) => {
                   key={link.title}
                   to={link.href}
                   getProps={isPartiallyActive}
-                  activeClassName="link-active"
                   className="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100"
                 >
                   {link.title}

@@ -1,35 +1,29 @@
 ---
-title: html5 中 manifest 文件的作用
+title: 总结一下 HTML5 中的 manifest 文件
 tags:
-  - html5
-  - js
-  - webpack
-  - pwa
+  - HTML5
+  - Webpack
+  - PWA
 category:
   - 编程笔记
 date: 2019-08-30 18:00:28
-slug: understand-what-manifest-is
+slug: understand-what-manifest-is-in-html5
 thumbnail: '../../thumbnails/html5.png'
 ---
 
 在前端，说到 `manifest` 可以指代下列含义：
 
-- `html` 标签的 `manifest` 属性: 离线缓存（目前已被废弃）
-- `pwa` : 将 `web` 应用程序安装到设备的主屏幕
+- `html` 标签的 `manifest` 属性
+- `PWA` 将 `web` 应用程序安装到设备的主屏幕
 - `webpack` 中 `webpack-manifest-plugin` 插件打包出来的 `manifest.json` 文件，用来生成一份资源清单，为后端渲染服务所用
-- `webpack` 中 `dll` 打包时,输出的 `manifest.json` 文件，用来分析已经打包过的文件，优化打包速度和大小
+- `webpack` 中 `dll` 打包时，输出的 `manifest.json` 文件，用来分析已经打包过的文件，优化打包速度和大小
 - `webpack` 中 `manifest` 运行时代码
 
 下面来分别介绍下：
 
-<details>
-<summary>html 属性 manifest</summary>
+## html 标签属性 manifest
 
-## html 属性 manifest
-
-**index.html：**
-
-```html
+```html:title=index.html;
 <!DOCTYPE html>
 <html lang="en" manifest="/tc.mymanifest">
   <head>
@@ -49,7 +43,7 @@ thumbnail: '../../thumbnails/html5.png'
 
 **tc.mymanifest：**
 
-```bash
+```text
 # v1 这是注释
 CACHE MANIFEST
 /theme.css
@@ -78,7 +72,7 @@ FALLBACK:
 
 需要特别注意：用户第一次访问该网页，缓存文件之后，第二次进入该页面，发现 `tc.mymanifest` 缓存清单更新了，于是会重新下载缓存文件，但是，第二次进入显示的页面仍然执行的是旧文件，下载的新文件，只会在**第三次进入该页面后执行！！！**
 
-如果希望用户立即看到新内容，需要`js`监听更新事件，重新加载页面
+如果希望用户立即看到新内容，需要 JavaScript 监听更新事件，重新加载页面
 
 ```js
 window.addEventListener(
@@ -102,16 +96,11 @@ window.addEventListener(
 );
 ```
 
-建议对 `tc.mymanifest` 缓存清单设置永不缓存，不过，`manifest` 也有很多缺点，比如需要手动一个个填写缓存的文件，更新文件之后需要二次刷新，如果更新的资源中有一个资源更新失败了，将导致全部更新失败，将用回上一版本的缓存，并且 `html5` 规范也废弃了这个属性，因此不建议使用
-
-</details>
-
-<details>
-<summary>PWA</summary>
+建议对 `tc.mymanifest` 缓存清单设置永不缓存，不过，`manifest` 也有很多缺点，比如需要手动一个个填写缓存的文件，更新文件之后需要二次刷新，如果更新的资源中有一个资源更新失败了，将导致全部更新失败，将用回上一版本的缓存，并且 HTML5 规范也废弃了这个属性，因此不建议使用。
 
 ## PWA
 
-为了实现 `PWA` 应用添加至桌面的功能，除了要求站点支持 `HTTPS` 之外，还需要准备 `manifest.json` 文件去配置应用的图标、名称等信息
+为了实现 `PWA` 应用添加至桌面的功能，除了要求站点支持 `HTTPS` 之外，还需要准备 `manifest.json` 文件去配置应用的图标、名称等信息。
 
 ```html
 <link rel="manifest" href="/manifest.json" />
@@ -135,13 +124,15 @@ window.addEventListener(
 }
 ```
 
-通过一系列配置，就可以把一个 `PWA` 像 `APP` 一样，添加一个图标到手机屏幕上，点击图标即可打开站点
+通过 Service workers 让 PWA 离线工作，通过一系列配置，就可以把一个 PWA 像 `APP` 一样，添加一个图标到手机屏幕上，点击图标即可打开站点。
 
-</details>
+> [PWA 概念](https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps)
+>
+> [Webpack 构建 PWA](https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack)
 
 ## **webpack-manifest-plugin**
 
-通常情况下，我们打包出来的 `js` , `css` 都是带上版本号的，通过 `HtmlWebpackPlugin` 可以自动帮我们在 `index.html` 里面加上带版本号的 `js` 和 `css`
+通常情况下，我们打包出来的 `js` , `css` 都是带上版本号的，通过 `HtmlWebpackPlugin` 可以自动帮我们在 `index.html` 里面加上带版本号的 `js` 和 `css`。
 
 ```html
 <!DOCTYPE html>
@@ -218,7 +209,7 @@ res.send(`
 
 `Webpack4` 自带代码分割功能，只要配置:
 
-```js:title=gatsby-config.js
+```js:title=webpack.config.js
 optimization: {
   splitChunks: {
     chunks: 'all'
@@ -227,7 +218,7 @@ optimization: {
 ```
 
 重新打包，发现新生成了一个 `vendor.js` 文件，公用的一些代码就被打包进去了
-重新修改 `src/Home.js` ,然后打包，你会发现 `vendor.js` 的 `hash` 值没有改变，这也是我们希望的
+重新修改 `src/Home.js` ,然后打包，你会发现 `vendor.js` 的 `hash` 值没有改变，这也是我们希望的。
 
 ## DLL 打包
 
@@ -243,9 +234,7 @@ dll 打包原理就是：
 - `Webpack` 打包时，读取 `manifest.json`，知道哪些代码可以直接忽略，从而提高构建速度
   我们新建一个 `webpack.dll.js`
 
-**webpack.dll.js：**
-
-```js
+```js:title=webpack.dll.js
 module.exports = {
   entry: {
     vendors: ['react', 'react-dom'], // 手动指定打包哪些库
@@ -339,4 +328,4 @@ optimization: {
 - `dll` 打包清单
 - 代码加载顺序清单
 
-只不过是在不同的场景中使用特定的清单来完成某些功能
+只不过是在不同的场景中使用特定的清单来完成某些功能。
