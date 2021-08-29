@@ -8,6 +8,7 @@ import Avatar from '@/assets/svgs/avatar.svg';
 import { getWeek } from '@/utils';
 import StyledCodeType from '@/components/StyledCodeType';
 import ToolTipQrCode from '@/components/ToolTipQrCode';
+import BlogComment from '@/components/Comments';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-10 h-10 rounded-full',
@@ -85,13 +86,8 @@ const DefaultPostLayout: React.FC<DefaultPostLayoutProps> = ({ tags, title, next
               <article dangerouslySetInnerHTML={{ __html: html }} />
             </StyledCodeType>
             <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-              <Link to="discussUrl(slug)" rel="nofollow">
-                Discuss on Twitter
-              </Link>
-              {` • `}
-              <Link to="editUrl(fileName)">View on GitHub</Link>
+              <BlogComment />
             </div>
-            {/* <Comments frontMatter={frontMatter} /> */}
           </div>
           <footer>
             <div className="text-sm font-medium leading-5 divide-gray-200 xl:divide-y dark:divide-gray-700 xl:col-start-1 xl:row-start-2">

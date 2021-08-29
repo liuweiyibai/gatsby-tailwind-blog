@@ -5,6 +5,7 @@ import SocialIcon from '@/Layout/SocialIcon';
 import Avatar from '@/assets/svgs/avatar.svg';
 import { hueRotateAnimate, spin } from '@/Layout/AppLogo';
 import Seo from '@/components/Seo';
+import { MdLocationOn } from 'react-icons/md';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-48 h-48 rounded-full',
@@ -40,11 +41,13 @@ const AboutTemplate: React.FC = ({ pageContext }) => {
           <div className="flex flex-col items-center pt-8 space-x-2">
             <StyledAvatar />
             <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">刘威益佰</h3>
-            <div className="text-gray-500 dark:text-gray-400">occupation</div>
-            <div className="text-gray-500 dark:text-gray-400">company</div>
+            <div className="text-gray-500 dark:text-gray-400">前端开发工程师 & 后端搬运工</div>
+            <div className="text-gray-500 dark:text-gray-400 flex justify-center items-center">
+              <MdLocationOn size={16} /> <span>北京</span>
+            </div>
             <div className="flex pt-6 space-x-3">
-              <SocialIcon kind="mail" href={`mailto:${'email'}`} />
-              <SocialIcon kind="github" href="github" />
+              <SocialIcon kind="mail" href="mailto:lw1140@163.com" />
+              <SocialIcon kind="github" href="https://github.com/liuweiyibai" />
               <SocialIcon kind="linkedin" href="linkedin" />
               <SocialIcon kind="twitter" href="twitter" />
             </div>
