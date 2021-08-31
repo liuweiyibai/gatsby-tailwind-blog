@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import dayjs from 'dayjs';
-import PageTitle from '@/components/PageTitle';
-import { getWeek } from '@/utils';
+import PageTitle from 'components/PageTitle';
+import { getWeek } from 'utils';
 import { DefaultPostLayoutProps } from './DefaultPostLayout';
 
 const SimplePostLayout: React.FC<DefaultPostLayoutProps> = ({ title, next, date, prev, html }) => {

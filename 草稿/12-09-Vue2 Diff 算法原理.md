@@ -32,7 +32,7 @@ thumbnail: '../../thumbnails/vue.png'
 
 修改 DOM 的开销是很大的，如果大量修改 DOM，会造成浏览器的回流或者重绘。如果我们只需要修改 DOM 中的某个节点，如何能提高 DOM 树更新效率，每次更新都采取最小更新策略，减少回流、重绘的次数，Diff 算法能够帮助我们。
 
-我们先根据真实 DOM 生成一颗 Virtual DOM，当 Virtual DOM 某个节点的数据改变后会生成一个新的 VNode Vnode 和 oldVnode 作对比，发现有不一样的地方就直接修改在真实的 DOM 上，利用两棵树比较到最小差异来找到 DOM 树的更新点。
+我们先根据真实 DOM 生成一颗 Virtual DOM，当 Virtual DOM 某个节点的数据改变后会生成一个新的 VNode 和 oldVnode 作对比，发现有不一样的地方就直接修改在真实的 DOM 上，利用两棵树比较到最小差异来找到 DOM 树的更新点。
 
 在 Vue 的 Diff 过程就是调用名为 patch 的函数，比较新旧节点，一边比较一边给真实的 DOM 打补丁。
 

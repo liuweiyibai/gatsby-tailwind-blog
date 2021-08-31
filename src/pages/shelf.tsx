@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Seo from '@/components/Seo';
-import AppLayout from '@/Layout/AppLayout';
+import Seo from 'components/Seo';
+import AppLayout from 'Layout/AppLayout';
 
 const SecondPage = () => (
   <AppLayout>

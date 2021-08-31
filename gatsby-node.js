@@ -1,6 +1,22 @@
 const path = require('path');
+const fs = require('fs');
 const { kebabCase } = require('lodash');
 const dayjs = require('dayjs');
+
+const pathResolve = dir => path.resolve(__dirname, dir);
+
+const genAlias = () => {
+  const alias = {};
+  const files = fs.readdirSync(pathResolve('src'));
+  files.forEach(function (item) {
+    let stat = fs.lstatSync(pathResolve(`src/${item}`));
+    if (stat.isDirectory() === true) {
+      alias[item] = pathResolve(`src/${item}`);
+    }
+  });
+  return alias;
+};
+
 exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   const config = getConfig();
   if (stage === 'build-javascript') {
@@ -13,9 +29,7 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
 
   actions.setWebpackConfig({
     resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'src'),
-      },
+      alias: genAlias(),
     },
   });
 };
