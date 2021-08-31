@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import dayjs from 'dayjs';
 import Tag from 'components/Tag';
 import PageTitle from 'components/PageTitle';
-import Avatar from 'assets/svgs/avatar.svg';
+import { ReactComponent as Avatar } from 'assets/svgs/avatar.svg';
 import { getWeek } from 'utils';
 import StyledCodeType from 'components/StyledCodeType';
 import ToolTipQrCode from 'components/ToolTipQrCode';
