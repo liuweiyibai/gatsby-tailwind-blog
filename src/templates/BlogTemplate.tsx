@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import AppLayout from '../Layout/AppLayout';
-import BlogListLayout from '@/Layout/BlogListLayout';
-import Seo from '@/components/Seo';
+import BlogListLayout from 'Layout/BlogListLayout';
+import Seo from 'components/Seo';
 
 function MapObject(obj: any) {
   return {

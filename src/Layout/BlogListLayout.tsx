@@ -1,7 +1,7 @@
 import React, { useState, FC } from 'react';
 
-import PostItemSmall from '@/components/PostItemSmall';
-import Pagination, { PaginationProps } from '@/components/Pagination';
+import PostItemSmall from 'components/PostItemSmall';
+import Pagination, { PaginationProps } from 'components/Pagination';
 
 interface PropsListLayout {
   posts: Array<any>;

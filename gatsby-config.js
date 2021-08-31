@@ -123,11 +123,14 @@ module.exports = {
       },
     },
     // 图片处理 ==== end
+    // svg 处理
     {
-      resolve: 'gatsby-plugin-react-svg',
+      resolve: 'gatsby-plugin-svgr',
       options: {
-        rule: {
-          include: /src/,
+        prettier: true,
+        svgo: true,
+        svgoConfig: {
+          plugins: [{ removeViewBox: true }, { cleanupIDs: true }],
         },
       },
     },

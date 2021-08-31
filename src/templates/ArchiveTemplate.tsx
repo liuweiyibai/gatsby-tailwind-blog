@@ -3,17 +3,17 @@ import { kebabCase } from 'lodash';
 import { Link } from 'gatsby';
 import loadable from '@loadable/component';
 
-import ArchiveTag from '@/components/ArchiveTag';
-import PlaceholderComponent from '@/components/Placeholder';
-import AppLayout from '@/Layout/AppLayout';
-import Seo from '@/components/Seo';
+import ArchiveTag from 'components/ArchiveTag';
+import PlaceholderComponent from 'components/Placeholder';
+import AppLayout from 'Layout/AppLayout';
+import Seo from 'components/Seo';
 
 /* eslint-disable @typescript-eslint/no-require-imports */
 const randomColor = require('randomcolor');
 const Color = require('color');
 /* eslint-disable @typescript-eslint/no-require-imports */
 
-const Animated = loadable(() => import('@/components/Animated'), {
+const Animated = loadable(() => import('components/Animated'), {
   fallback: <PlaceholderComponent />,
 });
 

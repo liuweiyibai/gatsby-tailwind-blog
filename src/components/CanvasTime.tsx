@@ -1,5 +1,5 @@
 import * as React from 'react';
-import canvasTime from '@/utils/canvasTime';
+import canvasTime from 'utils/canvasTime';
 
 const CanvasTime = () => {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
