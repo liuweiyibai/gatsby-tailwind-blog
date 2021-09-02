@@ -1,5 +1,5 @@
 ---
-title: Vue2 Diff 算法原理
+title: Vue2 Diff 算法过程
 date: 2020-12-09 20:29:44
 category:
   - 编程笔记
@@ -28,7 +28,7 @@ thumbnail: '../../thumbnails/vue.png'
 
 ## Diff
 
-当数据发生变化时，Vue 是怎么更新节点的呢？
+当数据发生变化时，Vue 是怎么更新节点的呢？diff 整体策略为：深度优先，同层比较。
 
 修改 DOM 的开销是很大的，如果大量修改 DOM，会造成浏览器的回流或者重绘。如果我们只需要修改 DOM 中的某个节点，如何能提高 DOM 树更新效率，每次更新都采取最小更新策略，减少回流、重绘的次数，Diff 算法能够帮助我们。
 
@@ -160,12 +160,12 @@ function patchVnode(oldVnode, vnode) {
   // 判断 Vnode 和 oldVnode 是否指向同一个对象，如果是，那么直接 return
   if (oldVnode === vnode) return;
 
-  // 如果他们都有文本节点并且不相等，那么将 el 的文本节点设置为 Vnode 的文本节点
+  // 如果他们都有文本节点并且不相等
   if (oldVnode.text !== null && vnode.text !== null && oldVnode.text !== vnode.text) {
+    // 那么将 el 的文本节点设置为 Vnode 的文本节点
     api.setTextContent(el, vnode.text);
   } else {
     updateEle(el, vnode, oldVnode);
-
     if (oldCh && ch && oldCh !== ch) {
       // 如果 oldVnode 没有子节点而 Vnode 有，则将 Vnode 的子节点真实化之后添加到 el 如果两者都有子节点，则执行 updateChildren 函数比较子节点，这一步很重要
       updateChildren(el, oldCh, ch);
@@ -179,9 +179,99 @@ function patchVnode(oldVnode, vnode) {
 }
 ```
 
-<!-- https://juejin.cn/post/6844903961837699079#heading-4 -->
+updateChildren 函数详解，这个函数将 Vnode 的子节点 newCh 和 oldVnode 的子节点 oldCh 提取出来；oldCh 和 newCh 各有两个头尾的变量 StartIdx 和 EndIdx ，它们的 2 个变量相互比较，一共有 4 种比较方式。如果 4 种比较都没匹配，如果设置了 key ，就会用 key 进行比较，在比较的过程中，变量会往中间靠，一旦 StartIdx>EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。
 
-<!-- https://cloud.tencent.com/developer/article/1006029 -->
+新旧两个 VNode 节点的左右头尾两侧均有一个变量标识，在遍历过程中这几个变量都会向中间靠拢。当 oldStartIdx <= oldEndIdx 或者 newStartIdx <= newEndIdx 时结束循环。在遍历中，如果存在 key，并且满足 sameVnode，会将该 DOM 节点进行复用(只通过移动节点顺序)，否则则会创建一个新的 DOM 节点。
+
+```js
+/**
+ * @param parentElm 当前节点的真实DOM
+ * @param oldCh 旧节点的children
+ * @param newCh 新节点的children
+*/
+updateChildren (parentElm, oldCh, newCh) {
+ // 两棵树起始索引
+ let oldStartIdx = 0, newStartIdx = 0
+
+ // 旧节点的最后一个元素的索引
+ let oldEndIdx = oldCh.length - 1
+
+ // 第一个旧节点
+ let oldStartVnode = oldCh[0]
+
+ //  最后一个旧节点
+ let oldEndVnode = oldCh[oldEndIdx]
+
+ let newEndIdx = newCh.length - 1
+ let newStartVnode = newCh[0]
+ let newEndVnode = newCh[newEndIdx]
+ let oldKeyToIdx
+ let idxInOld
+ let elmToMove
+ let before
+
+ // 当在各自索引区间内
+ while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+  if (oldStartVnode == null) {
+  // 对于vnode.key的比较，会把oldVnode = null
+   oldStartVnode = oldCh[++oldStartIdx]
+  }else if (oldEndVnode == null) {
+   oldEndVnode = oldCh[--oldEndIdx]
+  }else if (newStartVnode == null) {
+   newStartVnode = newCh[++newStartIdx]
+  }else if (newEndVnode == null) {
+   newEndVnode = newCh[--newEndIdx]
+  }else if (sameVnode(oldStartVnode, newStartVnode)) {
+   patchVnode(oldStartVnode, newStartVnode)
+   oldStartVnode = oldCh[++oldStartIdx]
+   newStartVnode = newCh[++newStartIdx]
+  }else if (sameVnode(oldEndVnode, newEndVnode)) {
+   patchVnode(oldEndVnode, newEndVnode)
+   oldEndVnode = oldCh[--oldEndIdx]
+   newEndVnode = newCh[--newEndIdx]
+  }else if (sameVnode(oldStartVnode, newEndVnode)) {
+   patchVnode(oldStartVnode, newEndVnode)
+   api.insertBefore(parentElm, oldStartVnode.el, api.nextSibling(oldEndVnode.el))
+   oldStartVnode = oldCh[++oldStartIdx]
+   newEndVnode = newCh[--newEndIdx]
+  }else if (sameVnode(oldEndVnode, newStartVnode)) {
+   patchVnode(oldEndVnode, newStartVnode)
+   api.insertBefore(parentElm, oldEndVnode.el, oldStartVnode.el)
+   oldEndVnode = oldCh[--oldEndIdx]
+   newStartVnode = newCh[++newStartIdx]
+  }else {
+   // 使用key时的比较
+   if (oldKeyToIdx === undefined) {
+    oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx) // 有key生成index表
+   }
+   idxInOld = oldKeyToIdx[newStartVnode.key]
+   if (!idxInOld) {
+    api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
+    newStartVnode = newCh[++newStartIdx]
+   }
+   else {
+    elmToMove = oldCh[idxInOld]
+    if (elmToMove.sel !== newStartVnode.sel) {
+     api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
+    }else {
+     patchVnode(elmToMove, newStartVnode)
+     oldCh[idxInOld] = null
+     api.insertBefore(parentElm, elmToMove.el, oldStartVnode.el)
+    }
+    newStartVnode = newCh[++newStartIdx]
+   }
+  }
+ }
+ if (oldStartIdx > oldEndIdx) {
+  before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].el
+  addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx)
+ }else if (newStartIdx > newEndIdx) {
+  removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
+ }
+}
+```
+
+<!-- https://juejin.cn/post/6844903961837699079#heading-4 -->
 
 <!-- https://www.jb51.net/article/140471.htm -->
 
