@@ -185,12 +185,14 @@ updateChildren 函数详解，这个函数将 Vnode 的子节点 newCh 和 oldVn
 
 ```js
 /**
+ * 此函数的作用是比较两个 Vnode 数组得出最小操作补丁，执行一个双边循环。
  * @param parentElm 当前节点的真实DOM
  * @param oldCh 旧节点的children
  * @param newCh 新节点的children
+ * https://blog.csdn.net/suwu150/article/details/103369140
 */
 updateChildren (parentElm, oldCh, newCh) {
- // 两棵树起始索引
+ // 新旧两棵树起始索引
  let oldStartIdx = 0, newStartIdx = 0
 
  // 旧节点的最后一个元素的索引
@@ -210,19 +212,25 @@ updateChildren (parentElm, oldCh, newCh) {
  let elmToMove
  let before
 
- // 当在各自索引区间内
+ // 当在各自索引区间内，才执行下面的代码
+ // 每一轮循环，比较两棵树首尾4个节点，当其中一组长度为0，则证明diff过程完成
  while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
   if (oldStartVnode == null) {
-  // 对于vnode.key的比较，会把oldVnode = null
+    // 获取旧树起始节点，并且索引后移
    oldStartVnode = oldCh[++oldStartIdx]
   }else if (oldEndVnode == null) {
+    // 获取旧树中最后一个，并且将索引前移
    oldEndVnode = oldCh[--oldEndIdx]
   }else if (newStartVnode == null) {
+    // 新树的起始节点，索引后移
    newStartVnode = newCh[++newStartIdx]
   }else if (newEndVnode == null) {
+    // 新树的最后一个，索引前移
    newEndVnode = newCh[--newEndIdx]
   }else if (sameVnode(oldStartVnode, newStartVnode)) {
+    // 当新旧起始节点是相同 vonde
    patchVnode(oldStartVnode, newStartVnode)
+   // 重新给节点赋值
    oldStartVnode = oldCh[++oldStartIdx]
    newStartVnode = newCh[++newStartIdx]
   }else if (sameVnode(oldEndVnode, newEndVnode)) {
@@ -248,8 +256,7 @@ updateChildren (parentElm, oldCh, newCh) {
    if (!idxInOld) {
     api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
     newStartVnode = newCh[++newStartIdx]
-   }
-   else {
+   }else {
     elmToMove = oldCh[idxInOld]
     if (elmToMove.sel !== newStartVnode.sel) {
      api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
@@ -262,14 +269,19 @@ updateChildren (parentElm, oldCh, newCh) {
    }
   }
  }
+  // 表示旧树先遍历结束，新树中所有剩余节点增加到
  if (oldStartIdx > oldEndIdx) {
   before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].el
   addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx)
  }else if (newStartIdx > newEndIdx) {
+  // 新树先遍历结束，则旧树中需要删除一些节点
   removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
  }
 }
 ```
+
+<!-- 用数组来描述diff过程 -->
+<!-- https://juejin.cn/post/6844903872960561160 -->
 
 <!-- https://juejin.cn/post/6844903961837699079#heading-4 -->
 
