@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 
-import { ReactComponent as Mail } from 'assets/svgs/mail.svg';
-import { ReactComponent as Github } from 'assets/svgs/github.svg';
-import { ReactComponent as Facebook } from 'assets/svgs/facebook.svg';
-import { ReactComponent as Youtube } from 'assets/svgs/youtube.svg';
-import { ReactComponent as Linkedin } from 'assets/svgs/linkedin.svg';
-import { ReactComponent as Twitter } from 'assets/svgs/twitter.svg';
+import Mail from 'assets/svgs/mail.svg';
+import Github from 'assets/svgs/github.svg';
+import Facebook from 'assets/svgs/facebook.svg';
+import Youtube from 'assets/svgs/youtube.svg';
+import Linkedin from 'assets/svgs/linkedin.svg';
+import Twitter from 'assets/svgs/twitter.svg';
 
 const components = {
   mail: Mail,

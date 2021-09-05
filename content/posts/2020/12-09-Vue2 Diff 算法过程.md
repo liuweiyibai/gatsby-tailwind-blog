@@ -85,7 +85,9 @@ var vnode = {
 
 ![Vue Diff 流程图](https://cdn.clearlywind.com/static/images/vue-diff-fluent.png)
 
-## 具体代码
+下面通过 vue diff 源码来解析整个过程：
+
+## patch
 
 定义在 `vue/src/core/vdom/patch.js` 中：
 
@@ -134,20 +136,9 @@ function sameVnode(a, b) {
 }
 ```
 
-如果是相同节点会执行 patchVnode(oldVnode, vnode)。如果不值得比较，进入 patch 函数中的 else 逻辑。其过程是：
+## patchVnode 函数
 
-1. 取得 oldvnode.el 的父节点，parentEle 是真实 DOM
-2. createEle(vnode)会为 VNode 创建它的真实 dom，令 vnode.el = 真实 DOM
-3. parentEle 将新的 DOM 插入，移除旧的 DOM
-   当不值得比较时，新节点直接把老节点整个替换了
-
-如果两个节点都是一样的，那么就深入检查他们的子节点。如果两个节点不一样那就说明 VNode 完全被改变了，就可以直接替换 oldVnode。
-
-虽然这两个节点不一样但是他们的子节点一样怎么办？别忘了，Diff 可是逐层比较的，如果第一层不一样那么就不会继续深入比较第二层了。
-
-patch 最后会返回 VNode，VNode 和进入 patch 之前的不同在哪？就是 vnode.el，唯一的改变就是之前 vnode.el = null, 而现在它引用的是对应的真实 DOM。至此完成一个 patch 过程。
-
-当我们确定两个节点相同之后，我们会给两个节点指定 patchVnode 方法：
+如果是相同节点会执行 patchVnode(oldVnode, vnode)。否则进入 patch 函数中的 else 逻辑。其代码结构:
 
 ```js
 function patchVnode(oldVnode, vnode) {
@@ -179,116 +170,139 @@ function patchVnode(oldVnode, vnode) {
 }
 ```
 
-updateChildren 函数详解，这个函数将 Vnode 的子节点 newCh 和 oldVnode 的子节点 oldCh 提取出来；oldCh 和 newCh 各有两个头尾的变量 StartIdx 和 EndIdx ，它们的 2 个变量相互比较，一共有 4 种比较方式。如果 4 种比较都没匹配，如果设置了 key ，就会用 key 进行比较，在比较的过程中，变量会往中间靠，一旦 StartIdx>EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。
+1. 取得 oldvnode.el 的父节点，parentEle 是真实 DOM
+2. createEle(vnode)会为 VNode 创建它的真实 dom，令 vnode.el = 真实 DOM
+3. parentEle 将新的 DOM 插入，移除旧的 DOM
+   当不值得比较时，新节点直接把老节点整个替换了
+
+如果两个节点都是一样的，那么就深入检查他们的子节点。如果两个节点不一样那就说明 VNode 完全被改变了，就可以直接替换 oldVnode。
+
+虽然这两个节点不一样但是他们的子节点一样怎么办？别忘了，Diff 可是逐层比较的，如果第一层不一样那么就不会继续深入比较第二层了。
+
+patch 最后会返回 VNode，VNode 和进入 patch 之前的不同在哪？就是 vnode.el，唯一的改变就是之前 vnode.el = null, 而现在它引用的是对应的真实 DOM。至此完成一个 patch 过程。
+
+## updateChildren 函数
+
+这个函数将 Vnode 的子节点 newCh 和 oldVnode 的子节点 oldCh 提取出来；oldCh 和 newCh 各有两个头尾的变量 StartIdx 和 EndIdx ，它们的 2 个变量相互比较，一共有 4 种比较方式。如果 4 种比较都没匹配，如果设置了 key ，就会用 key 进行比较，在比较的过程中，变量会往中间靠，一旦 StartIdx>EndIdx 表明 oldCh 和 newCh 至少有一个已经遍历完了，就会结束比较。
 
 新旧两个 VNode 节点的左右头尾两侧均有一个变量标识，在遍历过程中这几个变量都会向中间靠拢。当 oldStartIdx <= oldEndIdx 或者 newStartIdx <= newEndIdx 时结束循环。在遍历中，如果存在 key，并且满足 sameVnode，会将该 DOM 节点进行复用(只通过移动节点顺序)，否则则会创建一个新的 DOM 节点。
 
 ```js
 /**
  * 此函数的作用是比较两个 Vnode 数组得出最小操作补丁，执行一个双边循环。
+ * 从新旧数组首尾向中间前进的方式来遍历
  * @param parentElm 当前节点的真实DOM
  * @param oldCh 旧节点的children
  * @param newCh 新节点的children
- * https://blog.csdn.net/suwu150/article/details/103369140
-*/
-updateChildren (parentElm, oldCh, newCh) {
- // 新旧两棵树起始索引
- let oldStartIdx = 0, newStartIdx = 0
+ * 这个函数执行的目的是:找到 新旧子节点中 的 相同的子节点，尽量以 移动 替代 新建 去更新
+ * DOM，只有在实在不同的情况下，才会新建
+ */
+function updateChildren(parentElm, oldCh, newCh) {
+  // 新旧两棵树起始索引
+  let oldStartIdx = 0,
+    newStartIdx = 0;
 
- // 旧节点的最后一个元素的索引
- let oldEndIdx = oldCh.length - 1
+  // 旧节点的最后一个元素的索引
+  let oldEndIdx = oldCh.length - 1;
 
- // 第一个旧节点
- let oldStartVnode = oldCh[0]
+  // 第一个旧节点
+  let oldStartVnode = oldCh[0];
 
- //  最后一个旧节点
- let oldEndVnode = oldCh[oldEndIdx]
+  //  最后一个旧节点
+  let oldEndVnode = oldCh[oldEndIdx];
 
- let newEndIdx = newCh.length - 1
- let newStartVnode = newCh[0]
- let newEndVnode = newCh[newEndIdx]
- let oldKeyToIdx
- let idxInOld
- let elmToMove
- let before
+  let newEndIdx = newCh.length - 1;
+  let newStartVnode = newCh[0];
+  let newEndVnode = newCh[newEndIdx];
+  let oldKeyToIdx;
+  let idxInOld;
+  let elmToMove;
+  let before;
 
- // 当在各自索引区间内，才执行下面的代码
- // 每一轮循环，比较两棵树首尾4个节点，当其中一组长度为0，则证明diff过程完成
- while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-  if (oldStartVnode == null) {
-    // 获取旧树起始节点，并且索引后移
-   oldStartVnode = oldCh[++oldStartIdx]
-  }else if (oldEndVnode == null) {
-    // 获取旧树中最后一个，并且将索引前移
-   oldEndVnode = oldCh[--oldEndIdx]
-  }else if (newStartVnode == null) {
-    // 新树的起始节点，索引后移
-   newStartVnode = newCh[++newStartIdx]
-  }else if (newEndVnode == null) {
-    // 新树的最后一个，索引前移
-   newEndVnode = newCh[--newEndIdx]
-  }else if (sameVnode(oldStartVnode, newStartVnode)) {
-    // 当新旧起始节点是相同 vonde
-   patchVnode(oldStartVnode, newStartVnode)
-   // 重新给节点赋值
-   oldStartVnode = oldCh[++oldStartIdx]
-   newStartVnode = newCh[++newStartIdx]
-  }else if (sameVnode(oldEndVnode, newEndVnode)) {
-   patchVnode(oldEndVnode, newEndVnode)
-   oldEndVnode = oldCh[--oldEndIdx]
-   newEndVnode = newCh[--newEndIdx]
-  }else if (sameVnode(oldStartVnode, newEndVnode)) {
-   patchVnode(oldStartVnode, newEndVnode)
-   api.insertBefore(parentElm, oldStartVnode.el, api.nextSibling(oldEndVnode.el))
-   oldStartVnode = oldCh[++oldStartIdx]
-   newEndVnode = newCh[--newEndIdx]
-  }else if (sameVnode(oldEndVnode, newStartVnode)) {
-   patchVnode(oldEndVnode, newStartVnode)
-   api.insertBefore(parentElm, oldEndVnode.el, oldStartVnode.el)
-   oldEndVnode = oldCh[--oldEndIdx]
-   newStartVnode = newCh[++newStartIdx]
-  }else {
-   // 使用key时的比较
-   if (oldKeyToIdx === undefined) {
-    oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx) // 有key生成index表
-   }
-   idxInOld = oldKeyToIdx[newStartVnode.key]
-   if (!idxInOld) {
-    api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
-    newStartVnode = newCh[++newStartIdx]
-   }else {
-    elmToMove = oldCh[idxInOld]
-    if (elmToMove.sel !== newStartVnode.sel) {
-     api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el)
-    }else {
-     patchVnode(elmToMove, newStartVnode)
-     oldCh[idxInOld] = null
-     api.insertBefore(parentElm, elmToMove.el, oldStartVnode.el)
+  // 当在各自索引区间内，才执行下面的代码
+  // 每一轮循环，比较两棵树首尾4个节点，当其中一组长度为0，则证明diff过程完成
+  while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+    if (oldStartVnode == null) {
+      // 获取旧树起始节点，并且索引后移
+      oldStartVnode = oldCh[++oldStartIdx];
+    } else if (oldEndVnode == null) {
+      // 获取旧树中最后一个，并且将索引前移
+      oldEndVnode = oldCh[--oldEndIdx];
+    } else if (newStartVnode == null) {
+      // 新树的起始节点，索引后移
+      newStartVnode = newCh[++newStartIdx];
+    } else if (newEndVnode == null) {
+      // 新树的最后一个，索引前移
+      newEndVnode = newCh[--newEndIdx];
+    } else if (sameVnode(oldStartVnode, newStartVnode)) {
+      // 当新旧起始节点是相同 vonde
+      patchVnode(oldStartVnode, newStartVnode);
+      // 重新给节点赋值
+      oldStartVnode = oldCh[++oldStartIdx];
+      newStartVnode = newCh[++newStartIdx];
+    } else if (sameVnode(oldEndVnode, newEndVnode)) {
+      patchVnode(oldEndVnode, newEndVnode);
+      oldEndVnode = oldCh[--oldEndIdx];
+      newEndVnode = newCh[--newEndIdx];
+    } else if (sameVnode(oldStartVnode, newEndVnode)) {
+      patchVnode(oldStartVnode, newEndVnode);
+      api.insertBefore(parentElm, oldStartVnode.el, api.nextSibling(oldEndVnode.el));
+      oldStartVnode = oldCh[++oldStartIdx];
+      newEndVnode = newCh[--newEndIdx];
+    } else if (sameVnode(oldEndVnode, newStartVnode)) {
+      patchVnode(oldEndVnode, newStartVnode);
+      api.insertBefore(parentElm, oldEndVnode.el, oldStartVnode.el);
+      oldEndVnode = oldCh[--oldEndIdx];
+      newStartVnode = newCh[++newStartIdx];
+    } else {
+      // 使用key时的比较
+      if (oldKeyToIdx === undefined) {
+        oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx); // 有key生成index表
+      }
+      // 通过新节点的key去查找
+      idxInOld = oldKeyToIdx[newStartVnode.key];
+      if (!idxInOld) {
+        api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el);
+        newStartVnode = newCh[++newStartIdx];
+      } else {
+        // 老节点存在key
+        elmToMove = oldCh[idxInOld];
+        if (elmToMove.sel !== newStartVnode.sel) {
+          api.insertBefore(parentElm, createEle(newStartVnode).el, oldStartVnode.el);
+        } else {
+          patchVnode(elmToMove, newStartVnode);
+          oldCh[idxInOld] = null;
+          api.insertBefore(parentElm, elmToMove.el, oldStartVnode.el);
+        }
+        newStartVnode = newCh[++newStartIdx];
+      }
     }
-    newStartVnode = newCh[++newStartIdx]
-   }
   }
- }
   // 表示旧树先遍历结束，新树中所有剩余节点增加到
- if (oldStartIdx > oldEndIdx) {
-  before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].el
-  addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx)
- }else if (newStartIdx > newEndIdx) {
-  // 新树先遍历结束，则旧树中需要删除一些节点
-  removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx)
- }
+  if (oldStartIdx > oldEndIdx) {
+    before = newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].el;
+    addVnodes(parentElm, before, newCh, newStartIdx, newEndIdx);
+  } else if (newStartIdx > newEndIdx) {
+    // 新树先遍历结束，则旧树中需要删除一些节点
+    removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+  }
 }
 ```
 
-<!-- 用数组来描述diff过程 -->
-<!-- https://juejin.cn/post/6844903872960561160 -->
+这里有一段模拟了 diff 过程的代码，可以 debugger 调试一下 diff 过程，加深理解：
 
-<!-- https://juejin.cn/post/6844903961837699079#heading-4 -->
+https://codepen.io/hotblin/pen/rNwLqMy?editors=0012
 
-<!-- https://www.jb51.net/article/140471.htm -->
+## 总结
 
-<!-- https://segmentfault.com/a/1190000020663531?utm_source=tag-newest -->
-
-<!-- https://blog.fundebug.com/2019/06/26/vue-virtual-dom/ -->
-
-<!-- https://segmentfault.com/a/1190000008782928 -->
+- 当数据发生改变时，订阅者 watcher 就会调用 patch 给真实的 DOM 打补丁
+- 通过 isSameVnode 进行判断，相同则调用 patchVnode 方法
+- patchVnode 做了以下操作：
+  - 找到对应的真实 dom，称为 el
+  - 如果都有文本节点且不相等，将 el 文本节点设置为 Vnode 的文本节点
+  - 如果 oldVnode 有子节点而 VNode 没有，则删除 el 子节点
+  - 如果 oldVnode 没有子节点而 VNode 有，则将 VNode 的子节点真实化后添加到 el
+  - 如果两者都有子节点，则执行 updateChildren 函数比较子节点
+- updateChildren 主要做了以下操作：
+  - 设置新旧 VNode 的头尾指针
+  - 新旧头尾指针进行比较，循环向中间靠拢，根据情况调用 patchVnode 进行 patch 重复流程、调用 createElem 创建一个新节点，从哈希表寻找 key 一致的 VNode 节点再分情况操作。
