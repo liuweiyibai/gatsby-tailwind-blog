@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import Tag from '@/components/Tag';
-import PageTitle from '@/components/PageTitle';
-import Avatar from '@/assets/svgs/avatar.svg';
-import { getWeek } from '@/utils';
-import StyledCodeType from '@/components/StyledCodeType';
-import ToolTipQrCode from '@/components/ToolTipQrCode';
-import BlogComment from '@/components/Comments';
+import Tag from 'components/Tag';
+import PageTitle from 'components/PageTitle';
+import Avatar from 'assets/svgs/avatar.svg';
+import { getWeek } from 'utils';
+import StyledCodeType from 'components/StyledCodeType';
+import ToolTipQrCode from 'components/ToolTipQrCode';
+import BlogComment from 'components/Comments';
 
 const StyledAvatar = styled(Avatar).attrs({
   className: 'w-10 h-10 rounded-full',

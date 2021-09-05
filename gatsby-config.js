@@ -123,6 +123,7 @@ module.exports = {
       },
     },
     // 图片处理 ==== end
+    // svg 处理
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

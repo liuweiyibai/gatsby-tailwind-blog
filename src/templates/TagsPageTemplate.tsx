@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import AppLayout from '../Layout/AppLayout';
-import Tag from '@/components/Tag';
-import Seo from '@/components/Seo';
+import Tag from 'components/Tag';
+import Seo from 'components/Seo';
 
 function genFontSize(count: any): string {
   let fontSize: number;

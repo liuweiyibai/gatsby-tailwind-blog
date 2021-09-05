@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
-import AppLayout from '@/Layout/AppLayout';
-import DefaultPostLayout from '@/Layout/DefaultPostLayout';
-import SimplePostLyout from '@/Layout/SimplePostLyout';
-import Seo from '@/components/Seo';
+import AppLayout from 'Layout/AppLayout';
+import DefaultPostLayout from 'Layout/DefaultPostLayout';
+import SimplePostLyout from 'Layout/SimplePostLyout';
+import Seo from 'components/Seo';
 
 const MapToObject = (obj: markdownRemarkType): markdownRemarkType2 => {
   return {

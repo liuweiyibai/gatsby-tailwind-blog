@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-import Logo from '@/assets/svgs/logo.svg';
+import Logo from 'assets/svgs/logo.svg';
 
 export const hueRotateAnimate = keyframes`
   0% {

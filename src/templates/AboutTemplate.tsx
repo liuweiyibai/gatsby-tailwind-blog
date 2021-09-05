@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import AppLayout from '@/Layout/AppLayout';
-import SocialIcon from '@/Layout/SocialIcon';
-import Avatar from '@/assets/svgs/avatar.svg';
-import { hueRotateAnimate, spin } from '@/Layout/AppLogo';
-import Seo from '@/components/Seo';
+import AppLayout from 'Layout/AppLayout';
+import SocialIcon from 'Layout/SocialIcon';
+import Avatar from 'assets/svgs/avatar.svg';
+import { hueRotateAnimate, spin } from 'Layout/AppLogo';
+import Seo from 'components/Seo';
 import { MdLocationOn } from 'react-icons/md';
 
 const StyledAvatar = styled(Avatar).attrs({

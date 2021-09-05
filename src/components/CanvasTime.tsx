@@ -1,17 +1,13 @@
 import * as React from 'react';
-import canvasTime from '@/utils/canvasTime';
+import canvasTime from 'utils/canvasTime';
 
 const CanvasTime = () => {
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null!);
   React.useEffect(() => {
-    if (canvasRef.current !== null) {
-      canvasTime(canvasRef.current, localStorage.getItem('theme') === 'true' ? true : false);
-    }
+    canvasTime(canvasRef.current, localStorage.getItem('theme') === 'true' ? true : false);
 
     const callback = (e: CustomEventInit) => {
-      if (canvasRef.current !== null) {
-        canvasTime(canvasRef.current, e.detail);
-      }
+      canvasTime(canvasRef.current, e.detail);
     };
 
     window.addEventListener('changeTheme', callback);
