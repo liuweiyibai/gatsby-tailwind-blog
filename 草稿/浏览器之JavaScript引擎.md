@@ -17,3 +17,15 @@ GUI 渲染线程与 JavaScript 引擎线程互斥的，由于 JavaScript 是可�
 在 Chrome 中 JavaScript 是由 V8 引擎来解析并且执行的。
 
 下面我们了解一下 V8 引擎。
+
+JIT，全称是 Just In Time，混合使用编译器和解释器的技术。而编译器启动速度慢，执行速度快。而解释器的启动速度快，执行速度慢。而 JIT 技术就是博两者之长。如图示：
+
+type 和 interface 的区别：type 类型不能二次编辑，而 interface 可以随时扩展。
+
+## Vue 短板
+
+Vue2.x 版本对 TypeScript 的支持是硬伤，而 TypeScript 对大型项目的保障能力是被普遍认可的，看到 Vue 没法支持，在选择技术栈时很容易放弃它。
+
+一旦项目体量变大，Vue 的代码会变得更难以维护，真正在实践中 Options API 虽然在组件层面上，每个内容的职责都很清晰，这是 data，那是 method，但是从跨组件的角度来看就没那么好了，因此 Vue 2 缺少一种真正更好的抽象逻辑的办法，而非将代码搬到独立的 .js 文件里来缩减 SFC 代码行数。
+
+optionAPI 劣势，模板语法需要指令标签的记忆
