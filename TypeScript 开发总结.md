@@ -1,6 +1,16 @@
-## props
+---
+title: TypeScript 开发总结
+date: 2021-09-11 17:38:37
+category:
+  - 编程笔记
+tags: ['TypeScript']
+slug: type-script-development-summary
+thumbnail: ''
+---
 
-使用 ts 定义 props 的类型
+## 类型&结构定义
+
+使用 interface 或者 type 定义类型结构，让 TypeScript 可以推断出我们定义变量的类型。比如在 React 中定义 Props 的类型
 
 ```ts
 interface AdminProps {}
@@ -66,8 +76,52 @@ type AdminProps = {
   // 利用上一步的做法 再进一步的提取出原生的 onClick 函数类型
   // 此时函数的第一个参数会自动推断为 React 的点击事件类型
   onClickButton：React.ComponentProps<"button">["onClick"]
+
+  // 函数的定义，对函数的入参和返回值进行约束
+   getNumber: (x, y: string) => number;
+      (price: string): void;
 }
 ```
+
+可索引类型接口
+
+```ts
+/**
+ * 约束 index 必须是数字，值必须是 string
+ * 数组
+ */
+interface IArr {
+  [index: number]: string;
+}
+const arr: IArr = ['a', 'b', 'c'];
+
+/**
+ * 约束key 必须是string，值是any
+ * 对象
+ */
+interface IObj {
+  [key: string]: any;
+}
+const obj: IObj = { a: {}, b: '1' };
+```
+
+> interface 和 type 的区别
+
+- 类型别名
+
+  TypeScript 提供了为类型注解设置别名的便捷语法，你可以使用 type 关键字 来创建别名，比如：
+
+  ```ts
+  type Pet = 'cat' | 'dog';
+  let pet: Pet;
+
+  pet = 'cat'; // Ok
+  pet = 'dog'; // Ok
+  pet = 'zebra'; // Compiler error
+  ```
+
+- typeof
+- keyof
 
 ## 常用泛型
 
@@ -153,3 +207,18 @@ type AdminProps = {
     sex: '男',
   };
   ```
+
+<!-- <https://my.oschina.net/u/4386652/blog/4892397>
+<https://itbilu.com/javascript/js/typescript.html>
+
+https://blog.csdn.net/qq_33221861/article/details/112369522 -->
+
+<!-- typescript + react -->
+<!-- https://juejin.cn/post/6910863689260204039#heading-11 -->
+<!-- https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn -->
+
+- ts 工具类型
+
+<!-- https://www.cnblogs.com/cangqinglang/p/12896595.html -->
+<!-- https://www.cnblogs.com/Grewer/p/10973744.html -->
+<!-- https://blog.csdn.net/weixin_38080573/article/details/92838045 -->

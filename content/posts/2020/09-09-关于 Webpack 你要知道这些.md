@@ -189,7 +189,7 @@ module.export = {
 };
 ```
 
-## Webpack 的热更新原理
+## 热更新原理
 
 Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `HMR`。这个机制可以做到不用刷新浏览器而将新变更的模块替换掉旧的模块
 
@@ -360,12 +360,104 @@ Webpack 的热更新又称热替换（`Hot Module Replacement`），缩写为 `H
 
 ## 代码分割
 
-代码分割的本质其实就是在源代码直接上线和打包成唯一脚本 `main.bundle.js` 这两种极端方案之间的一种更适合实际场景的中间状态
+代码分割是指，将脚本中无需立即调用的代码在代码构建时转变为异步加载的过程。
 
-`「用可接受的服务器性能压力增加来换取更好的用户体验」`
+在 Webpack 构建时，会避免加载已声明要异步加载的代码，异步代码会被单独分离出一个文件，当代码实际调用时被加载至页面。
 
-- 源代码直接上线：虽然过程可控，但是 `http` 请求多，性能开销大
-- 打包成唯一脚本：一把梭完自己爽，服务器压力小，但是页面空白期长，用户体验不好
+> 「用可接受的服务器性能压力增加来换取更好的用户体验」
+
+其原理是：
+
+代码分割技术的核心是「异步加载资源」，浏览器提供了支持，W3C stage 3 规范：[whatwg/loader](https://whatwg.github.io/loader/) 对其进行了定义：可以通过 `import()` 关键字让浏览器在程序执行时异步加载相关资源。当然会有一些兼容上的问题。
+
+Webpack 底层帮你将异步加载的代码抽离成一份新的文件，并在你需要时通过 JSONP 的方式去获取文件资源，因此，你可以在任何浏览器上实现代码的异步加载，并且在将来所有浏览器都实现 `import()` 方法时平滑过渡，cool！👍
+
+代码分割可以分为「静态分割」和「“动态”分割」两种方式，注意“动态”这不是指异步调用的代码是 “动态” 生成的，而是在代码调用时根据当前的状态，「动态地」异步加载对应的代码块。下面分别介绍一下。
+
+- 静态代码分割，在代码中明确声明需要异步加载的代码。
+
+  ```js
+  const getModal = () => import('./src/modal.js');
+  body.on('click', () => {
+    // 异步去拉取这段代码
+    getModal().then(module => {
+      const modalTarget = document.getElementById('Modal');
+      // 调用模块内部方法
+      module.initModal(modalTarget);
+    });
+  });
+  // 每当调用一个声明了异步加载代码的变量时，它总是返回一个 Promise 对象。
+  ```
+
+  > 注意：在 Vue 中，可以直接使用 import() 关键字做到这一点，而在 React 中，你需要使用 react-loadable 去完成同样的事。
+
+  何时使用静态代码分割技术，这一技术适合以下的场景：
+
+  1. 你正在使用一个非常大的库或框架：如果在页面初始化时你不需要使用它，就不要在页面初载时加载它；
+  2. 任何临时的资源：指不在页面初始化时被使用，被使用后又会立即被销毁的资源，例如模态框，对话框，tooltip 等（任何一开始不显示在页面上的东西都可以有条件的加载）；
+  3. 路由：既然用户不会一下子看到所有页面，那么只把当前页面相关资源给用户就是个明智的做法；
+
+- 动态代码分割，在代码调用时根据当前的状态，「动态地」异步加载对应的代码块。
+
+  ```js
+  const getTheme = themeName => import(`./src/themes/${themeName}`);
+  // 使用 import() 异步导入
+  if (window.feeling.stylish) {
+    getTheme('stylish').then(module => {
+      module.applyTheme();
+    });
+  } else if (window.feeling.trendy) {
+    getTheme('trendy').then(module => {
+      module.applyTheme();
+    });
+  }
+  ```
+
+  看到了吗，我们 “动态” 的声明了我们要异步加载的代码块，Webpack 会在构建时将你声明的目录下的所有可能分离的代码都抽象为一个文件（这被称为 contextModule 模块），因此无论你最终声明了调用哪个文件，本质上就和静态代码分割一样，在请求一个早已准备好的，静态的文件。
+
+  一些使用 “动态” 代码分割技术的场景：
+
+  1. A/B Test：你不需要在代码中引入不需要的 UI 代码；
+  2. 加载主题：根据用户的设置，动态加载相应的主题；
+  3. 为了方便 ：本质上，你可以用静态代码分割代替「动态」代码分割，但是后者比前者拥有更少的代码量；
+
+## 魔法注释
+
+魔术注释是由 Webpack 提供的，可以为代码分割服务的一种技术。通过在 import 关键字后的括号中使用指定注释，我们可以对代码分割后的 chunk 有更多的控制权，让我们看一个例子：
+
+```js
+// index.js
+import(
+  /* webpackChunkName: "footerModule" */
+  './footer'
+);
+// 通过这样的配置，我们可以对分离出的 chunk 进行命名，这对于我们 debug 而言非常方便。
+```
+
+- Webpack Modes
+
+  除了上面提到过得 webpackChunkName 注释外，Webpack 还提供了一些其他注释让我们能够对异步加载模块拥有更多控制权，例如下方这个例子：
+
+  ```js
+  import(
+    /* webpackChunkName: "my-chunk-name" */
+    /* webpackMode: lazy */
+    './someModule'
+  );
+  ```
+
+  webpackMode 的默认值为 lazy 它会使所有异步模块都会被单独抽离成单一的 chunk，若设置该值为 lazy-once，Webpack 就会将所有带有标记的异步加载模块放在同一个 chunk 中。
+
+- Prefetch or Preload
+
+  通过添加 webpackPrefetch 魔术注释，Webpack 令我们可以使用与 `<link rel="prefetch">` 相同的特性。让浏览器会在 Idle 状态时预先帮我们加载所需的资源，善用这个技术可以使我们的应用交互变得更加流畅。
+
+  ```js
+  import(
+    /* webpackPrefetch: true */
+    './someModule'
+  );
+  ```
 
 ## 编写 loader 的思路
 
@@ -396,15 +488,3 @@ Webpack 在运行的生命周期中会广播出许多事件，`plugin` 可以监
   - `emit` 事件发生时，可以读取到最终输出的资源、代码块、模块及其依赖，并进行修改(`emit` 事件是修改 Webpack 输出资源的最后时机)
   - `watch-run` 当依赖的文件发生变化时会触发
 - 异步的事件需要在插件处理完任务时调用回调函数通知 Webpack 进入下一个流程，不然会卡住
-
-## Babel 原理
-
-大多数 JavaScript parser 遵循 [estree](https://github.com/estree/estree) 规范，Babel 最初基于 [acorn 项目](https://github.com/acornjs/acorn)(轻量级现代 `JavaScript` 解析器) Babel 大概分为三大部分：
-
-- 解析：将代码转换成 `ast`
-  - 词法分析：将代码(字符串)分割为 `token` 流，即语法单元成的数组
-  - 语法分析：分析 `token` 流(上面生成的数组)并生成 `ast`
-- 转换：访问 `ast` 的节点进行变换操作生产新的 `ast`
-  - [Taro 就是利用 babel 完成的小程序语法转换](https://github.com/NervJS/taro/blob/master/packages/taro-transformer-wx/src/index.ts#L15)
-- 生成：以新的 `ast` 为基础生成代码
-  想了解如何一步一步实现一个编译器的同学可以移步 `babel` 官网曾经推荐的开源项目 [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler)
