@@ -11,3 +11,7 @@ thumbnail: ''
 所谓 diff，就是计算两颗树形结构差异并进行转换的过程。
 
 Vue 和 React 都是根据 jsx 或者 template 编译成类 createElement 函数后生成虚拟的 dom 节点，然后这些虚拟 dom 节点放在一起生成一棵虚拟 dom 树，当数据发生变化时，会生成一棵新的虚拟 dom 树，然后通过 diff 算法，找出两棵树中的最小差别，然后实现更新到真实 dom 上，实现在真实 dom 的最小更新。
+
+https://zhuanlan.zhihu.com/p/149972619
+
+vue3 diff https://www.jianshu.com/p/eb08022ee488
