@@ -105,7 +105,7 @@ interface IObj {
 const obj: IObj = { a: {}, b: '1' };
 ```
 
-> interface 和 type 的区别
+> interface 和 type 的区别：type 可以定义类型别名、联合类型等、type 语句中还可以使用 typeof **获取实例**的类型进行赋值、interface 能够声明合并，也就是可以多次声明，多次声明会被合并为一个接口。
 
 - 类型别名
 
