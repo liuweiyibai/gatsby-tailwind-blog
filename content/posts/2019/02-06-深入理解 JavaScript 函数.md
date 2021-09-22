@@ -345,7 +345,7 @@ const a = foo();
 a();
 ```
 
-[js 闭包浅析](/blog/analysis-of-javascript-closure)
+[JavaScript 闭包浅析](/blog/analysis-of-javascript-closure)
 
 ## 高阶函数
 
