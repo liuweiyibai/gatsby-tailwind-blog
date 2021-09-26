@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+// import { GatsbyImage } from 'gatsby-plugin-image';
 // import styled from "styled-components"
-import { getFixed } from '../utils';
+// import { getFixed } from '../utils';
 import Tag from '../components/Tag';
 
 export interface PropsPostItem {
@@ -19,14 +19,14 @@ export interface PropsPostItem {
 // }))``
 
 const PostItem: React.FC<PropsPostItem> = ({ slug, title, date, tags, excerpt, thumbnail }): JSX.Element => {
-  const image = getFixed(thumbnail);
+  // const image = getFixed(thumbnail);
   return (
     <li className="py-8">
       <article>
-        <div className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-center">
-          <div className="hidden xl:grid justify-items-center">
+        <div className="space-y-2 xl:space-y-0 xl:items-center">
+          {/* <div className="hidden xl:grid justify-items-center">
             <GatsbyImage image={image} className="opacity-70" alt={title} />
-          </div>
+          </div> */}
           <div className="space-y-5 xl:col-span-3">
             <div className="space-y-6">
               <div>
