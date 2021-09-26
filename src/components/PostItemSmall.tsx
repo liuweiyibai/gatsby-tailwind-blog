@@ -14,14 +14,14 @@ export interface PostProps {
 }
 
 const PostItemSmall: React.FC<PostProps> = ({ slug, title, date, tags = [], thumbnail, excerpt }): JSX.Element => {
-  const image = getFixed(thumbnail);
+  // const image = getFixed(thumbnail);
   return (
     <li className="py-4">
-      <article className="space-y-2 xl:grid xl:grid-cols-4 xl:space-y-0 xl:items-center">
-        <div className="hidden lg:grid justify-items-center">
+      <article className="space-y-2 xl:space-y-0 xl:items-center relative">
+        {/* <div className="absolute top-1/2 opacity-5">
           <GatsbyImage image={image} className="opacity-70" alt={title} />
-        </div>
-        <div className="space-y-3 xl:col-span-3">
+        </div> */}
+        <div className="space-y-2 xl:col-span-3">
           <div>
             <h3 className="text-2xl font-bold leading-8 tracking-tight">
               <Link to={`${slug}`} className="text-gray-900 dark:text-gray-100">

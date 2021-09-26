@@ -5,7 +5,7 @@ import Pagination, { PaginationProps } from 'components/Pagination';
 
 interface PropsListLayout {
   posts: Array<any>;
-  title: string;
+  title?: string;
   pagination: PaginationProps;
 }
 
@@ -28,10 +28,10 @@ const ListLayout: FC<PropsListLayout> = ({ posts, title = '全部文章', pagina
           </h1>
           <div className="relative max-w-lg">
             <input
-              aria-label="Search articles"
+              aria-label="搜索"
               type="text"
               onChange={e => setSearchValue(e.target.value)}
-              placeholder="Search articles"
+              placeholder="搜索"
               className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md dark:border-gray-900 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
             />
             <svg

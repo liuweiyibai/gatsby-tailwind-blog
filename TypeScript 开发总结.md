@@ -107,20 +107,40 @@ const obj: IObj = { a: {}, b: '1' };
 
 > interface 和 type 的区别：type 可以定义类型别名、联合类型等、type 语句中还可以使用 typeof **获取实例**的类型进行赋值、interface 能够声明合并，也就是可以多次声明，多次声明会被合并为一个接口。
 
-- 类型别名
+## 类型别名
 
-  TypeScript 提供了为类型注解设置别名的便捷语法，你可以使用 type 关键字 来创建别名，比如：
+TypeScript 提供了为类型注解设置别名的便捷语法，你可以使用 type 关键字 来创建别名，比如：
 
-  ```ts
-  type Pet = 'cat' | 'dog';
-  let pet: Pet;
+```ts
+type Pet = 'cat' | 'dog';
+type myString = string;
+let pet: Pet;
 
-  pet = 'cat'; // Ok
-  pet = 'dog'; // Ok
-  pet = 'zebra'; // Compiler error
-  ```
+pet = 'cat'; // Ok
+pet = 'dog'; // Ok
+pet = 'zebra'; // Compiler error
+```
 
 - typeof
+
+  在 TypeScript 中， typeof 操作符可以用来获取一个变量声明或对象的类型。
+
+  ```js
+  interface Person {
+    name: string;
+    age: number;
+  }
+
+  const sem: Person = { name: 'semlinker', age: 30 };
+  type Sem = typeof sem; // -> Person
+
+  function toArray(x: number): Array<number> {
+    return [x];
+  }
+
+  type Func = typeof toArray; // -> (x: number) => number[]
+  ```
+
 - keyof
 
 ## 常用泛型
